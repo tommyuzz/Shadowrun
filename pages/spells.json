@@ -4,13 +4,16 @@
     "keywords": {
       "direct": "Roll Spellcasting + Magic [Force] against the target’s Body for a physical spell or Willpower for a mana spell. Damage equals net hits, with no separate Damage Resistance Test.",
       "indirect": "Requires a clear line of fire. A single target resists with Reaction + Intuition; damage is Force + net hits, AP –Force, resisted with Body + modified Armor. Area versions use the grenade-like area spell procedure.",
-      "elemental": "Uses a specified elemental effect and applies the appropriate special damage rules in addition to the spell’s normal damage."
+      "elemental (acid)": "Acid damage is Physical and reduces the rating of any Armor it hits by 1. If the acid is not removed or neutralized, it continues to burn each Combat Turn. Reduce its base DV by 1, then apply the damage again. It also reduces Armor by another 1 each turn until it is removed, neutralized, or its base DV reaches 0. Armor reduction applies to worn Armor first. The gamemaster may allow it to affect Armor accessories instead. At the gamemaster’s discretion, acid may also create **Light Smoke** around the target.",
+      "elemental (cold)": "Cold damage is Physical and can also freeze liquids, gum up lubricants, and make Armor brittle. Anything directly hit must make an Armor Test:1 or more hits: The Armor remains usable.No hits: The Armor breaks and must be repaired.Glitch: The Armor is destroyed beyond repair. Critical Glitch: The Armor is destroyed beyond repair in a dangerous way.",
+      "elemental (electricity)": "Electricity attacks only cause secondary effects if they deal at least 1 box of damage. Characters damaged by Electricity suffers:–1 dice pool to all actions and Defense Tests for 1 Combat Turn.–5 Initiative Score immediately. These penalties do not stack from multiple attacks. Each additional damaging Electricity attack extends the duration of the –1 dice pool penalty by 1 Combat Turn. If Initiative is reduced to 0 or less, the character loses their last remaining action. If they have no Initiative left when hit, the reduction applies at the start of the next Combat Turn. Electronics and Drones - Electricity damage is Physical against electronics and drones. If they take at least 1 box of damage, they also suffer Matrix damage equal to half the Physical damage dealt, rounded down. Vehicles - Vehicles can take Electricity damage but suffer no secondary effects. Individual vehicle systems may be targeted with a Called Shot.",
+      "elemental (fire)": "Fire damage is Physical and may cause targets to catch fire. To determine whether something ignites, roll: Armor Value + Fire Resistance – Fire AP. The threshold equals the net hits of the fire-based attack. On a success, the item does not catch fire.Armor accessories are normally excluded from this test, though the gamemaster may require them to test separately.Burning - When something catches fire: It starts at DV 3. Damage is applied at the end of each Combat Turn. The fire's DV increases by 1 at the start of each subsequent Combat Turn. The fire continues until the target is destroyed or the flames are extinguished. To put out the fire, make an Agility + Intuition Test. Reduce the fire's DV by 1 per hit. While burning, the fire may also ignite nearby flammable objects or creatures."
     },
     "spells": {
       "acid stream": {
         "keywords": [
           "indirect",
-          "elemental"
+          "elemental (acid)"
         ],
         "type": "P",
         "range": "LOS",
@@ -23,7 +26,7 @@
       "toxic wave": {
         "keywords": [
           "indirect",
-          "elemental"
+          "elemental (acid)"
         ],
         "type": "P",
         "range": "LOS (A)",
@@ -108,7 +111,7 @@
       "flamethrower": {
         "keywords": [
           "indirect",
-          "elemental"
+          "elemental (fire)"
         ],
         "type": "P",
         "range": "LOS",
@@ -121,7 +124,7 @@
       "fireball": {
         "keywords": [
           "indirect",
-          "elemental"
+          "elemental (fire)"
         ],
         "type": "P",
         "range": "LOS (A)",
@@ -134,7 +137,7 @@
       "lightning bolt": {
         "keywords": [
           "indirect",
-          "elemental"
+          "elemental (electricity)"
         ],
         "type": "P",
         "range": "LOS",
@@ -147,7 +150,7 @@
       "ball lightning": {
         "keywords": [
           "indirect",
-          "elemental"
+          "elemental (electricity)"
         ],
         "type": "P",
         "range": "LOS (A)",

@@ -704,9 +704,17 @@
 
     <main class="workspace">
       <aside class="sidebar" aria-label="Spell controls and code legend">
+        <section class="panel category-panel">
+          <div class="panel-inner">
+            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span><span id="category-brief-title">Combat spell protocol</span></h2>
+            <p class="category-description" id="category-description"></p>
+            <p class="glitch-text" id="category-glitches" hidden></p>
+          </div>
+        </section>
+
         <section class="panel roster-panel">
           <div class="panel-inner">
-            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Spell roster</h2>
+            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Spells</h2>
             <label class="search-label" for="spell-search">Filter current category</label>
             <input class="search" id="spell-search" type="search" placeholder="Enter spell name…" autocomplete="off">
             <div class="roster-head">
@@ -732,13 +740,6 @@
           </div>
         </section>
 
-        <section class="panel category-panel">
-          <div class="panel-inner">
-            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span><span id="category-brief-title">Combat spell protocol</span></h2>
-            <p class="category-description" id="category-description"></p>
-            <p class="glitch-text" id="category-glitches" hidden></p>
-          </div>
-        </section>
       </aside>
 
       <article class="panel spell-panel" id="spell-panel" role="tabpanel" aria-live="polite">
