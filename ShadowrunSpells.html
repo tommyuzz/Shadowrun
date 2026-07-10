@@ -1,0 +1,2083 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shadowrun Fifth Edition spell reference browser.">
+  <title>Shadowrun 5e // Spell Index</title>
+  <style>
+    :root {
+      --ink: #101113;
+      --muted: #62666a;
+      --line: #a6a9ab;
+      --faint: #e5e6e6;
+      --paper: #fbfbf9;
+      --red: #e11b17;
+      --red-dark: #ae130f;
+      --cut: 18px;
+      --max: 1260px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(rgba(17,18,20,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(17,18,20,.018) 1px, transparent 1px),
+        #dfe1e1;
+      background-size: 32px 32px;
+      font-family: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    a { color: var(--red-dark); text-underline-offset: 3px; }
+
+    .sheet {
+      position: relative;
+      width: min(calc(100% - 32px), 1400px);
+      min-height: calc(100vh - 32px);
+      margin: 16px auto;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 14% 9%, rgba(0,0,0,.025), transparent 18%),
+        radial-gradient(circle at 83% 68%, rgba(0,0,0,.018), transparent 23%),
+        var(--paper);
+      border: 1px solid var(--ink);
+      box-shadow: 0 12px 30px rgba(0,0,0,.14);
+      clip-path: polygon(20px 0, 42% 0, calc(42% + 12px) 6px, 72% 6px, calc(72% + 8px) 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 56% 100%, calc(56% - 12px) calc(100% - 7px), 32% calc(100% - 7px), calc(32% - 8px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      z-index: 20;
+      border: 1px solid rgba(17,18,20,.55);
+      pointer-events: none;
+      clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+    }
+
+    .masthead {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 22px;
+      align-items: center;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 35px 34px 25px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .masthead::after {
+      content: "";
+      position: absolute;
+      right: 34px;
+      bottom: -6px;
+      width: 190px;
+      height: 5px;
+      background: repeating-linear-gradient(110deg, var(--red) 0 4px, transparent 4px 8px);
+    }
+
+    .brand-mark {
+      width: 74px;
+      height: 74px;
+      color: var(--red);
+    }
+
+    .kicker, .eyebrow, .field-label, .tab, .search-label,
+    .record-id, .tag, .footer-copy, .roster-count, .protocol-key {
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .kicker {
+      margin: 0 0 3px;
+      color: var(--red);
+      font-size: .78rem;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5.4rem);
+      font-weight: 900;
+      letter-spacing: .01em;
+      line-height: .87;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 11px 0 0;
+      color: var(--red);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle::before,
+    .brand-subtitle::after {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .record-id {
+      align-self: end;
+      min-width: 205px;
+      font-size: .7rem;
+      text-align: right;
+    }
+
+    .record-id strong {
+      display: block;
+      color: var(--red);
+      font-size: 1.05rem;
+      letter-spacing: .06em;
+    }
+
+    .barcode {
+      display: inline-block;
+      width: 148px;
+      height: 27px;
+      margin-top: 8px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 5px, var(--ink) 5px 6px, transparent 6px 9px);
+      border-inline: 5px solid var(--paper);
+    }
+
+    .tabs-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(251,251,249,.97);
+      border-bottom: 1px solid var(--ink);
+      backdrop-filter: blur(8px);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr) auto;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 34px;
+    }
+
+    .tab, .print-button {
+      position: relative;
+      min-height: 52px;
+      padding: 0 14px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-left: 1px solid var(--faint);
+      cursor: pointer;
+    }
+
+    .tab::after {
+      content: "";
+      position: absolute;
+      right: 10px;
+      bottom: 7px;
+      left: 10px;
+      height: 3px;
+      background: transparent;
+    }
+
+    .tab:hover, .tab[aria-selected="true"] { color: var(--red); }
+    .tab[aria-selected="true"]::after { background: var(--red); }
+    .tab:last-of-type { border-right: 1px solid var(--faint); }
+
+    .print-button {
+      width: 50px;
+      border-right: 1px solid var(--faint);
+      font-size: 1rem;
+    }
+
+    .print-button:hover { color: #fff; background: var(--red); }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      gap: 18px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 27px 34px 38px;
+    }
+
+    .panel {
+      position: relative;
+      padding: 4px;
+      background: var(--ink);
+      clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+    }
+
+    .panel + .panel { margin-top: 15px; }
+
+    .panel-inner {
+      height: 100%;
+      padding: 19px;
+      background: var(--paper);
+      clip-path: polygon(calc(var(--cut) - 2px) 0, 100% 0, 100% calc(100% - var(--cut) + 2px), calc(100% - var(--cut) + 2px) 100%, 0 100%, 0 calc(var(--cut) - 2px));
+    }
+
+    .panel-heading {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 0 0 14px;
+      padding-bottom: 10px;
+      color: var(--red);
+      border-bottom: 1px solid var(--ink);
+      font-size: 1.08rem;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .crosshair {
+      position: relative;
+      flex: 0 0 18px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .crosshair::before, .crosshair::after {
+      content: "";
+      position: absolute;
+      background: currentColor;
+    }
+
+    .crosshair::before { left: 7px; top: -5px; width: 2px; height: 24px; }
+    .crosshair::after { left: -5px; top: 7px; width: 24px; height: 2px; }
+
+    .search-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: .62rem;
+    }
+
+    .search {
+      width: 100%;
+      height: 39px;
+      padding: 0 11px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--ink);
+      border-radius: 0;
+      outline: none;
+    }
+
+    .search:focus { border-color: var(--red); box-shadow: inset 4px 0 var(--red); }
+
+    .roster-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 16px 0 8px;
+    }
+
+    .roster-head strong {
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .roster-count { color: var(--red); font-size: .62rem; }
+
+    .spell-roster {
+      display: grid;
+      gap: 5px;
+    }
+
+    .spell-button {
+      display: grid;
+      grid-template-columns: 24px 1fr auto;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+      min-height: 39px;
+      padding: 5px 7px;
+      color: var(--ink);
+      background: transparent;
+      border: 1px solid #c8cacc;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .spell-button:hover { border-color: var(--red); }
+    .spell-button[aria-current="true"] { color: #fff; background: var(--red); border-color: var(--red); }
+
+    .spell-index {
+      display: grid;
+      width: 22px;
+      height: 22px;
+      place-items: center;
+      background: var(--ink);
+      color: #fff;
+      font-size: .58rem;
+      font-weight: 800;
+    }
+
+    .spell-button[aria-current="true"] .spell-index { color: var(--red); background: #fff; }
+
+    .spell-name {
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .035em;
+      text-transform: uppercase;
+    }
+
+    .spell-drain { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .65rem; }
+
+    .empty-message {
+      padding: 14px 8px;
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: center;
+      border: 1px dashed var(--line);
+    }
+
+    .legend-grid { display: grid; gap: 0; }
+    .legend-row {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #d0d2d2;
+    }
+    .legend-row:last-child { border-bottom: 0; }
+    .legend-row dt, .legend-row dd { margin: 0; }
+    .legend-row dt { color: var(--red); font-weight: 900; font-size: .7rem; }
+    .legend-row dd { color: var(--muted); font-size: .7rem; line-height: 1.35; }
+
+    .spell-panel > .panel-inner { padding: clamp(24px, 4vw, 44px); }
+
+    .spell-header {
+      position: relative;
+      padding: 0 0 24px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .spell-header::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 7px;
+      width: 105px;
+      height: 9px;
+      background: repeating-linear-gradient(110deg, var(--red) 0 3px, transparent 3px 6px);
+    }
+
+    .eyebrow {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      margin: 0 0 8px;
+      color: var(--red);
+      font-size: .7rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      font-weight: 900;
+      letter-spacing: .01em;
+      line-height: .88;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      padding: 5px 9px 4px;
+      color: var(--red);
+      border: 1px solid var(--red);
+      font-size: .6rem;
+      line-height: 1;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(95px, 1fr));
+      margin-top: 24px;
+      border: 1px solid var(--ink);
+    }
+
+    .stat {
+      min-height: 83px;
+      padding: 13px 14px;
+      border-right: 1px solid var(--ink);
+    }
+
+    .stat:last-child { border-right: 0; }
+    .stat[hidden] { display: none; }
+
+    .field-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--red);
+      font-size: .6rem;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 1.03rem;
+      font-weight: 900;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .stat-meaning {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .65rem;
+      line-height: 1.2;
+    }
+
+    .section {
+      padding-top: 28px;
+      scroll-margin-top: 70px;
+    }
+
+    .section-title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin: 0 0 15px;
+      color: var(--red);
+      font-size: 1.25rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .section-title::before {
+      content: attr(data-index);
+      display: inline-grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      color: #fff;
+      background: var(--red);
+      font-size: .67rem;
+      letter-spacing: .04em;
+    }
+
+    .description, .category-description, .glitch-text {
+      max-width: 82ch;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .96rem;
+    }
+
+    .description::first-letter {
+      float: left;
+      margin: .02em .09em 0 0;
+      color: var(--red);
+      font-family: Impact, Haettenschweiler, sans-serif;
+      font-size: 3.6em;
+      line-height: .78;
+    }
+
+    .category-panel .panel-inner {
+      background:
+        linear-gradient(135deg, rgba(226,27,23,.07), transparent 48%),
+        var(--paper);
+    }
+
+    .category-description {
+      max-width: none;
+      color: #34373a;
+      font-size: .78rem;
+      line-height: 1.52;
+    }
+    .glitch-text { margin-top: 13px; padding-top: 12px; border-top: 1px solid #c1c3c4; color: var(--muted); font-size: .78rem; }
+    .glitch-text[hidden] { display: none; }
+
+    .protocols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .protocol {
+      padding: 15px;
+      border: 1px solid #b9bcbd;
+      background: #fff;
+    }
+
+    .protocol { border-color: var(--red); box-shadow: inset 4px 0 var(--red); }
+
+    .protocol-key {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--red);
+      font-size: .65rem;
+    }
+
+    .protocol p {
+      margin: 0;
+      color: #42464a;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .76rem;
+      line-height: 1.45;
+    }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 34px 30px;
+    }
+
+    .footer-frame {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: 18px;
+      align-items: center;
+      padding: 17px 21px;
+      border: 1px solid var(--ink);
+      clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 28% 100%, calc(28% - 14px) calc(100% - 7px), 14px calc(100% - 7px), 0 calc(100% - 21px), 0 14px);
+    }
+
+    .footer-bars {
+      width: 78px;
+      height: 30px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px);
+    }
+
+    .footer-copy {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .66rem;
+      line-height: 1.55;
+    }
+
+    .footer-warning {
+      color: var(--red);
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .sigil {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      color: var(--red);
+      border: 3px solid var(--red);
+      border-radius: 50%;
+      font-size: 1.12rem;
+      font-weight: 900;
+      transform: rotate(-12deg);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 900px) {
+      .sheet { width: 100%; min-height: 100vh; margin: 0; border: 0; clip-path: none; }
+      .sheet::before { display: none; }
+      .masthead { grid-template-columns: 58px 1fr; padding: 27px 22px 21px; }
+      .brand-mark { width: 58px; height: 58px; }
+      .record-id { display: none; }
+      .tabs { display: flex; overflow-x: auto; padding: 0 22px; scrollbar-width: none; }
+      .tabs::-webkit-scrollbar { display: none; }
+      .tab { flex: 0 0 auto; min-width: 136px; }
+      .print-button { flex: 0 0 50px; }
+      .workspace { grid-template-columns: 1fr; padding: 20px 22px 30px; }
+      .sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .panel + .panel { margin-top: 0; }
+      .legend-panel { align-self: start; }
+      .category-panel { grid-column: 2; }
+      .spell-panel { grid-row: 1; }
+      .stat-grid { grid-template-columns: repeat(3, 1fr); }
+      .stat { border-bottom: 1px solid var(--ink); }
+      .stat:nth-child(3) { border-right: 0; }
+      .stat:nth-last-child(-n+2) { border-bottom: 0; }
+      footer { padding: 0 22px 24px; }
+    }
+
+    @media (max-width: 580px) {
+      .masthead { grid-template-columns: 1fr; }
+      .brand-mark { display: none; }
+      .brand-title { font-size: 2.9rem; }
+      .brand-subtitle::before, .brand-subtitle::after { width: 14px; }
+      .workspace { padding: 14px; }
+      .sidebar { grid-template-columns: 1fr; }
+      .category-panel { grid-column: auto; }
+      .spell-panel > .panel-inner { padding: 22px 18px; }
+      h1 { font-size: clamp(3.2rem, 18vw, 5.4rem); }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat, .stat:nth-child(3) { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+      .stat:nth-child(even), .stat:last-child { border-right: 0; }
+      .protocols { grid-template-columns: 1fr; }
+      .print-button { display: none; }
+      footer { padding: 0 14px 18px; }
+      .footer-frame { grid-template-columns: 1fr auto; }
+      .footer-bars, .footer-warning { display: none; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet { width: 100%; margin: 0; border: 0; box-shadow: none; clip-path: none; }
+      .sheet::before, .tabs-wrap, .search-label, .search { display: none; }
+      .masthead, .workspace, footer { max-width: none; }
+      .workspace { grid-template-columns: 27% 1fr; padding-top: 18px; }
+      .spell-roster .spell-button:not([aria-current="true"]) { display: none; }
+      .panel { break-inside: avoid; }
+      .protocols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="masthead">
+      <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/>
+        <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/>
+        <path d="M50 3v25M50 72v25M3 50h25M72 50h25" fill="none" stroke="currentColor" stroke-width="4"/>
+        <path d="M55 25 31 54h17l-5 24 27-38H53z" fill="currentColor"/>
+      </svg>
+      <div>
+        <p class="kicker">Awakened operations archive</p>
+        <p class="brand-title">Shadowrun</p>
+        <p class="brand-subtitle">Fifth edition spell index</p>
+      </div>
+      <div class="record-id" aria-label="Dataset identification">
+        <strong>GRIMOIRE // 5E</strong>
+        <span>DATASET: SPELLS.JSON</span>
+        <div class="barcode" aria-hidden="true"></div>
+      </div>
+    </header>
+
+    <nav class="tabs-wrap" aria-label="Spell categories">
+      <div class="tabs" role="tablist" aria-label="Shadowrun spell types">
+        <button class="tab" type="button" role="tab" data-category="combat">Combat</button>
+        <button class="tab" type="button" role="tab" data-category="detection">Detection</button>
+        <button class="tab" type="button" role="tab" data-category="health">Health</button>
+        <button class="tab" type="button" role="tab" data-category="illusion">Illusion</button>
+        <button class="tab" type="button" role="tab" data-category="manipulation">Manipulation</button>
+        <button class="print-button" type="button" title="Print current spell" aria-label="Print current spell">⌁</button>
+      </div>
+    </nav>
+
+    <main class="workspace">
+      <aside class="sidebar" aria-label="Spell controls and code legend">
+        <section class="panel roster-panel">
+          <div class="panel-inner">
+            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Spell roster</h2>
+            <label class="search-label" for="spell-search">Filter current category</label>
+            <input class="search" id="spell-search" type="search" placeholder="Enter spell name…" autocomplete="off">
+            <div class="roster-head">
+              <strong id="roster-category">Combat files</strong>
+              <span class="roster-count" id="roster-count">0 records</span>
+            </div>
+            <div class="spell-roster" id="spell-roster"></div>
+          </div>
+        </section>
+
+        <section class="panel legend-panel">
+          <div class="panel-inner">
+            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Code index</h2>
+            <dl class="legend-grid">
+              <div class="legend-row"><dt>M / P</dt><dd>Mana / Physical spell type</dd></div>
+              <div class="legend-row"><dt>T</dt><dd>Touch range</dd></div>
+              <div class="legend-row"><dt>LOS</dt><dd>Line of sight</dd></div>
+              <div class="legend-row"><dt>(A)</dt><dd>Area effect</dd></div>
+              <div class="legend-row"><dt>S / P</dt><dd>Stun / Physical damage</dd></div>
+              <div class="legend-row"><dt>I / S / P</dt><dd>Instant / Sustained / Permanent duration</dd></div>
+              <div class="legend-row"><dt>F</dt><dd>Force used in Drain Value</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="panel category-panel">
+          <div class="panel-inner">
+            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span><span id="category-brief-title">Combat spell protocol</span></h2>
+            <p class="category-description" id="category-description"></p>
+            <p class="glitch-text" id="category-glitches" hidden></p>
+          </div>
+        </section>
+      </aside>
+
+      <article class="panel spell-panel" id="spell-panel" role="tabpanel" aria-live="polite">
+        <div class="panel-inner">
+          <header class="spell-header">
+            <p class="eyebrow" id="spell-eyebrow">Combat protocol // Spell record</p>
+            <h1 id="spell-title">Spell</h1>
+            <div class="tag-row" id="spell-keywords" aria-label="Spell keywords"></div>
+          </header>
+
+          <div class="stat-grid" id="stat-grid" aria-label="Spell statistics">
+            <div class="stat">
+              <span class="field-label">Type</span>
+              <strong class="stat-value" id="stat-type">—</strong>
+              <span class="stat-meaning" id="meaning-type"></span>
+            </div>
+            <div class="stat">
+              <span class="field-label">Range</span>
+              <strong class="stat-value" id="stat-range">—</strong>
+              <span class="stat-meaning" id="meaning-range"></span>
+            </div>
+            <div class="stat" id="damage-stat">
+              <span class="field-label">Damage</span>
+              <strong class="stat-value" id="stat-damage">—</strong>
+              <span class="stat-meaning" id="meaning-damage"></span>
+            </div>
+            <div class="stat">
+              <span class="field-label">Duration</span>
+              <strong class="stat-value" id="stat-duration">—</strong>
+              <span class="stat-meaning" id="meaning-duration"></span>
+            </div>
+            <div class="stat">
+              <span class="field-label">Drain</span>
+              <strong class="stat-value" id="stat-drain">—</strong>
+              <span class="stat-meaning">Drain Value</span>
+            </div>
+          </div>
+
+          <section class="section" id="description-section">
+            <h2 class="section-title" data-index="01">Spell effect</h2>
+            <p class="description" id="spell-description"></p>
+          </section>
+
+          <section class="section">
+            <h2 class="section-title" data-index="02">Keywords</h2>
+            <div class="protocols" id="category-protocols"></div>
+          </section>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      <div class="footer-frame">
+        <div class="footer-bars" aria-hidden="true"></div>
+        <div class="footer-copy">&gt;&gt; CAST. ADAPT. SURVIVE.<br>KNOW THE RULES. CONTROL THE FIELD.</div>
+        <div class="footer-warning">The corporations own everything.<br>Information is power. Stay sharp.</div>
+        <span class="sigil" aria-hidden="true">✦</span>
+      </div>
+    </footer>
+  </div>
+
+  <script id="spell-data" type="application/json">
+    {
+      "combat": {
+        "description": "Combat spells use mana to create damaging effects, either by direct or indirect means. They’re a mana-slinger’s guns, and are treated that way by law enforcement.",
+        "keywords": {
+          "direct": "Roll Spellcasting + Magic [Force] against the target’s Body for a physical spell or Willpower for a mana spell. Damage equals net hits, with no separate Damage Resistance Test.",
+          "indirect": "Requires a clear line of fire. A single target resists with Reaction + Intuition; damage is Force + net hits, AP –Force, resisted with Body + modified Armor. Area versions use the grenade-like area spell procedure.",
+          "elemental": "Uses a specified elemental effect and applies the appropriate special damage rules in addition to the spell’s normal damage."
+        },
+        "spells": {
+          "acid stream": {
+            "keywords": [
+              "indirect",
+              "elemental"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 3",
+            "sourcePage": 283,
+            "Description": "This spell creates a powerful corrosive that sprays the target, causing terrible burns and eating away organic and metallic material—treat it as Acid damage (p. 170), with appropriate effects on the affected area and any objects therein. The acid quickly evaporates, but the damage it inflicts remains. Acid Stream is a single-target spell."
+          },
+          "toxic wave": {
+            "keywords": [
+              "indirect",
+              "elemental"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 1",
+            "sourcePage": 283,
+            "Description": "This spell creates a powerful corrosive that sprays the target, causing terrible burns and eating away organic and metallic material—treat it as Acid damage (p. 170), with appropriate effects on the affected area and any objects therein. The acid quickly evaporates, but the damage it inflicts remains. Toxic Wave is an area spell."
+          },
+          "punch": {
+            "keywords": [
+              "indirect"
+            ],
+            "type": "P",
+            "range": "T",
+            "damage": "S",
+            "duration": "I",
+            "Drain": "F - 6",
+            "sourcePage": 283,
+            "Description": "This spell smacks the target(s) with invisible psychokinetic force, similar to a bruising punch, that inflicts Stun damage. Punch requires you to touch the target."
+          },
+          "clout": {
+            "keywords": [
+              "indirect"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "damage": "S",
+            "duration": "I",
+            "Drain": "F - 3",
+            "sourcePage": 284,
+            "Description": "This spell smacks the target(s) with invisible psychokinetic force, similar to a bruising punch, that inflicts Stun damage. Clout affects a single target."
+          },
+          "blast": {
+            "keywords": [
+              "indirect"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "damage": "S",
+            "duration": "I",
+            "Drain": "F",
+            "sourcePage": 284,
+            "Description": "This spell smacks the target(s) with invisible psychokinetic force, similar to a bruising punch, that inflicts Stun damage. Punch requires you to touch the target. Clout affects a single target, while Blast is an area spell."
+          },
+          "death touch": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "M",
+            "range": "T",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 6",
+            "sourcePage": 284,
+            "Description": "Death Touch channels destructive magical power into the target, doing Physical damage. The damage inflicted is similar to massive cellular die off from radiation or necrotizing fasciitis, but without the continuing effects. But still, ick. Since they are mana spells, spells in this group only affect living and magical targets and are resisted with Willpower. Death Touch requires the magician to touch the target."
+          },
+          "manabolt": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 3",
+            "sourcePage": 284,
+            "Description": "Manabolt channels destructive magical power into the target, doing Physical damage. The damage inflicted is similar to massive cellular die off from radiation or necrotizing fasciitis, but without the continuing effects. But still, ick. Since they are mana spells, spells in this group only affect living and magical targets and are resisted with Willpower. Manabolt affects a single target."
+          },
+          "manaball": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F",
+            "sourcePage": 284,
+            "Description": "Manaball channels destructive magical power into the target, doing Physical damage. The damage inflicted is similar to massive cellular die off from radiation or necrotizing fasciitis, but without the continuing effects. But still, ick. Since they are mana spells, spells in this group only affect living and magical targets and are resisted with Willpower. Manaball is an area-effect spell."
+          },
+          "flamethrower": {
+            "keywords": [
+              "indirect",
+              "elemental"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 3",
+            "sourcePage": 284,
+            "Description": "This spell creates an explosion of flames that flash into existence and scorch the target(s), giving them the double benefit of causing pain and being intimidating as hell. These spells deal Fire damage (p. 171). These flames burn out after striking the target, but their secondary effects may ignite flammable materials that continue to burn after the spell is exhausted. Flamethrower is a single-target spell."
+          },
+          "fireball": {
+            "keywords": [
+              "indirect",
+              "elemental"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 1",
+            "sourcePage": 284,
+            "Description": "This spell creates an explosion of flames that flash into existence and scorch the target(s), giving them the double benefit of causing pain and being intimidating as hell. These spells deal Fire damage (p. 171). These flames burn out after striking the target, but their secondary effects may ignite flammable materials that continue to burn after the spell is exhausted. Fireball is an area spell."
+          },
+          "lightning bolt": {
+            "keywords": [
+              "indirect",
+              "elemental"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 3",
+            "sourcePage": 284,
+            "Description": "This spell creates and direct vicious strikes of electricity that cause Electricity damage. Lightning Bolt is a single target spell."
+          },
+          "ball lightning": {
+            "keywords": [
+              "indirect",
+              "elemental"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 1",
+            "sourcePage": 284,
+            "Description": "This spell creates and direct vicious strikes of electricity that cause Electricity damage. Ball Lightning is an area spell."
+          },
+          "shatter": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "P",
+            "range": "T",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 6",
+            "sourcePage": 284,
+            "Description": "This spell channels destructive magical power into the targets causing Physical damage. The target is cooked from the inside, like magically microwaving a hot dog. As physical energies, they can affect both living and non-living targets and are resisted by the target’s Body. Shatter requires you to touch the target."
+          },
+          "powerbolt": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F - 3",
+            "sourcePage": 284,
+            "Description": "This spell channels destructive magical power into the targets causing Physical damage. The target is cooked from the inside, like magically microwaving a hot dog. As physical energies, they can affect both living and non-living targets and are resisted by the target’s Body. Powerbolt affects a single target."
+          },
+          "powerball": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "damage": "P",
+            "duration": "I",
+            "Drain": "F",
+            "sourcePage": 284,
+            "Description": "This spell channels destructive magical power into the targets causing Physical damage. The target is cooked from the inside, like magically microwaving a hot dog. As physical energies, they can affect both living and non-living targets and are resisted by the target’s Body. Powerball is an area spell."
+          },
+          "knockout": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "M",
+            "range": "T",
+            "damage": "S",
+            "duration": "I",
+            "Drain": "F - 6",
+            "sourcePage": 284,
+            "Description": "This spell channels magical energy directly into the target, causing Stun damage. They are sometimes referred to as “sleep” spells because they can render targets unconscious but keep them alive, in the cases where you’d prefer more polite violence. Knockout requires the magician to touch the target."
+          },
+          "stunbolt": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "damage": "S",
+            "duration": "I",
+            "Drain": "F - 3",
+            "sourcePage": 284,
+            "Description": "This spell channels magical energy directly into the target, causing Stun damage. They are sometimes referred to as “sleep” spells because they can render targets unconscious but keep them alive, in the cases where you’d prefer more polite violence. Stunbolt affects a single target."
+          },
+          "stunball": {
+            "keywords": [
+              "direct"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "damage": "S",
+            "duration": "I",
+            "Drain": "F",
+            "sourcePage": 285,
+            "Description": "This spell channels magical energy directly into the target, causing Stun damage. They are sometimes referred to as “sleep” spells because they can render targets unconscious but keep them alive, in the cases where you’d prefer more polite violence. Stunball is an area spell."
+          }
+        }
+      },
+      "detection": {
+        "description": "Detection spells grant a new sense or improve an existing one while sustained. They may be cast on the magician or another subject within touch range. Standard sensory range is Force × Magic metres; Extended versions use Force × Magic × 10 metres. Net hits determine the detail obtained, and using the sense may require an Observe in Detail Simple Action.",
+        "glitches": "A glitch may provide false or misleading information. A critical glitch may increase Drain, make Drain Physical, temporarily remove one of the subject’s senses, or grant the spell’s sense to others within range.",
+        "keywords": {
+          "active": "Roll Spellcasting + Magic [Force] against the appropriate resistance pool. The caster rolls once; each target tests separately against that result, including targets entering the spell’s range later.",
+          "passive": "The spell continuously feeds information while sustained. Perception Tests using the sense are limited by the spell’s net hits instead of the subject’s Mental limit.",
+          "directional": "The sense operates in a chosen direction, like ordinary vision.",
+          "area": "The sense works in every direction at once, like hearing.",
+          "extended area": "An area sense with an extended range of Force × Magic × 10 metres.",
+          "psychic": "The spell grants a non-standard psychic sense, such as telepathy or precognition."
+        },
+        "spells": {
+          "analyze device": {
+            "keywords": [
+              "active",
+              "directional"
+            ],
+            "type": "P",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 285,
+            "Description": "This spell allows the subject to analyze the purpose and operation of a device or piece of equipment within range of the sense. The casting of the spell is opposed by the object’s resistance (p. 295). Each net hit can be used to provide a piece of information about the device that would not be readily apparent (for example, it would not give the information that it is a Renraku-manufactured device if the thing is emblazoned with a huge Renraku logo, but it might say what the basic function of the thing is). Each net hit also gives the subject a bonus die while operating the device and allows the subject to ignore any skill-defaulting modifiers for using it as long as the spell is sustained."
+          },
+          "analyze magic": {
+            "keywords": [
+              "active",
+              "directional"
+            ],
+            "type": "P",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 285,
+            "Description": "This spell allows the subject to analyze the purpose of a magical object (e.g., foci, alchemical preparations, magical lodges, active rituals). Treat the net hits from the Spellcasting Test as hits on the Assensing Table (p. 313), except the subject isn’t required to be perceiving astrally."
+          },
+          "analyze truth": {
+            "keywords": [
+              "active",
+              "directional"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 286,
+            "Description": "The subject can tell whether a target’s statements are the truth (or at least if the subject honestly believes them to be true).The spell needs at least 1 net hit to determine validity of a selected statement. The spell does not work on written materials or items recorded through any sort of technological medium. The subject must hear a statement in person (with the target within range) to be able to judge its truth."
+          },
+          "clairaudience": {
+            "keywords": [
+              "passive",
+              "directional"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 286,
+            "Description": "The subject can hear distant sounds as if physically present at a chosen point within the sensory range of the spell. The listening point may be moved to any other point within range of the spell as a Complex Action. While using Clairaudience, the subject cannot use her normal hearing. This spell doesn’t translate visual images, only sounds (and only sounds within the subject’s natural range of hearing; augmented hearing does not apply)."
+          },
+          "clairvoyance": {
+            "keywords": [
+              "passive",
+              "directional"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 286,
+            "Description": "The subject can see distant scenes as if physically present at a chosen point within the sensory range of the spell. The visual point may be moved to any other point within range of the spell as a Complex Action. The subject can’t use normal vision or astral perception while using Clairvoyance. This spell doesn’t translate sound, only vision, and it doesn’t work with augmented vision. You can’t target spells through Clairvoyance."
+          },
+          "combat sense": {
+            "keywords": [
+              "passive",
+              "psychic"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F",
+            "sourcePage": 286,
+            "Description": "The subject can subconsciously analyze combat and other dangerous situations within range, sensing events a split-second before they happen. Every hit on the Spellcasting Test adds 1 die for Reaction on Surprise Tests, and also to rolls made when defending against ranged and melee attacks as long as the spell remains in effect."
+          },
+          "detect enemies": {
+            "keywords": [
+              "active",
+              "area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 286,
+            "Description": "The subject can detect living targets within range who have hostile intentions toward him. The spell does not detect traps (since they aren’t alive), nor can it detect someone about to shoot into a crowd at random (since the hostility is not directed at the subject of the spell). The spell can detect targets preparing an ambush or other surprise attack directed at the subject."
+          },
+          "detect enemies, extended": {
+            "keywords": [
+              "active",
+              "extended area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F",
+            "sourcePage": 286,
+            "Description": "The subject can detect living targets within range who have hostile intentions toward him. The spell does not detect traps (since they aren’t alive), nor can it detect someone about to shoot into a crowd at random (since the hostility is not directed at the subject of the spell). The spell can detect targets preparing an ambush or other surprise attack directed at the subject."
+          },
+          "detect individual": {
+            "keywords": [
+              "active",
+              "area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 286,
+            "Description": "The subject can detect the presence of a particular individual anywhere within range of the sense. You need to specify the individual during casting, someone you know or at least have met in the past."
+          },
+          "detect life": {
+            "keywords": [
+              "active",
+              "area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 286,
+            "Description": "The subject detects all living beings (but not spirits) within range of the sense and knows their number and relative location. In a crowded area, the spell is virtually useless, picking up a blurred mass of traces of life."
+          },
+          "detect life, extended": {
+            "keywords": [
+              "active",
+              "extended area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 286,
+            "Description": "The subject detects all living beings (but not spirits) within range of the sense and knows their number and relative location. In a crowded area, the spell is virtually useless, picking up a blurred mass of traces of life."
+          },
+          "detect [life form]": {
+            "keywords": [
+              "active",
+              "area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 287,
+            "Description": "The subject detects all of a specified type of life form within the range of the sense and knows their number and relative location. This is actually several different spells that must be learned separately, one for each type of life form that a caster might like to detect (Detect Orks, Detect Elves, Detect Dragons, and so forth), which are learned separately."
+          },
+          "detect [life form], extended": {
+            "keywords": [
+              "active",
+              "extended area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F",
+            "sourcePage": 287,
+            "Description": "The subject detects all of a specified type of life form within the range of the sense and knows their number and relative location. This is actually several different spells that must be learned separately, one for each type of life form that a caster might like to detect (Detect Orks, Detect Elves, Detect Dragons, and so forth), which are learned separately."
+          },
+          "detect magic": {
+            "keywords": [
+              "active",
+              "area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 287,
+            "Description": "The subject can detect the presence of all foci, spells, wards, magical lodges, alchemical preparations, active rituals, and spirits within range of the sense. It does not detect Awakened characters or critters, astral signatures, alchemical preparations that that have expired or already triggered, or the effects of permanent spells once they have become permanent."
+          },
+          "detect magic, extended": {
+            "keywords": [
+              "active",
+              "extended area"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F",
+            "sourcePage": 287,
+            "Description": "The subject can detect the presence of all foci, spells, wards, magical lodges, alchemical preparations, active rituals, and spirits within range of the sense. It does not detect Awakened characters or critters, astral signatures, alchemical preparations that that have expired or already triggered, or the effects of permanent spells once they have become permanent."
+          },
+          "detect [object]": {
+            "keywords": [
+              "active",
+              "area"
+            ],
+            "type": "P",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 287,
+            "Description": "The subject detects all of a specified type of object within range of the sense and knows their number and relative location. Each type of object requires a separate spell (Detect Guns, Detect Computers, Detect Explosives, and so forth). These spells must all be learned and cast separately."
+          },
+          "mindlink": {
+            "keywords": [
+              "active",
+              "psychic"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 287,
+            "Description": "Mindlink allows the magician and one voluntary subject to communicate mentally, exchanging conversation, emotions, and mental images. One hit on the Spellcasting Test is enough to establish the link. The subject must remain within range of the magician for the Mindlink to work."
+          },
+          "mind probe": {
+            "keywords": [
+              "active",
+              "directional"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F",
+            "sourcePage": 287,
+            "Description": "This spell allows the subject to telepathically probe the mind of a specific target within range of the sense (chosen when the spell is cast). The target is aware of the probing, though they may not know the source of the spell. The number of net hits you get on the spell determines what kind of information the subject can read, given on the table. The subject may probe for one piece of information per Complex Action while the spell is sustained. Additional uses of Mind Probe against the same target within a number of hours equal to the target’s Willpower inflict a –2 dice pool modifier on the Spellcasting attempt."
+          }
+        }
+      },
+      "health": {
+        "description": "Health spells affect the condition and performance of living bodies. They can heal injury, combat disease or toxins, and increase or decrease Attributes. All Health spells require the magician to touch the subject.",
+        "keywords": {
+          "essence": "Apply a dice-pool modifier equal to the target’s current Essence minus their maximum Essence, rounded up."
+        },
+        "spells": {
+          "antidote": {
+            "keywords": [],
+            "type": "M",
+            "range": "T",
+            "duration": "P",
+            "Drain": "F - 3",
+            "sourcePage": 288,
+            "Description": "This spell helps a poisoned subject overcome a toxin. Casters use it after the target has been poisoned, but before the target needs to make her Toxin Resistance Test, based on the Speed of the toxin. Add the hits from this spell directly to the hits from the Toxin Resistance Test."
+          },
+          "cure disease": {
+            "keywords": [
+              "essence"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "P",
+            "Drain": "F - 4",
+            "sourcePage": 288,
+            "Description": "This spell is used at any point after infection to help a patient overcome illness. The infected character receives a number of additional dice on her Disease Resistance Test equal to the spell’s net hits until the patient recovers (or dies). It does not heal any damage already inflicted by the disease (that requires a separate Healing spell)."
+          },
+          "decrease [attribute]": {
+            "keywords": [
+              "essence"
+            ],
+            "type": "P",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 288,
+            "Description": "This spell weakens the target by decreasing a designated Attribute. A version of this spell exists for each Physical and Mental attribute, but not for Special attributes (Initiative, Edge, Essence, Magic, or Resonance). It affects both natural and augmented Attributes. This spell is cast with an Opposed Spellcasting + Magic [Force] v. (targeted Attribute) + Willpower Test. If the magician wins, the Attribute is reduced by the spell’s net hits. If a Physical Attribute is reduced to 0, the victim is incapacitated and paralyzed. If a Mental Attribute is reduced to 0, the victim stands still, mindlessly confused. Decreasing an Attribute also affects any other derived statistics that use it (for example, if Reaction or Intuition is lowered, Initiative is lowered as well) as long as the spell is sustained."
+          },
+          "detox": {
+            "keywords": [],
+            "type": "M",
+            "range": "T",
+            "duration": "P",
+            "Drain": "F - 6",
+            "sourcePage": 288,
+            "Description": "Detox relieves the side effects of a drug or poison. The Force of the spell must equal or exceed the toxin’s base DV. A single hit is sufficient to eliminate all symptoms. Detox does not heal or prevent damage done by toxins, but it eliminates any side effects they may have on the victim (dizziness, hallucinations, nausea, pain, and so forth). Detox is the hangover cure of choice among those who can afford it."
+          },
+          "heal": {
+            "keywords": [
+              "essence"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "P",
+            "Drain": "F - 4",
+            "sourcePage": 288,
+            "Description": "Heal repairs physical injuries. It heals a number of boxes of Physical damage equal to the spell’s hits from the Spellcasting Test. Hits can also be used to reduce the base time for the spell to become permanent; each hit spent this way shaves off 1 Combat Turn (you can split hits between healing and reducing time). Any boxes of Physical damage your target still has after any boxes are healed magically can only be healed by time and rest."
+          },
+          "increase [attribute]": {
+            "keywords": [
+              "essence"
+            ],
+            "type": "P",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 288,
+            "Description": "This spell increases an Attribute (natural or augmented) on a voluntary subject. A version of this spell exists for each Physical and Mental attribute, but not for Special Attributes (Initiative, Edge, Essence, Magic, or Resonance). The Force of the spell must equal or exceed the (augmented) value of the Attribute being affected. The Attribute is increased by an amount equal to the hits scored, up to the target’s augmented maximum (any hits that would increase the Attribute beyond its augmented maximum are ignored). Each Attribute can only be affected by a single Increase Attribute spell at a time. Note that increasing an Attribute may affect other derived statistics (Increase Reaction also affects Initiative, for example, while Increase Body adds extra boxes to the character’s Physical Condition Monitor for as long as the spell lasts)."
+          },
+          "increase reflexes": {
+            "keywords": [
+              "essence"
+            ],
+            "type": "P",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F",
+            "sourcePage": 288,
+            "Description": "This spell increases the initiative of a subject. Each hit rolled on the Spellcasting Test adds +1 to the target’s Initiative, and every two hits adds one Initiative Die. A character can only be affected by a single Increase Reflexes spell at a time, and the maximum Initiative Dice anyone can have is +5D6."
+          },
+          "oxygenate": {
+            "keywords": [],
+            "type": "P",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 5",
+            "sourcePage": 288,
+            "Description": "This spell oxygenates the blood of a voluntary subject, providing extra Body dice (1 die for every hit) to re- sist suffocation, strangulation, the effects of inhaled gas, or any other effect of oxygen deprivation. The spell also allows the subject to breathe underwater."
+          },
+          "prophylaxis": {
+            "keywords": [],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 4",
+            "sourcePage": 289,
+            "Description": "This spell provides an extra die per hit for a subject to resist infection, drugs, or toxins. The spell does not discriminate between harmful and beneficial drugs, so the subject also resists medicines and other helpful drugs while under its effects. Reduce the bonuses of a beneficial drug by 1 for every hit rolled in the casting; three or more hits block effects that do not have a bonus or penalty associated with them."
+          },
+          "resist pain": {
+            "keywords": [],
+            "type": "M",
+            "range": "T",
+            "duration": "P",
+            "Drain": "F - 4",
+            "sourcePage": 289,
+            "Description": "Resist Pain allows the subject to ignore the pain of injuries, reducing penalties from Physical or Stun damage. Each hit on the Spellcasting Test removes the effect of one box of damage from each of the subject’s Condition Monitor tracks. It does not remove the damage itself; it only eliminates the modifiers. If all of the boxes on the track are filled, the character still falls unconscious. The spell is permanent in that the boost to the patient’s endorphin levels does not wear off. If the subject’s damage rises above the level at which the patient is resisting pain or if the existing injuries heal, the spell dissipates. A person can only be under the effects of one Resist Pain spell at a time (the one with the most hits)."
+          },
+          "stabilize": {
+            "keywords": [],
+            "type": "M",
+            "range": "T",
+            "duration": "P",
+            "Drain": "F - 4",
+            "sourcePage": 289,
+            "Description": "When applied to a character with a filled Physical damage track, this spell stabilizes all vital functions and prevents the character from dying. The spell’s Force must equal or exceed the overflow damage already taken when the spell starts. The full time must be taken for the spell to become permanent before the character is truly stabilized; hits reduce the time it takes by 1 Combat Turn each. If successful, the spell prevents the character from taking further damage from Physical Damage Overflow (p. 209)."
+          }
+        }
+      },
+      "illusion": {
+        "description": "Illusion spells manipulate perception. They cannot directly inflict lasting physical harm, although false sensations and deceptive environments can still place victims in danger. Illusions may be obvious or realistic, affect one or several senses, and use mana or physical effects.",
+        "keywords": {
+          "obvious": "Created for entertainment and immediately recognisable as an illusion.",
+          "realistic": "Designed to seem completely real and may be resisted by observers.",
+          "single-sense": "Affects one sense.",
+          "multi-sense": "Affects several senses.",
+          "area": "Affects subjects throughout the spell’s area."
+        },
+        "spells": {
+          "agony": {
+            "keywords": [
+              "realistic",
+              "single-sense"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 4",
+            "sourcePage": 290,
+            "Description": "A favorite of mages going through bad break-ups, Agony inflicts an illusion of terrible pain on the target. Each net hit scored by the magician temporarily inflicts 1 box of Physical and 1 box of Stun damage on the target. It is not actual damage, only a measure of the effect of the spell. The target is affected the same as if the damage were real, with the usual injury penalties. If the target’s damage boxes are completely filled, he is racked with pain, unable to move or act. Once the spell is ended, the pain and damage boxes immediately go away. Agony affects a single target, while Mass Agony is an area spell."
+          },
+          "mass agony": {
+            "keywords": [
+              "realistic",
+              "single-sense"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 290,
+            "Description": "A favorite of mages going through bad break-ups, Agony inflicts an illusion of terrible pain on the target. Each net hit scored by the magician temporarily inflicts 1 box of Physical and 1 box of Stun damage on the target. It is not actual damage, only a measure of the effect of the spell. The target is affected the same as if the damage were real, with the usual injury penalties. If the target’s damage boxes are completely filled, he is racked with pain, unable to move or act. Once the spell is ended, the pain and damage boxes immediately go away. Agony affects a single target, while Mass Agony is an area spell."
+          },
+          "bugs": {
+            "keywords": [
+              "realistic",
+              "multi-sense"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 290,
+            "Description": "These spells make the target believe that small bugs of various persuasions are crawling over their entire body, biting them, scurrying about, and crawling into assorted orifices. The bugs look, feel, smell, and even taste real. The illusion is usually enough to make any target who fails to resist freak out. For each net hit you get, the target loses 2 from their Initiative Score. If you sustain the spell, they lose the same amount from their Initiative Score at the beginning of each Combat Turn. Bugs affects a single target, Swarm is an area spell."
+          },
+          "swarm": {
+            "keywords": [
+              "realistic",
+              "multi-sense"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 290,
+            "Description": "These spells make the target believe that small bugs of various persuasions are crawling over their entire body, biting them, scurrying about, and crawling into assorted orifices. The bugs look, feel, smell, and even taste real. The illusion is usually enough to make any target who fails to resist freak out. For each net hit you get, the target loses 2 from their Initiative Score. If you sustain the spell, they lose the same amount from their Initiative Score at the beginning of each Combat Turn. Bugs affects a single target, Swarm is an area spell."
+          },
+          "confusion": {
+            "keywords": [
+              "realistic",
+              "multi-sense"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 290,
+            "Description": "These spells produce a storm of conflicting sensations and images to confuse the senses. For each net hit on the Spellcasting Test, the target suffers a –1 dice pool modifier to all tests due to the distraction. Confusion affects a single target. Mass Confusion is an area spell. The Chaos spell is a physical version of Confusion (above), so it also affects technological systems and sensing devices. Chaotic World is an area version of Chaos."
+          },
+          "mass confusion": {
+            "keywords": [
+              "realistic",
+              "multi-sense",
+              "area"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 290,
+            "Description": "These spells produce a storm of conflicting sensations and images to confuse the senses. For each net hit on the Spellcasting Test, the target suffers a –1 dice pool modifier to all tests due to the distraction. Confusion affects a single target. Mass Confusion is an area spell. The Chaos spell is a physical version of Confusion (above), so it also affects technological systems and sensing devices. Chaotic World is an area version of Chaos."
+          },
+          "chaos": {
+            "keywords": [
+              "realistic",
+              "multi-sense"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 290,
+            "Description": "These spells produce a storm of conflicting sensations and images to confuse the senses. For each net hit on the Spellcasting Test, the target suffers a –1 dice pool modifier to all tests due to the distraction. Confusion affects a single target. Mass Confusion is an area spell. The Chaos spell is a physical version of Confusion (above), so it also affects technological systems and sensing devices. Chaotic World is an area version of Chaos."
+          },
+          "chaotic world": {
+            "keywords": [
+              "realistic",
+              "multi-sense",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F",
+            "sourcePage": 290,
+            "Description": "These spells produce a storm of conflicting sensations and images to confuse the senses. For each net hit on the Spellcasting Test, the target suffers a –1 dice pool modifier to all tests due to the distraction. Confusion affects a single target. Mass Confusion is an area spell. The Chaos spell is a physical version of Confusion (above), so it also affects technological systems and sensing devices. Chaotic World is an area version of Chaos."
+          },
+          "entertainment": {
+            "keywords": [
+              "obvious",
+              "multi-sense",
+              "area"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 290,
+            "Description": "These area spells create obvious, but entertaining, illusions. Hits on the Spellcasting Test measure how detailed, interesting, and captivating the audience finds the illusion. The magician can reproduce just about anything from her imagination, or re-create something she has experienced. Entertainment affects the minds of the subjects and cannot be detected by non-living sensors. Trid Entertainment is a physical spell and can be perceived by both living subjects and non-living sensors. These spells are used for amusement as well as art. The entertainment industry uses illusionists as literal special effects wizards. Magical designers and artists work to create new and interesting sensations, including sensations that can’t otherwise be experienced in the real world. Only the wealthy can afford the unique experiences offered by such magicians firsthand."
+          },
+          "trid entertainment": {
+            "keywords": [
+              "obvious",
+              "multi-sense",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 290,
+            "Description": "These area spells create obvious, but entertaining, illusions. Hits on the Spellcasting Test measure how detailed, interesting, and captivating the audience finds the illusion. The magician can reproduce just about anything from her imagination, or re-create something she has experienced. Entertainment affects the minds of the subjects and cannot be detected by non-living sensors. Trid Entertainment is a physical spell and can be perceived by both living subjects and non-living sensors. These spells are used for amusement as well as art. The entertainment industry uses illusionists as literal special effects wizards. Magical designers and artists work to create new and interesting sensations, including sensations that can’t otherwise be experienced in the real world. Only the wealthy can afford the unique experiences offered by such magicians firsthand."
+          },
+          "invisibility": {
+            "keywords": [
+              "realistic",
+              "single-sense"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 291,
+            "Description": "This spell makes the subject more difficult to detect by normal visual senses (including low-light, thermographic, and other senses that rely on the visual spectrum). The subject is completely tangible and detectable by the other senses (hearing, smell, touch, and even taste, if it somehow comes to that). Her aura is still visible to astral perception. Anyone who might be in a position to perceive the subject must first successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone that resists at a later point. Even if the spell is resisted, the subject might remain undetected if she’s good enough with her Sneaking Test. An invisible character may still be detected by non-visual means, such as hearing or smell. Attacks against invisible targets suffer the Blind Fire modifier if the attacker is unable to see or otherwise sense the subject of the spell. Invisibility affects the minds of viewers. Improved Invisibility mimics the subject’s surroundings from all angles and affects technological sensors as well."
+          },
+          "improved invisibility": {
+            "keywords": [
+              "realistic",
+              "single-sense"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 291,
+            "Description": "This spell makes the subject more difficult to detect by normal visual senses (including low-light, thermographic, and other senses that rely on the visual spectrum). The subject is completely tangible and detectable by the other senses (hearing, smell, touch, and even taste, if it somehow comes to that). Her aura is still visible to astral perception. Anyone who might be in a position to perceive the subject must first successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone that resists at a later point. Even if the spell is resisted, the subject might remain undetected if she’s good enough with her Sneaking Test. An invisible character may still be detected by non-visual means, such as hearing or smell. Attacks against invisible targets suffer the Blind Fire modifier if the attacker is unable to see or otherwise sense the subject of the spell. Invisibility affects the minds of viewers. Improved Invisibility mimics the subject’s surroundings from all angles and affects technological sensors as well."
+          },
+          "mask": {
+            "keywords": [
+              "realistic",
+              "multi-sense"
+            ],
+            "type": "M",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 291,
+            "Description": "The Mask spell requires the magician to touch the subject. The subject assumes a different physical appearance (of the same basic size and shape as her natural form) chosen by the magician. This spell can alter the subject’s voice, scent, and other physical characteristics as well. Anyone who might see through the disguise must first successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone that resists at a later point. Mask affects the minds of viewers. Physical Mask creates an illusion that affects technological sensors as well."
+          },
+          "physical mask": {
+            "keywords": [
+              "realistic",
+              "multi-sense"
+            ],
+            "type": "P",
+            "range": "T",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 291,
+            "Description": "The Mask spell requires the magician to touch the subject. The subject assumes a different physical appearance (of the same basic size and shape as her natural form) chosen by the magician. This spell can alter the subject’s voice, scent, and other physical characteristics as well. Anyone who might see through the disguise must first successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone that resists at a later point. Mask affects the minds of viewers. Physical Mask creates an illusion that affects technological sensors as well."
+          },
+          "phantasm": {
+            "keywords": [
+              "realistic",
+              "multi-sense",
+              "area"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 291,
+            "Description": "These area spells create convincing illusions of any object, creature, or scene the magician desires. They can create an illusion of anything the magician has seen before, from a flower or a credstick to a dragon breathing fire, as long as the illusion is no larger than the spell’s area of effect. Anyone who might pierce the illusion must successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone attempting to resist at a later point. Phantasm only affects living beings, while Trid Phantasm affects technological sensors as well."
+          },
+          "trid phantasm": {
+            "keywords": [
+              "realistic",
+              "multi-sense",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F",
+            "sourcePage": 291,
+            "Description": "These area spells create convincing illusions of any object, creature, or scene the magician desires. They can create an illusion of anything the magician has seen before, from a flower or a credstick to a dragon breathing fire, as long as the illusion is no larger than the spell’s area of effect. Anyone who might pierce the illusion must successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone attempting to resist at a later point. Phantasm only affects living beings, while Trid Phantasm affects technological sensors as well."
+          },
+          "hush": {
+            "keywords": [
+              "realistic",
+              "single-sense",
+              "area"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 291,
+            "Description": "These spells create an area that dampens sound. Sonic attacks into or out of the field, as well as critter powers using a sonic medium (such as Paralyzing Howl), are reduced by –1 per hit on the Spellcasting Test. Anyone attempting to hear a sound from within or across the silenced area must successfully resist the spell. Hush is a mana spell and so only affects living beings and magic sonic attacks. Silence affects technological devices and is useful for jamming alarms, detection devices, sonar, and tactical communications, as well as technological sonic weapons."
+          },
+          "silence": {
+            "keywords": [
+              "realistic",
+              "single-sense",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 291,
+            "Description": "These spells create an area that dampens sound. Sonic attacks into or out of the field, as well as critter powers using a sonic medium (such as Paralyzing Howl), are reduced by –1 per hit on the Spellcasting Test. Anyone attempting to hear a sound from within or across the silenced area must successfully resist the spell. Hush is a mana spell and so only affects living beings and magic sonic attacks. Silence affects technological devices and is useful for jamming alarms, detection devices, sonar, and tactical communications, as well as technological sonic weapons."
+          },
+          "stealth": {
+            "keywords": [
+              "realistic",
+              "single-sense"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 292,
+            "Description": "Stealth makes the subject less audible to normal and augmented hearing. The subject moves in silence, making less or no noise. Things not directly touched by the subject can still make noise, so a character under a Stealth spell would make no noise knocking on a door, but the door would make noise hitting the floor or wall if it was kicked in. Anyone who might hear the subject must first successfully resist the spell. Make a single Spellcasting Test and use the hits scored as the threshold for anyone who resists at a later point. Even if the spell is resisted, the subject might remain unnoticed if her Sneaking Tests are up to par."
+          }
+        }
+      },
+      "manipulation": {
+        "description": "Manipulation spells control, animate, or transform matter and energy.",
+        "keywords": {
+          "damaging": "Deals damage equal to Force with AP 0, resisted with Body + Armor. Spellcasting hits do not increase the damage.",
+          "mental": "Targets initially resist with Logic + Willpower. While sustained, a target may use a Complex Action to reduce the caster’s net hits with Logic + Willpower at a –Force penalty.",
+          "environmental": "Affects an area instead of directly targeting a creature or object.",
+          "physical": "Affects physical forms and is usually resisted with Body + Strength for living targets or Object Resistance for inanimate objects.",
+          "area": "Affects targets or objects throughout the spell’s area."
+        },
+        "spells": {
+          "animate": {
+            "keywords": [
+              "physical"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 292,
+            "Description": "This spell causes inanimate objects to move. The object moves according to its structure (balls can roll, rugs may crawl, humanoid statues can walk, and so on). The spell imparts a limited flexibility, allowing solid objects such as statues to shamble a bit as if they had joints. You need to get net successes against the target’s Object Resistance (p. 295); larger items (over 200 kilograms) have their resistance increased by 2 for every full 200 kilos they weigh. Controlling the object takes only a Simple Action; objects can also be ordered to maintain their movement while you direct your attention elsewhere. You only have rough control over the object’s movement and can’t manipulate individual parts or components (finer control requires a spell like Magic Fingers, p. 294). The maximum movement rate for objects is (Force) meters per turn, subject to the gamemaster’s discretion. If the object is held by someone else, you need to win an Opposed Test using Force x 2 against the holder’s Strength + Body to break the object free. If it’s fastened, make this Force x 2 Success Test against an appropriate gamemaster-determined threshold. Animate affects a single non-living object; Mass Animate is an area spell that can get a number of objects moving at once (like a room full of brooms, for example)."
+          },
+          "mass animate": {
+            "keywords": [
+              "physical",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F + 1",
+            "sourcePage": 292,
+            "Description": "This spell causes inanimate objects to move. The object moves according to its structure (balls can roll, rugs may crawl, humanoid statues can walk, and so on). The spell imparts a limited flexibility, allowing solid objects such as statues to shamble a bit as if they had joints. You need to get net successes against the target’s Object Resistance (p. 295); larger items (over 200 kilograms) have their resistance increased by 2 for every full 200 kilos they weigh. Controlling the object takes only a Simple Action; objects can also be ordered to maintain their movement while you direct your attention elsewhere. You only have rough control over the object’s movement and can’t manipulate individual parts or components (finer control requires a spell like Magic Fingers, p. 294). The maximum movement rate for objects is (Force) meters per turn, subject to the gamemaster’s discretion. If the object is held by someone else, you need to win an Opposed Test using Force x 2 against the holder’s Strength + Body to break the object free. If it’s fastened, make this Force x 2 Success Test against an appropriate gamemaster-determined threshold. Animate affects a single non-living object; Mass Animate is an area spell that can get a number of objects moving at once (like a room full of brooms, for example)."
+          },
+          "armor": {
+            "keywords": [
+              "physical"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 292,
+            "Description": "This spell creates a glowing field of magical energy around the subject that protects against Physical Damage. It provides Armor equal to the hits scored and is cumulative with other armor. It is not included in any calculations to determine armor encumbrance (see Armor and Encumbrance, p. 169)."
+          },
+          "control actions": {
+            "keywords": [
+              "mental"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 292,
+            "Description": "You control the physical actions of your target like a puppeteer pulling strings. The victim’s consciousness is unaffected, but you control the victim’s body. Use your own skills when forcing your target to perform actions. It takes a Complex Action to make the target perform any action. Control Actions only affects a single target, Mob Control affects any living targets within the area of effect. Victims of Mob Control may be manipulated individually (with separate actions) or issued the same command as a group (with a single action)."
+          },
+          "mob control": {
+            "keywords": [
+              "mental",
+              "area"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F + 1",
+            "sourcePage": 292,
+            "Description": "You control the physical actions of your target like a puppeteer pulling strings. The victim’s consciousness is unaffected, but you control the victim’s body. Use your own skills when forcing your target to perform actions. It takes a Complex Action to make the target perform any action. Control Actions only affects a single target, Mob Control affects any living targets within the area of effect. Victims of Mob Control may be manipulated individually (with separate actions) or issued the same command as a group (with a single action)."
+          },
+          "control thoughts": {
+            "keywords": [
+              "mental"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 293,
+            "Description": "The magician seizes control of the target’s mind, directing everything the target thinks. The magician mentally gives commands with a Standard Action, and the target is compelled to obey as if it were his own idea. Control Thoughts affects a single target, while Mob Mind affects any living targets within the area of effect. Victims of a Mob Mind may be manipulated individually (with separate actions) or issued the same command as a group (with a single action)."
+          },
+          "mob mind": {
+            "keywords": [
+              "mental",
+              "area"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F + 1",
+            "sourcePage": 293,
+            "Description": "The magician seizes control of the target’s mind, directing everything the target thinks. The magician mentally gives commands with a Standard Action, and the target is compelled to obey as if it were his own idea. Control Thoughts affects a single target, while Mob Mind affects any living targets within the area of effect. Victims of a Mob Mind may be manipulated individually (with separate actions) or issued the same command as a group (with a single action)."
+          },
+          "fling": {
+            "keywords": [
+              "physical",
+              "damaging"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "I",
+            "Drain": "F - 2",
+            "sourcePage": 293,
+            "Description": "This spell psychokinetically hurls a single object of no more than (Force) kilograms at a designated target. Use your Spellcasting Test in place of a normal Ranged Combat Test for the purposes of the item hitting the target, and use your Magic instead of Strength for determining Damage Value and range. Use standard grenade ranges (see Range Table, p. 185)"
+          },
+          "ice sheet": {
+            "keywords": [
+              "environmental",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "I",
+            "Drain": "F",
+            "sourcePage": 293,
+            "Description": "This spell creates a slippery sheet of ice over the area of effect. Characters crossing the ice must make an Agility + Reaction Test with a threshold equal to the hits you score to avoid falling prone. Vehicles must make an immediate Crash Test (p. 201). The sheet melts at a rate of 1 square meter per minute at room temperature (faster when it’s hotter, slower when it’s colder, or not at all if it’s below freezing)."
+          },
+          "ignite": {
+            "keywords": [
+              "physical"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "P",
+            "Drain": "F - 1",
+            "sourcePage": 293,
+            "Description": "The Ignite spell accelerates molecular motion in the target, causing it to catch fire once the spell becomes permanent. Against non-living targets, the magician must succeed against the target’s Object Resistance dice pool. Once the target ignites, it burns normally until it is consumed or extinguished. Against living targets, treat Ignite as a Spellcasting + Magic [Force] v. Body + Reaction Test. If successful, the spell wraps a living target in heat and flames, eventually setting the target on fire (Fire Damage p. 171)."
+          },
+          "influence": {
+            "keywords": [
+              "mental"
+            ],
+            "type": "M",
+            "range": "LOS",
+            "duration": "P",
+            "Drain": "F - 1",
+            "sourcePage": 293,
+            "Description": "You implant a single suggestion in the victim’s mind, like a powerful post-hypnotic command. For example, you might have your target think that FizzyFluid is the best drink on the market, or that he can’t remember his best friend’s name, or that he should let you past a locked door. The target carries out this suggestion as if it were his own idea. If confronted with the wrongness of the suggestion (like when the reality of the flavor of FizzyFluid in his mouth contrasts with his belief that it’s good), the subject can attempt to overcome it using the rules for overcoming mental manipulations (p. 292). In any case, the suggestion fades naturally after a number of minutes equal to your net hits."
+          },
+          "levitate": {
+            "keywords": [
+              "physical"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 293,
+            "Description": "Levitate allows you to telekinetically lift a person or object and move it around. You have to beat a threshold equal to the subject’s mass divided by 200 kilograms, rounded up. The subject of the spell can be moved anywhere in your line of sight at a movement rate equal to the spell’s Force in meters per Combat Turn. If you’re trying to levitate an item held by a living being, or levitate an unwilling living being, that being can defend against the Spellcasting Test with Strength + Body. You can use this spell to levitate yourself, if you need a view from a higher perspective or desire some parachute-free sky diving."
+          },
+          "light": {
+            "keywords": [
+              "environmental",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 4",
+            "sourcePage": 293,
+            "Description": "This spell creates a mobile point of light, illuminating a radius around it equal to the spell’s Force in meters. The spell cannot be used to blind a target, but it offsets darkness visibility modifiers. Each hit on the Spellcasting Test counters a –1 die penalty due to light conditions."
+          },
+          "magic fingers": {
+            "keywords": [
+              "physical"
+            ],
+            "type": "P",
+            "range": "LOS",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 294,
+            "Description": "Magic Fingers creates a psychokinetic effect as a sort of invisible hand that can hold or manipulate items. The hits on the Spellcasting + Magic Test become the spell’s effective Strength and Agility. You can use skills remotely with Magic Fingers, replacing your inherent limits with the spell’s Force. The spell has problems with fine control, so even simple actions such as picking up a coin may require a test (at the gamemaster’s discretion). You can fight, pick a lock, or perform any other action, using the magic fingers as if they were your real hands. The magic fingers can manipulate objects within your line of sight, but only objects within a meter or so of one another at any given moment (the “hands” can’t be farther away from each other than your arm span). This spell comes in very handy (no pun intended) for disarming bombs and handling other hazardous work from a safe distance."
+          },
+          "mana barrier": {
+            "keywords": [
+              "environmental",
+              "area"
+            ],
+            "type": "M",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 294,
+            "Description": "Mana Barrier creates an invisible barrier of magical energy. It has a barrier rating equal to the net hits scored and follows the rules for mana barriers (p. 315). This barrier does not restrict living beings or physical objects, but it impedes spirits, foci, dual beings, and spells on the plane in which you cast it (physical or astral). If cast on the astral plane, it also impedes astral forms and reduces visibility."
+          },
+          "physical barrier": {
+            "keywords": [
+              "environmental",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 1",
+            "sourcePage": 294,
+            "Description": "This spell creates a glowing, translucent force field with 1 point of both Armor and Structure rating per hit. You can form the barrier as a dome with a radius and height equal to the spell’s normal radius. Alternately, you can use it to form a wall with a height equal to the spell’s Force and a length equal to its Force x 2. Physical Barrier creates a physical wall. Anything the size of a molecule (or less) can pass through the barrier, including air or other gases. Anything bigger treats the barrier as a normal physical wall. The wall is translucent but shimmers, the equivalent of Light Fog (p. 175). The barrier does not impede spellcasting (other than visibility penalties), except for spells with physical components like indirect combat spells. The barrier can be brought down by physical attacks, but as long as you sustain it will regenerate all of its Structure Rating at the beginning of each Combat Turn. If the barrier is reduced to Structure Rating 0, it collapses and the spell ends."
+          },
+          "poltergeist": {
+            "keywords": [
+              "environmental",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 2",
+            "sourcePage": 294,
+            "Description": "Poltergeist picks up all small objects (up to a kilogram in mass) within the spell’s area and whirls them around in random patterns. This creates the equivalent visibility penalty of Light Fog (p. 175). The spell inflicts 2 boxes of Stun damage (resisted with Body + Armor) to anyone in the area each Combat Turn, whacking them with flying debris. Poltergeist may do more damage in cluttered environments, or inflict Physical damage if the gamemaster feels the debris is sufficiently dangerous (broken glass and nails, for example). If there is no debris lying around, this spell doesn’t do much more than make a spooky noise."
+          },
+          "shadow": {
+            "keywords": [
+              "environmental",
+              "area"
+            ],
+            "type": "P",
+            "range": "LOS (A)",
+            "duration": "S",
+            "Drain": "F - 3",
+            "sourcePage": 294,
+            "Description": "Shadow creates a globe of darkness with a radius equal to the spell’s Force in meters. For every two hits, increase the light penalty (p. 175) by one catagory—2 hits for Partial Light, 4 hits for Dim Light, and 6 hits for Total Darkness. This spell doesn’t cause more than Total Darkness."
+          }
+        }
+      }
+    }
+  </script>
+  <script>
+    (function () {
+      "use strict";
+
+      var spellData = JSON.parse(document.getElementById("spell-data").textContent);
+      var categories = ["combat", "detection", "health", "illusion", "manipulation"];
+      var state = { category: "combat", spell: null, query: "" };
+
+      var typeLabels = { M: "Mana", P: "Physical" };
+      var durationLabels = { I: "Instant", S: "Sustained", P: "Permanent" };
+      var damageLabels = { S: "Stun", P: "Physical" };
+
+      var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+      var search = document.getElementById("spell-search");
+      var roster = document.getElementById("spell-roster");
+      var rosterCategory = document.getElementById("roster-category");
+      var rosterCount = document.getElementById("roster-count");
+
+      function titleCase(value) {
+        return String(value).replace(/\b\w/g, function (letter) { return letter.toUpperCase(); });
+      }
+
+      function spellEntries(category) {
+        return Object.entries(spellData[category].spells || {});
+      }
+
+      function rangeMeaning(value) {
+        if (value === "T") return "Touch";
+        if (value === "LOS") return "Line of sight";
+        if (value === "LOS (A)") return "Line of sight · Area";
+        return "";
+      }
+
+      function setText(id, value) {
+        document.getElementById(id).textContent = value == null || value === "" ? "—" : value;
+      }
+
+      function renderTabs() {
+        tabs.forEach(function (tab) {
+          var category = tab.dataset.category;
+          tab.setAttribute("aria-selected", category === state.category ? "true" : "false");
+          tab.tabIndex = category === state.category ? 0 : -1;
+        });
+      }
+
+      function renderRoster() {
+        var entries = spellEntries(state.category);
+        var filtered = entries.filter(function (entry) {
+          return entry[0].toLowerCase().includes(state.query.toLowerCase());
+        });
+
+        rosterCategory.textContent = titleCase(state.category) + " files";
+        rosterCount.textContent = filtered.length + (filtered.length === 1 ? " record" : " records");
+        roster.replaceChildren();
+
+        if (!filtered.length) {
+          var empty = document.createElement("div");
+          empty.className = "empty-message";
+          empty.textContent = "No matching spells in this category.";
+          roster.appendChild(empty);
+          return;
+        }
+
+        filtered.forEach(function (entry, index) {
+          var key = entry[0];
+          var spell = entry[1];
+          var button = document.createElement("button");
+          var number = document.createElement("span");
+          var name = document.createElement("span");
+          var drain = document.createElement("span");
+
+          button.type = "button";
+          button.className = "spell-button";
+          button.setAttribute("aria-current", key === state.spell ? "true" : "false");
+          button.dataset.spell = key;
+
+          number.className = "spell-index";
+          number.textContent = String(index + 1).padStart(2, "0");
+          name.className = "spell-name";
+          name.textContent = titleCase(key);
+          drain.className = "spell-drain";
+          drain.textContent = spell.Drain || "";
+
+          button.append(number, name, drain);
+          button.addEventListener("click", function () {
+            state.spell = key;
+            renderRoster();
+            renderSpell();
+            updateHash();
+          });
+          roster.appendChild(button);
+        });
+      }
+
+      function renderSpell() {
+        var category = spellData[state.category];
+        var spell = category.spells[state.spell];
+        if (!spell) return;
+
+        setText("spell-eyebrow", titleCase(state.category) + " protocol // Spell record");
+        setText("spell-title", titleCase(state.spell));
+        setText("stat-type", spell.type);
+        setText("meaning-type", typeLabels[spell.type] || "");
+        setText("stat-range", spell.range);
+        setText("meaning-range", rangeMeaning(spell.range));
+        setText("stat-duration", spell.duration);
+        setText("meaning-duration", durationLabels[spell.duration] || "");
+        setText("stat-drain", spell.Drain);
+        setText("spell-description", spell.Description);
+        setText("category-brief-title", titleCase(state.category) + " spell protocol");
+        setText("category-description", category.description);
+
+        var damageStat = document.getElementById("damage-stat");
+        damageStat.hidden = !Object.prototype.hasOwnProperty.call(spell, "damage");
+        if (!damageStat.hidden) {
+          setText("stat-damage", spell.damage);
+          setText("meaning-damage", damageLabels[spell.damage] || "");
+        }
+
+        var keywordRow = document.getElementById("spell-keywords");
+        keywordRow.replaceChildren();
+        if (spell.keywords && spell.keywords.length) {
+          spell.keywords.forEach(function (keyword) {
+            var tag = document.createElement("span");
+            tag.className = "tag";
+            tag.textContent = keyword;
+            keywordRow.appendChild(tag);
+          });
+        } else {
+          var tag = document.createElement("span");
+          tag.className = "tag";
+          tag.textContent = "Unclassified";
+          keywordRow.appendChild(tag);
+        }
+
+        var glitches = document.getElementById("category-glitches");
+        if (category.glitches) {
+          glitches.hidden = false;
+          glitches.textContent = "Glitches: " + category.glitches;
+        } else {
+          glitches.hidden = true;
+          glitches.textContent = "";
+        }
+
+        var protocols = document.getElementById("category-protocols");
+        protocols.replaceChildren();
+        var spellKeywords = spell.keywords || [];
+        var keywordRules = Object.entries(category.keywords || {}).filter(function (entry) {
+          return spellKeywords.includes(entry[0]);
+        });
+        if (!keywordRules.length) {
+          var none = document.createElement("div");
+          none.className = "empty-message";
+          none.textContent = "This spell has no listed keywords.";
+          protocols.appendChild(none);
+        } else {
+          keywordRules.forEach(function (entry) {
+            var card = document.createElement("article");
+            var heading = document.createElement("strong");
+            var copy = document.createElement("p");
+
+            card.className = "protocol";
+            heading.className = "protocol-key";
+            heading.textContent = entry[0];
+            copy.textContent = entry[1];
+            card.append(heading, copy);
+            protocols.appendChild(card);
+          });
+        }
+      }
+
+      function renderCategory(category, requestedSpell) {
+        if (!spellData[category]) return;
+        state.category = category;
+        state.query = "";
+        search.value = "";
+
+        var entries = spellEntries(category);
+        state.spell = requestedSpell && spellData[category].spells[requestedSpell]
+          ? requestedSpell
+          : (entries[0] ? entries[0][0] : null);
+
+        renderTabs();
+        renderRoster();
+        renderSpell();
+      }
+
+      function updateHash() {
+        var next = "#" + encodeURIComponent(state.category) + "/" + encodeURIComponent(state.spell || "");
+        if (window.location.hash !== next) history.replaceState(null, "", next);
+      }
+
+      function readHash() {
+        var parts = window.location.hash.slice(1).split("/").map(decodeURIComponent);
+        var category = spellData[parts[0]] ? parts[0] : "combat";
+        renderCategory(category, parts[1]);
+      }
+
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener("click", function () {
+          renderCategory(tab.dataset.category);
+          updateHash();
+        });
+
+        tab.addEventListener("keydown", function (event) {
+          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+          event.preventDefault();
+          var direction = event.key === "ArrowRight" ? 1 : -1;
+          var target = tabs[(index + direction + tabs.length) % tabs.length];
+          target.focus();
+          target.click();
+        });
+      });
+
+      search.addEventListener("input", function () {
+        state.query = search.value.trim();
+        renderRoster();
+      });
+
+      document.querySelector(".print-button").addEventListener("click", function () {
+        window.print();
+      });
+
+      window.addEventListener("hashchange", readHash);
+      readHash();
+      updateHash();
+    }());
+  </script>
+</body>
+</html>
