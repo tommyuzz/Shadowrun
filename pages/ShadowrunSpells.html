@@ -26,9 +26,9 @@
       margin: 0;
       color: var(--ink);
       background:
-        linear-gradient(rgba(17,18,20,.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(17,18,20,.018) 1px, transparent 1px),
-        #dfe1e1;
+              linear-gradient(rgba(17,18,20,.025) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(17,18,20,.018) 1px, transparent 1px),
+              #dfe1e1;
       background-size: 32px 32px;
       font-family: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
       line-height: 1.5;
@@ -45,9 +45,9 @@
       margin: 16px auto;
       overflow: hidden;
       background:
-        radial-gradient(circle at 14% 9%, rgba(0,0,0,.025), transparent 18%),
-        radial-gradient(circle at 83% 68%, rgba(0,0,0,.018), transparent 23%),
-        var(--paper);
+              radial-gradient(circle at 14% 9%, rgba(0,0,0,.025), transparent 18%),
+              radial-gradient(circle at 83% 68%, rgba(0,0,0,.018), transparent 23%),
+              var(--paper);
       border: 1px solid var(--ink);
       box-shadow: 0 12px 30px rgba(0,0,0,.14);
       clip-path: polygon(20px 0, 42% 0, calc(42% + 12px) 6px, 72% 6px, calc(72% + 8px) 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 56% 100%, calc(56% - 12px) calc(100% - 7px), 32% calc(100% - 7px), calc(32% - 8px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
@@ -114,6 +114,20 @@
       text-transform: uppercase;
     }
 
+    .brand-link {
+      display: inline-block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand-link:hover .brand-title,
+    .brand-link:focus-visible .brand-title { color: var(--red); }
+
+    .brand-link:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 5px;
+    }
+
     .brand-subtitle {
       display: flex;
       align-items: center;
@@ -168,13 +182,13 @@
 
     .tabs {
       display: grid;
-      grid-template-columns: repeat(5, 1fr) auto;
+      grid-template-columns: repeat(5, 1fr);
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 34px;
     }
 
-    .tab, .print-button {
+    .tab {
       position: relative;
       min-height: 52px;
       padding: 0 14px;
@@ -198,14 +212,6 @@
     .tab:hover, .tab[aria-selected="true"] { color: var(--red); }
     .tab[aria-selected="true"]::after { background: var(--red); }
     .tab:last-of-type { border-right: 1px solid var(--faint); }
-
-    .print-button {
-      width: 50px;
-      border-right: 1px solid var(--faint);
-      font-size: 1rem;
-    }
-
-    .print-button:hover { color: #fff; background: var(--red); }
 
     .workspace {
       display: grid;
@@ -288,7 +294,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin: 16px 0 8px;
+      margin: 12px 0 0;
     }
 
     .roster-head strong {
@@ -299,41 +305,65 @@
 
     .roster-count { color: var(--red); font-size: .62rem; }
 
-    .spell-roster {
-      display: grid;
-      gap: 5px;
+    .spell-picker { position: relative; }
+
+    .spell-combobox {
+      position: relative;
     }
 
-    .spell-button {
+    .spell-select-input {
+      padding-right: 38px;
+    }
+
+    .combo-arrow {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 9px;
+      height: 9px;
+      pointer-events: none;
+      border-right: 2px solid var(--red);
+      border-bottom: 2px solid var(--red);
+      transform: translateY(-70%) rotate(45deg);
+    }
+
+    .spell-options {
+      position: absolute;
+      top: calc(100% + 5px);
+      right: 0;
+      left: 0;
+      z-index: 30;
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 5px;
+      background: var(--paper);
+      border: 1px solid var(--ink);
+      box-shadow: 0 12px 24px rgba(0,0,0,.18);
+    }
+
+    .spell-options[hidden] { display: none; }
+
+    .spell-option {
       display: grid;
-      grid-template-columns: 24px 1fr auto;
+      grid-template-columns: 1fr auto;
       gap: 8px;
       align-items: center;
       width: 100%;
       min-height: 39px;
-      padding: 5px 7px;
+      padding: 7px 9px;
       color: var(--ink);
       background: transparent;
-      border: 1px solid #c8cacc;
+      border: 0;
+      border-bottom: 1px solid #d7d8d9;
       text-align: left;
       cursor: pointer;
     }
 
-    .spell-button:hover { border-color: var(--red); }
-    .spell-button[aria-current="true"] { color: #fff; background: var(--red); border-color: var(--red); }
-
-    .spell-index {
-      display: grid;
-      width: 22px;
-      height: 22px;
-      place-items: center;
-      background: var(--ink);
-      color: #fff;
-      font-size: .58rem;
-      font-weight: 800;
-    }
-
-    .spell-button[aria-current="true"] .spell-index { color: var(--red); background: #fff; }
+    .spell-option:last-child { border-bottom: 0; }
+    .spell-option:hover,
+    .spell-option.is-active { color: #fff; background: var(--red); }
+    .spell-option[aria-selected="true"] { box-shadow: inset 4px 0 var(--red); }
+    .spell-option[aria-selected="true"].is-active { box-shadow: inset 4px 0 #fff; }
 
     .spell-name {
       font-size: .76rem;
@@ -351,6 +381,141 @@
       text-align: center;
       border: 1px dashed var(--line);
     }
+
+
+
+    .spell-list-view[hidden],
+    .spell-record-view[hidden] { display: none; }
+
+    .spell-record-view .spell-header { padding-right: 130px; }
+
+    .spell-list-summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .spell-list-summary strong { color: var(--red); }
+
+    .spell-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .spell-list-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 58px;
+      padding: 12px 14px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--ink);
+      box-shadow: inset 4px 0 var(--red);
+      text-align: left;
+      cursor: pointer;
+      transition: color .12s ease, background .12s ease, border-color .12s ease;
+    }
+
+    .spell-list-item:hover,
+    .spell-list-item:focus-visible {
+      color: #fff;
+      background: var(--red);
+      border-color: var(--red);
+      outline: none;
+    }
+
+    .spell-list-name {
+      min-width: 0;
+      font-size: .85rem;
+      font-weight: 900;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .spell-list-source {
+      color: var(--red);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .68rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .spell-list-item:hover .spell-list-source,
+    .spell-list-item:focus-visible .spell-list-source { color: #fff; }
+
+    .back-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      min-height: 36px;
+      padding: 7px 11px;
+      color: var(--red);
+      background: var(--paper);
+      border: 1px solid var(--red);
+      font-size: .66rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .back-button::before {
+      content: "←";
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .back-button:hover,
+    .back-button:focus-visible {
+      color: #fff;
+      background: var(--red);
+      outline: none;
+    }
+
+    .sidebar-keywords {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 2px solid var(--ink);
+    }
+
+    .sidebar-subheading {
+      margin: 0 0 12px;
+      color: var(--red);
+      font-size: .82rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .sidebar-keyword-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .sidebar-keyword {
+      padding: 11px 12px;
+      background: #fff;
+      border: 1px solid var(--red);
+      box-shadow: inset 4px 0 var(--red);
+    }
+
+    .sidebar-keyword .protocol-key { margin-bottom: 5px; }
+    .sidebar-keyword .protocol-copy { font-size: .7rem; }
 
     .legend-grid { display: grid; gap: 0; }
     .legend-row {
@@ -500,7 +665,9 @@
       font-size: .96rem;
     }
 
-    .description::first-letter {
+    .description > :first-child { margin-top: 0; }
+    .description > :last-child { margin-bottom: 0; }
+    .description p:first-child::first-letter {
       float: left;
       margin: .02em .09em 0 0;
       color: var(--red);
@@ -509,10 +676,19 @@
       line-height: .78;
     }
 
+    .description ul, .description ol,
+    .protocol-copy ul, .protocol-copy ol {
+      margin: .7em 0;
+      padding-left: 1.35em;
+    }
+
+    .description li + li,
+    .protocol-copy li + li { margin-top: .25em; }
+
     .category-panel .panel-inner {
       background:
-        linear-gradient(135deg, rgba(226,27,23,.07), transparent 48%),
-        var(--paper);
+              linear-gradient(135deg, rgba(226,27,23,.07), transparent 48%),
+              var(--paper);
     }
 
     .category-description {
@@ -545,12 +721,48 @@
       font-size: .65rem;
     }
 
-    .protocol p {
-      margin: 0;
+    .protocol-copy {
       color: #42464a;
       font-family: Arial, Helvetica, sans-serif;
       font-size: .76rem;
       line-height: 1.45;
+    }
+
+    .protocol-copy > :first-child { margin-top: 0; }
+    .protocol-copy > :last-child { margin-bottom: 0; }
+
+    .source-book {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: center;
+      max-width: 640px;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid var(--red);
+      box-shadow: inset 4px 0 var(--red);
+    }
+
+    .source-code {
+      display: grid;
+      min-width: 58px;
+      min-height: 46px;
+      padding: 6px;
+      place-items: center;
+      color: #fff;
+      background: var(--red);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .84rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .source-title {
+      display: block;
+      font-size: .88rem;
+      font-weight: 900;
+      line-height: 1.25;
+      text-transform: uppercase;
     }
 
     footer {
@@ -624,13 +836,13 @@
       .tabs { display: flex; overflow-x: auto; padding: 0 22px; scrollbar-width: none; }
       .tabs::-webkit-scrollbar { display: none; }
       .tab { flex: 0 0 auto; min-width: 136px; }
-      .print-button { flex: 0 0 50px; }
       .workspace { grid-template-columns: 1fr; padding: 20px 22px 30px; }
       .sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
       .panel + .panel { margin-top: 0; }
       .legend-panel { align-self: start; }
-      .category-panel { grid-column: 2; }
+      .category-panel { grid-column: auto; }
       .spell-panel { grid-row: 1; }
+      .spell-list { grid-template-columns: 1fr; }
       .stat-grid { grid-template-columns: repeat(3, 1fr); }
       .stat { border-bottom: 1px solid var(--ink); }
       .stat:nth-child(3) { border-right: 0; }
@@ -647,12 +859,12 @@
       .sidebar { grid-template-columns: 1fr; }
       .category-panel { grid-column: auto; }
       .spell-panel > .panel-inner { padding: 22px 18px; }
+      .spell-record-view .spell-header { padding-right: 0; padding-top: 48px; }
       h1 { font-size: clamp(3.2rem, 18vw, 5.4rem); }
       .stat-grid { grid-template-columns: repeat(2, 1fr); }
       .stat, .stat:nth-child(3) { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
       .stat:nth-child(even), .stat:last-child { border-right: 0; }
       .protocols { grid-template-columns: 1fr; }
-      .print-button { display: none; }
       footer { padding: 0 14px 18px; }
       .footer-frame { grid-template-columns: 1fr auto; }
       .footer-bars, .footer-warning { display: none; }
@@ -661,90 +873,94 @@
     @media print {
       body { background: #fff; }
       .sheet { width: 100%; margin: 0; border: 0; box-shadow: none; clip-path: none; }
-      .sheet::before, .tabs-wrap, .search-label, .search { display: none; }
+      .sheet::before, .tabs-wrap, .spell-picker { display: none; }
       .masthead, .workspace, footer { max-width: none; }
       .workspace { grid-template-columns: 27% 1fr; padding-top: 18px; }
-      .spell-roster .spell-button:not([aria-current="true"]) { display: none; }
       .panel { break-inside: avoid; }
       .protocols { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="sheet">
-    <header class="masthead">
-      <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
-        <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/>
-        <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/>
-        <path d="M50 3v25M50 72v25M3 50h25M72 50h25" fill="none" stroke="currentColor" stroke-width="4"/>
-        <path d="M55 25 31 54h17l-5 24 27-38H53z" fill="currentColor"/>
-      </svg>
-      <div>
-        <p class="kicker">Awakened operations archive</p>
-        <p class="brand-title">Shadowrun</p>
-        <p class="brand-subtitle">Fifth edition spell index</p>
-      </div>
-      <div class="record-id" aria-label="Dataset identification">
-        <strong>GRIMOIRE // 5E</strong>
-        <span>DATASET: SPELLS.JSON</span>
-        <div class="barcode" aria-hidden="true"></div>
-      </div>
-    </header>
+<div class="sheet">
+  <header class="masthead">
+    <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/>
+      <path d="M50 3v25M50 72v25M3 50h25M72 50h25" fill="none" stroke="currentColor" stroke-width="4"/>
+      <path d="M55 25 31 54h17l-5 24 27-38H53z" fill="currentColor"/>
+    </svg>
+    <div>
+      <p class="kicker">Awakened operations archive</p>
+      <a class="brand-link" href="../ShadowrunHome.html" aria-label="Return to Shadowrun home page"><p class="brand-title">Shadowrun</p></a>
+      <p class="brand-subtitle">Fifth edition spell index</p>
+    </div>
+    <div class="record-id" aria-label="Dataset identification">
+      <strong>GRIMOIRE // 5E</strong>
+      <span>DATASET: SPELLS.JSON</span>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </header>
 
-    <nav class="tabs-wrap" aria-label="Spell categories">
-      <div class="tabs" role="tablist" aria-label="Shadowrun spell types">
-        <button class="tab" type="button" role="tab" data-category="combat">Combat</button>
-        <button class="tab" type="button" role="tab" data-category="detection">Detection</button>
-        <button class="tab" type="button" role="tab" data-category="health">Health</button>
-        <button class="tab" type="button" role="tab" data-category="illusion">Illusion</button>
-        <button class="tab" type="button" role="tab" data-category="manipulation">Manipulation</button>
-        <button class="print-button" type="button" title="Print current spell" aria-label="Print current spell">⌁</button>
-      </div>
-    </nav>
+  <nav class="tabs-wrap" aria-label="Spell categories">
+    <div class="tabs" role="tablist" aria-label="Shadowrun spell types">
+      <button class="tab" type="button" role="tab" data-category="combat">Combat</button>
+      <button class="tab" type="button" role="tab" data-category="detection">Detection</button>
+      <button class="tab" type="button" role="tab" data-category="health">Health</button>
+      <button class="tab" type="button" role="tab" data-category="illusion">Illusion</button>
+      <button class="tab" type="button" role="tab" data-category="manipulation">Manipulation</button>
+    </div>
+  </nav>
 
-    <main class="workspace">
-      <aside class="sidebar" aria-label="Spell controls and code legend">
-        <section class="panel category-panel">
-          <div class="panel-inner">
-            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span><span id="category-brief-title">Combat spell protocol</span></h2>
-            <p class="category-description" id="category-description"></p>
-            <p class="glitch-text" id="category-glitches" hidden></p>
-          </div>
-        </section>
-
-        <section class="panel roster-panel">
-          <div class="panel-inner">
-            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Spells</h2>
-            <label class="search-label" for="spell-search">Filter current category</label>
-            <input class="search" id="spell-search" type="search" placeholder="Enter spell name…" autocomplete="off">
-            <div class="roster-head">
-              <strong id="roster-category">Combat files</strong>
-              <span class="roster-count" id="roster-count">0 records</span>
-            </div>
-            <div class="spell-roster" id="spell-roster"></div>
-          </div>
-        </section>
-
-        <section class="panel legend-panel">
-          <div class="panel-inner">
-            <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Code index</h2>
-            <dl class="legend-grid">
-              <div class="legend-row"><dt>M / P</dt><dd>Mana / Physical spell type</dd></div>
-              <div class="legend-row"><dt>T</dt><dd>Touch range</dd></div>
-              <div class="legend-row"><dt>LOS</dt><dd>Line of sight</dd></div>
-              <div class="legend-row"><dt>(A)</dt><dd>Area effect</dd></div>
-              <div class="legend-row"><dt>S / P</dt><dd>Stun / Physical damage</dd></div>
-              <div class="legend-row"><dt>I / S / P</dt><dd>Instant / Sustained / Permanent duration</dd></div>
-              <div class="legend-row"><dt>F</dt><dd>Force used in Drain Value</dd></div>
-            </dl>
-          </div>
-        </section>
-
-      </aside>
-
-      <article class="panel spell-panel" id="spell-panel" role="tabpanel" aria-live="polite">
+  <main class="workspace">
+    <aside class="sidebar" aria-label="Spell category information and code legend">
+      <section class="panel category-panel">
         <div class="panel-inner">
+          <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span><span id="category-brief-title">Combat spell protocol</span></h2>
+          <div class="category-description" id="category-description"></div>
+          <div class="glitch-text" id="category-glitches" hidden></div>
+        </div>
+      </section>
+
+      <section class="panel legend-panel">
+        <div class="panel-inner">
+          <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Code index</h2>
+          <dl class="legend-grid">
+            <div class="legend-row"><dt>M / P</dt><dd>Mana / Physical spell type</dd></div>
+            <div class="legend-row"><dt>T</dt><dd>Touch range</dd></div>
+            <div class="legend-row"><dt>LOS</dt><dd>Line of sight</dd></div>
+            <div class="legend-row"><dt>(A)</dt><dd>Area effect</dd></div>
+            <div class="legend-row"><dt>S / P</dt><dd>Stun / Physical damage</dd></div>
+            <div class="legend-row"><dt>I / S / P</dt><dd>Instant / Sustained / Permanent duration</dd></div>
+            <div class="legend-row"><dt>F</dt><dd>Force used in Drain Value</dd></div>
+          </dl>
+
+          <div class="sidebar-keywords">
+            <h3 class="sidebar-subheading">Keywords</h3>
+            <div class="sidebar-keyword-list" id="sidebar-keywords" aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+    </aside>
+
+    <article class="panel spell-panel" id="spell-panel" role="tabpanel" aria-live="polite">
+      <div class="panel-inner">
+        <section class="spell-list-view" id="spell-list-view">
           <header class="spell-header">
+            <p class="eyebrow" id="spell-list-eyebrow">Combat protocol // Spell list</p>
+            <h1 id="spell-list-title">Combat spells</h1>
+          </header>
+
+          <div class="spell-list-summary">
+            <span>Select a spell to open its full record</span>
+            <strong id="spell-list-count">0 records</strong>
+          </div>
+          <div class="spell-list" id="spell-list"></div>
+        </section>
+
+        <section class="spell-record-view" id="spell-record-view" hidden>
+          <header class="spell-header">
+            <button class="back-button" id="back-to-list" type="button">Back to list</button>
             <p class="eyebrow" id="spell-eyebrow">Combat protocol // Spell record</p>
             <h1 id="spell-title">Spell</h1>
             <div class="tag-row" id="spell-keywords" aria-label="Spell keywords"></div>
@@ -780,262 +996,325 @@
 
           <section class="section" id="description-section">
             <h2 class="section-title" data-index="01">Spell effect</h2>
-            <p class="description" id="spell-description"></p>
+            <div class="description" id="spell-description"></div>
           </section>
 
-          <section class="section">
-            <h2 class="section-title" data-index="02">Keywords</h2>
-            <div class="protocols" id="category-protocols"></div>
+          <section class="section" id="source-section">
+            <h2 class="section-title" data-index="02">Source book</h2>
+            <div class="source-book">
+              <span class="source-code" id="source-code">—</span>
+              <strong class="source-title" id="source-title">—</strong>
+            </div>
           </section>
-        </div>
-      </article>
-    </main>
-
-    <footer>
-      <div class="footer-frame">
-        <div class="footer-bars" aria-hidden="true"></div>
-        <div class="footer-copy">&gt;&gt; CAST. ADAPT. SURVIVE.<br>KNOW THE RULES. CONTROL THE FIELD.</div>
-        <div class="footer-warning">The corporations own everything.<br>Information is power. Stay sharp.</div>
-        <span class="sigil" aria-hidden="true">✦</span>
+        </section>
       </div>
-    </footer>
-  </div>
+    </article>
+  </main>
 
-  <script>
-    (async function () {
-      "use strict";
+  <footer>
+    <div class="footer-frame">
+      <div class="footer-bars" aria-hidden="true"></div>
+      <div class="footer-copy">&gt;&gt; CAST. ADAPT. SURVIVE.<br>KNOW THE RULES. CONTROL THE FIELD.</div>
+      <div class="footer-warning">The corporations own everything.<br>Information is power. Stay sharp.</div>
+      <span class="sigil" aria-hidden="true">✦</span>
+    </div>
+  </footer>
+</div>
 
-      var response = await fetch("./spells.json");
+<script>
+  (async function () {
+    "use strict";
 
-      if (!response.ok) {
-        throw new Error("Failed to load spells.json: HTTP " + response.status);
+    var response = await fetch("./spells.json");
+
+    if (!response.ok) {
+      throw new Error("Failed to load spells.json: HTTP " + response.status);
+    }
+
+    var spellData = await response.json();
+    var categories = ["combat", "detection", "health", "illusion", "manipulation"];
+    var state = { category: "combat", spell: null, mode: "list" };
+
+    var typeLabels = { M: "Mana", P: "Physical" };
+    var durationLabels = { I: "Instant", S: "Sustained", P: "Permanent" };
+    var damageLabels = { S: "Stun", P: "Physical" };
+    var sourceLabels = {
+      CRB: "Shadowrun Fifth Edition Core Rulebook",
+      SG: "Street Grimoire",
+      FA: "Forbidden Arcana",
+      HT: "Hard Targets",
+      CA: "Cutting Aces"
+    };
+
+    var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+    var listView = document.getElementById("spell-list-view");
+    var recordView = document.getElementById("spell-record-view");
+    var spellList = document.getElementById("spell-list");
+    var sidebarKeywords = document.getElementById("sidebar-keywords");
+    var backButton = document.getElementById("back-to-list");
+
+    function titleCase(value) {
+      return String(value).replace(/\b\w/g, function (letter) { return letter.toUpperCase(); });
+    }
+
+    function spellEntries(category) {
+      return Object.entries(spellData[category].spells || {});
+    }
+
+    function rangeMeaning(value) {
+      if (value === "T") return "Touch";
+      if (value === "LOS") return "Line of sight";
+      if (value === "LOS (A)") return "Line of sight · Area";
+      return "";
+    }
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value == null || value === "" ? "—" : value;
+    }
+
+    function setHTML(id, value) {
+      var element = document.getElementById(id);
+      var html = value == null || value === "" ? "—" : String(value);
+      element.innerHTML = html;
+
+      if (id === "spell-description" && !element.firstElementChild) {
+        element.innerHTML = "<p>" + html + "</p>";
+      }
+    }
+
+    function renderTabs() {
+      tabs.forEach(function (tab) {
+        var category = tab.dataset.category;
+        tab.setAttribute("aria-selected", category === state.category ? "true" : "false");
+        tab.tabIndex = category === state.category ? 0 : -1;
+      });
+    }
+
+    function renderCategoryInfo() {
+      var category = spellData[state.category];
+      setText("category-brief-title", titleCase(state.category) + " spell protocol");
+      setHTML("category-description", category.description);
+
+      var glitches = document.getElementById("category-glitches");
+      if (category.glitches) {
+        glitches.hidden = false;
+        glitches.innerHTML = "<strong>Glitches:</strong> " + category.glitches;
+      } else {
+        glitches.hidden = true;
+        glitches.textContent = "";
+      }
+    }
+
+    function renderSidebarKeywords() {
+      sidebarKeywords.replaceChildren();
+
+      if (!state.spell || !spellData[state.category].spells[state.spell]) {
+        var prompt = document.createElement("div");
+        prompt.className = "empty-message";
+        prompt.textContent = "Select a spell to view its keyword meanings.";
+        sidebarKeywords.appendChild(prompt);
+        return;
       }
 
-      var spellData = await response.json();
-      var categories = ["combat", "detection", "health", "illusion", "manipulation"];
-      var state = { category: "combat", spell: null, query: "" };
+      var category = spellData[state.category];
+      var spell = category.spells[state.spell];
+      var spellKeywords = spell.keywords || [];
 
-      var typeLabels = { M: "Mana", P: "Physical" };
-      var durationLabels = { I: "Instant", S: "Sustained", P: "Permanent" };
-      var damageLabels = { S: "Stun", P: "Physical" };
-
-      var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
-      var search = document.getElementById("spell-search");
-      var roster = document.getElementById("spell-roster");
-      var rosterCategory = document.getElementById("roster-category");
-      var rosterCount = document.getElementById("roster-count");
-
-      function titleCase(value) {
-        return String(value).replace(/\b\w/g, function (letter) { return letter.toUpperCase(); });
+      if (!spellKeywords.length) {
+        var none = document.createElement("div");
+        none.className = "empty-message";
+        none.textContent = "This spell has no listed keywords.";
+        sidebarKeywords.appendChild(none);
+        return;
       }
 
-      function spellEntries(category) {
-        return Object.entries(spellData[category].spells || {});
+      spellKeywords.forEach(function (keyword) {
+        var card = document.createElement("article");
+        var heading = document.createElement("strong");
+        var copy = document.createElement("div");
+
+        card.className = "sidebar-keyword";
+        heading.className = "protocol-key";
+        heading.textContent = keyword;
+        copy.className = "protocol-copy";
+        copy.innerHTML = Object.prototype.hasOwnProperty.call(category.keywords || {}, keyword)
+                ? category.keywords[keyword]
+                : "No keyword description is listed for this entry.";
+
+        card.append(heading, copy);
+        sidebarKeywords.appendChild(card);
+      });
+    }
+
+    function renderSpellList() {
+      var entries = spellEntries(state.category);
+      setText("spell-list-eyebrow", titleCase(state.category) + " protocol // Spell list");
+      setText("spell-list-title", titleCase(state.category) + " spells");
+      setText("spell-list-count", entries.length + (entries.length === 1 ? " record" : " records"));
+
+      spellList.replaceChildren();
+
+      if (!entries.length) {
+        var empty = document.createElement("div");
+        empty.className = "empty-message";
+        empty.textContent = "No spells are listed in this category.";
+        spellList.appendChild(empty);
+        return;
       }
 
-      function rangeMeaning(value) {
-        if (value === "T") return "Touch";
-        if (value === "LOS") return "Line of sight";
-        if (value === "LOS (A)") return "Line of sight · Area";
-        return "";
-      }
+      entries.forEach(function (entry) {
+        var key = entry[0];
+        var spell = entry[1];
+        var button = document.createElement("button");
+        var name = document.createElement("span");
+        var source = document.createElement("span");
 
-      function setText(id, value) {
-        document.getElementById(id).textContent = value == null || value === "" ? "—" : value;
-      }
+        button.type = "button";
+        button.className = "spell-list-item";
+        button.dataset.spell = key;
+        button.setAttribute("aria-label", "Open " + titleCase(key) + " spell record");
 
-      function renderTabs() {
-        tabs.forEach(function (tab) {
-          var category = tab.dataset.category;
-          tab.setAttribute("aria-selected", category === state.category ? "true" : "false");
-          tab.tabIndex = category === state.category ? 0 : -1;
+        name.className = "spell-list-name";
+        name.textContent = titleCase(key);
+        source.className = "spell-list-source";
+        source.textContent = spell.source ? "Source: " + spell.source : "";
+
+        button.append(name, source);
+        button.addEventListener("click", function () {
+          selectSpell(key);
         });
+        spellList.appendChild(button);
+      });
+    }
+
+    function renderSpellRecord() {
+      var category = spellData[state.category];
+      var spell = category.spells[state.spell];
+      if (!spell) return;
+
+      setText("spell-eyebrow", titleCase(state.category) + " protocol // Spell record");
+      setText("spell-title", titleCase(state.spell));
+      setText("stat-type", spell.type);
+      setText("meaning-type", typeLabels[spell.type] || "");
+      setText("stat-range", spell.range);
+      setText("meaning-range", rangeMeaning(spell.range));
+      setText("stat-duration", spell.duration);
+      setText("meaning-duration", durationLabels[spell.duration] || "");
+      setText("stat-drain", spell.drain);
+      setHTML("spell-description", spell.description);
+      setText("source-code", spell.source || "—");
+      setText("source-title", sourceLabels[spell.source] || spell.source || "Unknown source");
+
+      var damageStat = document.getElementById("damage-stat");
+      damageStat.hidden = !Object.prototype.hasOwnProperty.call(spell, "damage");
+      if (!damageStat.hidden) {
+        setText("stat-damage", spell.damage);
+        setText("meaning-damage", damageLabels[spell.damage] || "");
       }
 
-      function renderRoster() {
-        var entries = spellEntries(state.category);
-        var filtered = entries.filter(function (entry) {
-          return entry[0].toLowerCase().includes(state.query.toLowerCase());
-        });
-
-        rosterCategory.textContent = titleCase(state.category) + " files";
-        rosterCount.textContent = filtered.length + (filtered.length === 1 ? " record" : " records");
-        roster.replaceChildren();
-
-        if (!filtered.length) {
-          var empty = document.createElement("div");
-          empty.className = "empty-message";
-          empty.textContent = "No matching spells in this category.";
-          roster.appendChild(empty);
-          return;
-        }
-
-        filtered.forEach(function (entry, index) {
-          var key = entry[0];
-          var spell = entry[1];
-          var button = document.createElement("button");
-          var number = document.createElement("span");
-          var name = document.createElement("span");
-          var drain = document.createElement("span");
-
-          button.type = "button";
-          button.className = "spell-button";
-          button.setAttribute("aria-current", key === state.spell ? "true" : "false");
-          button.dataset.spell = key;
-
-          number.className = "spell-index";
-          number.textContent = String(index + 1).padStart(2, "0");
-          name.className = "spell-name";
-          name.textContent = titleCase(key);
-          drain.className = "spell-drain";
-          drain.textContent = spell.Drain || "";
-
-          button.append(number, name, drain);
-          button.addEventListener("click", function () {
-            state.spell = key;
-            renderRoster();
-            renderSpell();
-            updateHash();
-          });
-          roster.appendChild(button);
-        });
-      }
-
-      function renderSpell() {
-        var category = spellData[state.category];
-        var spell = category.spells[state.spell];
-        if (!spell) return;
-
-        setText("spell-eyebrow", titleCase(state.category) + " protocol // Spell record");
-        setText("spell-title", titleCase(state.spell));
-        setText("stat-type", spell.type);
-        setText("meaning-type", typeLabels[spell.type] || "");
-        setText("stat-range", spell.range);
-        setText("meaning-range", rangeMeaning(spell.range));
-        setText("stat-duration", spell.duration);
-        setText("meaning-duration", durationLabels[spell.duration] || "");
-        setText("stat-drain", spell.Drain);
-        setText("spell-description", spell.Description);
-        setText("category-brief-title", titleCase(state.category) + " spell protocol");
-        setText("category-description", category.description);
-
-        var damageStat = document.getElementById("damage-stat");
-        damageStat.hidden = !Object.prototype.hasOwnProperty.call(spell, "damage");
-        if (!damageStat.hidden) {
-          setText("stat-damage", spell.damage);
-          setText("meaning-damage", damageLabels[spell.damage] || "");
-        }
-
-        var keywordRow = document.getElementById("spell-keywords");
-        keywordRow.replaceChildren();
-        if (spell.keywords && spell.keywords.length) {
-          spell.keywords.forEach(function (keyword) {
-            var tag = document.createElement("span");
-            tag.className = "tag";
-            tag.textContent = keyword;
-            keywordRow.appendChild(tag);
-          });
-        } else {
+      var keywordRow = document.getElementById("spell-keywords");
+      keywordRow.replaceChildren();
+      if (spell.keywords && spell.keywords.length) {
+        spell.keywords.forEach(function (keyword) {
           var tag = document.createElement("span");
           tag.className = "tag";
-          tag.textContent = "Unclassified";
+          tag.textContent = keyword;
           keywordRow.appendChild(tag);
-        }
-
-        var glitches = document.getElementById("category-glitches");
-        if (category.glitches) {
-          glitches.hidden = false;
-          glitches.textContent = "Glitches: " + category.glitches;
-        } else {
-          glitches.hidden = true;
-          glitches.textContent = "";
-        }
-
-        var protocols = document.getElementById("category-protocols");
-        protocols.replaceChildren();
-        var spellKeywords = spell.keywords || [];
-        var keywordRules = Object.entries(category.keywords || {}).filter(function (entry) {
-          return spellKeywords.includes(entry[0]);
         });
-        if (!keywordRules.length) {
-          var none = document.createElement("div");
-          none.className = "empty-message";
-          none.textContent = "This spell has no listed keywords.";
-          protocols.appendChild(none);
-        } else {
-          keywordRules.forEach(function (entry) {
-            var card = document.createElement("article");
-            var heading = document.createElement("strong");
-            var copy = document.createElement("p");
-
-            card.className = "protocol";
-            heading.className = "protocol-key";
-            heading.textContent = entry[0];
-            copy.textContent = entry[1];
-            card.append(heading, copy);
-            protocols.appendChild(card);
-          });
-        }
+      } else {
+        var tag = document.createElement("span");
+        tag.className = "tag";
+        tag.textContent = "Unclassified";
+        keywordRow.appendChild(tag);
       }
+    }
 
-      function renderCategory(category, requestedSpell) {
-        if (!spellData[category]) return;
-        state.category = category;
-        state.query = "";
-        search.value = "";
+    function showMode(mode) {
+      state.mode = mode === "record" ? "record" : "list";
+      listView.hidden = state.mode !== "list";
+      recordView.hidden = state.mode !== "record";
+    }
 
-        var entries = spellEntries(category);
-        state.spell = requestedSpell && spellData[category].spells[requestedSpell]
-          ? requestedSpell
-          : (entries[0] ? entries[0][0] : null);
-
-        renderTabs();
-        renderRoster();
-        renderSpell();
-      }
-
-      function updateHash() {
-        var next = "#" + encodeURIComponent(state.category) + "/" + encodeURIComponent(state.spell || "");
-        if (window.location.hash !== next) history.replaceState(null, "", next);
-      }
-
-      function readHash() {
-        var parts = window.location.hash.slice(1).split("/").map(decodeURIComponent);
-        var category = spellData[parts[0]] ? parts[0] : "combat";
-        renderCategory(category, parts[1]);
-      }
-
-      tabs.forEach(function (tab, index) {
-        tab.addEventListener("click", function () {
-          renderCategory(tab.dataset.category);
-          updateHash();
-        });
-
-        tab.addEventListener("keydown", function (event) {
-          if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-          event.preventDefault();
-          var direction = event.key === "ArrowRight" ? 1 : -1;
-          var target = tabs[(index + direction + tabs.length) % tabs.length];
-          target.focus();
-          target.click();
-        });
-      });
-
-      search.addEventListener("input", function () {
-        state.query = search.value.trim();
-        renderRoster();
-      });
-
-      document.querySelector(".print-button").addEventListener("click", function () {
-        window.print();
-      });
-
-      window.addEventListener("hashchange", readHash);
-      readHash();
+    function selectSpell(key) {
+      if (!spellData[state.category].spells[key]) return;
+      state.spell = key;
+      renderSpellRecord();
+      renderSidebarKeywords();
+      showMode("record");
       updateHash();
-    }()).catch(function (error) {
-      console.error("Failed to initialise spell page:", error);
+    }
+
+    function showList(options) {
+      var preserveSelection = options && options.preserveSelection;
+      if (!preserveSelection) state.spell = null;
+      renderSpellList();
+      renderSidebarKeywords();
+      showMode("list");
+      updateHash();
+    }
+
+    function renderCategory(category, requestedSpell) {
+      if (!spellData[category]) return;
+      state.category = category;
+      state.spell = null;
+      renderTabs();
+      renderCategoryInfo();
+      renderSpellList();
+
+      if (requestedSpell && spellData[category].spells[requestedSpell]) {
+        state.spell = requestedSpell;
+        renderSpellRecord();
+        showMode("record");
+      } else {
+        showMode("list");
+      }
+
+      renderSidebarKeywords();
+    }
+
+    function updateHash() {
+      var next = "#" + encodeURIComponent(state.category);
+      if (state.mode === "record" && state.spell) {
+        next += "/" + encodeURIComponent(state.spell);
+      }
+      if (window.location.hash !== next) history.replaceState(null, "", next);
+    }
+
+    function readHash() {
+      var parts = window.location.hash.slice(1).split("/").map(decodeURIComponent);
+      var category = spellData[parts[0]] ? parts[0] : "combat";
+      renderCategory(category, parts[1]);
+    }
+
+    tabs.forEach(function (tab, index) {
+      tab.addEventListener("click", function () {
+        state.category = tab.dataset.category;
+        state.spell = null;
+        renderTabs();
+        renderCategoryInfo();
+        showList();
+      });
+
+      tab.addEventListener("keydown", function (event) {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+        event.preventDefault();
+        var direction = event.key === "ArrowRight" ? 1 : -1;
+        var target = tabs[(index + direction + tabs.length) % tabs.length];
+        target.focus();
+        target.click();
+      });
     });
-  </script>
+
+    backButton.addEventListener("click", function () {
+      showList({ preserveSelection: true });
+    });
+
+    window.addEventListener("hashchange", readHash);
+    readHash();
+    updateHash();
+  }()).catch(function (error) {
+    console.error("Failed to initialise spell page:", error);
+  });
+</script>
 </body>
 </html>
