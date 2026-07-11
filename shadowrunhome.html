@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shadowrun Fifth Edition reference archive home page.">
+  <title>Shadowrun 5e // Operations Archive</title>
+  <style>
+    :root {
+      --ink: #101113;
+      --muted: #62666a;
+      --line: #a6a9ab;
+      --faint: #e5e6e6;
+      --paper: #fbfbf9;
+      --red: #e11b17;
+      --red-dark: #ae130f;
+      --max: 1260px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+              linear-gradient(rgba(17,18,20,.025) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(17,18,20,.018) 1px, transparent 1px),
+              #dfe1e1;
+      background-size: 32px 32px;
+      font-family: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input, select { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    a { color: inherit; }
+
+    .sheet {
+      position: relative;
+      width: min(calc(100% - 32px), 1400px);
+      min-height: calc(100vh - 32px);
+      margin: 16px auto;
+      overflow: hidden;
+      background:
+              radial-gradient(circle at 14% 9%, rgba(0,0,0,.025), transparent 18%),
+              radial-gradient(circle at 83% 68%, rgba(0,0,0,.018), transparent 23%),
+              var(--paper);
+      border: 1px solid var(--ink);
+      box-shadow: 0 12px 30px rgba(0,0,0,.14);
+      clip-path: polygon(20px 0, 42% 0, calc(42% + 12px) 6px, 72% 6px, calc(72% + 8px) 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 56% 100%, calc(56% - 12px) calc(100% - 7px), 32% calc(100% - 7px), calc(32% - 8px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      z-index: 20;
+      border: 1px solid rgba(17,18,20,.55);
+      pointer-events: none;
+      clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+    }
+
+    .masthead {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 22px;
+      align-items: center;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 35px 34px 25px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .masthead::after {
+      content: "";
+      position: absolute;
+      right: 34px;
+      bottom: -6px;
+      width: 190px;
+      height: 5px;
+      background: repeating-linear-gradient(110deg, var(--red) 0 4px, transparent 4px 8px);
+    }
+
+    .brand-mark {
+      width: 74px;
+      height: 74px;
+      color: var(--red);
+    }
+
+    .kicker, .eyebrow, .tab, .record-id, .footer-copy,
+    .panel-heading, .module-code, .module-status {
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .kicker {
+      margin: 0 0 3px;
+      color: var(--red);
+      font-size: .78rem;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5.4rem);
+      font-weight: 900;
+      letter-spacing: .01em;
+      line-height: .87;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 11px 0 0;
+      color: var(--red);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle::before,
+    .brand-subtitle::after {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .record-id {
+      align-self: end;
+      min-width: 205px;
+      font-size: .7rem;
+      text-align: right;
+    }
+
+    .record-id strong {
+      display: block;
+      color: var(--red);
+      font-size: 1.05rem;
+      letter-spacing: .06em;
+    }
+
+    .barcode {
+      display: inline-block;
+      width: 148px;
+      height: 27px;
+      margin-top: 8px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 5px, var(--ink) 5px 6px, transparent 6px 9px);
+      border-inline: 5px solid var(--paper);
+    }
+
+    .tabs-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(251,251,249,.97);
+      border-bottom: 1px solid var(--ink);
+      backdrop-filter: blur(8px);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 34px;
+    }
+
+    .tab {
+      position: relative;
+      min-height: 52px;
+      padding: 0 14px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-left: 1px solid var(--faint);
+      cursor: pointer;
+    }
+
+    .tab::after {
+      content: "";
+      position: absolute;
+      right: 10px;
+      bottom: 7px;
+      left: 10px;
+      height: 3px;
+      background: transparent;
+    }
+
+    .tab:hover,
+    .tab:focus-visible,
+    .tab[aria-selected="true"] { color: var(--red); }
+
+    .tab[aria-selected="true"]::after { background: var(--red); }
+    .tab:last-of-type { border-right: 1px solid var(--faint); }
+
+    .tab:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: -4px;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      gap: 18px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 27px 34px 38px;
+    }
+
+    .sidebar {
+      display: grid;
+      align-content: start;
+      gap: 18px;
+    }
+
+    .panel {
+      position: relative;
+      border: 1px solid var(--ink);
+      background: var(--paper);
+      clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(16,17,19,.3);
+      pointer-events: none;
+      clip-path: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px);
+    }
+
+    .panel-inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+    }
+
+    .sidebar .panel-inner { padding: 19px 18px 20px; }
+
+    .panel-heading {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 15px;
+      padding-bottom: 10px;
+      font-size: .78rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .crosshair {
+      position: relative;
+      width: 19px;
+      height: 19px;
+      flex: 0 0 auto;
+      border: 2px solid var(--red);
+      border-radius: 50%;
+    }
+
+    .crosshair::before,
+    .crosshair::after {
+      content: "";
+      position: absolute;
+      background: var(--red);
+    }
+
+    .crosshair::before {
+      top: 7px;
+      left: -4px;
+      width: 23px;
+      height: 1px;
+    }
+
+    .crosshair::after {
+      top: -4px;
+      left: 7px;
+      width: 1px;
+      height: 23px;
+    }
+
+    .protocol-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .archive-index {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+    }
+
+    .archive-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .archive-row:last-child { border-bottom: 0; }
+
+    .archive-row dt,
+    .archive-row dd { margin: 0; }
+
+    .archive-row dt {
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .archive-row dd {
+      color: var(--muted);
+      font-size: .7rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .archive-row.active dt,
+    .archive-row.active dd { color: var(--red); }
+
+    .content-panel > .panel-inner {
+      min-height: 545px;
+      padding: 32px 34px 34px;
+      background:
+              radial-gradient(circle at 92% 6%, rgba(225,27,23,.065), transparent 23%),
+              linear-gradient(120deg, transparent 0 77%, rgba(17,18,20,.035) 77% 78%, transparent 78% 100%),
+              var(--paper);
+    }
+
+    .content-header {
+      position: relative;
+      margin-bottom: 26px;
+      padding: 0 0 20px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .content-header::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -6px;
+      width: 132px;
+      height: 5px;
+      background: repeating-linear-gradient(110deg, var(--red) 0 4px, transparent 4px 8px);
+    }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: var(--red);
+      font-size: .72rem;
+    }
+
+    .content-title {
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(3rem, 7vw, 5.6rem);
+      font-weight: 900;
+      letter-spacing: .01em;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    .content-intro {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .module-button {
+      position: relative;
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr);
+      grid-template-rows: auto auto;
+      column-gap: 19px;
+      row-gap: 6px;
+      align-items: center;
+      min-height: 150px;
+      padding: 22px 24px;
+      overflow: hidden;
+      color: var(--ink);
+      background:
+              linear-gradient(130deg, transparent 0 76%, rgba(225,27,23,.06) 76% 100%),
+              #f5f5f2;
+      border: 1px solid var(--ink);
+      text-decoration: none;
+      clip-path: polygon(13px 0, 100% 0, 100% calc(100% - 13px), calc(100% - 13px) 100%, 0 100%, 0 13px);
+      transition: transform .14s ease, background-color .14s ease, color .14s ease;
+    }
+
+    .module-button::before {
+      content: "";
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(16,17,19,.22);
+      pointer-events: none;
+      clip-path: polygon(9px 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%, 0 9px);
+    }
+
+    .module-button::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 74px;
+      height: 5px;
+      background: var(--red);
+    }
+
+    .module-button:hover,
+    .module-button:focus-visible {
+      color: var(--red);
+      background:
+              linear-gradient(130deg, transparent 0 72%, rgba(225,27,23,.095) 72% 100%),
+              #fff;
+      transform: translateY(-2px);
+    }
+
+    .module-button:focus-visible {
+      outline: 3px solid var(--red);
+      outline-offset: 3px;
+    }
+
+    .module-symbol {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      width: 82px;
+      height: 82px;
+      color: var(--red);
+    }
+
+    .module-label {
+      position: relative;
+      z-index: 1;
+      grid-column: 2;
+      grid-row: 1;
+      min-width: 0;
+    }
+
+    .module-code {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: .68rem;
+    }
+
+    .module-name {
+      display: block;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(2.2rem, 4.2vw, 3.5rem);
+      font-weight: 900;
+      letter-spacing: .01em;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+
+    .module-status {
+      position: relative;
+      z-index: 1;
+      grid-column: 2;
+      grid-row: 2;
+      justify-self: start;
+      align-self: start;
+      color: var(--red);
+      font-size: .68rem;
+      white-space: nowrap;
+    }
+
+    .module-status::after {
+      content: "  ›";
+      font-size: 1.25em;
+    }
+
+    .tab-pane[hidden] { display: none; }
+
+    .empty-pane {
+      min-height: 360px;
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 34px 31px;
+      color: var(--muted);
+      font-size: .68rem;
+    }
+
+    .footer-copy { color: var(--ink); }
+
+    @media (max-width: 900px) {
+      .masthead {
+        grid-template-columns: auto 1fr;
+      }
+
+      .record-id { display: none; }
+
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .module-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 650px) {
+      .sheet {
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        clip-path: none;
+      }
+
+      .sheet::before { display: none; }
+
+      .masthead {
+        grid-template-columns: 58px 1fr;
+        gap: 14px;
+        padding: 25px 20px 20px;
+      }
+
+      .brand-mark {
+        width: 58px;
+        height: 58px;
+      }
+
+      .brand-title { font-size: clamp(2.65rem, 15vw, 4.4rem); }
+
+      .tabs { padding: 0; }
+      .tab { min-height: 48px; padding-inline: 6px; font-size: .72rem; }
+
+      .workspace { padding: 20px; }
+      .sidebar { grid-template-columns: 1fr; }
+      .content-panel > .panel-inner { min-height: 480px; padding: 27px 20px 25px; }
+
+      .module-button {
+        grid-template-columns: 64px minmax(0, 1fr);
+        min-height: 130px;
+        padding: 18px;
+      }
+
+      .module-symbol {
+        width: 62px;
+        height: 62px;
+      }
+
+      .module-status { display: none; }
+      .module-name { font-size: clamp(2rem, 11vw, 3rem); }
+
+      footer {
+        flex-direction: column;
+        padding: 0 20px 27px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet { width: 100%; margin: 0; border: 0; box-shadow: none; clip-path: none; }
+      .sheet::before, .tabs-wrap { display: none; }
+      .masthead, .workspace, footer { max-width: none; }
+      .sidebar { display: none; }
+      .workspace { grid-template-columns: 1fr; padding-top: 18px; }
+      .module-button { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+<div class="sheet">
+  <header class="masthead">
+    <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/>
+      <path d="M50 3v25M50 72v25M3 50h25M72 50h25" fill="none" stroke="currentColor" stroke-width="4"/>
+      <path d="M37 32h26l10 18-10 18H37L27 50z" fill="none" stroke="currentColor" stroke-width="5"/>
+      <circle cx="50" cy="50" r="7" fill="currentColor"/>
+    </svg>
+
+    <div>
+      <p class="kicker">Runner operations archive</p>
+      <h1 class="brand-title">Shadowrun</h1>
+      <p class="brand-subtitle">Fifth edition reference index</p>
+    </div>
+
+    <div class="record-id" aria-label="Archive identification">
+      <strong>RUNNER // 5E</strong>
+      <span>INDEX: SHADOWRUNHOME.HTML</span>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <nav class="tabs-wrap" aria-label="Reference categories">
+    <div class="tabs" role="tablist" aria-label="Shadowrun reference sections">
+      <button class="tab" id="skills-tab" type="button" role="tab" aria-selected="false" aria-controls="skills-pane" data-tab="skills">Skills</button>
+      <button class="tab" id="hacking-tab" type="button" role="tab" aria-selected="false" aria-controls="hacking-pane" data-tab="hacking">Hacking</button>
+      <button class="tab" id="magic-tab" type="button" role="tab" aria-selected="true" aria-controls="magic-pane" data-tab="magic">Magic</button>
+      <button class="tab" id="equipment-tab" type="button" role="tab" aria-selected="false" aria-controls="equipment-pane" data-tab="equipment">Equipment</button>
+    </div>
+  </nav>
+
+  <main class="workspace">
+    <aside class="sidebar" aria-label="Reference archive information">
+      <section class="panel">
+        <div class="panel-inner">
+          <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Operations index protocol</h2>
+          <p class="protocol-copy">Central access point for the Shadowrun Fifth Edition reference archive. Select a discipline above, then open the relevant data module.</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-inner">
+          <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Archive sectors</h2>
+          <dl class="archive-index" id="archive-index">
+            <div class="archive-row" data-sector="skills"><dt>Skills</dt><dd>Standby</dd></div>
+            <div class="archive-row" data-sector="hacking"><dt>Hacking</dt><dd>Standby</dd></div>
+            <div class="archive-row active" data-sector="magic"><dt>Magic</dt><dd>Online</dd></div>
+            <div class="archive-row" data-sector="equipment"><dt>Equipment</dt><dd>Standby</dd></div>
+          </dl>
+        </div>
+      </section>
+    </aside>
+
+    <article class="panel content-panel" aria-live="polite">
+      <div class="panel-inner">
+        <section class="tab-pane empty-pane" id="skills-pane" role="tabpanel" aria-labelledby="skills-tab" hidden></section>
+        <section class="tab-pane empty-pane" id="hacking-pane" role="tabpanel" aria-labelledby="hacking-tab" hidden></section>
+
+        <section class="tab-pane" id="magic-pane" role="tabpanel" aria-labelledby="magic-tab">
+          <header class="content-header">
+            <p class="eyebrow">Awakened operations archive // Magic index</p>
+            <h2 class="content-title">Magic</h2>
+            <p class="content-intro">Access the available Fifth Edition magical reference modules.</p>
+          </header>
+
+          <div class="module-grid" aria-label="Magic reference modules">
+            <a class="module-button" href="spells/spells.html">
+              <svg class="module-symbol" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/>
+                <path d="M50 3v25M50 72v25M3 50h25M72 50h25" fill="none" stroke="currentColor" stroke-width="4"/>
+                <path d="M55 25 31 54h17l-5 24 27-38H53z" fill="currentColor"/>
+              </svg>
+              <span class="module-label">
+                <span class="module-code">Grimoire // Spell index</span>
+                <span class="module-name">Spells</span>
+              </span>
+              <span class="module-status">Open archive</span>
+            </a>
+
+            <a class="module-button" href="adeptpowers/adeptpowers.html">
+              <svg class="module-symbol" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="39" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="50" cy="50" r="29" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5"/>
+                <path d="M50 5v18M50 77v18M5 50h18M77 50h18" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="50" cy="29" r="7" fill="currentColor"/>
+                <path d="M50 39c-12 0-19 10-17 22 1 8 7 15 17 25 10-10 16-17 17-25 2-12-5-22-17-22Zm0 10 8 11-8 13-8-13 8-11Z" fill="currentColor"/>
+              </svg>
+              <span class="module-label">
+                <span class="module-code">Adept // Power index</span>
+                <span class="module-name">Adept Powers</span>
+              </span>
+              <span class="module-status">Open archive</span>
+            </a>
+          </div>
+        </section>
+
+        <section class="tab-pane empty-pane" id="equipment-pane" role="tabpanel" aria-labelledby="equipment-tab" hidden></section>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <span class="footer-copy">Shadowrun 5E // Runner operations archive</span>
+    <span>Reference interface // local static index</span>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+    var panes = Array.prototype.slice.call(document.querySelectorAll(".tab-pane"));
+    var archiveRows = Array.prototype.slice.call(document.querySelectorAll(".archive-row"));
+
+    function activateTab(name, moveFocus) {
+      tabs.forEach(function (tab) {
+        var selected = tab.dataset.tab === name;
+        tab.setAttribute("aria-selected", selected ? "true" : "false");
+        tab.tabIndex = selected ? 0 : -1;
+        if (selected && moveFocus) tab.focus();
+      });
+
+      panes.forEach(function (pane) {
+        pane.hidden = pane.id !== name + "-pane";
+      });
+
+      archiveRows.forEach(function (row) {
+        var active = row.dataset.sector === name;
+        row.classList.toggle("active", active);
+        var status = row.querySelector("dd");
+        if (status) status.textContent = active && name === "magic" ? "Online" : "Standby";
+      });
+
+      if (history.replaceState) {
+        history.replaceState(null, "", "#" + name);
+      }
+    }
+
+    tabs.forEach(function (tab, index) {
+      tab.addEventListener("click", function () {
+        activateTab(tab.dataset.tab, false);
+      });
+
+      tab.addEventListener("keydown", function (event) {
+        if (event.key !== "ArrowLeft" && event.key !== "ArrowRight" && event.key !== "Home" && event.key !== "End") return;
+        event.preventDefault();
+
+        var targetIndex = index;
+        if (event.key === "ArrowLeft") targetIndex = (index - 1 + tabs.length) % tabs.length;
+        if (event.key === "ArrowRight") targetIndex = (index + 1) % tabs.length;
+        if (event.key === "Home") targetIndex = 0;
+        if (event.key === "End") targetIndex = tabs.length - 1;
+
+        activateTab(tabs[targetIndex].dataset.tab, true);
+      });
+    });
+
+    var requested = window.location.hash.replace(/^#/, "");
+    var valid = tabs.some(function (tab) { return tab.dataset.tab === requested; });
+    activateTab(valid ? requested : "magic", false);
+  }());
+</script>
+</body>
+</html>

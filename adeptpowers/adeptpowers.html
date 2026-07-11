@@ -1,0 +1,1781 @@
+<!doctype html>
+<!-- adeptpowers verified build: 2026-07-11 / unique global IDs / source title parity / reduced record title scale -->
+<html lang="en-GB" data-build="adeptpowers-verified-2026-07-11">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shadowrun Fifth Edition Core Rulebook adept power reference browser.">
+  <title>Shadowrun 5e // Adept Power Index</title>
+  <style>
+    :root {
+      --ink: #101113;
+      --muted: #62666a;
+      --line: #a6a9ab;
+      --faint: #e5e6e6;
+      --paper: #fbfbf9;
+      --red: #e11b17;
+      --red-dark: #ae130f;
+      --cut: 18px;
+      --max: 1260px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+              linear-gradient(rgba(17,18,20,.025) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(17,18,20,.018) 1px, transparent 1px),
+              #dfe1e1;
+      background-size: 32px 32px;
+      font-family: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    button, input, select { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    a { color: var(--red-dark); text-underline-offset: 3px; }
+
+    .sheet {
+      position: relative;
+      width: min(calc(100% - 32px), 1400px);
+      min-height: calc(100vh - 32px);
+      margin: 16px auto;
+      overflow: hidden;
+      background:
+              radial-gradient(circle at 14% 9%, rgba(0,0,0,.025), transparent 18%),
+              radial-gradient(circle at 83% 68%, rgba(0,0,0,.018), transparent 23%),
+              var(--paper);
+      border: 1px solid var(--ink);
+      box-shadow: 0 12px 30px rgba(0,0,0,.14);
+      clip-path: polygon(20px 0, 42% 0, calc(42% + 12px) 6px, 72% 6px, calc(72% + 8px) 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px), calc(100% - 20px) 100%, 56% 100%, calc(56% - 12px) calc(100% - 7px), 32% calc(100% - 7px), calc(32% - 8px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
+    }
+
+    .sheet::before {
+      content: "";
+      position: absolute;
+      inset: 7px;
+      z-index: 20;
+      border: 1px solid rgba(17,18,20,.55);
+      pointer-events: none;
+      clip-path: polygon(15px 0, calc(100% - 15px) 0, 100% 15px, 100% calc(100% - 15px), calc(100% - 15px) 100%, 15px 100%, 0 calc(100% - 15px), 0 15px);
+    }
+
+    .masthead {
+      position: relative;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 22px;
+      align-items: center;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 35px 34px 25px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .masthead::after {
+      content: "";
+      position: absolute;
+      right: 34px;
+      bottom: -6px;
+      width: 190px;
+      height: 5px;
+      background: repeating-linear-gradient(110deg, var(--red) 0 4px, transparent 4px 8px);
+    }
+
+    .brand-mark {
+      width: 74px;
+      height: 74px;
+      color: var(--red);
+    }
+
+    .kicker, .eyebrow, .field-label, .tab, .search-label,
+    .record-id, .tag, .footer-copy, .roster-count, .protocol-key {
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .kicker {
+      margin: 0 0 3px;
+      color: var(--red);
+      font-size: .78rem;
+    }
+
+    .brand-title {
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(2.8rem, 6vw, 5.4rem);
+      font-weight: 900;
+      letter-spacing: .01em;
+      line-height: .87;
+      text-transform: uppercase;
+    }
+
+    .brand-link {
+      display: inline-block;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .brand-link:hover .brand-title,
+    .brand-link:focus-visible .brand-title { color: var(--red); }
+
+    .brand-link:focus-visible {
+      outline: 2px solid var(--red);
+      outline-offset: 5px;
+    }
+
+    .brand-subtitle {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin: 11px 0 0;
+      color: var(--red);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle::before,
+    .brand-subtitle::after {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .record-id {
+      align-self: end;
+      min-width: 205px;
+      font-size: .7rem;
+      text-align: right;
+    }
+
+    .record-id strong {
+      display: block;
+      color: var(--red);
+      font-size: 1.05rem;
+      letter-spacing: .06em;
+    }
+
+    .barcode {
+      display: inline-block;
+      width: 148px;
+      height: 27px;
+      margin-top: 8px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 3px, transparent 3px 5px, var(--ink) 5px 6px, transparent 6px 9px);
+      border-inline: 5px solid var(--paper);
+    }
+
+    .tabs-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(251,251,249,.97);
+      border-bottom: 1px solid var(--ink);
+      backdrop-filter: blur(8px);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 34px;
+    }
+
+    .tab {
+      position: relative;
+      min-height: 52px;
+      padding: 0 14px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-left: 1px solid var(--faint);
+      cursor: pointer;
+    }
+
+    .tab::after {
+      content: "";
+      position: absolute;
+      right: 10px;
+      bottom: 7px;
+      left: 10px;
+      height: 3px;
+      background: transparent;
+    }
+
+    .tab:hover, .tab[aria-selected="true"] { color: var(--red); }
+    .tab[aria-selected="true"]::after { background: var(--red); }
+    .tab:last-of-type { border-right: 1px solid var(--faint); }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      gap: 18px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 27px 34px 38px;
+    }
+
+    .panel {
+      position: relative;
+      padding: 4px;
+      background: var(--ink);
+      clip-path: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+    }
+
+    .panel + .panel { margin-top: 15px; }
+
+    .panel-inner {
+      height: 100%;
+      padding: 19px;
+      background: var(--paper);
+      clip-path: polygon(calc(var(--cut) - 2px) 0, 100% 0, 100% calc(100% - var(--cut) + 2px), calc(100% - var(--cut) + 2px) 100%, 0 100%, 0 calc(var(--cut) - 2px));
+    }
+
+    .panel-heading {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin: 0 0 14px;
+      padding-bottom: 10px;
+      color: var(--red);
+      border-bottom: 1px solid var(--ink);
+      font-size: 1.08rem;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .crosshair {
+      position: relative;
+      flex: 0 0 18px;
+      width: 18px;
+      height: 18px;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+    }
+
+    .crosshair::before, .crosshair::after {
+      content: "";
+      position: absolute;
+      background: currentColor;
+    }
+
+    .crosshair::before { left: 7px; top: -5px; width: 2px; height: 24px; }
+    .crosshair::after { left: -5px; top: 7px; width: 24px; height: 2px; }
+
+    .search-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--muted);
+      font-size: .62rem;
+    }
+
+    .search {
+      width: 100%;
+      height: 39px;
+      padding: 0 11px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--ink);
+      border-radius: 0;
+      outline: none;
+    }
+
+    .search:focus { border-color: var(--red); box-shadow: inset 4px 0 var(--red); }
+
+    .roster-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 12px 0 0;
+    }
+
+    .roster-head strong {
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .roster-count { color: var(--red); font-size: .62rem; }
+
+    .power-picker { position: relative; }
+
+    .power-combobox {
+      position: relative;
+    }
+
+    .power-select-input {
+      padding-right: 38px;
+    }
+
+    .combo-arrow {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 9px;
+      height: 9px;
+      pointer-events: none;
+      border-right: 2px solid var(--red);
+      border-bottom: 2px solid var(--red);
+      transform: translateY(-70%) rotate(45deg);
+    }
+
+    .power-options {
+      position: absolute;
+      top: calc(100% + 5px);
+      right: 0;
+      left: 0;
+      z-index: 30;
+      max-height: 320px;
+      overflow-y: auto;
+      padding: 5px;
+      background: var(--paper);
+      border: 1px solid var(--ink);
+      box-shadow: 0 12px 24px rgba(0,0,0,.18);
+    }
+
+    .power-options[hidden] { display: none; }
+
+    .power-option {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+      min-height: 39px;
+      padding: 7px 9px;
+      color: var(--ink);
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #d7d8d9;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .power-option:last-child { border-bottom: 0; }
+    .power-option:hover,
+    .power-option.is-active { color: #fff; background: var(--red); }
+    .power-option[aria-selected="true"] { box-shadow: inset 4px 0 var(--red); }
+    .power-option[aria-selected="true"].is-active { box-shadow: inset 4px 0 #fff; }
+
+    .power-name {
+      font-size: .76rem;
+      font-weight: 800;
+      letter-spacing: .035em;
+      text-transform: uppercase;
+    }
+
+    .power-drain { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .65rem; }
+
+    .empty-message {
+      padding: 14px 8px;
+      color: var(--muted);
+      font-size: .8rem;
+      text-align: center;
+      border: 1px dashed var(--line);
+    }
+
+
+
+    .power-list-view[hidden],
+    .power-record-view[hidden] { display: none; }
+
+    .power-record-view .power-header { padding-right: 130px; }
+
+    .power-list-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: 20px;
+      align-items: start;
+    }
+
+    .power-list-header .eyebrow {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .power-list-header h1 {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .power-list-header .filter-toggle-button {
+      position: static;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: start;
+    }
+
+    .filter-toggle-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 7px 12px;
+      color: var(--red);
+      background: var(--paper);
+      border: 1px solid var(--red);
+      font-size: .66rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .filter-toggle-button::before {
+      content: "⌕";
+      margin-right: 7px;
+      font-size: .95rem;
+      line-height: 1;
+    }
+
+    .filter-toggle-button:hover,
+    .filter-toggle-button:focus-visible,
+    .filter-toggle-button[aria-expanded="true"] {
+      color: #fff;
+      background: var(--red);
+      outline: none;
+    }
+
+    .power-list-search {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .power-list-search > .power-filter-field:first-child {
+      grid-column: 1 / -1;
+    }
+
+    .power-list-search[hidden] { display: none; }
+
+    .power-filter-field { min-width: 0; }
+
+    .filter-control {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 34px;
+      gap: 6px;
+      align-items: stretch;
+    }
+
+    .keyword-filter {
+      min-width: 0;
+      appearance: none;
+      padding-right: 32px;
+      background-image:
+              linear-gradient(45deg, transparent 50%, var(--red) 50%),
+              linear-gradient(135deg, var(--red) 50%, transparent 50%);
+      background-position:
+              calc(100% - 16px) 16px,
+              calc(100% - 11px) 16px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+
+    .filter-clear-button {
+      display: grid;
+      width: 34px;
+      height: 39px;
+      padding: 0;
+      place-items: center;
+      color: var(--red);
+      background: var(--paper);
+      border: 1px solid var(--red);
+      font-size: 1.1rem;
+      font-weight: 900;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .filter-clear-button:disabled {
+      opacity: .35;
+      cursor: default;
+    }
+
+    .filter-clear-button:hover:not(:disabled),
+    .filter-clear-button:focus-visible:not(:disabled) {
+      color: #fff;
+      background: var(--red);
+      outline: none;
+    }
+
+    .power-list-summary {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .power-list-summary strong { color: var(--red); }
+
+    .power-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .power-list-item {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      min-height: 58px;
+      padding: 12px 14px;
+      color: var(--ink);
+      background: #fff;
+      border: 1px solid var(--ink);
+      box-shadow: inset 4px 0 var(--red);
+      text-align: left;
+      cursor: pointer;
+      transition: color .12s ease, background .12s ease, border-color .12s ease;
+    }
+
+    .power-list-item:hover,
+    .power-list-item:focus-visible {
+      color: #fff;
+      background: var(--red);
+      border-color: var(--red);
+      outline: none;
+    }
+
+    .power-list-index {
+      display: inline-grid;
+      min-width: 50px;
+      height: 28px;
+      padding: 0 7px;
+      place-items: center;
+      color: var(--red);
+      background:
+              linear-gradient(135deg, rgba(225,27,23,.12) 0 48%, transparent 48%);
+      border: 1px solid var(--red);
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .62rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .power-list-item:hover .power-list-index,
+    .power-list-item:focus-visible .power-list-index {
+      color: #fff;
+      background: rgba(0,0,0,.14);
+      border-color: #fff;
+    }
+
+    .power-list-name {
+      min-width: 0;
+      font-size: .85rem;
+      font-weight: 900;
+      letter-spacing: .045em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .power-list-cost {
+      color: var(--red);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .68rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .power-list-item:hover .power-list-cost,
+    .power-list-item:focus-visible .power-list-cost { color: #fff; }
+
+    .back-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      min-height: 36px;
+      padding: 7px 11px;
+      color: var(--red);
+      background: var(--paper);
+      border: 1px solid var(--red);
+      font-size: .66rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .back-button::before {
+      content: "←";
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    .back-button:hover,
+    .back-button:focus-visible {
+      color: #fff;
+      background: var(--red);
+      outline: none;
+    }
+
+    .legend-grid { display: grid; gap: 0; }
+    .legend-row {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #d0d2d2;
+    }
+    .legend-row:last-child { border-bottom: 0; }
+    .legend-row dt, .legend-row dd { margin: 0; }
+    .legend-row dt { color: var(--red); font-weight: 900; font-size: .7rem; }
+    .legend-row dd { color: var(--muted); font-size: .7rem; line-height: 1.35; }
+
+    .power-panel > .panel-inner { padding: clamp(24px, 4vw, 44px); }
+
+    .power-header {
+      position: relative;
+      padding: 0 0 24px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .power-header::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 7px;
+      width: 105px;
+      height: 9px;
+      background: repeating-linear-gradient(110deg, var(--red) 0 3px, transparent 3px 6px);
+    }
+
+    .eyebrow {
+      display: flex;
+      gap: 9px;
+      align-items: center;
+      margin: 0 0 8px;
+      color: var(--red);
+      font-size: .7rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 25px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    h1 {
+      max-width: 900px;
+      margin: 0;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(3.5rem, 7vw, 7rem);
+      font-weight: 900;
+      letter-spacing: .01em;
+      line-height: .88;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .tag {
+      padding: 5px 9px 4px;
+      color: var(--red);
+      border: 1px solid var(--red);
+      font-size: .6rem;
+      line-height: 1;
+    }
+
+    #power-title,
+    #power-list-title {
+      font-family: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    /* List-mode type headings stay dominant; individual power records use a smaller title scale. */
+    #power-list-title {
+      font-size: clamp(3.5rem, 7vw, 7rem);
+    }
+
+    #power-title {
+      max-width: 720px;
+      font-size: clamp(1.9rem, 3.6vw, 3.6rem);
+      line-height: .96;
+    }
+
+    .keyword-toggle {
+      appearance: none;
+      padding: 7px 11px 6px;
+      color: var(--red);
+      background: transparent;
+      border: 1px solid var(--red);
+      font-size: .72rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+
+    .keyword-toggle:hover,
+    .keyword-toggle:focus-visible {
+      color: #fff;
+      background: var(--red-dark);
+      outline: none;
+    }
+
+    .keyword-toggle[aria-pressed="true"] {
+      color: #fff;
+      background: var(--red);
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,.2);
+    }
+
+    .keyword-detail {
+      margin-top: 18px;
+      padding: 17px 18px 18px;
+      background: #fff;
+      border: 1px solid var(--ink);
+      border-left: 5px solid var(--red);
+    }
+
+    .keyword-detail[hidden] { display: none; }
+
+    .keyword-detail-title {
+      display: block;
+      margin: 0 0 7px;
+      color: var(--red);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .keyword-detail-copy {
+      color: var(--ink);
+      font-size: .82rem;
+      line-height: 1.55;
+    }
+
+    .keyword-detail-copy > :first-child { margin-top: 0; }
+    .keyword-detail-copy > :last-child { margin-bottom: 0; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(125px, 1fr));
+      margin-top: 24px;
+      border: 1px solid var(--ink);
+    }
+
+    .stat {
+      min-height: 83px;
+      padding: 13px 14px;
+      border-right: 1px solid var(--ink);
+    }
+
+    .stat:last-child { border-right: 0; }
+    .stat[hidden] { display: none; }
+
+    .field-label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--red);
+      font-size: .6rem;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 1.03rem;
+      font-weight: 900;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .stat-meaning {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .65rem;
+      line-height: 1.2;
+    }
+
+    .section {
+      padding-top: 28px;
+      scroll-margin-top: 70px;
+    }
+
+    .section-title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin: 0 0 15px;
+      color: var(--red);
+      font-size: 1.25rem;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .section-title[data-index]::before {
+      content: attr(data-index);
+      display: inline-grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      color: #fff;
+      background: var(--red);
+      font-size: .67rem;
+      letter-spacing: .04em;
+    }
+
+    .description, .category-description, .glitch-text {
+      max-width: 82ch;
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .96rem;
+    }
+
+    .description > :first-child { margin-top: 0; }
+    .description > :last-child { margin-bottom: 0; }
+    .description ul, .description ol,
+    .protocol-copy ul, .protocol-copy ol {
+      margin: .7em 0;
+      padding-left: 1.35em;
+    }
+
+    .description li + li,
+    .protocol-copy li + li { margin-top: .25em; }
+
+    .category-panel .panel-inner {
+      background:
+              linear-gradient(135deg, rgba(225,27,23,.07), transparent 48%),
+              var(--paper);
+    }
+
+    .category-description {
+      max-width: none;
+      color: #34373a;
+      font-size: .78rem;
+      line-height: 1.52;
+    }
+    .glitch-text { margin-top: 13px; padding-top: 12px; border-top: 1px solid #c1c3c4; color: var(--muted); font-size: .78rem; }
+    .glitch-text[hidden] { display: none; }
+
+    .protocols {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .protocol {
+      padding: 15px;
+      border: 1px solid #b9bcbd;
+      background: #fff;
+    }
+
+    .protocol { border-color: var(--red); box-shadow: inset 4px 0 var(--red); }
+
+    .protocol-key {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--red);
+      font-size: .65rem;
+    }
+
+    .protocol-copy {
+      color: #42464a;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: .76rem;
+      line-height: 1.45;
+    }
+
+    .protocol-copy > :first-child { margin-top: 0; }
+    .protocol-copy > :last-child { margin-bottom: 0; }
+
+    .source-book {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: center;
+      max-width: 640px;
+      padding: 15px;
+      background: #fff;
+      border: 1px solid var(--red);
+      box-shadow: inset 4px 0 var(--red);
+    }
+
+    .source-code {
+      display: grid;
+      min-width: 58px;
+      min-height: 46px;
+      padding: 6px;
+      place-items: center;
+      color: #fff;
+      background: var(--red);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .84rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+    }
+
+    .source-title {
+      display: block;
+      font-size: .88rem;
+      font-weight: 900;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 34px 30px;
+    }
+
+    .footer-frame {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: 18px;
+      align-items: center;
+      padding: 17px 21px;
+      border: 1px solid var(--ink);
+      clip-path: polygon(14px 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 28% 100%, calc(28% - 14px) calc(100% - 7px), 14px calc(100% - 7px), 0 calc(100% - 21px), 0 14px);
+    }
+
+    .footer-bars {
+      width: 78px;
+      height: 30px;
+      background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 5px);
+    }
+
+    .footer-copy {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .66rem;
+      line-height: 1.55;
+    }
+
+    .footer-warning {
+      color: var(--red);
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+
+    .sigil {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      color: var(--red);
+      border: 3px solid var(--red);
+      border-radius: 50%;
+      font-size: 1.12rem;
+      font-weight: 900;
+      transform: rotate(-12deg);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+
+
+    /* Adept-specific visual language: internal mana, pulse lines, and disciplined motion. */
+    body {
+      background:
+              radial-gradient(circle at 18% 12%, rgba(225,27,23,.07), transparent 19%),
+              radial-gradient(circle at 82% 70%, rgba(17,18,20,.045), transparent 23%),
+              linear-gradient(rgba(17,18,20,.025) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(17,18,20,.018) 1px, transparent 1px),
+              #dfe1e1;
+      background-size: auto, auto, 32px 32px, 32px 32px;
+    }
+
+    .power-panel > .panel-inner {
+      background:
+              radial-gradient(circle at 91% 4%, rgba(225,27,23,.08), transparent 22%),
+              linear-gradient(120deg, transparent 0 76%, rgba(17,18,20,.04) 76% 77%, transparent 77% 100%),
+              var(--paper);
+    }
+
+    .brand-mark .adept-core { color: var(--red); }
+
+    .power-list-meta {
+      display: grid;
+      gap: 2px;
+      justify-items: end;
+      min-width: 0;
+      text-align: right;
+    }
+
+    .power-list-activation {
+      max-width: 140px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .55rem;
+      font-weight: 800;
+      letter-spacing: .035em;
+      line-height: 1.15;
+      text-transform: uppercase;
+      white-space: normal;
+    }
+
+    .power-list-item:hover .power-list-activation,
+    .power-list-item:focus-visible .power-list-activation { color: rgba(255,255,255,.82); }
+
+    .stat:first-child {
+      box-shadow: inset 0 -4px 0 var(--red);
+    }
+
+    .source-code {
+      min-width: 58px;
+      background: var(--red);
+    }
+
+    .rule-reference {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: .68rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .cost-filter, .activation-filter, .rule-filter {
+      min-width: 0;
+      appearance: none;
+      padding-right: 32px;
+      background-image:
+              linear-gradient(45deg, transparent 50%, var(--red) 50%),
+              linear-gradient(135deg, var(--red) 50%, transparent 50%);
+      background-position:
+              calc(100% - 16px) 16px,
+              calc(100% - 11px) 16px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+
+    @media (max-width: 900px) {
+      .sheet { width: 100%; min-height: 100vh; margin: 0; border: 0; clip-path: none; }
+      .sheet::before { display: none; }
+      .masthead { grid-template-columns: 58px 1fr; padding: 27px 22px 21px; }
+      .brand-mark { width: 58px; height: 58px; }
+      .record-id { display: none; }
+      .tabs { display: flex; overflow-x: auto; padding: 0 22px; scrollbar-width: none; }
+      .tabs::-webkit-scrollbar { display: none; }
+      .tab { flex: 1 0 110px; min-width: 110px; }
+      .workspace { grid-template-columns: 1fr; padding: 20px 22px 30px; }
+      .sidebar { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .panel + .panel { margin-top: 0; }
+      .legend-panel { align-self: start; }
+      .category-panel { grid-column: auto; }
+      .power-panel { grid-row: 1; }
+      .power-list { grid-template-columns: 1fr; }
+      .power-list-search { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+      .stat:nth-child(even) { border-right: 0; }
+      .stat:nth-last-child(-n+2) { border-bottom: 0; }
+      footer { padding: 0 22px 24px; }
+    }
+
+    @media (max-width: 580px) {
+      .masthead { grid-template-columns: 1fr; }
+      .brand-mark { display: none; }
+      .brand-title { font-size: 2.9rem; }
+      .brand-subtitle::before, .brand-subtitle::after { width: 14px; }
+      .workspace { padding: 14px; }
+      .sidebar { grid-template-columns: 1fr; }
+      .category-panel { grid-column: auto; }
+      .power-panel > .panel-inner { padding: 22px 18px; }
+      .power-record-view .power-header { padding-right: 0; padding-top: 48px; }
+      .power-list-header { grid-template-columns: 1fr; padding-top: 0;}
+      .power-list-header .filter-toggle-button { grid-column: 1; grid-row: 1; justify-self: end; margin-bottom: 12px;}
+      .power-list-header .eyebrow { grid-column: 1; grid-row: 2; }
+      .power-list-header h1 { grid-column: 1; grid-row: 3; }
+      .power-list-search { grid-template-columns: 1fr; }
+      h1 { font-size: clamp(3.2rem, 18vw, 5.4rem); }
+      #power-title { font-size: clamp(1.85rem, 9vw, 3.1rem); }
+      .stat-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
+      .stat:nth-child(even) { border-right: 0; }
+      .stat:nth-last-child(-n+2) { border-bottom: 0; }
+      .protocols { grid-template-columns: 1fr; }
+      footer { padding: 0 14px 18px; }
+      .footer-frame { grid-template-columns: 1fr auto; }
+      .footer-bars, .footer-warning { display: none; }
+    }
+
+    @media print {
+      body { background: #fff; }
+      .sheet { width: 100%; margin: 0; border: 0; box-shadow: none; clip-path: none; }
+      .sheet::before, .tabs-wrap, .power-picker { display: none; }
+      .masthead, .workspace, footer { max-width: none; }
+      .workspace { grid-template-columns: 27% 1fr; padding-top: 18px; }
+      .panel { break-inside: avoid; }
+      .protocols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+<div class="sheet">
+  <header class="masthead">
+    <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="39" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle cx="50" cy="50" r="29" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="4 5"/>
+      <path d="M50 5v18M50 77v18M5 50h18M77 50h18" fill="none" stroke="currentColor" stroke-width="3"/>
+      <circle class="adept-core" cx="50" cy="29" r="7" fill="currentColor"/>
+      <path class="adept-core" d="M50 39c-12 0-19 10-17 22 1 8 7 15 17 25 10-10 16-17 17-25 2-12-5-22-17-22Zm0 10 8 11-8 13-8-13 8-11Z" fill="currentColor"/>
+    </svg>
+    <div>
+      <p class="kicker">Awakened somatic archive</p>
+      <a class="brand-link" href="../ShadowrunHome.html" aria-label="Return to Shadowrun home page"><p class="brand-title">Shadowrun</p></a>
+      <p class="brand-subtitle">Fifth edition adept power index</p>
+    </div>
+    <div class="record-id" aria-label="Dataset identification">
+      <strong>ADEPT // 5E</strong>
+      <span>DATASET: ADEPTPOWERS.JSON</span>
+      <div class="barcode" aria-hidden="true"></div>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="sidebar" aria-label="Adept power information and code legend">
+      <section class="panel category-panel">
+        <div class="panel-inner">
+          <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span><span id="view-brief-title">Adept Power Protocol</span></h2>
+          <div class="category-description" id="view-description"></div>
+          <div class="glitch-text" id="view-rule-note"></div>
+        </div>
+      </section>
+
+      <section class="panel legend-panel">
+        <div class="panel-inner">
+          <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Power code index</h2>
+          <dl class="legend-grid">
+            <div class="legend-row"><dt>PP</dt><dd>Power Points spent to purchase adept powers.</dd></div>
+            <div class="legend-row"><dt>/ LVL</dt><dd>Cost is paid for each level purchased.</dd></div>
+            <div class="legend-row"><dt>ACT</dt><dd>Power has a listed activation action.</dd></div>
+            <div class="legend-row"><dt>INT</dt><dd>Intrinsic power; no activation action is required.</dd></div>
+            <div class="legend-row"><dt>DRN</dt><dd>Adept Drain is normally Stun, resisted with Body + Willpower.</dd></div>
+          </dl>
+        </div>
+      </section>
+    </aside>
+
+    <article class="panel power-panel" id="power-panel" role="tabpanel" aria-live="polite">
+      <div class="panel-inner">
+        <section class="power-list-view" id="power-list-view">
+          <header class="power-header power-list-header">
+            <button class="filter-toggle-button" id="power-filter-toggle" type="button" aria-expanded="false" aria-controls="power-list-filters">Filter</button>
+            <p class="eyebrow" id="power-list-eyebrow">Adept archive // Core adept powers</p>
+            <h1 id="power-list-title">Adept powers</h1>
+          </header>
+
+          <div class="power-list-search" id="power-list-filters" hidden>
+            <div class="power-filter-field">
+              <label class="search-label" for="power-list-search">Search by power name</label>
+              <div class="filter-control">
+                <input class="search" id="power-list-search" type="search" placeholder="Enter power name…" autocomplete="off">
+                <button class="filter-clear-button" id="power-name-clear" type="button" aria-label="Clear power name search" title="Clear power name search">×</button>
+              </div>
+            </div>
+
+            <div class="power-filter-field">
+              <label class="search-label" for="power-cost-type-filter">Filter by cost type</label>
+              <div class="filter-control">
+                <select class="search rule-filter" id="power-cost-type-filter"><option value="">All cost types</option></select>
+                <button class="filter-clear-button" id="power-cost-type-clear" type="button" aria-label="Clear cost type filter" title="Clear cost type filter">×</button>
+              </div>
+            </div>
+
+            <div class="power-filter-field">
+              <label class="search-label" for="power-cost-filter">Filter by PP cost</label>
+              <div class="filter-control">
+                <select class="search cost-filter" id="power-cost-filter"><option value="">All PP costs</option></select>
+                <button class="filter-clear-button" id="power-cost-clear" type="button" aria-label="Clear Power Point cost filter" title="Clear Power Point cost filter">×</button>
+              </div>
+            </div>
+
+            <div class="power-filter-field">
+              <label class="search-label" for="power-activation-filter">Filter by activation</label>
+              <div class="filter-control">
+                <select class="search activation-filter" id="power-activation-filter"><option value="">All activation types</option></select>
+                <button class="filter-clear-button" id="power-activation-clear" type="button" aria-label="Clear activation filter" title="Clear activation filter">×</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="power-list-summary">
+            <span>Select a power to open its full record</span>
+            <strong id="power-list-count">0 records</strong>
+          </div>
+          <div class="power-list" id="power-list"></div>
+        </section>
+
+        <section class="power-record-view" id="power-record-view" hidden>
+          <header class="power-header">
+            <button class="back-button" id="back-to-list" type="button">Back to list</button>
+            <p class="eyebrow" id="power-eyebrow">Adept archive // Power record</p>
+            <h1 id="power-title">Adept power</h1>
+            <div class="tag-row" id="power-rules" aria-label="Power rule tags"></div>
+          </header>
+
+          <section class="keyword-detail" id="power-rule-detail" aria-live="polite" hidden>
+            <strong class="keyword-detail-title" id="power-rule-detail-title"></strong>
+            <div class="keyword-detail-copy" id="power-rule-detail-copy"></div>
+          </section>
+
+          <div class="stat-grid" id="stat-grid" aria-label="Adept power statistics">
+            <div class="stat">
+              <span class="field-label">Power Point cost</span>
+              <strong class="stat-value" id="stat-cost">—</strong>
+              <span class="stat-meaning">Purchase cost</span>
+            </div>
+            <div class="stat">
+              <span class="field-label">Activation</span>
+              <strong class="stat-value" id="stat-activation">—</strong>
+              <span class="stat-meaning" id="meaning-activation"></span>
+            </div>
+            <div class="stat">
+              <span class="field-label">Rating structure</span>
+              <strong class="stat-value" id="stat-rating">—</strong>
+              <span class="stat-meaning">How the power is purchased</span>
+            </div>
+            <div class="stat">
+              <span class="field-label">Maximum</span>
+              <strong class="stat-value" id="stat-maximum">—</strong>
+              <span class="stat-meaning">Power-specific or general limit</span>
+            </div>
+          </div>
+
+          <section class="section" id="description-section">
+            <h2 class="section-title">Power effect</h2>
+            <div class="description" id="power-description"></div>
+          </section>
+
+          <section class="section" id="related-rules-section" hidden>
+            <h2 class="section-title">Related core rules</h2>
+            <div class="protocols" id="related-rules"></div>
+          </section>
+
+          <section class="section" id="source-section">
+            <div class="source-book" aria-label="Source book">
+              <span class="source-code" id="source-code">—</span>
+              <strong class="source-title" id="source-title">—</strong>
+            </div>
+          </section>
+        </section>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <div class="footer-frame">
+      <div class="footer-bars" aria-hidden="true"></div>
+      <div class="footer-copy">&gt;&gt; FOCUS. MOVE. TRANSCEND.<br>CHANNEL THE MANA. CONTROL THE BODY.</div>
+      <div class="footer-warning">Power is discipline made manifest.<br>Know the cost before you commit.</div>
+      <span class="sigil" aria-hidden="true">◇</span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  (async function () {
+    "use strict";
+
+    var response = await fetch("./adeptpowers.json");
+    if (!response.ok) throw new Error("Failed to load adeptpowers.json: HTTP " + response.status);
+
+    var powerData = await response.json();
+    var pageMeta = {
+      title: "Shadowrun Fifth Edition Adept Power Index",
+      source: "Shadowrun Fifth Edition Core Rulebook",
+      description: "Core adept powers and the general rules for purchasing, activating, and resisting Drain from adept powers."
+    };
+    var sourceLabels = {
+      CRB: "Shadowrun Fifth Edition Core Rulebook"
+    };
+    var state = {
+      power: null,
+      mode: "list",
+      query: "",
+      costType: "",
+      cost: "",
+      activation: "",
+      filtersOpen: false,
+      recordRule: ""
+    };
+
+    var listView = document.getElementById("power-list-view");
+    var recordView = document.getElementById("power-record-view");
+    var powerList = document.getElementById("power-list");
+    var powerListSearch = document.getElementById("power-list-search");
+    var powerListFilters = document.getElementById("power-list-filters");
+    var powerFilterToggle = document.getElementById("power-filter-toggle");
+    var powerCostTypeFilter = document.getElementById("power-cost-type-filter");
+    var powerCostFilter = document.getElementById("power-cost-filter");
+    var powerActivationFilter = document.getElementById("power-activation-filter");
+    var powerNameClear = document.getElementById("power-name-clear");
+    var powerCostTypeClear = document.getElementById("power-cost-type-clear");
+    var powerCostClear = document.getElementById("power-cost-clear");
+    var powerActivationClear = document.getElementById("power-activation-clear");
+    var powerRuleDetail = document.getElementById("power-rule-detail");
+    var powerRuleDetailTitle = document.getElementById("power-rule-detail-title");
+    var powerRuleDetailCopy = document.getElementById("power-rule-detail-copy");
+    var relatedRulesSection = document.getElementById("related-rules-section");
+    var relatedRules = document.getElementById("related-rules");
+    var backButton = document.getElementById("back-to-list");
+
+    function titleCase(value) {
+      return String(value).replace(/\b\w/g, function (letter) { return letter.toUpperCase(); });
+    }
+
+    function setText(id, value) {
+      document.getElementById(id).textContent = value == null ? "" : String(value);
+    }
+
+    function setHTML(id, value) {
+      document.getElementById(id).innerHTML = value == null ? "" : String(value);
+    }
+
+    var globalPowerKeys = Object.keys(powerData.powers || {});
+    var globalPowerNumbers = globalPowerKeys.reduce(function (numbers, key, index) {
+      numbers[key] = index + 1;
+      return numbers;
+    }, {});
+
+    function allEntries() {
+      return globalPowerKeys.map(function (key) {
+        return [key, powerData.powers[key]];
+      });
+    }
+
+    function powerRecordNumber(key) {
+      return globalPowerNumbers[key] || 0;
+    }
+
+    function viewEntries() {
+      return allEntries();
+    }
+
+    var COST_TYPE_TAGS = ["fixed cost", "per level", "variable cost"];
+
+    function powerCostType(power) {
+      var tags = power.ruleTags || [];
+      for (var i = 0; i < COST_TYPE_TAGS.length; i += 1) {
+        if (tags.includes(COST_TYPE_TAGS[i])) return COST_TYPE_TAGS[i];
+      }
+      return "";
+    }
+
+    function viewCostTypes() {
+      var found = new Set();
+      viewEntries().forEach(function (entry) {
+        var type = powerCostType(entry[1]);
+        if (type) found.add(type);
+      });
+      return Array.from(found).sort(function (a, b) {
+        return COST_TYPE_TAGS.indexOf(a) - COST_TYPE_TAGS.indexOf(b);
+      });
+    }
+
+    function viewCosts() {
+      var found = new Set();
+      viewEntries().forEach(function (entry) {
+        (entry[1].costValues || []).forEach(function (cost) { found.add(Number(cost)); });
+      });
+      return Array.from(found).sort(function (a, b) { return a - b; });
+    }
+
+    function powerActivationType(power) {
+      return power.activation === "Intrinsic" ? "Intrinsic" : "Activated";
+    }
+
+    function viewActivations() {
+      var found = new Set();
+      viewEntries().forEach(function (entry) { found.add(powerActivationType(entry[1])); });
+      return ["Intrinsic", "Activated"].filter(function (type) { return found.has(type); });
+    }
+
+    function renderViewInfo() {
+      setText("view-brief-title", "Adept Power Protocol");
+      setHTML("view-description", pageMeta.description);
+      setHTML("view-rule-note", powerData.rules["rating limit"] + "<br><br>" + powerData.rules["adept drain"]);
+    }
+
+    function populateSelect(select, values, allLabel, formatter) {
+      var current = select.value;
+      select.replaceChildren();
+      var all = document.createElement("option");
+      all.value = "";
+      all.textContent = allLabel;
+      select.appendChild(all);
+      values.forEach(function (value) {
+        var option = document.createElement("option");
+        option.value = String(value);
+        option.textContent = formatter ? formatter(value) : titleCase(value);
+        select.appendChild(option);
+      });
+      select.value = current;
+    }
+
+    function renderFilterOptions() {
+      var costTypes = viewCostTypes();
+      var costs = viewCosts();
+      var activations = viewActivations();
+
+      populateSelect(powerCostTypeFilter, costTypes, "All cost types", titleCase);
+      populateSelect(powerCostFilter, costs, "All PP costs", function (value) { return value + " PP"; });
+      populateSelect(powerActivationFilter, activations, "All activation types", function (value) { return value; });
+
+      if (state.costType && !costTypes.includes(state.costType)) state.costType = "";
+      if (state.cost && !costs.map(String).includes(String(state.cost))) state.cost = "";
+      if (state.activation && !activations.includes(state.activation)) state.activation = "";
+
+      powerCostTypeFilter.value = state.costType;
+      powerCostFilter.value = state.cost;
+      powerActivationFilter.value = state.activation;
+    }
+
+    function renderFilterControls() {
+      powerListFilters.hidden = !state.filtersOpen;
+      powerFilterToggle.setAttribute("aria-expanded", state.filtersOpen ? "true" : "false");
+      powerListSearch.value = state.query;
+      powerCostTypeFilter.value = state.costType;
+      powerCostFilter.value = state.cost;
+      powerActivationFilter.value = state.activation;
+      powerNameClear.disabled = !state.query;
+      powerCostTypeClear.disabled = !state.costType;
+      powerCostClear.disabled = !state.cost;
+      powerActivationClear.disabled = !state.activation;
+    }
+
+    function renderRecordRuleDetail() {
+      if (!state.recordRule || !powerData.rules[state.recordRule]) {
+        powerRuleDetail.hidden = true;
+        powerRuleDetailTitle.textContent = "";
+        powerRuleDetailCopy.innerHTML = "";
+        return;
+      }
+      powerRuleDetail.hidden = false;
+      powerRuleDetailTitle.textContent = titleCase(state.recordRule);
+      powerRuleDetailCopy.innerHTML = powerData.rules[state.recordRule];
+      Array.prototype.forEach.call(document.querySelectorAll(".keyword-toggle"), function (button) {
+        button.setAttribute("aria-pressed", button.dataset.rule === state.recordRule ? "true" : "false");
+      });
+    }
+
+    function toggleRecordRule(rule) {
+      state.recordRule = state.recordRule === rule ? "" : rule;
+      renderRecordRuleDetail();
+    }
+
+    function compactCost(power) {
+      var values = (power.costValues || []).map(Number);
+      if (values.length > 1) {
+        return Math.min.apply(null, values) + "–" + Math.max.apply(null, values) + " PP";
+      }
+      return String(power.cost || "").replace(" per level", " / LVL").replace(" each", " EACH");
+    }
+
+    function renderPowerList() {
+      var entries = viewEntries();
+      var query = state.query.trim().toLowerCase();
+      var selectedCost = state.cost ? Number(state.cost) : null;
+      var hasFilters = Boolean(query || state.costType || state.cost || state.activation);
+
+      var filtered = entries.filter(function (entry) {
+        var key = entry[0];
+        var power = entry[1];
+        var matchesName = !query || key.toLowerCase().includes(query);
+        var matchesCostType = !state.costType || powerCostType(power) === state.costType;
+        var matchesCost = selectedCost == null || (power.costValues || []).map(Number).includes(selectedCost);
+        var matchesActivation = !state.activation || powerActivationType(power) === state.activation;
+        return matchesName && matchesCostType && matchesCost && matchesActivation;
+      });
+
+      setText("power-list-eyebrow", "Adept archive // Core adept powers");
+      setText("power-list-title", "Adept powers");
+      setText("power-list-count", hasFilters
+              ? filtered.length + " of " + entries.length + " records"
+              : entries.length + (entries.length === 1 ? " record" : " records"));
+
+      powerList.replaceChildren();
+      if (!filtered.length) {
+        var empty = document.createElement("div");
+        empty.className = "empty-message";
+        empty.textContent = hasFilters ? "No adept powers match the current filters." : "No adept powers are listed.";
+        powerList.appendChild(empty);
+        return;
+      }
+
+      filtered.forEach(function (entry) {
+        var key = entry[0];
+        var power = entry[1];
+        var recordNumber = powerRecordNumber(key);
+
+        var button = document.createElement("button");
+        var index = document.createElement("span");
+        var name = document.createElement("span");
+        var meta = document.createElement("span");
+        var cost = document.createElement("span");
+        var activation = document.createElement("span");
+
+        button.type = "button";
+        button.className = "power-list-item";
+        button.dataset.power = key;
+        button.setAttribute("aria-label", "Open " + titleCase(key) + " adept power record");
+
+        index.className = "power-list-index";
+        index.textContent = "AP-" + String(recordNumber).padStart(3, "0");
+        index.setAttribute("aria-hidden", "true");
+
+        name.className = "power-list-name";
+        name.textContent = titleCase(key);
+
+        meta.className = "power-list-meta";
+        cost.className = "power-list-cost";
+        cost.textContent = compactCost(power);
+        activation.className = "power-list-activation";
+        activation.textContent = power.activation;
+        meta.append(cost, activation);
+
+        button.append(index, name, meta);
+        button.addEventListener("click", function () { selectPower(key); });
+        powerList.appendChild(button);
+      });
+    }
+
+    function renderRelatedRules(power) {
+      relatedRules.replaceChildren();
+      var keys = power.relatedRules || [];
+      relatedRulesSection.hidden = !keys.length;
+      if (!keys.length) return;
+
+      keys.forEach(function (key) {
+        var copy = powerData.relatedRules[key];
+        if (!copy) return;
+        var block = document.createElement("article");
+        var heading = document.createElement("strong");
+        var body = document.createElement("div");
+        block.className = "protocol";
+        heading.className = "protocol-key";
+        heading.textContent = titleCase(key);
+        body.className = "protocol-copy";
+        body.innerHTML = copy;
+        block.append(heading, body);
+        relatedRules.appendChild(block);
+      });
+    }
+
+    function renderPowerRecord() {
+      var power = powerData.powers[state.power];
+      if (!power) return;
+
+      setText("power-eyebrow", "Adept archive // Power record");
+      setText("power-title", titleCase(state.power));
+      setText("stat-cost", power.cost);
+      setText("stat-activation", power.activation);
+      setText("meaning-activation", power.activation === "Intrinsic" ? "No activation action required" : "Listed activation cost");
+      setText("stat-rating", power.rating);
+      setText("stat-maximum", power.maximum);
+      setHTML("power-description", power.description);
+      setText("source-code", power.source || "—");
+      setText("source-title", sourceLabels[power.source] || power.source || "Unknown source");
+
+      state.recordRule = "";
+      var ruleRow = document.getElementById("power-rules");
+      ruleRow.replaceChildren();
+      (power.ruleTags || []).forEach(function (rule) {
+        var button = document.createElement("button");
+        button.type = "button";
+        button.className = "keyword-toggle";
+        button.dataset.rule = rule;
+        button.setAttribute("aria-pressed", "false");
+        button.textContent = titleCase(rule);
+        button.addEventListener("click", function () { toggleRecordRule(rule); });
+        ruleRow.appendChild(button);
+      });
+
+      renderRecordRuleDetail();
+      renderRelatedRules(power);
+    }
+
+    function showMode(mode) {
+      state.mode = mode === "record" ? "record" : "list";
+      listView.hidden = state.mode !== "list";
+      recordView.hidden = state.mode !== "record";
+    }
+
+    function selectPower(key) {
+      if (!powerData.powers[key]) return;
+      state.power = key;
+      renderPowerRecord();
+      showMode("record");
+      updateHash();
+    }
+
+    function showList(options) {
+      var preserveSelection = options && options.preserveSelection;
+      if (!preserveSelection) state.power = null;
+      state.recordRule = "";
+      renderRecordRuleDetail();
+      renderPowerList();
+      showMode("list");
+      updateHash();
+    }
+
+    function renderPage(requestedPower) {
+      state.power = null;
+      state.query = "";
+      state.costType = "";
+      state.cost = "";
+      state.activation = "";
+      state.filtersOpen = false;
+      state.recordRule = "";
+
+      renderViewInfo();
+      renderFilterOptions();
+      renderFilterControls();
+      renderPowerList();
+
+      if (requestedPower && powerData.powers[requestedPower]) {
+        state.power = requestedPower;
+        renderPowerRecord();
+        showMode("record");
+      } else {
+        showMode("list");
+      }
+    }
+
+    function updateHash() {
+      var next = "#powers";
+      if (state.mode === "record" && state.power) next = "#power/" + encodeURIComponent(state.power);
+      if (window.location.hash !== next) history.replaceState(null, "", next);
+    }
+
+    function readHash() {
+      var parts = window.location.hash.slice(1).split("/").map(decodeURIComponent);
+      var requestedPower = "";
+
+      if (parts[0] === "power" && parts[1] && powerData.powers[parts[1]]) {
+        requestedPower = parts[1];
+      } else if (parts.length > 1 && powerData.powers[parts[parts.length - 1]]) {
+        // Backwards compatibility with the former #intrinsic/<power> and #activated/<power> links.
+        requestedPower = parts[parts.length - 1];
+      }
+
+      renderPage(requestedPower);
+    }
+
+    powerFilterToggle.addEventListener("click", function () {
+      state.filtersOpen = !state.filtersOpen;
+      renderFilterControls();
+      if (state.filtersOpen) powerListSearch.focus();
+    });
+
+    powerListSearch.addEventListener("input", function () {
+      state.query = powerListSearch.value;
+      renderFilterControls();
+      renderPowerList();
+    });
+
+    powerCostTypeFilter.addEventListener("change", function () {
+      state.costType = powerCostTypeFilter.value;
+      renderFilterControls();
+      renderPowerList();
+    });
+
+    powerCostFilter.addEventListener("change", function () {
+      state.cost = powerCostFilter.value;
+      renderFilterControls();
+      renderPowerList();
+    });
+
+    powerActivationFilter.addEventListener("change", function () {
+      state.activation = powerActivationFilter.value;
+      renderFilterControls();
+      renderPowerList();
+    });
+
+    powerNameClear.addEventListener("click", function () {
+      state.query = "";
+      renderFilterControls();
+      renderPowerList();
+      powerListSearch.focus();
+    });
+
+    powerCostTypeClear.addEventListener("click", function () {
+      state.costType = "";
+      renderFilterControls();
+      renderPowerList();
+      powerCostTypeFilter.focus();
+    });
+
+    powerCostClear.addEventListener("click", function () {
+      state.cost = "";
+      renderFilterControls();
+      renderPowerList();
+      powerCostFilter.focus();
+    });
+
+    powerActivationClear.addEventListener("click", function () {
+      state.activation = "";
+      renderFilterControls();
+      renderPowerList();
+      powerActivationFilter.focus();
+    });
+
+    backButton.addEventListener("click", function () {
+      showList({ preserveSelection: true });
+    });
+
+    window.addEventListener("hashchange", readHash);
+    readHash();
+    updateHash();
+  }()).catch(function (error) {
+    console.error("Failed to initialise adept power page:", error);
+    var panel = document.getElementById("power-panel");
+    if (panel) {
+      panel.querySelector(".panel-inner").innerHTML = '<div class="empty-message">Failed to load adeptpowers.json. Serve this page over HTTP and keep the JSON file in the same directory.</div>';
+    }
+  });
+</script>
+</body>
+</html>
