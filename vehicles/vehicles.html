@@ -82,13 +82,19 @@
           <div class="tag-row" id="tags"></div>
         </header>
         <div class="tag-detail" id="tag-detail" hidden><strong class="tag-detail-title" id="tag-detail-title"></strong><div class="tag-detail-copy" id="tag-detail-copy"></div></div>
+        <section class="telemetry-panel" aria-labelledby="telemetry-title">
+          <div class="telemetry-heading">
+            <h2 id="telemetry-title">Performance telemetry</h2>
+            <span id="telemetry-class">Vehicle profile</span>
+          </div>
+          <div class="telemetry-grid" id="telemetry-grid"></div>
+        </section>
         <div class="vehicle-data-grid" id="vehicle-data"></div>
         <section class="vehicle-description">
           <h2 class="section-title">Description</h2>
           <p class="vehicle-skill-note"><span>Associated skill</span><strong id="vehicle-skill"></strong></p>
           <p id="vehicle-description"></p>
         </section>
-        <section class="section" id="similar-section" hidden><h2 class="section-title">Similar models</h2><ul class="model-list" id="similar-models"></ul></section>
         <section class="section" id="features-section" hidden><h2 class="section-title">Special features</h2><ul class="feature-list" id="features"></ul></section>
         <section class="section"><div class="source-book"><span class="source-code" id="source-code">CRB</span><strong class="source-title" id="source-title">Shadowrun Fifth Edition Core Rulebook</strong></div></section>
       </section>
@@ -154,7 +160,7 @@
     vehicleList.replaceChildren();
     if (!rows.length) { var empty = document.createElement("div"); empty.className = "empty-message"; empty.textContent = hasFilters ? "No vehicles match the current filters." : "No vehicles are listed in this category."; vehicleList.appendChild(empty); return; }
     rows.forEach(function (vehicle) {
-      var button = document.createElement("button"); button.type = "button"; button.className = "vehicle-list-item"; button.setAttribute("aria-label", "Open " + vehicle.name + " vehicle record");
+      var button = document.createElement("button"); button.type = "button"; button.className = "vehicle-list-item"; button.dataset.category = vehicle.category; button.setAttribute("aria-label", "Open " + vehicle.name + " vehicle record");
       var index = document.createElement("span"); index.className = "list-index"; index.textContent = "VH-" + String(allIndex(vehicle.name)).padStart(3, "0"); index.setAttribute("aria-hidden", "true");
       var name = document.createElement("span"); name.className = "vehicle-list-name"; name.textContent = vehicle.name;
       var value = document.createElement("span"); value.className = "vehicle-list-value"; value.textContent = vehicle.subcategory || "Uncategorised";
@@ -187,10 +193,48 @@
     item.append(name, content); return item;
   }
 
-  function fillList(id, values) {
-    var section = document.getElementById(id + "-section"), list = document.getElementById(id === "similar" ? "similar-models" : "features");
+  function fillFeatures(values) {
+    var section = document.getElementById("features-section"), list = document.getElementById("features");
     values = Array.isArray(values) ? values : []; section.hidden = !values.length; list.replaceChildren();
     values.forEach(function (value) { var item = document.createElement("li"); item.textContent = value; list.appendChild(item); });
+  }
+
+  function numericRating(value) {
+    var matches = String(value == null ? "" : value).match(/\d+(?:\.\d+)?/g);
+    return matches ? matches.map(Number) : [];
+  }
+
+  function telemetryBar(label, value, modifier) {
+    var ratings = numericRating(value);
+    if (!ratings.length) return null;
+    var maximum = 10;
+    var item = document.createElement("div"); item.className = "telemetry-item" + (modifier ? " " + modifier : "");
+    var header = document.createElement("div"); header.className = "telemetry-item-head";
+    var name = document.createElement("span"); name.textContent = label;
+    var reading = document.createElement("strong"); reading.textContent = value;
+    header.append(name, reading); item.appendChild(header);
+    var lanes = document.createElement("div"); lanes.className = "telemetry-lanes";
+    ratings.forEach(function (rating, index) {
+      var lane = document.createElement("div"); lane.className = "telemetry-lane";
+      var laneLabel = document.createElement("span");
+      laneLabel.textContent = ratings.length > 1 ? (index === 0 ? "Road" : "Off-road") : "Rating";
+      var track = document.createElement("span"); track.className = "telemetry-track"; track.setAttribute("role", "meter"); track.setAttribute("aria-label", label + (ratings.length > 1 ? (index === 0 ? " on road" : " off road") : "") + " rating"); track.setAttribute("aria-valuemin", "0"); track.setAttribute("aria-valuemax", String(maximum)); track.setAttribute("aria-valuenow", String(rating));
+      for (var segmentIndex = 1; segmentIndex <= maximum; segmentIndex += 1) {
+        var segment = document.createElement("i"); segment.className = "telemetry-segment" + (segmentIndex <= rating ? " is-active" : ""); segment.setAttribute("aria-hidden", "true"); track.appendChild(segment);
+      }
+      lane.append(laneLabel, track); lanes.appendChild(lane);
+    });
+    item.appendChild(lanes); return item;
+  }
+
+  function renderTelemetry(vehicle) {
+    var record = document.getElementById("record-view");
+    record.dataset.category = vehicle.category.toLowerCase();
+    document.getElementById("telemetry-class").textContent = vehicle.category + " // " + vehicle.subcategory;
+    var grid = document.getElementById("telemetry-grid"); grid.replaceChildren();
+    [["Handling", vehicle.handling, "telemetry-handling"], ["Speed", vehicle.speed, "telemetry-speed"], ["Armor", vehicle.armor, "telemetry-armor"]].forEach(function (entry) {
+      var node = telemetryBar(entry[0], entry[1], entry[2]); if (node) grid.appendChild(node);
+    });
   }
 
   function renderRecord(vehicle) {
@@ -200,12 +244,13 @@
     var tags = document.getElementById("tags"); tags.replaceChildren();
     tagDefinitions(vehicle).forEach(function (tag) { var button = document.createElement("button"); button.type = "button"; button.className = "tag-toggle"; button.dataset.tag = tag.key; button.setAttribute("aria-pressed", "false"); button.textContent = tag.label; button.addEventListener("click", function () { state.recordTag = state.recordTag === tag.key ? "" : tag.key; renderTagDetail(); }); tags.appendChild(button); });
     renderTagDetail();
+    renderTelemetry(vehicle);
 
     var grid = document.getElementById("vehicle-data"); grid.replaceChildren();
     [["Handling", vehicle.handling], ["Speed", vehicle.speed], ["Acceleration", vehicle.acceleration], ["Body", vehicle.body], ["Armor", vehicle.armor], ["Pilot", vehicle.pilot], ["Sensor", vehicle.sensor], ["Seats", vehicle.seats], ["Availability", vehicle.availability], ["Cost", vehicle.cost]].forEach(function (entry) { var node = field(entry[0], entry[1]); if (node) grid.appendChild(node); });
     document.getElementById("vehicle-skill").textContent = vehicle.skill || "Special";
     document.getElementById("vehicle-description").textContent = vehicle.description || "No description is available for this vehicle.";
-    fillList("similar", vehicle.similar_models); fillList("features", vehicle.features);
+    fillFeatures(vehicle.features);
     document.getElementById("source-code").textContent = vehicle.source || "—";
     document.getElementById("source-title").textContent = sourceLabels[vehicle.source] || vehicle.source || "Source unavailable";
   }
@@ -234,4 +279,3 @@
 </script>
 </body>
 </html>
-

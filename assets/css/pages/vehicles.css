@@ -237,6 +237,166 @@
   color: #fff;
 }
 
+.vehicle-list-item::after {
+  content: attr(data-category);
+  position: absolute;
+  top: 3px;
+  right: 6px;
+  color: rgba(16,17,19,.18);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .5rem;
+  font-weight: 900;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.vehicle-list-item {
+  position: relative;
+}
+
+.vehicle-list-item:hover::after,
+.vehicle-list-item:focus-visible::after {
+  color: rgba(255,255,255,.45);
+}
+
+.telemetry-panel {
+  position: relative;
+  margin-top: 22px;
+  padding: 16px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgba(225,27,23,.055) 1px, transparent 1px),
+    linear-gradient(rgba(16,17,19,.035) 1px, transparent 1px),
+    #fff;
+  background-size: 24px 24px;
+  border: 1px solid var(--ink);
+  box-shadow: inset 4px 0 var(--red);
+}
+
+.telemetry-panel::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 78px;
+  height: 5px;
+  background: repeating-linear-gradient(110deg, var(--red) 0 4px, transparent 4px 8px);
+}
+
+.telemetry-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: baseline;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.telemetry-heading h2,
+.telemetry-heading span {
+  margin: 0;
+  font-size: .67rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.telemetry-heading h2 {
+  color: var(--red);
+}
+
+.telemetry-heading span {
+  color: var(--muted);
+  text-align: right;
+}
+
+.telemetry-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 14px;
+}
+
+.telemetry-item {
+  min-width: 0;
+}
+
+.telemetry-item-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: .65rem;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.telemetry-item-head strong {
+  color: var(--red);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.telemetry-lanes {
+  display: grid;
+  gap: 5px;
+}
+
+.telemetry-lane {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 7px;
+  align-items: center;
+}
+
+.telemetry-lane > span:first-child {
+  color: var(--muted);
+  font-size: .55rem;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.telemetry-track {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(2px, 1fr));
+  gap: 2px;
+  height: 8px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.telemetry-segment {
+  display: block;
+  height: 100%;
+  background: var(--faint);
+  border: 1px solid var(--line);
+}
+
+.telemetry-segment.is-active {
+  background: var(--red);
+  border-color: var(--red-dark);
+  animation: telemetry-scan .42s ease-out both;
+}
+
+.vehicle-record-view[data-category="groundcraft"] .telemetry-panel {
+  background-image:
+    linear-gradient(90deg, rgba(225,27,23,.055) 1px, transparent 1px),
+    repeating-linear-gradient(90deg, transparent 0 45%, rgba(16,17,19,.04) 45% 47%, transparent 47% 100%);
+}
+
+.vehicle-record-view[data-category="watercraft"] .telemetry-panel {
+  background-image:
+    repeating-radial-gradient(ellipse at 50% 120%, transparent 0 12px, rgba(16,17,19,.04) 13px 14px, transparent 15px 24px);
+}
+
+.vehicle-record-view[data-category="aircraft"] .telemetry-panel {
+  background-image:
+    radial-gradient(circle at 82% 45%, transparent 0 24px, rgba(225,27,23,.055) 25px 26px, transparent 27px 40px),
+    linear-gradient(135deg, transparent 48%, rgba(16,17,19,.035) 49% 51%, transparent 52%);
+}
+
 .vehicle-data-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
@@ -252,7 +412,14 @@
   background: #fff;
   border: 1px solid var(--ink);
   box-shadow: inset 4px 0 var(--red);
+  animation: telemetry-field-in .22s ease-out both;
 }
+
+.vehicle-data-field:nth-child(2) { animation-delay: .025s; }
+.vehicle-data-field:nth-child(3) { animation-delay: .05s; }
+.vehicle-data-field:nth-child(4) { animation-delay: .075s; }
+.vehicle-data-field:nth-child(5) { animation-delay: .1s; }
+.vehicle-data-field:nth-child(6) { animation-delay: .125s; }
 
 .vehicle-data-field::after {
   content: "";
@@ -376,6 +543,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .telemetry-grid {
+    grid-template-columns: 1fr;
+  }
+
   .vehicle-list-header {
     display: block;
   }
@@ -413,7 +584,23 @@
   }
 }
 
-.model-list,
+@keyframes telemetry-scan {
+  from { opacity: .15; transform: scaleY(.35); }
+  to { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes telemetry-field-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .telemetry-segment,
+  .vehicle-data-field {
+    animation: none;
+  }
+}
+
 .feature-list {
   margin: 0;
   padding-left: 1.25rem;
@@ -421,20 +608,7 @@
   line-height: 1.65;
 }
 
-.model-list {
-  columns: 2;
-  column-gap: 28px;
-}
-
-.model-list li,
 .feature-list li {
   break-inside: avoid;
   margin-bottom: 5px;
 }
-
-@media (max-width: 580px) {
-  .model-list {
-    columns: 1;
-  }
-}
-
