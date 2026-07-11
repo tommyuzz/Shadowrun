@@ -34,7 +34,7 @@
       line-height: 1.5;
     }
 
-    button, input { font: inherit; }
+    button, input, select { font: inherit; }
     button { -webkit-tap-highlight-color: transparent; }
     a { color: var(--red-dark); text-underline-offset: 3px; }
 
@@ -389,8 +389,122 @@
 
     .spell-record-view .spell-header { padding-right: 130px; }
 
+    .spell-list-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      column-gap: 20px;
+      align-items: start;
+    }
+
+    .spell-list-header .eyebrow {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .spell-list-header h1 {
+      grid-column: 1;
+      grid-row: 2;
+    }
+
+    .spell-list-header .filter-toggle-button {
+      position: static;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: start;
+    }
+
+    .filter-toggle-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
+      padding: 7px 12px;
+      color: var(--red);
+      background: var(--paper);
+      border: 1px solid var(--red);
+      font-size: .66rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .filter-toggle-button::before {
+      content: "⌕";
+      margin-right: 7px;
+      font-size: .95rem;
+      line-height: 1;
+    }
+
+    .filter-toggle-button:hover,
+    .filter-toggle-button:focus-visible,
+    .filter-toggle-button[aria-expanded="true"] {
+      color: #fff;
+      background: var(--red);
+      outline: none;
+    }
+
     .spell-list-search {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
       margin-top: 18px;
+    }
+
+    .spell-list-search[hidden] { display: none; }
+
+    .spell-filter-field { min-width: 0; }
+
+    .filter-control {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 34px;
+      gap: 6px;
+      align-items: stretch;
+    }
+
+    .keyword-filter {
+      min-width: 0;
+      appearance: none;
+      padding-right: 32px;
+      background-image:
+              linear-gradient(45deg, transparent 50%, var(--red) 50%),
+              linear-gradient(135deg, var(--red) 50%, transparent 50%);
+      background-position:
+              calc(100% - 16px) 16px,
+              calc(100% - 11px) 16px;
+      background-size: 5px 5px, 5px 5px;
+      background-repeat: no-repeat;
+      cursor: pointer;
+    }
+
+    .filter-clear-button {
+      display: grid;
+      width: 34px;
+      height: 39px;
+      padding: 0;
+      place-items: center;
+      color: var(--red);
+      background: var(--paper);
+      border: 1px solid var(--red);
+      font-size: 1.1rem;
+      font-weight: 900;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .filter-clear-button:disabled {
+      opacity: .35;
+      cursor: default;
+    }
+
+    .filter-clear-button:hover:not(:disabled),
+    .filter-clear-button:focus-visible:not(:disabled) {
+      color: #fff;
+      background: var(--red);
+      outline: none;
     }
 
     .spell-list-summary {
@@ -417,7 +531,7 @@
 
     .spell-list-item {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: auto minmax(0, 1fr) auto;
       gap: 12px;
       align-items: center;
       min-height: 58px;
@@ -437,6 +551,32 @@
       background: var(--red);
       border-color: var(--red);
       outline: none;
+    }
+
+    .spell-list-index {
+      display: inline-grid;
+      min-width: 50px;
+      height: 28px;
+      padding: 0 7px;
+      place-items: center;
+      color: var(--red);
+      background:
+              linear-gradient(135deg, rgba(225,27,23,.12) 0 48%, transparent 48%);
+      border: 1px solid var(--red);
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .62rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .spell-list-item:hover .spell-list-index,
+    .spell-list-item:focus-visible .spell-list-index {
+      color: #fff;
+      background: rgba(0,0,0,.14);
+      border-color: #fff;
     }
 
     .spell-list-name {
@@ -490,36 +630,6 @@
       background: var(--red);
       outline: none;
     }
-
-    .sidebar-keywords {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 2px solid var(--ink);
-    }
-
-    .sidebar-subheading {
-      margin: 0 0 12px;
-      color: var(--red);
-      font-size: .82rem;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .sidebar-keyword-list {
-      display: grid;
-      gap: 9px;
-    }
-
-    .sidebar-keyword {
-      padding: 11px 12px;
-      background: #fff;
-      border: 1px solid var(--red);
-      box-shadow: inset 4px 0 var(--red);
-    }
-
-    .sidebar-keyword .protocol-key { margin-bottom: 5px; }
-    .sidebar-keyword .protocol-copy { font-size: .7rem; }
 
     .legend-grid { display: grid; gap: 0; }
     .legend-row {
@@ -595,6 +705,70 @@
       line-height: 1;
     }
 
+    #spell-title,
+    #spell-list-title {
+      font-family: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+      font-weight: 800;
+      letter-spacing: -.02em;
+    }
+
+    .keyword-toggle {
+      appearance: none;
+      padding: 7px 11px 6px;
+      color: var(--red);
+      background: transparent;
+      border: 1px solid var(--red);
+      font-size: .72rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: color .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+
+    .keyword-toggle:hover,
+    .keyword-toggle:focus-visible {
+      color: #fff;
+      background: var(--red-dark);
+      outline: none;
+    }
+
+    .keyword-toggle[aria-pressed="true"] {
+      color: #fff;
+      background: var(--red);
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,.2);
+    }
+
+    .keyword-detail {
+      margin-top: 18px;
+      padding: 17px 18px 18px;
+      background: #fff;
+      border: 1px solid var(--ink);
+      border-left: 5px solid var(--red);
+    }
+
+    .keyword-detail[hidden] { display: none; }
+
+    .keyword-detail-title {
+      display: block;
+      margin: 0 0 7px;
+      color: var(--red);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+    }
+
+    .keyword-detail-copy {
+      color: var(--ink);
+      font-size: .82rem;
+      line-height: 1.55;
+    }
+
+    .keyword-detail-copy > :first-child { margin-top: 0; }
+    .keyword-detail-copy > :last-child { margin-bottom: 0; }
+
     .stat-grid {
       display: grid;
       grid-template-columns: repeat(5, minmax(95px, 1fr));
@@ -650,7 +824,7 @@
       text-transform: uppercase;
     }
 
-    .section-title::before {
+    .section-title[data-index]::before {
       content: attr(data-index);
       display: inline-grid;
       width: 34px;
@@ -671,15 +845,6 @@
 
     .description > :first-child { margin-top: 0; }
     .description > :last-child { margin-bottom: 0; }
-    .description p:first-child::first-letter {
-      float: left;
-      margin: .02em .09em 0 0;
-      color: var(--red);
-      font-family: Impact, Haettenschweiler, sans-serif;
-      font-size: 3.6em;
-      line-height: .78;
-    }
-
     .description ul, .description ol,
     .protocol-copy ul, .protocol-copy ol {
       margin: .7em 0;
@@ -864,6 +1029,11 @@
       .category-panel { grid-column: auto; }
       .spell-panel > .panel-inner { padding: 22px 18px; }
       .spell-record-view .spell-header { padding-right: 0; padding-top: 48px; }
+      .spell-list-header { grid-template-columns: 1fr; padding-top: 0;}
+      .spell-list-header .filter-toggle-button { grid-column: 1; grid-row: 1; justify-self: end; margin-bottom: 12px;}
+      .spell-list-header .eyebrow { grid-column: 1; grid-row: 2; }
+      .spell-list-header h1 { grid-column: 1; grid-row: 3; }
+      .spell-list-search { grid-template-columns: 1fr; }
       h1 { font-size: clamp(3.2rem, 18vw, 5.4rem); }
       .stat-grid { grid-template-columns: repeat(2, 1fr); }
       .stat, .stat:nth-child(3) { border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); }
@@ -939,10 +1109,6 @@
             <div class="legend-row"><dt>F</dt><dd>Force used in Drain Value</dd></div>
           </dl>
 
-          <div class="sidebar-keywords" id="sidebar-keywords-section" hidden>
-            <h3 class="sidebar-subheading">Keywords</h3>
-            <div class="sidebar-keyword-list" id="sidebar-keywords" aria-live="polite"></div>
-          </div>
         </div>
       </section>
     </aside>
@@ -950,14 +1116,30 @@
     <article class="panel spell-panel" id="spell-panel" role="tabpanel" aria-live="polite">
       <div class="panel-inner">
         <section class="spell-list-view" id="spell-list-view">
-          <header class="spell-header">
+          <header class="spell-header spell-list-header">
+            <button class="filter-toggle-button" id="spell-filter-toggle" type="button" aria-expanded="false" aria-controls="spell-list-filters">Filter</button>
             <p class="eyebrow" id="spell-list-eyebrow">Combat protocol // Spell list</p>
             <h1 id="spell-list-title">Combat spells</h1>
           </header>
 
-          <div class="spell-list-search">
-            <label class="search-label" for="spell-list-search">Search current spell type</label>
-            <input class="search" id="spell-list-search" type="search" placeholder="Enter spell name…" autocomplete="off">
+          <div class="spell-list-search" id="spell-list-filters" hidden>
+            <div class="spell-filter-field">
+              <label class="search-label" for="spell-list-search">Search by spell name</label>
+              <div class="filter-control">
+                <input class="search" id="spell-list-search" type="search" placeholder="Enter spell name…" autocomplete="off">
+                <button class="filter-clear-button" id="spell-name-clear" type="button" aria-label="Clear spell name search" title="Clear spell name search">×</button>
+              </div>
+            </div>
+
+            <div class="spell-filter-field">
+              <label class="search-label" for="spell-keyword-filter">Filter by keyword</label>
+              <div class="filter-control">
+                <select class="search keyword-filter" id="spell-keyword-filter">
+                  <option value="">All keywords</option>
+                </select>
+                <button class="filter-clear-button" id="spell-keyword-clear" type="button" aria-label="Clear keyword filter" title="Clear keyword filter">×</button>
+              </div>
+            </div>
           </div>
 
           <div class="spell-list-summary">
@@ -974,6 +1156,11 @@
             <h1 id="spell-title">Spell</h1>
             <div class="tag-row" id="spell-keywords" aria-label="Spell keywords"></div>
           </header>
+
+          <section class="keyword-detail" id="spell-keyword-detail" aria-live="polite" hidden>
+            <strong class="keyword-detail-title" id="spell-keyword-detail-title"></strong>
+            <div class="keyword-detail-copy" id="spell-keyword-detail-copy"></div>
+          </section>
 
           <div class="stat-grid" id="stat-grid" aria-label="Spell statistics">
             <div class="stat">
@@ -1004,12 +1191,11 @@
           </div>
 
           <section class="section" id="description-section">
-            <h2 class="section-title" data-index="01">Spell effect</h2>
+            <h2 class="section-title">Spell effect</h2>
             <div class="description" id="spell-description"></div>
           </section>
 
           <section class="section" id="source-section">
-            <h2 class="section-title" data-index="02">Source book</h2>
             <div class="source-book">
               <span class="source-code" id="source-code">—</span>
               <strong class="source-title" id="source-title">—</strong>
@@ -1042,7 +1228,7 @@
 
     var spellData = await response.json();
     var categories = ["combat", "detection", "health", "illusion", "manipulation"];
-    var state = { category: "combat", spell: null, mode: "list", query: "" };
+    var state = { category: "combat", spell: null, mode: "list", query: "", keyword: "", filtersOpen: false, recordKeyword: "" };
 
     var typeLabels = { M: "Mana", P: "Physical" };
     var durationLabels = { I: "Instant", S: "Sustained", P: "Permanent" };
@@ -1060,8 +1246,14 @@
     var recordView = document.getElementById("spell-record-view");
     var spellList = document.getElementById("spell-list");
     var spellListSearch = document.getElementById("spell-list-search");
-    var sidebarKeywordsSection = document.getElementById("sidebar-keywords-section");
-    var sidebarKeywords = document.getElementById("sidebar-keywords");
+    var spellListFilters = document.getElementById("spell-list-filters");
+    var spellFilterToggle = document.getElementById("spell-filter-toggle");
+    var spellKeywordFilter = document.getElementById("spell-keyword-filter");
+    var spellNameClear = document.getElementById("spell-name-clear");
+    var spellKeywordClear = document.getElementById("spell-keyword-clear");
+    var spellKeywordDetail = document.getElementById("spell-keyword-detail");
+    var spellKeywordDetailTitle = document.getElementById("spell-keyword-detail-title");
+    var spellKeywordDetailCopy = document.getElementById("spell-keyword-detail-copy");
     var backButton = document.getElementById("back-to-list");
 
     function titleCase(value) {
@@ -1070,6 +1262,49 @@
 
     function spellEntries(category) {
       return Object.entries(spellData[category].spells || {});
+    }
+
+    function categoryKeywords(category) {
+      var found = new Set();
+      spellEntries(category).forEach(function (entry) {
+        (entry[1].keywords || []).forEach(function (keyword) {
+          found.add(keyword);
+        });
+      });
+      return Array.from(found).sort(function (a, b) {
+        return a.localeCompare(b);
+      });
+    }
+
+    function renderKeywordFilterOptions() {
+      var keywords = categoryKeywords(state.category);
+      spellKeywordFilter.replaceChildren();
+
+      var allOption = document.createElement("option");
+      allOption.value = "";
+      allOption.textContent = "All keywords";
+      spellKeywordFilter.appendChild(allOption);
+
+      keywords.forEach(function (keyword) {
+        var option = document.createElement("option");
+        option.value = keyword;
+        option.textContent = titleCase(keyword);
+        spellKeywordFilter.appendChild(option);
+      });
+
+      if (state.keyword && !keywords.includes(state.keyword)) {
+        state.keyword = "";
+      }
+      spellKeywordFilter.value = state.keyword;
+    }
+
+    function renderFilterControls() {
+      spellListFilters.hidden = !state.filtersOpen;
+      spellFilterToggle.setAttribute("aria-expanded", state.filtersOpen ? "true" : "false");
+      spellListSearch.value = state.query;
+      spellKeywordFilter.value = state.keyword;
+      spellNameClear.disabled = !state.query;
+      spellKeywordClear.disabled = !state.keyword;
     }
 
     function rangeMeaning(value) {
@@ -1116,61 +1351,50 @@
       }
     }
 
-    function renderSidebarKeywords() {
-      sidebarKeywords.replaceChildren();
+    function renderRecordKeywordDetail() {
+      var keywordRow = document.getElementById("spell-keywords");
+      Array.prototype.forEach.call(keywordRow.querySelectorAll(".keyword-toggle"), function (button) {
+        button.setAttribute("aria-pressed", button.dataset.keyword === state.recordKeyword ? "true" : "false");
+      });
 
-      if (!state.spell || !spellData[state.category].spells[state.spell]) {
-        var prompt = document.createElement("div");
-        prompt.className = "empty-message";
-        prompt.textContent = "Select a spell to view its keyword meanings.";
-        sidebarKeywords.appendChild(prompt);
+      if (!state.recordKeyword) {
+        spellKeywordDetail.hidden = true;
+        spellKeywordDetailTitle.textContent = "";
+        spellKeywordDetailCopy.innerHTML = "";
         return;
       }
 
       var category = spellData[state.category];
-      var spell = category.spells[state.spell];
-      var spellKeywords = spell.keywords || [];
+      var description = Object.prototype.hasOwnProperty.call(category.keywords || {}, state.recordKeyword)
+              ? category.keywords[state.recordKeyword]
+              : "No keyword description is listed for this entry.";
 
-      if (!spellKeywords.length) {
-        var none = document.createElement("div");
-        none.className = "empty-message";
-        none.textContent = "This spell has no listed keywords.";
-        sidebarKeywords.appendChild(none);
-        return;
-      }
+      spellKeywordDetailTitle.textContent = titleCase(state.recordKeyword);
+      spellKeywordDetailCopy.innerHTML = description;
+      spellKeywordDetail.hidden = false;
+    }
 
-      spellKeywords.forEach(function (keyword) {
-        var card = document.createElement("article");
-        var heading = document.createElement("strong");
-        var copy = document.createElement("div");
-
-        card.className = "sidebar-keyword";
-        heading.className = "protocol-key";
-        heading.textContent = keyword;
-        copy.className = "protocol-copy";
-        copy.innerHTML = Object.prototype.hasOwnProperty.call(category.keywords || {}, keyword)
-                ? category.keywords[keyword]
-                : "No keyword description is listed for this entry.";
-
-        card.append(heading, copy);
-        sidebarKeywords.appendChild(card);
-      });
+    function toggleRecordKeyword(keyword) {
+      state.recordKeyword = state.recordKeyword === keyword ? "" : keyword;
+      renderRecordKeywordDetail();
     }
 
     function renderSpellList() {
       var entries = spellEntries(state.category);
       var query = state.query.trim().toLowerCase();
-      var filtered = query
-              ? entries.filter(function (entry) {
-                return entry[0].toLowerCase().includes(query);
-              })
-              : entries;
+      var keyword = state.keyword;
+      var hasFilters = Boolean(query || keyword);
+      var filtered = entries.filter(function (entry) {
+        var matchesName = !query || entry[0].toLowerCase().includes(query);
+        var matchesKeyword = !keyword || (entry[1].keywords || []).includes(keyword);
+        return matchesName && matchesKeyword;
+      });
 
       setText("spell-list-eyebrow", titleCase(state.category) + " protocol // Spell list");
       setText("spell-list-title", titleCase(state.category) + " spells");
       setText(
               "spell-list-count",
-              query
+              hasFilters
                       ? filtered.length + " of " + entries.length + " records"
                       : entries.length + (entries.length === 1 ? " record" : " records")
       );
@@ -1180,8 +1404,8 @@
       if (!filtered.length) {
         var empty = document.createElement("div");
         empty.className = "empty-message";
-        empty.textContent = query
-                ? "No matching spells in this category."
+        empty.textContent = hasFilters
+                ? "No spells match the current filters."
                 : "No spells are listed in this category.";
         spellList.appendChild(empty);
         return;
@@ -1190,7 +1414,11 @@
       filtered.forEach(function (entry) {
         var key = entry[0];
         var spell = entry[1];
+        var recordNumber = entries.findIndex(function (candidate) {
+          return candidate[0] === key;
+        }) + 1;
         var button = document.createElement("button");
+        var index = document.createElement("span");
         var name = document.createElement("span");
         var drain = document.createElement("span");
 
@@ -1199,12 +1427,15 @@
         button.dataset.spell = key;
         button.setAttribute("aria-label", "Open " + titleCase(key) + " spell record");
 
+        index.className = "spell-list-index";
+        index.textContent = "SP-" + String(recordNumber).padStart(3, "0");
+        index.setAttribute("aria-hidden", "true");
         name.className = "spell-list-name";
         name.textContent = titleCase(key);
         drain.className = "spell-list-drain";
         drain.textContent = spell.Drain ? "Drain " + spell.Drain : "";
 
-        button.append(name, drain);
+        button.append(index, name, drain);
         button.addEventListener("click", function () {
           selectSpell(key);
         });
@@ -1237,14 +1468,21 @@
         setText("meaning-damage", damageLabels[spell.damage] || "");
       }
 
+      state.recordKeyword = "";
       var keywordRow = document.getElementById("spell-keywords");
       keywordRow.replaceChildren();
       if (spell.keywords && spell.keywords.length) {
         spell.keywords.forEach(function (keyword) {
-          var tag = document.createElement("span");
-          tag.className = "tag";
-          tag.textContent = keyword;
-          keywordRow.appendChild(tag);
+          var button = document.createElement("button");
+          button.type = "button";
+          button.className = "keyword-toggle";
+          button.dataset.keyword = keyword;
+          button.setAttribute("aria-pressed", "false");
+          button.textContent = titleCase(keyword);
+          button.addEventListener("click", function () {
+            toggleRecordKeyword(keyword);
+          });
+          keywordRow.appendChild(button);
         });
       } else {
         var tag = document.createElement("span");
@@ -1252,20 +1490,19 @@
         tag.textContent = "Unclassified";
         keywordRow.appendChild(tag);
       }
+      renderRecordKeywordDetail();
     }
 
     function showMode(mode) {
       state.mode = mode === "record" ? "record" : "list";
       listView.hidden = state.mode !== "list";
       recordView.hidden = state.mode !== "record";
-      sidebarKeywordsSection.hidden = state.mode !== "record";
     }
 
     function selectSpell(key) {
       if (!spellData[state.category].spells[key]) return;
       state.spell = key;
       renderSpellRecord();
-      renderSidebarKeywords();
       showMode("record");
       updateHash();
     }
@@ -1273,12 +1510,9 @@
     function showList(options) {
       var preserveSelection = options && options.preserveSelection;
       if (!preserveSelection) state.spell = null;
-
-      state.query= "";
-      spellListSearch.value = "";
-
+      state.recordKeyword = "";
+      renderRecordKeywordDetail();
       renderSpellList();
-      renderSidebarKeywords();
       showMode("list");
       updateHash();
     }
@@ -1288,9 +1522,13 @@
       state.category = category;
       state.spell = null;
       state.query = "";
-      spellListSearch.value = "";
+      state.keyword = "";
+      state.filtersOpen = false;
+      state.recordKeyword = "";
       renderTabs();
       renderCategoryInfo();
+      renderKeywordFilterOptions();
+      renderFilterControls();
       renderSpellList();
 
       if (requestedSpell && spellData[category].spells[requestedSpell]) {
@@ -1301,7 +1539,6 @@
         showMode("list");
       }
 
-      renderSidebarKeywords();
     }
 
     function updateHash() {
@@ -1323,9 +1560,12 @@
         state.category = tab.dataset.category;
         state.spell = null;
         state.query = "";
-        spellListSearch.value = "";
+        state.keyword = "";
+        state.filtersOpen = false;
         renderTabs();
         renderCategoryInfo();
+        renderKeywordFilterOptions();
+        renderFilterControls();
         showList();
       });
 
@@ -1339,12 +1579,41 @@
       });
     });
 
+    spellFilterToggle.addEventListener("click", function () {
+      state.filtersOpen = !state.filtersOpen;
+      renderFilterControls();
+      if (state.filtersOpen) spellListSearch.focus();
+    });
+
     spellListSearch.addEventListener("input", function () {
       state.query = spellListSearch.value;
+      renderFilterControls();
       renderSpellList();
     });
 
+    spellKeywordFilter.addEventListener("change", function () {
+      state.keyword = spellKeywordFilter.value;
+      renderFilterControls();
+      renderSpellList();
+    });
+
+    spellNameClear.addEventListener("click", function () {
+      state.query = "";
+      renderFilterControls();
+      renderSpellList();
+      spellListSearch.focus();
+    });
+
+    spellKeywordClear.addEventListener("click", function () {
+      state.keyword = "";
+      renderFilterControls();
+      renderSpellList();
+      spellKeywordFilter.focus();
+    });
+
     backButton.addEventListener("click", function () {
+      state.keyword = "";
+      renderFilterControls();
       showList({ preserveSelection: true });
     });
 
