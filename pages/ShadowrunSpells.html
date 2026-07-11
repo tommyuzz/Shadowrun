@@ -389,6 +389,10 @@
 
     .spell-record-view .spell-header { padding-right: 130px; }
 
+    .spell-list-search {
+      margin-top: 18px;
+    }
+
     .spell-list-summary {
       display: flex;
       justify-content: space-between;
@@ -444,7 +448,7 @@
       overflow-wrap: anywhere;
     }
 
-    .spell-list-source {
+    .spell-list-drain {
       color: var(--red);
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       font-size: .68rem;
@@ -452,8 +456,8 @@
       white-space: nowrap;
     }
 
-    .spell-list-item:hover .spell-list-source,
-    .spell-list-item:focus-visible .spell-list-source { color: #fff; }
+    .spell-list-item:hover .spell-list-drain,
+    .spell-list-item:focus-visible .spell-list-drain { color: #fff; }
 
     .back-button {
       position: absolute;
@@ -935,7 +939,7 @@
             <div class="legend-row"><dt>F</dt><dd>Force used in Drain Value</dd></div>
           </dl>
 
-          <div class="sidebar-keywords">
+          <div class="sidebar-keywords" id="sidebar-keywords-section" hidden>
             <h3 class="sidebar-subheading">Keywords</h3>
             <div class="sidebar-keyword-list" id="sidebar-keywords" aria-live="polite"></div>
           </div>
@@ -950,6 +954,11 @@
             <p class="eyebrow" id="spell-list-eyebrow">Combat protocol // Spell list</p>
             <h1 id="spell-list-title">Combat spells</h1>
           </header>
+
+          <div class="spell-list-search">
+            <label class="search-label" for="spell-list-search">Search current spell type</label>
+            <input class="search" id="spell-list-search" type="search" placeholder="Enter spell name…" autocomplete="off">
+          </div>
 
           <div class="spell-list-summary">
             <span>Select a spell to open its full record</span>
@@ -1033,7 +1042,7 @@
 
     var spellData = await response.json();
     var categories = ["combat", "detection", "health", "illusion", "manipulation"];
-    var state = { category: "combat", spell: null, mode: "list" };
+    var state = { category: "combat", spell: null, mode: "list", query: "" };
 
     var typeLabels = { M: "Mana", P: "Physical" };
     var durationLabels = { I: "Instant", S: "Sustained", P: "Permanent" };
@@ -1050,6 +1059,8 @@
     var listView = document.getElementById("spell-list-view");
     var recordView = document.getElementById("spell-record-view");
     var spellList = document.getElementById("spell-list");
+    var spellListSearch = document.getElementById("spell-list-search");
+    var sidebarKeywordsSection = document.getElementById("sidebar-keywords-section");
     var sidebarKeywords = document.getElementById("sidebar-keywords");
     var backButton = document.getElementById("back-to-list");
 
@@ -1148,26 +1159,40 @@
 
     function renderSpellList() {
       var entries = spellEntries(state.category);
+      var query = state.query.trim().toLowerCase();
+      var filtered = query
+              ? entries.filter(function (entry) {
+                return entry[0].toLowerCase().includes(query);
+              })
+              : entries;
+
       setText("spell-list-eyebrow", titleCase(state.category) + " protocol // Spell list");
       setText("spell-list-title", titleCase(state.category) + " spells");
-      setText("spell-list-count", entries.length + (entries.length === 1 ? " record" : " records"));
+      setText(
+              "spell-list-count",
+              query
+                      ? filtered.length + " of " + entries.length + " records"
+                      : entries.length + (entries.length === 1 ? " record" : " records")
+      );
 
       spellList.replaceChildren();
 
-      if (!entries.length) {
+      if (!filtered.length) {
         var empty = document.createElement("div");
         empty.className = "empty-message";
-        empty.textContent = "No spells are listed in this category.";
+        empty.textContent = query
+                ? "No matching spells in this category."
+                : "No spells are listed in this category.";
         spellList.appendChild(empty);
         return;
       }
 
-      entries.forEach(function (entry) {
+      filtered.forEach(function (entry) {
         var key = entry[0];
         var spell = entry[1];
         var button = document.createElement("button");
         var name = document.createElement("span");
-        var source = document.createElement("span");
+        var drain = document.createElement("span");
 
         button.type = "button";
         button.className = "spell-list-item";
@@ -1176,10 +1201,10 @@
 
         name.className = "spell-list-name";
         name.textContent = titleCase(key);
-        source.className = "spell-list-source";
-        source.textContent = spell.source ? "Source: " + spell.source : "";
+        drain.className = "spell-list-drain";
+        drain.textContent = spell.Drain ? "Drain " + spell.Drain : "";
 
-        button.append(name, source);
+        button.append(name, drain);
         button.addEventListener("click", function () {
           selectSpell(key);
         });
@@ -1200,7 +1225,7 @@
       setText("meaning-range", rangeMeaning(spell.range));
       setText("stat-duration", spell.duration);
       setText("meaning-duration", durationLabels[spell.duration] || "");
-      setText("stat-drain", spell.drain);
+      setText("stat-drain", spell.Drain);
       setHTML("spell-description", spell.description);
       setText("source-code", spell.source || "—");
       setText("source-title", sourceLabels[spell.source] || spell.source || "Unknown source");
@@ -1233,6 +1258,7 @@
       state.mode = mode === "record" ? "record" : "list";
       listView.hidden = state.mode !== "list";
       recordView.hidden = state.mode !== "record";
+      sidebarKeywordsSection.hidden = state.mode !== "record";
     }
 
     function selectSpell(key) {
@@ -1247,6 +1273,10 @@
     function showList(options) {
       var preserveSelection = options && options.preserveSelection;
       if (!preserveSelection) state.spell = null;
+
+      state.query= "";
+      spellListSearch.value = "";
+
       renderSpellList();
       renderSidebarKeywords();
       showMode("list");
@@ -1257,6 +1287,8 @@
       if (!spellData[category]) return;
       state.category = category;
       state.spell = null;
+      state.query = "";
+      spellListSearch.value = "";
       renderTabs();
       renderCategoryInfo();
       renderSpellList();
@@ -1290,6 +1322,8 @@
       tab.addEventListener("click", function () {
         state.category = tab.dataset.category;
         state.spell = null;
+        state.query = "";
+        spellListSearch.value = "";
         renderTabs();
         renderCategoryInfo();
         showList();
@@ -1303,6 +1337,11 @@
         target.focus();
         target.click();
       });
+    });
+
+    spellListSearch.addEventListener("input", function () {
+      state.query = spellListSearch.value;
+      renderSpellList();
     });
 
     backButton.addEventListener("click", function () {
