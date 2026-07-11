@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shadowrun Fifth Edition Core Rulebook weapon reference browser.">
+  <title>Shadowrun 5e // Weapon Index</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/pages/weapons.css">
+</head>
+<body>
+<div class="sheet">
+  <header class="masthead">
+    <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="50" cy="50" r="22" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/><path d="M50 3v25M50 72v25M3 50h25M72 50h25" fill="none" stroke="currentColor" stroke-width="4"/><path d="M37 32h26l10 18-10 18H37L27 50z" fill="none" stroke="currentColor" stroke-width="5"/><circle cx="50" cy="50" r="7" fill="currentColor"/></svg>
+    <div>
+      <p class="kicker">Street armament archive</p>
+      <a class="brand-link" href="../shadowrunhome.html" aria-label="Return to Shadowrun home page"><p class="brand-title">Shadowrun</p></a>
+      <p class="brand-subtitle">Fifth edition weapon index</p>
+    </div>
+    <div class="record-id"><strong>ARSENAL // 5E</strong><span>DATASET: WEAPONS.JSON</span><div class="barcode" aria-hidden="true"></div></div>
+  </header>
+
+  <nav class="tabs-wrap" aria-label="Weapon categories">
+    <div class="tabs weapon-tabs" role="tablist" aria-label="Weapon categories">
+      <button class="tab" id="all-tab" type="button" role="tab" aria-selected="true" aria-controls="weapon-panel" data-category="All">All</button>
+      <button class="tab" id="melee-tab" type="button" role="tab" aria-selected="false" aria-controls="weapon-panel" data-category="Melee">Melee</button>
+      <button class="tab" id="projectile-tab" type="button" role="tab" aria-selected="false" aria-controls="weapon-panel" data-category="Projectile">Projectile</button>
+      <button class="tab" id="firearms-tab" type="button" role="tab" aria-selected="false" aria-controls="weapon-panel" data-category="Firearms">Firearms</button>
+      <button class="tab" id="heavy-tab" type="button" role="tab" aria-selected="false" aria-controls="weapon-panel" data-category="Heavy Weapons">Heavy Weapons</button>
+      <button class="tab" id="explosives-tab" type="button" role="tab" aria-selected="false" aria-controls="weapon-panel" data-category="Explosives">Explosives</button>
+    </div>
+  </nav>
+
+  <main class="workspace">
+    <aside class="sidebar" aria-label="Weapon archive information">
+      <section class="panel"><div class="panel-inner">
+        <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Archive scope</h2>
+        <p class="protocol-copy">Core Rulebook melee weapons, projectile weapons, firearms, heavy weapons, grenades, rockets, and missiles. Ammunition and accessories are indexed separately.</p>
+      </div></section>
+      <section class="panel"><div class="panel-inner">
+        <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Category count</h2>
+        <dl class="category-counts" id="category-counts"></dl>
+      </div></section>
+    </aside>
+
+    <article class="panel weapon-panel" id="weapon-panel" role="tabpanel" aria-labelledby="all-tab" aria-live="polite"><div class="panel-inner">
+      <section class="weapon-list-view" id="list-view">
+        <header class="weapon-header weapon-list-header">
+          <p class="eyebrow" id="list-eyebrow">Complete archive // Weapon list</p>
+          <h1 id="list-title">All weapons</h1>
+          <button class="filter-toggle-button" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters">Filter</button>
+        </header>
+
+        <div class="weapon-filters" id="filters" hidden>
+          <div class="weapon-filter-field">
+            <label class="search-label" for="search">Search weapons</label>
+            <div class="filter-control"><input class="search" id="search" type="search" placeholder="Enter weapon name…" autocomplete="off"><button class="filter-clear-button" id="search-clear" type="button" aria-label="Clear weapon search" title="Clear search" disabled>×</button></div>
+          </div>
+          <div class="weapon-filter-field">
+            <label class="search-label" for="subcategory">Weapon type</label>
+            <div class="filter-control"><select class="search keyword-filter" id="subcategory"><option value="">All types</option></select><button class="filter-clear-button" id="subcategory-clear" type="button" aria-label="Clear weapon type filter" title="Clear weapon type" disabled>×</button></div>
+          </div>
+          <div class="weapon-filter-field">
+            <label class="search-label" for="legality">Legality</label>
+            <div class="filter-control"><select class="search keyword-filter" id="legality"><option value="">All legality</option><option value="Legal">Legal</option><option value="R">Restricted</option><option value="F">Forbidden</option></select><button class="filter-clear-button" id="legality-clear" type="button" aria-label="Clear legality filter" title="Clear legality" disabled>×</button></div>
+          </div>
+        </div>
+
+        <div class="weapon-list-summary"><span>Select a weapon to open its full record</span><strong id="list-count">0 records</strong></div>
+        <div class="weapon-list" id="weapon-list"></div>
+      </section>
+
+      <section class="weapon-record-view" id="record-view" hidden>
+        <header class="weapon-header">
+          <p class="eyebrow" id="record-eyebrow">Weapon record</p>
+          <h1 id="weapon-title">Weapon</h1>
+          <button class="back-button" id="back" type="button">Back to list</button>
+          <div class="tag-row" id="tags"></div>
+        </header>
+        <div class="tag-detail" id="tag-detail" hidden><strong class="tag-detail-title" id="tag-detail-title"></strong><div class="tag-detail-copy" id="tag-detail-copy"></div></div>
+        <div class="stat-grid" id="stats"></div>
+        <div class="weapon-details" id="details"></div>
+        <section class="section" id="features-section" hidden><h2 class="section-title">Special features</h2><ul class="feature-list" id="features"></ul></section>
+        <section class="section"><div class="source-book"><span class="source-code" id="source-code">CRB // 000</span><strong class="source-title">Shadowrun Fifth Edition Core Rulebook</strong></div></section>
+      </section>
+    </div></article>
+  </main>
+
+  <footer><div class="footer-frame"><div class="footer-bars" aria-hidden="true"></div><div class="footer-copy">&gt;&gt; SELECT. SIGHT. SURVIVE.<br>KNOW YOUR RANGE. CONTROL THE FIELD.</div><div class="footer-warning">Every weapon leaves a signature.<br>Choose the right tool. Leave clean.</div><span class="sigil" aria-hidden="true">⌁</span></div></footer>
+</div>
+
+<script>
+(async function () {
+  "use strict";
+  var response = await fetch("./weapons.json", { cache: "no-store" });
+  if (!response.ok) throw new Error("Failed to load weapons.json: HTTP " + response.status);
+  var weapons = await response.json();
+  if (!Array.isArray(weapons)) throw new Error("weapons.json must contain an array of weapon records.");
+
+  var categories = ["All", "Melee", "Projectile", "Firearms", "Heavy Weapons", "Explosives"];
+  var state = { category: "All", weapon: null, query: "", subcategory: "", legality: "", filtersOpen: false, recordTag: "" };
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+  var listView = document.getElementById("list-view");
+  var recordView = document.getElementById("record-view");
+  var weaponList = document.getElementById("weapon-list");
+  var search = document.getElementById("search");
+  var subcategory = document.getElementById("subcategory");
+  var legalityFilter = document.getElementById("legality");
+  var tagDetail = document.getElementById("tag-detail");
+
+  function titleCase(value) { return String(value).replace(/\b\w/g, function (letter) { return letter.toUpperCase(); }); }
+  function legality(value) { value = String(value || ""); return /F$/.test(value) ? "F" : /R$/.test(value) ? "R" : "Legal"; }
+  function legalityLabel(value) { return value === "F" ? "Forbidden" : value === "R" ? "Restricted" : "Legal"; }
+  function allIndex(id) { return weapons.findIndex(function (weapon) { return weapon.id === id; }) + 1; }
+  function entriesForCategory() { return weapons.filter(function (weapon) { return state.category === "All" || weapon.category === state.category; }); }
+  function filteredEntries() {
+    var query = state.query.trim().toLowerCase();
+    return entriesForCategory().filter(function (weapon) {
+      return (!query || weapon.name.toLowerCase().includes(query))
+        && (!state.subcategory || weapon.subcategory === state.subcategory)
+        && (!state.legality || legality(weapon.availability) === state.legality);
+    });
+  }
+
+  function renderTabs() {
+    tabs.forEach(function (tab) {
+      var selected = tab.dataset.category === state.category;
+      tab.setAttribute("aria-selected", selected ? "true" : "false");
+      tab.tabIndex = selected ? 0 : -1;
+    });
+    document.getElementById("weapon-panel").setAttribute("aria-labelledby", (tabs.find(function (tab) { return tab.dataset.category === state.category; }) || tabs[0]).id);
+  }
+
+  function renderTypeOptions() {
+    var values = Array.from(new Set(entriesForCategory().map(function (weapon) { return weapon.subcategory; }).filter(Boolean))).sort();
+    subcategory.replaceChildren();
+    var all = document.createElement("option"); all.value = ""; all.textContent = "All types"; subcategory.appendChild(all);
+    values.forEach(function (value) { var option = document.createElement("option"); option.value = value; option.textContent = value; subcategory.appendChild(option); });
+    if (state.subcategory && !values.includes(state.subcategory)) state.subcategory = "";
+    subcategory.value = state.subcategory;
+  }
+
+  function renderFilterControls() {
+    document.getElementById("filters").hidden = !state.filtersOpen;
+    document.getElementById("filter-toggle").setAttribute("aria-expanded", state.filtersOpen ? "true" : "false");
+    search.value = state.query; subcategory.value = state.subcategory; legalityFilter.value = state.legality;
+    document.getElementById("search-clear").disabled = !state.query;
+    document.getElementById("subcategory-clear").disabled = !state.subcategory;
+    document.getElementById("legality-clear").disabled = !state.legality;
+  }
+
+  function renderList() {
+    var rows = filteredEntries();
+    var total = entriesForCategory().length;
+    var hasFilters = Boolean(state.query || state.subcategory || state.legality);
+    document.getElementById("list-title").textContent = state.category === "All" ? "All weapons" : state.category;
+    document.getElementById("list-eyebrow").textContent = (state.category === "All" ? "Complete archive" : state.category + " archive") + " // Weapon list";
+    document.getElementById("list-count").textContent = hasFilters ? rows.length + " of " + total + " records" : total + (total === 1 ? " record" : " records");
+    weaponList.replaceChildren();
+
+    if (!rows.length) {
+      var empty = document.createElement("div"); empty.className = "empty-message"; empty.textContent = hasFilters ? "No weapons match the current filters." : "No weapons are listed in this category."; weaponList.appendChild(empty); return;
+    }
+
+    rows.forEach(function (weapon) {
+      var button = document.createElement("button"); button.type = "button"; button.className = "weapon-list-item"; button.dataset.id = weapon.id; button.setAttribute("aria-label", "Open " + weapon.name + " weapon record");
+      var index = document.createElement("span"); index.className = "list-index"; index.textContent = "WP-" + String(allIndex(weapon.id)).padStart(3, "0"); index.setAttribute("aria-hidden", "true");
+      var name = document.createElement("span"); name.className = "weapon-list-name"; name.textContent = weapon.name;
+      var value = document.createElement("span"); value.className = "weapon-list-value"; value.textContent = weapon.damage || "Special";
+      button.append(index, name, value); button.addEventListener("click", function () { selectWeapon(weapon.id); }); weaponList.appendChild(button);
+    });
+  }
+
+  function tagDefinitions(weapon) {
+    var legal = legality(weapon.availability);
+    return [
+      { key: "category", label: weapon.category, html: "<strong>Weapon category</strong><br>This weapon is indexed under <strong>" + titleCase(weapon.category) + "</strong>. Use the matching archive tab to browse comparable weapons." },
+      { key: "type", label: weapon.subcategory, html: "<strong>Weapon type</strong><br>This record belongs to the <strong>" + titleCase(weapon.subcategory) + "</strong> weapon type." },
+      { key: "skill", label: weapon.skill, html: "<strong>Associated skill</strong><br>Attacks with this weapon normally use <strong>" + titleCase(weapon.skill) + "</strong>, subject to the weapon's specific rules and firing method." },
+      { key: "legality", label: legalityLabel(legal), html: "<strong>Legality</strong><br><strong>" + legalityLabel(legal) + "</strong> availability is indicated by <strong>" + String(weapon.availability || "—") + "</strong> in this record." }
+    ];
+  }
+
+  function renderTagDetail() {
+    Array.prototype.forEach.call(document.querySelectorAll("#tags .tag-toggle"), function (button) { button.setAttribute("aria-pressed", button.dataset.tag === state.recordTag ? "true" : "false"); });
+    var weapon = weapons.find(function (entry) { return entry.id === state.weapon; });
+    var selected = weapon && tagDefinitions(weapon).find(function (tag) { return tag.key === state.recordTag; });
+    if (!selected) { tagDetail.hidden = true; document.getElementById("tag-detail-title").textContent = ""; document.getElementById("tag-detail-copy").innerHTML = ""; return; }
+    document.getElementById("tag-detail-title").textContent = selected.label;
+    document.getElementById("tag-detail-copy").innerHTML = selected.html;
+    tagDetail.hidden = false;
+  }
+
+  function field(label, value) {
+    if (value == null || value === "") return null;
+    var item = document.createElement("div"); item.className = "weapon-detail";
+    var name = document.createElement("span"); name.className = "field-label"; name.textContent = label;
+    var content = document.createElement("strong"); content.textContent = value;
+    item.append(name, content); return item;
+  }
+
+  function renderRecord(weapon) {
+    document.getElementById("weapon-title").textContent = weapon.name;
+    document.getElementById("record-eyebrow").textContent = weapon.category + " protocol // Weapon record";
+    state.recordTag = "";
+    var tags = document.getElementById("tags"); tags.replaceChildren();
+    tagDefinitions(weapon).forEach(function (tag) {
+      var button = document.createElement("button"); button.type = "button"; button.className = "tag-toggle"; button.dataset.tag = tag.key; button.setAttribute("aria-pressed", "false"); button.textContent = tag.label;
+      button.addEventListener("click", function () { state.recordTag = state.recordTag === tag.key ? "" : tag.key; renderTagDetail(); }); tags.appendChild(button);
+    });
+    renderTagDetail();
+
+    var stats = document.getElementById("stats"); stats.replaceChildren();
+    [["Accuracy", weapon.accuracy], ["Damage", weapon.damage], ["AP", weapon.ap], [weapon.blast ? "Blast" : "Reach", weapon.blast || weapon.reach]].forEach(function (entry) {
+      var node = field(entry[0], entry[1] == null ? "—" : entry[1]); if (node) { node.className = "stat"; node.querySelector("strong").className = "stat-value"; stats.appendChild(node); }
+    });
+
+    var details = document.getElementById("details"); details.replaceChildren();
+    [["Skill", weapon.skill], ["Firing mode", weapon.mode], ["Recoil compensation", weapon.rc], ["Ammunition", weapon.ammo], ["Availability", weapon.availability], ["Cost", weapon.cost], ["Rating", weapon.rating]].forEach(function (entry) { var node = field(entry[0], entry[1]); if (node) details.appendChild(node); });
+
+    var section = document.getElementById("features-section"); var features = Array.isArray(weapon.features) ? weapon.features : [];
+    section.hidden = !features.length; var list = document.getElementById("features"); list.replaceChildren();
+    features.forEach(function (feature) { var item = document.createElement("li"); item.textContent = feature; list.appendChild(item); });
+    document.getElementById("source-code").textContent = "CRB // " + weapon.page;
+  }
+
+  function showList(preserveHash) { state.weapon = null; state.recordTag = ""; recordView.hidden = true; listView.hidden = false; renderTagDetail(); renderList(); if (!preserveHash) updateHash(); }
+  function selectWeapon(id, preserveHash) { var weapon = weapons.find(function (entry) { return entry.id === id; }); if (!weapon) return; state.weapon = id; renderRecord(weapon); listView.hidden = true; recordView.hidden = false; if (!preserveHash) updateHash(); window.scrollTo(0, 0); }
+  function updateHash() { var next = "#" + encodeURIComponent(state.category); if (state.weapon) next += "/" + encodeURIComponent(state.weapon); if (location.hash !== next) history.replaceState(null, "", next); }
+  function readHash() { var parts = location.hash.slice(1).split("/").map(decodeURIComponent); state.category = categories.includes(parts[0]) ? parts[0] : "All"; state.query = ""; state.subcategory = ""; state.legality = ""; state.filtersOpen = false; renderTabs(); renderTypeOptions(); renderFilterControls(); if (parts[1] && weapons.some(function (weapon) { return weapon.id === parts[1] && (state.category === "All" || weapon.category === state.category); })) selectWeapon(parts[1], true); else showList(true); }
+
+  tabs.forEach(function (tab, index) {
+    tab.addEventListener("click", function () { state.category = tab.dataset.category; state.query = ""; state.subcategory = ""; state.legality = ""; state.filtersOpen = false; renderTabs(); renderTypeOptions(); renderFilterControls(); showList(); });
+    tab.addEventListener("keydown", function (event) { if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return; event.preventDefault(); var target = event.key === "Home" ? 0 : event.key === "End" ? tabs.length - 1 : (index + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length; tabs[target].focus(); tabs[target].click(); });
+  });
+
+  document.getElementById("filter-toggle").addEventListener("click", function () { state.filtersOpen = !state.filtersOpen; renderFilterControls(); if (state.filtersOpen) search.focus(); });
+  search.addEventListener("input", function () { state.query = search.value; renderFilterControls(); renderList(); });
+  subcategory.addEventListener("change", function () { state.subcategory = subcategory.value; renderFilterControls(); renderList(); });
+  legalityFilter.addEventListener("change", function () { state.legality = legalityFilter.value; renderFilterControls(); renderList(); });
+  document.getElementById("search-clear").addEventListener("click", function () { state.query = ""; renderFilterControls(); renderList(); search.focus(); });
+  document.getElementById("subcategory-clear").addEventListener("click", function () { state.subcategory = ""; renderFilterControls(); renderList(); subcategory.focus(); });
+  document.getElementById("legality-clear").addEventListener("click", function () { state.legality = ""; renderFilterControls(); renderList(); legalityFilter.focus(); });
+  document.getElementById("back").addEventListener("click", function () { showList(); });
+  document.getElementById("category-counts").innerHTML = categories.slice(1).map(function (category) { return "<div><dt>" + category + "</dt><dd>" + weapons.filter(function (weapon) { return weapon.category === category; }).length + "</dd></div>"; }).join("");
+  window.addEventListener("hashchange", readHash);
+  readHash(); updateHash();
+}()).catch(function (error) {
+  console.error("Failed to initialise weapon page:", error);
+  var panel = document.querySelector(".weapon-panel .panel-inner");
+  if (panel) panel.innerHTML = '<div class="empty-message"><strong>Failed to load weapons.json.</strong><br>Check that weapons.html and weapons.json are served from the same folder over HTTP or HTTPS.</div>';
+});
+</script>
+</body>
+</html>
+
