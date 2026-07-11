@@ -34,7 +34,7 @@
 
   <meta name="description" content="Shadowrun Fifth Edition reference archive home page.">
   <title>Shadowrun 5e // Operations Archive</title>
-    <link rel="stylesheet" href="assets/css/shared.css">
+  <link rel="stylesheet" href="assets/css/shared.css">
   <link rel="stylesheet" href="assets/css/pages/home.css">
 </head>
 <body>
@@ -63,7 +63,7 @@
 
   <nav class="tabs-wrap" aria-label="Reference categories">
     <div class="tabs" role="tablist" aria-label="Shadowrun reference sections">
-      <button class="tab" id="skills-tab" type="button" role="tab" aria-selected="false" aria-controls="skills-pane" data-tab="skills">Skills</button>
+      <button class="tab" id="corerules-tab" type="button" role="tab" aria-selected="false" aria-controls="corerules-pane" data-tab="corerules">Core Rules</button>
       <button class="tab" id="hacking-tab" type="button" role="tab" aria-selected="false" aria-controls="hacking-pane" data-tab="hacking">Hacking</button>
       <button class="tab" id="magic-tab" type="button" role="tab" aria-selected="true" aria-controls="magic-pane" data-tab="magic">Magic</button>
       <button class="tab" id="equipment-tab" type="button" role="tab" aria-selected="false" aria-controls="equipment-pane" data-tab="equipment">Equipment</button>
@@ -83,7 +83,7 @@
         <div class="panel-inner">
           <h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Archive sectors</h2>
           <dl class="archive-index" id="archive-index">
-            <div class="archive-row" data-sector="skills"><dt>Skills</dt><dd>Standby</dd></div>
+            <div class="archive-row" data-sector="corerules"><dt>Core Rules</dt><dd>Standby</dd></div>
             <div class="archive-row" data-sector="hacking"><dt>Hacking</dt><dd>Standby</dd></div>
             <div class="archive-row active" data-sector="magic"><dt>Magic</dt><dd>Online</dd></div>
             <div class="archive-row" data-sector="equipment"><dt>Equipment</dt><dd>Standby</dd></div>
@@ -94,7 +94,30 @@
 
     <article class="panel content-panel" aria-live="polite">
       <div class="panel-inner">
-        <section class="tab-pane empty-pane" id="skills-pane" role="tabpanel" aria-labelledby="skills-tab" hidden></section>
+        <section class="tab-pane" id="corerules-pane" role="tabpanel" aria-labelledby="corerules-tab" hidden>
+          <header class="content-header">
+            <p class="eyebrow">Runner operations archive // Core rules index</p>
+            <h2 class="content-title">Core Rules</h2>
+            <p class="content-intro">Access the available Fifth Edition core rules reference modules.</p>
+          </header>
+
+          <div class="module-grid" aria-label="Skill reference modules">
+            <a class="module-button" href="skills/skills.html">
+              <svg class="module-symbol" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/>
+                <path d="M50 5v18M50 77v18M5 50h18M77 50h18" fill="none" stroke="currentColor" stroke-width="3"/>
+                <path d="M33 61 45 73 70 39" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+                <path d="M31 28h38M27 35h46" fill="none" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <span class="module-label">
+                <span class="module-code">Competency // Skill index</span>
+                <span class="module-name">Skills</span>
+              </span>
+              <span class="module-status">Open archive</span>
+            </a>
+          </div>
+        </section>
         <section class="tab-pane empty-pane" id="hacking-pane" role="tabpanel" aria-labelledby="hacking-tab" hidden></section>
 
         <section class="tab-pane" id="magic-pane" role="tabpanel" aria-labelledby="magic-tab">
@@ -136,7 +159,30 @@
           </div>
         </section>
 
-        <section class="tab-pane empty-pane" id="equipment-pane" role="tabpanel" aria-labelledby="equipment-tab" hidden></section>
+        <section class="tab-pane" id="equipment-pane" role="tabpanel" aria-labelledby="equipment-tab" hidden>
+          <header class="content-header">
+            <p class="eyebrow">Runner equipment archive // Equipment index</p>
+            <h2 class="content-title">Equipment</h2>
+            <p class="content-intro">Access the available Fifth Edition equipment reference modules.</p>
+          </header>
+
+          <div class="module-grid" aria-label="Equipment reference modules">
+            <a class="module-button" href="weapons/weapons.html">
+              <svg class="module-symbol" viewBox="0 0 100 100" aria-hidden="true">
+                <circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/>
+                <circle cx="50" cy="50" r="26" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/>
+                <path d="M50 4v18M50 78v18M4 50h18M78 50h18" fill="none" stroke="currentColor" stroke-width="3"/>
+                <path d="M28 43h39l8 8-8 8H55l-7 12H36l5-12H28z" fill="currentColor"/>
+                <path d="M67 43v16M75 51h11" fill="none" stroke="currentColor" stroke-width="3"/>
+              </svg>
+              <span class="module-label">
+                <span class="module-code">Arsenal // Weapon index</span>
+                <span class="module-name">Weapons</span>
+              </span>
+              <span class="module-status">Open archive</span>
+            </a>
+          </div>
+        </section>
       </div>
     </article>
   </main>
@@ -171,7 +217,10 @@
         var active = row.dataset.sector === name;
         row.classList.toggle("active", active);
         var status = row.querySelector("dd");
-        if (status) status.textContent = active && name === "magic" ? "Online" : "Standby";
+        if (status) {
+          var available = name === "corerules" || name === "magic" || name === "equipment";
+          status.textContent = active && available ? "Online" : "Standby";
+        }
       });
 
       if (history.replaceState) {

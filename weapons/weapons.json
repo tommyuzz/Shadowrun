@@ -1,7 +1,29 @@
 {
-  "weapons": [
-    {
-      "name": "Combat Axe",
+  "subcategories": {
+    "Blades": "<strong>Using Blades</strong><br>Make a melee attack using <strong>Blades + Agility [Accuracy]</strong> opposed by the defender's <strong>Reaction + Intuition</strong>. Add net hits to the weapon's Damage Value.<br><br><strong>Reach</strong><br>Compare the Reach of both combatants. The difference modifies the defender's dice pool: a longer Reach gives the defender a bonus when defending and imposes a penalty when defending against the combatant with greater Reach.<br><br><strong>Damage</strong><br>Use the Damage Value and Armor Penetration listed for the weapon.",
+    "Clubs": "<strong>Using Clubs</strong><br>Make a melee attack using <strong>Clubs + Agility [Accuracy]</strong> opposed by the defender's <strong>Reaction + Intuition</strong>. Add net hits to the weapon's Damage Value.<br><br><strong>Reach</strong><br>Compare the Reach of both combatants. The difference modifies the defender's dice pool.<br><br><strong>Damage</strong><br>Most clubs inflict damage based on Strength. Stun batons instead inflict Electricity damage using their listed Damage Value and AP.",
+    "Other": "<strong>Other Melee Weapons</strong><br>This category contains weapons that use different skills and special rules. Use the skill listed on the individual weapon.<ul><li><strong>Knucks:</strong> Use Unarmed Combat and the Physical limit.</li><li><strong>Monofilament Whip:</strong> Use Exotic Melee Weapon (Monofilament Whip).</li><li><strong>Shock Gloves:</strong> Use Unarmed Combat and resolve their damage as Electricity damage.</li></ul>Standard melee attack, Reach, defense, and damage rules otherwise apply.",
+    "Bows": "<strong>Using Bows</strong><br>Use <strong>Archery + Agility [Accuracy]</strong>. Reloading a bow requires a <strong>Ready Weapon Simple Action</strong>.<br><br><strong>Strength Requirement</strong><br>A bow's Rating is its minimum Strength requirement. For every point that the user's Strength is below the bow's Rating, apply a <strong>−3 dice pool modifier</strong>.<br><br><strong>Range and Damage</strong><br>Use the lowest of the character's <strong>Strength</strong>, the <strong>bow's Rating</strong>, or the <strong>arrow's Rating</strong> when determining range and damage. Maximum bow Rating is 10.",
+    "Crossbows": "<strong>Using Crossbows</strong><br>Use <strong>Archery + Agility [Accuracy]</strong> and the normal ranged combat rules.<br><br><strong>Reloading</strong><br>Modern crossbows automatically reload and therefore do not require a Ready Weapon action between shots. Core Rulebook crossbows use internal magazines holding up to <strong>4 bolts</strong>.",
+    "Throwing Weapons": "<strong>Using Throwing Weapons</strong><br>Use <strong>Throwing Weapons + Agility [Physical]</strong> and apply the normal ranged combat rules. Net hits increase the attack's Damage Value.<br><br><strong>Readying Weapons</strong><br>A character can ready a number of throwing knives or shuriken equal to <strong>Agility ÷ 2</strong> with a single Ready Weapon action.<br><br>Thrown grenades use separate grenade rules.",
+    "Tasers": "<strong>Using Tasers</strong><br>Use <strong>Pistols + Agility [Accuracy]</strong> and the normal ranged combat rules. Tasers inflict <strong>Electricity damage</strong>.<br><br><strong>Electricity Effects</strong><br>If the target suffers at least 1 box of damage, they immediately suffer <strong>−5 Initiative Score</strong> and a <strong>−1 dice pool modifier to all actions and Defense Tests for 1 Combat Turn</strong>. Further damaging Electricity attacks do not increase these penalties, but each extends the −1 penalty's duration by 1 additional Combat Turn.",
+    "Hold-Outs": "<strong>Using Hold-Out Pistols</strong><br>Use <strong>Pistols + Agility [Accuracy]</strong> opposed by the target's Defense Test. Net hits increase Damage Value.<br><br>Use the weapon's listed Accuracy, Damage, AP, firing mode, recoil compensation, ammunition capacity, and the range bands for hold-out pistols. This subcategory has no additional universal combat rule beyond the normal firearm rules.",
+    "Light Pistols": "<strong>Using Light Pistols</strong><br>Use <strong>Pistols + Agility [Accuracy]</strong> opposed by the target's Defense Test. Net hits increase Damage Value.<br><br>Use the weapon's listed firing modes and apply the normal recoil and firearm rules. Range is determined using the light-pistol range bands.",
+    "Heavy Pistols": "<strong>Using Heavy Pistols</strong><br>Use <strong>Pistols + Agility [Accuracy]</strong> opposed by the target's Defense Test. Net hits increase Damage Value.<br><br>Use the weapon's listed firing modes and apply the normal recoil and firearm rules. Range is determined using the heavy-pistol range bands.",
+    "Machine Pistols": "<strong>Using Machine Pistols</strong><br>Use <strong>Automatics + Agility [Accuracy]</strong> opposed by the target's Defense Test.<br><br><strong>Automatic Fire</strong><br>Apply the rules for each firing mode available to the weapon. Burst Fire and Semi-Automatic Bursts impose <strong>−2 Defense</strong>; Long Bursts and Simple-Action Full Auto impose <strong>−5 Defense</strong>; Complex-Action Full Auto imposes <strong>−9 Defense</strong>. Apply recoil normally.",
+    "Submachine Guns": "<strong>Using Submachine Guns</strong><br>Use <strong>Automatics + Agility [Accuracy]</strong> opposed by the target's Defense Test.<br><br><strong>Automatic Fire</strong><br>Apply the rules for the firing modes available to the weapon. Burst Fire and Semi-Automatic Bursts impose <strong>−2 Defense</strong>; Long Bursts and Simple-Action Full Auto impose <strong>−5 Defense</strong>; Complex-Action Full Auto imposes <strong>−9 Defense</strong>. Apply recoil normally.",
+    "Assault Rifles": "<strong>Using Assault Rifles</strong><br>Use <strong>Automatics + Agility [Accuracy]</strong> opposed by the target's Defense Test.<br><br><strong>Automatic Fire</strong><br>Apply the rules for the firing modes available to the weapon. Burst Fire and Semi-Automatic Bursts impose <strong>−2 Defense</strong>; Long Bursts and Simple-Action Full Auto impose <strong>−5 Defense</strong>; Complex-Action Full Auto imposes <strong>−9 Defense</strong>. Apply recoil normally.",
+    "Sniper Rifles": "<strong>Using Sniper Rifles</strong><br>Use <strong>Longarms + Agility [Accuracy]</strong> opposed by the target's Defense Test. Net hits increase Damage Value.<br><br>Use the weapon's listed firing modes and normal recoil rules. Range is determined using the sporting-rifle or sniper-rifle range bands applicable to the individual weapon.",
+    "Shotguns": "<strong>Using Shotguns</strong><br>Use <strong>Longarms + Agility [Accuracy]</strong>. Shotguns normally fire slugs using their listed statistics. Shot rounds use the flechette ammunition rules and may use choke settings.<br><br><strong>Changing Choke</strong><br>Changing choke is a <strong>Simple Action</strong>, or a <strong>Free Action</strong> with a smartlinked shotgun.<ul><li><strong>Narrow:</strong> Target suffers −1 Defense at all ranges.</li><li><strong>Medium:</strong> Targets suffer −3 Defense. Short: −1 DV, up to 2 targets in 2m. Medium: −3 DV, up to 3 targets in 4m. Long: −5 DV and −1 Accuracy, up to 4 targets in 6m. Extreme: −7 DV and −1 Accuracy, up to 6 targets in 8m.</li><li><strong>Wide:</strong> Targets suffer −5 Defense. Short: −3 DV, up to 2 targets in 3m. Medium: −5 DV, up to 3 targets in 6m. Long: −7 DV and −1 Accuracy, up to 4 targets in 9m. Extreme: −9 DV and −1 Accuracy, up to 6 targets in 12m.</li></ul>Medium and wide spreads cannot be used with Called Shots.",
+    "Special Weapons": "<strong>Special Weapons</strong><br>This subcategory contains weapons whose effects vary significantly. Use <strong>Exotic Ranged Weapon + Agility [Accuracy]</strong> unless the individual weapon states otherwise.<br><br>Resolve the weapon's effect according to its own description. Chemical weapons deliver their loaded chemical or toxin, dart weapons deliver their drug or toxin payload, and other devices use their individually listed special effects.",
+    "Machine Guns": "<strong>Using Machine Guns</strong><br>Use <strong>Heavy Weapons + Agility [Accuracy]</strong>. Machine guns are divided into light, medium, and heavy types, which determine their range bands.<br><br><strong>Recoil</strong><br>Machine guns suffer <strong>double the normal dice pool modifier for uncompensated recoil</strong>.<br><br>Medium and heavy machine guns are particularly large; the Core Rulebook suggests Strength 8+ to carry an MMG and Strength 10+ to carry an HMG, with vehicle mounting generally being more practical.",
+    "Cannons/Launchers": "<strong>Using Cannons and Launchers</strong><br>Use <strong>Heavy Weapons + Agility [Accuracy]</strong>. Assault cannons, grenade launchers, and missile launchers suffer <strong>double the normal dice pool modifier for uncompensated recoil</strong>.<br><br><strong>Explosive Projectiles</strong><br>For a launched grenade, rocket, or missile, make a <strong>Heavy Weapons + Agility [Accuracy] (3) Test</strong>. Success places the projectile at the intended point; failure causes scatter. Then resolve the projectile's explosion and blast effects.",
+    "Grenades": "<strong>Throwing Grenades</strong><br>Choose a location and make a <strong>Throwing Weapons + Agility [Physical] (3) Test</strong> using a Throw Weapon Simple Action. With 3 hits, the grenade lands at the intended point. Fewer than 3 hits causes scatter.<br><br><strong>Detonation</strong><ul><li><strong>Timer:</strong> Detonates during the next Combat Turn at the thrower's Initiative Score when thrown, minus 10.</li><li><strong>Motion Sensor/Impact:</strong> Detonates following a sudden stop or change in direction, subject to the special miss and scatter rules.</li><li><strong>Wireless:</strong> A character with appropriate access to the grenade can remotely detonate it.</li></ul><strong>Blast</strong><br>Apply the grenade's listed Damage Value and AP at the centre of the explosion. For weapons with a negative Blast value such as −1/m or −2/m, reduce DV by that amount for every metre from the blast centre. Fixed-radius grenades instead affect the listed area.",
+    "Rockets": "<strong>Firing Rockets</strong><br>Make a <strong>Heavy Weapons + Agility [Accuracy] (3) Test</strong>, modified for range and other conditions. Success places the rocket at the intended point; failure causes scatter. Then resolve its explosion using the listed Damage Value, AP, and Blast.<br><br><strong>Arming Distance</strong><br>Rockets and missiles normally arm after travelling <strong>10 metres</strong> from their point of origin and explode on impact. The safety feature can be disabled with an <strong>Armorer + Logic [Mental] (4, 5 Minutes) Extended Test</strong>.<br><br>Fragmentation, high-explosive, and anti-vehicle rockets use their individual warhead statistics.",
+    "Missiles": "<strong>Firing Missiles</strong><br>Missiles are rockets fitted with internal guidance systems. Use the launched explosive rules: make a <strong>Heavy Weapons + Agility [Accuracy] (3) Test</strong>, determine whether the projectile lands on target or scatters, then resolve the explosion.<br><br><strong>Warhead</strong><br>A missile uses the Damage Value, AP, and Blast of its chosen rocket warhead. Its guidance system increases its cost and may provide additional targeting capabilities where the relevant sensor rules are used.<br><br><strong>Arming Distance</strong><br>Missiles normally arm after travelling <strong>10 metres</strong> and explode on impact."
+  },
+  "weapons": {
+    "combat_axe": {
       "category": "Melee",
       "subcategory": "Blades",
       "skill": "Blades",
@@ -14,8 +36,7 @@
       "description": "A two-handed tungsten-alloy monster, available single- or double-bladed. A hardened thrusting point can be concealed, spring-loaded, in the handle. While it may seem barbaric or primitive, the physical augmentations of 2075 can make an old-school weapon like a combat axe even deadlier than a firearm in the right hands. So go ahead, go medieval.",
       "source": "CRB"
     },
-    {
-      "name": "Combat Knife",
+    "combat_knife": {
       "category": "Melee",
       "subcategory": "Blades",
       "skill": "Blades",
@@ -28,8 +49,7 @@
       "description": "A long, KA-BAR-style fighting knife with a blacked-out blade and a chisel point for punching through armor.",
       "source": "CRB"
     },
-    {
-      "name": "Forearm Snap-Blades",
+    "forearm_snap_blades": {
       "category": "Melee",
       "subcategory": "Blades",
       "skill": "Blades",
@@ -45,8 +65,7 @@
       ],
       "source": "CRB"
     },
-    {
-      "name": "Katana",
+    "katana": {
       "category": "Melee",
       "subcategory": "Blades",
       "skill": "Blades",
@@ -59,8 +78,7 @@
       "description": "The legendary two-handed sword of the samurai. The katana has become synonymous not just with street samurai, but with shadowrunners in general, at least in the trids; they’ve got everyone packing a katana, from the decker to the mage. But being a silly cliché doesn’t make this blade any less dangerous, or less helpful in a fight.",
       "source": "CRB"
     },
-    {
-      "name": "Knife",
+    "knife": {
       "category": "Melee",
       "subcategory": "Blades",
       "skill": "Blades",
@@ -73,8 +91,7 @@
       "description": "Your basic, all-purpose street cutter. It comes in a bewildering array of styles, colors, and flavors, but the statistics don’t vary from one to the next. Ordinary knives are used by the poor, the desperate, or the cautious as backup weapons.",
       "source": "CRB"
     },
-    {
-      "name": "Pole Arm",
+    "pole_arm": {
       "category": "Melee",
       "subcategory": "Blades",
       "skill": "Blades",
@@ -87,8 +104,7 @@
       "description": "This is, at its very essence, a blade on the end of a very long stick. It usually features an axe-head, glaive, spear point, or similar maiming implement. It’s not easy to handle and it’s just about impossible to conceal, but it’s popular both with trolls and with melee combatants looking to safely keep said large trolls at more than arm’s length.",
       "source": "CRB"
     },
-    {
-      "name": "Survival Knife",
+    "survival_knife": {
       "category": "Melee",
       "subcategory": "Blades",
       "skill": "Blades",
@@ -101,8 +117,7 @@
       "description": "A fine quality blade—smooth on one edge, serrated on the other—with several accessories, including a GPS monitor, mini-multitool, micro-lighter, and a hidden compartment in the handle. The sides of the steel are coated with a non-toxic chemical that blacks out the blade when inert to prevent unwanted reflection, but can be activated to provide two hours of phosphorescent light. All knives can cut flesh, but a survival knife is better at cutting rope and wood, or otherwise being used as a tool. The survival knife is the kind of gadget that no professional should be without.",
       "source": "CRB"
     },
-    {
-      "name": "Sword",
+    "sword": {
       "category": "Melee",
       "subcategory": "Blades",
       "skill": "Blades",
@@ -115,8 +130,7 @@
       "description": "It’s sharp, it’s heavy, and it will fragging cut you wide open. Available in a wide variety of styles (wakizashi, seax, scimitar, jian, machete, and so on and so forth), this one-handed blade is not as formidable as a katana but is substantially easier to hide.",
       "source": "CRB"
     },
-    {
-      "name": "Club",
+    "club": {
       "category": "Melee",
       "subcategory": "Clubs",
       "skill": "Clubs",
@@ -129,8 +143,7 @@
       "description": "The weapon they named the skill after. These stats represent a range of objects, including an axe handle, baseball bat, wrench, crowbar, a tire iron, and a two-by-four with a rusty nail in it. There is a price listed, but it’s not overly difficult to find one for free if you know where to look.",
       "source": "CRB"
     },
-    {
-      "name": "Extendable Baton",
+    "extendable_baton": {
       "category": "Melee",
       "subcategory": "Clubs",
       "skill": "Clubs",
@@ -146,8 +159,7 @@
       ],
       "source": "CRB"
     },
-    {
-      "name": "Sap",
+    "sap": {
       "category": "Melee",
       "subcategory": "Clubs",
       "skill": "Clubs",
@@ -160,8 +172,7 @@
       "description": "Also called a blackjack, this is a small, springy club, or a flat piece of iron in a flexible leather covering. It’s specially designed for concealment (Concealability Modifier –2).",
       "source": "CRB"
     },
-    {
-      "name": "Staff",
+    "staff": {
       "category": "Melee",
       "subcategory": "Clubs",
       "skill": "Clubs",
@@ -174,8 +185,7 @@
       "description": "This large, heavy stick is popular with magicians going for that traditional look. Available in composite, hardwood, high-carbon steel, and other materials.",
       "source": "CRB"
     },
-    {
-      "name": "Stun Baton",
+    "stun_baton": {
       "category": "Melee",
       "subcategory": "Clubs",
       "skill": "Clubs",
@@ -188,8 +198,7 @@
       "description": "A standard riot-control weapon, viewed as a tool and symbol of corporate-government oppressors but pragmatically useful to runners. It has ten charges and regains one charge per ten seconds when plugged in.",
       "source": "CRB"
     },
-    {
-      "name": "Telescoping Staff",
+    "telescoping_staff": {
       "category": "Melee",
       "subcategory": "Clubs",
       "skill": "Clubs",
@@ -205,8 +214,7 @@
       ],
       "source": "CRB"
     },
-    {
-      "name": "Knucks",
+    "knucks": {
       "category": "Melee",
       "subcategory": "Other",
       "skill": "Unarmed Combat",
@@ -219,8 +227,7 @@
       "description": "These may be traditional fist-load weapons like brass knuckles, or modern “Hardliner gloves” with a thin layer of densiplast located along the knuckles and the edge of the hand. Either way they substantially boost the impact of a punch, making it potentially deadly. Attacks with knucks use the Unarmed Combat skill.",
       "source": "CRB"
     },
-    {
-      "name": "Monofilament Whip",
+    "monofilament_whip": {
       "category": "Melee",
       "subcategory": "Other",
       "skill": "Exotic Melee Weapon (Monofilament Whip)",
@@ -236,8 +243,7 @@
       ],
       "source": "CRB"
     },
-    {
-      "name": "Shock Gloves",
+    "shock_gloves": {
       "category": "Melee",
       "subcategory": "Other",
       "skill": "Unarmed Combat",
@@ -250,8 +256,7 @@
       "description": "These electrically insulated gloves have a wire mesh that discharges electric current with a punch or a simple touch. The gloves deal electricity damage and are good for ten charges before they need to be plugged in and recharged (at a rate of one charge per ten seconds). Attacks with shock gloves use the Unarmed Combat skill.",
       "source": "CRB"
     },
-    {
-      "name": "Bow",
+    "bow": {
       "category": "Projectile",
       "subcategory": "Bows",
       "skill": "Archery",
@@ -264,8 +269,7 @@
       "rating": "1-10",
       "source": "CRB"
     },
-    {
-      "name": "Light Crossbow",
+    "light_crossbow": {
       "category": "Projectile",
       "subcategory": "Crossbows",
       "skill": "Archery",
@@ -278,8 +282,7 @@
       "description": "Modern crossbows are equipped with automatic reloading devices, so unless you’re using a museum piece, reloading doesn’t require a Ready Weapon action. Crossbows have internal magazines (m) holding up to 4 bolts. Crossbows are available in Light, Medium, and Heavy sizes.",
       "source": "CRB"
     },
-    {
-      "name": "Medium Crossbow",
+    "medium_crossbow": {
       "category": "Projectile",
       "subcategory": "Crossbows",
       "skill": "Archery",
@@ -292,8 +295,7 @@
       "description": "Modern crossbows are equipped with automatic reloading devices, so unless you’re using a museum piece, reloading doesn’t require a Ready Weapon action. Crossbows have internal magazines (m) holding up to 4 bolts. Crossbows are available in Light, Medium, and Heavy sizes.",
       "source": "CRB"
     },
-    {
-      "name": "Heavy Crossbow",
+    "heavy_crossbow": {
       "category": "Projectile",
       "subcategory": "Crossbows",
       "skill": "Archery",
@@ -306,8 +308,7 @@
       "description": "Modern crossbows are equipped with automatic reloading devices, so unless you’re using a museum piece, reloading doesn’t require a Ready Weapon action. Crossbows have internal magazines (m) holding up to 4 bolts. Crossbows are available in Light, Medium, and Heavy sizes.",
       "source": "CRB"
     },
-    {
-      "name": "Throwing Knife/Shuriken",
+    "throwing_knife_shuriken": {
       "category": "Projectile",
       "subcategory": "Throwing Weapons",
       "skill": "Throwing Weapons",
@@ -319,8 +320,7 @@
       "description": "A wide variety of shapes and sizes of aerodynamically balanced, specially weighted, muscle-powered throwing weapons are available, from throwing spikes to darts to kunai and shuriken. A character can ready (Agility ÷ 2) of these knives with one Ready Weapon action.",
       "source": "CRB"
     },
-    {
-      "name": "Defiance EX Shocker",
+    "defiance_ex_shocker": {
       "category": "Firearms",
       "subcategory": "Tasers",
       "skill": "Pistols",
@@ -335,8 +335,7 @@
       "description": "This heavy-duty taser fires up to 4 darts that trail wires up to 20 meters long. The wired connection to the battery allows for a more powerful shock. Most modern tasers use wireless darts, so the Defiance EX Shocker is an exception. It also features contacts that allow it to be used as a stun weapon in melee (Accuracy 3, DV 8S(e), Reach 0).",
       "source": "CRB"
     },
-    {
-      "name": "Yamaha Pulsar",
+    "yamaha_pulsar": {
       "category": "Firearms",
       "subcategory": "Tasers",
       "skill": "Pistols",
@@ -351,8 +350,7 @@
       "description": "The darts of this taser contain wireless capacitors, meaning that the Pulsar eliminates the need for cumbersome wires. As a trade-off, it is slightly less powerful than the EX Shocker, although it can fire faster. It lacks the EX Shocker’s melee contacts.",
       "source": "CRB"
     },
-    {
-      "name": "Fichetti Tiffani Needler",
+    "fichetti_tiffani_needler": {
       "category": "Firearms",
       "subcategory": "Hold-Outs",
       "skill": "Pistols",
@@ -367,8 +365,7 @@
       "description": "Designed to appeal to social climbers and debutantes, the Tiffani Needler is available in a wide variety of colors and styles. It also has a special color-changing coating that can be manipulated via wireless signal. This is useful to make sure your gun matches with your shoes or your handbag. The Needler can only fire flechette rounds (already factored into its damage code).",
       "source": "CRB"
     },
-    {
-      "name": "Streetline Special",
+    "streetline_special": {
       "category": "Firearms",
       "subcategory": "Hold-Outs",
       "skill": "Pistols",
@@ -383,8 +380,7 @@
       "description": "Popular among society’s dregs, the Streetline Special is a small, lightweight weapon made of composite materials. Magnetic Anomaly Detectors (see MAD Scanner) suffer a –2 dice pool modifier to detect it.",
       "source": "CRB"
     },
-    {
-      "name": "Walther Palm Pistol",
+    "walther_palm_pistol": {
       "category": "Firearms",
       "subcategory": "Hold-Outs",
       "skill": "Pistols",
@@ -399,8 +395,7 @@
       "description": "This is a classic double-barreled derringer in an over-under barrel combination. It packs a punch for its size, but on the downside it has one of the most diminutive “magazine” capacities on the market—just one bullet per barrel. Both barrels can be fired at once as a short burst).",
       "source": "CRB"
     },
-    {
-      "name": "Ares Light Fire 75",
+    "ares_light_fire_75": {
       "category": "Firearms",
       "subcategory": "Light Pistols",
       "skill": "Pistols",
@@ -415,8 +410,7 @@
       "description": "Designed based on one of the most common pistols on the market, the Light Fire is a weapon for special operators, not commonly available through legal channels. A special barrel-mounted silencer developed exclusively for the Light Fire comes attached, applying an additional –1 dice pool modifier to the modifier usually provided by silencers. In addition to its integral silencer, the Ares Light Fire 75 includes a smartgun system.",
       "source": "CRB"
     },
-    {
-      "name": "Ares Light Fire 70",
+    "ares_light_fire_70": {
       "category": "Firearms",
       "subcategory": "Light Pistols",
       "skill": "Pistols",
@@ -431,8 +425,7 @@
       "description": "The Ares Light Fire 70 is one of the most common pistols on the market. A special barrel-mounted silencer developed exclusively for the Light Fire 70 is available that gives you an additional –1 dice pool modifier to the usual –4 (for a total of –5); this silencer costs 750¥.",
       "source": "CRB"
     },
-    {
-      "name": "Beretta 201T",
+    "beretta_201t": {
       "category": "Firearms",
       "subcategory": "Light Pistols",
       "skill": "Pistols",
@@ -447,8 +440,7 @@
       "description": "This light sidearm is used by many security professionals. It is capable of burst fire. Since the 201T is classified as a light pistol without further limitations, it is quite popular with security agencies in countries where heavy pistols and machine pistols are hard to come by legally. Semi-automatic bursts using the Beretta 201T require a Simple Action. The weapon includes a detachable shoulder stock.",
       "source": "CRB"
     },
-    {
-      "name": "Colt America L36",
+    "colt_america_l36": {
       "category": "Firearms",
       "subcategory": "Light Pistols",
       "skill": "Pistols",
@@ -463,8 +455,7 @@
       "description": "A venerable pistol with a great reputation. This basic firearm is cheap, easily concealed, and nearly ubiquitous. A perfect throwaway weapon.",
       "source": "CRB"
     },
-    {
-      "name": "Fichetti Security 600",
+    "fichetti_security_600": {
       "category": "Firearms",
       "subcategory": "Light Pistols",
       "skill": "Pistols",
@@ -479,8 +470,7 @@
       "description": "A light sidearm for security forces, this weapon’s highly efficient feeding mechanism allows it a thirty-round magazine. The Fichetti Security 600 comes with a detachable folding stock and laser sight.",
       "source": "CRB"
     },
-    {
-      "name": "Taurus Omni-6",
+    "taurus_omni_6": {
       "category": "Firearms",
       "subcategory": "Light Pistols",
       "skill": "Pistols",
@@ -495,8 +485,7 @@
       "description": "This reliable, rugged revolver is specially designed to handle a wide variety of ammunition. Popular with hobbyists and hand-loaders, the Omni-6 comes with some interchangeable cylinders so it can take either cased or caseless, light pistol or heavy pistol ammo. When firing light pistol rounds, the Omni-6 is semi-automatic (SA) and has a base DV of 6P, and when it fires heavy pistol ammo it has only single shot mode (SS), and a base DV of 7P and –1 AP. The Omni-6 includes an integral laser sight.",
       "source": "CRB"
     },
-    {
-      "name": "Ares Predator V",
+    "ares_predator_v": {
       "category": "Firearms",
       "subcategory": "Heavy Pistols",
       "skill": "Pistols",
@@ -511,8 +500,7 @@
       "description": "The newest iteration of the most popular handgun in the world, especially with mercenaries and shadowrunners. Upgraded with improved ergonomics and handling features, the Ares Predator V includes a smartgun system. Some say that the Ares Predator V isn’t better than other guns in its class, but no one can argue that it has better brand recognition.",
       "source": "CRB"
     },
-    {
-      "name": "Ares Viper Slivergun",
+    "ares_viper_slivergun": {
       "category": "Firearms",
       "subcategory": "Heavy Pistols",
       "skill": "Pistols",
@@ -527,8 +515,7 @@
       "description": "The sleek Slivergun pairs the undeniably winning combo of burst-fire capability and built-in sound suppression (an integral silencer) with its large magazine capacity. It fires metal slivers that count as flechette ammunition, which is factored into the weapon’s damage code.",
       "source": "CRB"
     },
-    {
-      "name": "Browning Ultra-Power",
+    "browning_ultra_power": {
       "category": "Firearms",
       "subcategory": "Heavy Pistols",
       "skill": "Pistols",
@@ -543,8 +530,7 @@
       "description": "This venerable sidearm is the Ares Predator’s primary competition as the world’s toughest heavy pistol. It offers a built-in top-mounted laser sight and is slightly cheaper.",
       "source": "CRB"
     },
-    {
-      "name": "Colt Government 2066",
+    "colt_government_2066": {
       "category": "Firearms",
       "subcategory": "Heavy Pistols",
       "skill": "Pistols",
@@ -559,8 +545,7 @@
       "description": "This government-issue weapon, styled after the legendary Colt M1911a1, uses an electrically induced spark to detonate the bullet’s propellants. The removal of most moving parts from the firing mechanism gives this weapon a reputation for being exceptionally reliable.",
       "source": "CRB"
     },
-    {
-      "name": "Remington Roomsweeper",
+    "remington_roomsweeper": {
       "category": "Firearms",
       "subcategory": "Heavy Pistols",
       "skill": "Pistols",
@@ -578,8 +563,7 @@
       ],
       "source": "CRB"
     },
-    {
-      "name": "Ruger Super Warhawk",
+    "ruger_super_warhawk": {
       "category": "Firearms",
       "subcategory": "Heavy Pistols",
       "skill": "Pistols",
@@ -594,8 +578,7 @@
       "description": "This revolver is as loud as a jet liner and twice as shiny. It’s also one of the scariest handguns in the world. The cased ammo variant is popular for the sheer thrill of swinging open the cylinder gate one handed and dumping spent brass.",
       "source": "CRB"
     },
-    {
-      "name": "Ares Crusader II",
+    "ares_crusader_ii": {
       "category": "Firearms",
       "subcategory": "Machine Pistols",
       "skill": "Automatics",
@@ -610,8 +593,7 @@
       "description": "A large magazine and easy handling make the Ares Crusader II one of the most popular weapons of its class. It features an integral barrel-mounted gas-vent 2 recoil compensation system and comes with an integral smartgun system.",
       "source": "CRB"
     },
-    {
-      "name": "Ceska Black Scorpion",
+    "ceska_black_scorpion": {
       "category": "Firearms",
       "subcategory": "Machine Pistols",
       "skill": "Automatics",
@@ -626,8 +608,7 @@
       "description": "This classic machine pistol provides concealable burst-fire capability. It comes equipped with an integral folding stock.",
       "source": "CRB"
     },
-    {
-      "name": "Steyr TMP",
+    "steyr_tmp": {
       "category": "Firearms",
       "subcategory": "Machine Pistols",
       "skill": "Automatics",
@@ -642,8 +623,7 @@
       "description": "This lightweight polymer-frame pistol is capable of full autofire, but its light weight makes it hard to control when firing on full auto. It comes equipped with a built-in top-mounted laser sight.",
       "source": "CRB"
     },
-    {
-      "name": "Colt Cobra TZ-120",
+    "colt_cobra_tz_120": {
       "category": "Firearms",
       "subcategory": "Submachine Guns",
       "skill": "Automatics",
@@ -658,8 +638,7 @@
       "description": "With its unique design and wide range of accessories, the Colt Cobra series is quite popular both among security forces the world over and on the trids. The TZ–120 comes with a folding stock, top-mounted laser sight, and a barrel-mounted gas-vent 2 system.",
       "source": "CRB"
     },
-    {
-      "name": "FN P93 Praetor",
+    "fn_p93_praetor": {
       "category": "Firearms",
       "subcategory": "Submachine Guns",
       "skill": "Automatics",
@@ -674,8 +653,7 @@
       "description": "This bullpup submachine gun was purpose-built for Corporate Court-controlled Interpol fast-response teams. Its special chamber system provides 1 point of Recoil Compensation, it has an integrated rigid stock, and a flashlight that can be used to reduce darkness penalties by one step (Environmental Modifiers, p. 173). Possession of the FN P93 while not a legitimate member of a Corporate Court force is a crime in most jurisdictions.",
       "source": "CRB"
     },
-    {
-      "name": "HK-227",
+    "hk_227": {
       "category": "Firearms",
       "subcategory": "Submachine Guns",
       "skill": "Automatics",
@@ -690,8 +668,7 @@
       "description": "The SMG of choice for many corporate and military security forces, the HK–227 boasts a retractable stock, smartgun system, and integral sound suppressor.",
       "source": "CRB"
     },
-    {
-      "name": "Ingram Smartgun X",
+    "ingram_smartgun_x": {
       "category": "Firearms",
       "subcategory": "Submachine Guns",
       "skill": "Automatics",
@@ -706,8 +683,7 @@
       "description": "Grade-A bang bang. Famous as the weapon of choice for many legendary street samurai since the 2050s, the Ingram Smartgun comes tricked out with a gas-vent 2 system, a smartgun system, and an integral sound suppressor.",
       "source": "CRB"
     },
-    {
-      "name": "SCK Model 100",
+    "sck_model_100": {
       "category": "Firearms",
       "subcategory": "Submachine Guns",
       "skill": "Automatics",
@@ -722,8 +698,7 @@
       "description": "Shin Chou Kyogo is synonymous with Japanese corporate security. Nearly every Japanacorp’s security forces are issued the SCK 100, including Renraku’s infamous Red Samurai. The SCK 100 features an internal smartgun system and a folding stock.",
       "source": "CRB"
     },
-    {
-      "name": "Uzi IV",
+    "uzi_iv": {
       "category": "Firearms",
       "subcategory": "Submachine Guns",
       "skill": "Automatics",
@@ -738,8 +713,7 @@
       "description": "This aging submachine gun is a worthy descendant of the famous Israeli weapon. The SMG features an integral folding stock and built-in top-mounted laser sight.",
       "source": "CRB"
     },
-    {
-      "name": "AK-97",
+    "ak_97": {
       "category": "Firearms",
       "subcategory": "Assault Rifles",
       "skill": "Automatics",
@@ -754,8 +728,7 @@
       "description": "The AK-97 is a legendary weapon with storied reliability—you can bury it for ten years, dig it up, and fire it immediately without a single problem. When all of the nano-fabricated AK–174s melted to slag, the AK-97s kept functioning just fine.",
       "source": "CRB"
     },
-    {
-      "name": "Ares Alpha",
+    "ares_alpha": {
       "category": "Firearms",
       "subcategory": "Assault Rifles",
       "skill": "Automatics",
@@ -773,8 +746,7 @@
       ],
       "source": "CRB"
     },
-    {
-      "name": "Colt M23",
+    "colt_m23": {
       "category": "Firearms",
       "subcategory": "Assault Rifles",
       "skill": "Automatics",
@@ -789,8 +761,7 @@
       "description": "This cheap, mass-produced, no-frills assault rifle is loved both by the gangbangers and pirates who can manage to get their hands on one and by the pros who are looking for something to modify from the ground up.",
       "source": "CRB"
     },
-    {
-      "name": "FN HAR",
+    "fn_har": {
       "category": "Firearms",
       "subcategory": "Assault Rifles",
       "skill": "Automatics",
@@ -805,8 +776,7 @@
       "description": "This assault rifle is supremely popular with private security forces and corporate threat-response teams. It features a laser sight and a gas-vent 2 system.",
       "source": "CRB"
     },
-    {
-      "name": "Yamaha Raiden",
+    "yamaha_raiden": {
       "category": "Firearms",
       "subcategory": "Assault Rifles",
       "skill": "Automatics",
@@ -821,8 +791,7 @@
       "description": "This electronic-firing assault rifle is state-of-the-art. The Raiden is very accurate and is quickly being adopted by japanacorp security forces and the Japanese Imperial Marines. It features an integral sound suppressor and smartgun system, and the electronic firing mechanism and design provides 1 point of Recoil Compensation.",
       "source": "CRB"
     },
-    {
-      "name": "Ares Desert Strike",
+    "ares_desert_strike": {
       "category": "Firearms",
       "subcategory": "Sniper Rifles",
       "skill": "Longarms",
@@ -837,8 +806,7 @@
       "description": "This combat-hardened sniper rifle is intended for long-range shooting in harsh environments. That means it was built without materials or technologies prone to failure. It comes equipped with a rigid stock with shock pad and a detachable imaging scope.",
       "source": "CRB"
     },
-    {
-      "name": "Cavalier Arms Crockett EBR",
+    "cavalier_arms_crockett_ebr": {
       "category": "Firearms",
       "subcategory": "Sniper Rifles",
       "skill": "Longarms",
@@ -853,8 +821,7 @@
       "description": "Straddling the line between assault rifle and sniper rifle, the Crockett EBR features a burst fire mode. While it lacks the magazine capacity of a true assault rifle, and lacks the precision of a true marksman’s weapon, it makes up for this in versatility, being able to switch fluidly between a sniping role and a combat role as easy as flipping a switch. It comes equipped with a rigid stock with shock pad and a detachable imaging scope.",
       "source": "CRB"
     },
-    {
-      "name": "Ranger Arms SM-5",
+    "ranger_arms_sm_5": {
       "category": "Firearms",
       "subcategory": "Sniper Rifles",
       "skill": "Longarms",
@@ -869,8 +836,7 @@
       "description": "A legendary assassin’s weapon, this sniper rifle features a silencer, an imaging scope, and a rigid stock with shock pad. The SM–5 disassembles completely in order to fit into a standard briefcase; setting it up or breaking it down takes an Extended Firearms + Logic [Mental] (6, Complex Action) Test. While deadly, the SM–5 is fragile. At the end of every Combat Turn in which the weapon is used in a running firefight, reduce its Accuracy by 1 (to a minimum of 3). If the weapon is used in combat as a melee weapon or to defend from a melee attack, reduce its Accuracy by 2 (again to a minimum of 3). Recalibrating the weapon (a one-hour job) returns its Accuracy to normal.",
       "source": "CRB"
     },
-    {
-      "name": "Remington 950",
+    "remington_950": {
       "category": "Firearms",
       "subcategory": "Sniper Rifles",
       "skill": "Longarms",
@@ -885,8 +851,7 @@
       "description": "This high-powered bolt-action hunting rifle features classic wooden furniture and a top-mounted imaging scope that have kept it popular with hunters for several decades. It cannot mount underbarrel accessories.",
       "source": "CRB"
     },
-    {
-      "name": "Ruger 100",
+    "ruger_100": {
       "category": "Firearms",
       "subcategory": "Sniper Rifles",
       "skill": "Longarms",
@@ -901,8 +866,7 @@
       "description": "This futuristic-looking gas-operated sporting rifle is the favorite weapon for many professional hunters and hobbyists. It features a built-in imaging scope and a rigid stock with shock pad.",
       "source": "CRB"
     },
-    {
-      "name": "Defiance T-250",
+    "defiance_t_250": {
       "category": "Firearms",
       "subcategory": "Shotguns",
       "skill": "Longarms",
@@ -917,8 +881,7 @@
       "description": "A common sight on the mean streets when things escalate beyond pistols and knives, this semi-automatic shotgun is available in either a normal-length or short-barreled version. It is gas operated, but also features a secondary pump action for situations where preventing jams is more important than quickly firing a second shot. The short-barreled version has the Concealability of +4, the range of a heavy pistol, and a damage code of 9P.",
       "source": "CRB"
     },
-    {
-      "name": "Enfield AS-7",
+    "enfield_as_7": {
       "category": "Firearms",
       "subcategory": "Shotguns",
       "skill": "Longarms",
@@ -933,8 +896,7 @@
       "description": "This military assault shotgun provides its user with massive firepower. As a close-quarters weapon and general combat gun, it is universally feared. It can either be loaded with ten-round ammo clips or a special twenty-four-round drum. The Enfield AS-7 comes equipped with a built-in, top-mounted laser sight.",
       "source": "CRB"
     },
-    {
-      "name": "PJSS Model 55",
+    "pjss_model_55": {
       "category": "Firearms",
       "subcategory": "Shotguns",
       "skill": "Longarms",
@@ -949,8 +911,7 @@
       "description": "This is a weapon of classic style for a classic sport. Produced only in small numbers, it’s renowned among European hunters and trap shooters as a precise and prestigious weapon. The weapon’s rigid stock comes equipped with an integrated shock pad. Both barrels can be shot at once as a short burst.",
       "source": "CRB"
     },
-    {
-      "name": "Ares S-III Super Squirt",
+    "ares_s_iii_super_squirt": {
       "category": "Firearms",
       "subcategory": "Special Weapons",
       "skill": "Exotic Ranged Weapon",
@@ -965,8 +926,7 @@
       "description": "This popular non-lethal weapon fires DMSO gel packs. The dimethyl sulfoxide forces the skin to absorb the chemicals the operator wishes to deliver. The attack itself causes no damage, but when the target is hit successfully, the DMSO delivers the substance directly into the target’s bloodstream as a Contact vector toxin (Toxins, Drugs, and BTLs). The Super Squirt uses Light Pistol ranges and can accept top- and underbarrel-mounted accessories.",
       "source": "CRB"
     },
-    {
-      "name": "Fichetti Pain Inducer",
+    "fichetti_pain_inducer": {
       "category": "Firearms",
       "subcategory": "Special Weapons",
       "skill": "Exotic Ranged Weapon",
@@ -981,8 +941,7 @@
       "description": "For a non-lethal weapon, the Fichetti Pain Inducer is not very humane. It makes someone feel like they are in a microwave, roasting from the inside out. Treat this as a toxin attack with a Power of 8 and a speed of Immediate. The target resists with Body + Willpower. If the modified Power exceeds the target’s Mental limit, the target must spend his next Action Phase doing whatever it takes to run away from the pain. The attacker can continue to hold her beam on a target with a Complex Action unless the gamemaster deems the target has dodged away or found cover. If the target cannot get out of the beam, he is incapacitated with pain, suffering a dice pool modifier equal to the modified Power on all tests for as long as the beam is trained on him. The Pain Inducer uses SMG ranges and can take top and underbarrel accessories. It has ten charges; when attached to a power point, it reloads one charge every ten seconds.",
       "source": "CRB"
     },
-    {
-      "name": "Parashield Dart Pistol",
+    "parashield_dart_pistol": {
       "category": "Firearms",
       "subcategory": "Special Weapons",
       "skill": "Exotic Ranged Weapon",
@@ -997,8 +956,7 @@
       "description": "The industry standard dart pistol, this fires injection darts with narcoject or another payload. The Parashield dart pistol uses Heavy Pistol ranges and can take top-mounted accessories.",
       "source": "CRB"
     },
-    {
-      "name": "Parashield Dart Rifle",
+    "parashield_dart_rifle": {
       "category": "Firearms",
       "subcategory": "Special Weapons",
       "skill": "Exotic Ranged Weapon",
@@ -1013,8 +971,7 @@
       "description": "Originally designed to non-lethally take down large game animals at long ranges, the Parashield dart rifle uses compressed air cartridges to fire injection darts. This weapon includes a top-mounted imaging scope. It uses sporting rifle ranges and can mount top and underbarrel accessories.",
       "source": "CRB"
     },
-    {
-      "name": "Ingram Valiant",
+    "ingram_valiant": {
       "category": "Heavy Weapons",
       "subcategory": "Machine Guns",
       "skill": "Heavy Weapons",
@@ -1029,8 +986,7 @@
       "description": "This legendary light machine gun is popular with mercenary units the world over. It comes with a rigid stock with shock pad, a laser sight, and a barrel-mounted gas-vent 2 system.",
       "source": "CRB"
     },
-    {
-      "name": "Stoner-Ares M202",
+    "stoner_ares_m202": {
       "category": "Heavy Weapons",
       "subcategory": "Machine Guns",
       "skill": "Heavy Weapons",
@@ -1045,8 +1001,7 @@
       "description": "This MMG packs a tremendous punch into a relatively lightweight framework made of extra-durable compounds. Due to its relatively small size, it’s a very popular secondary weapon for heavy military vehicles. Trolls with no concept of subtlety sometimes deck them out with accessories for use as personal weapons.",
       "source": "CRB"
     },
-    {
-      "name": "RPK HMG",
+    "rpk_hmg": {
       "category": "Heavy Weapons",
       "subcategory": "Machine Guns",
       "skill": "Heavy Weapons",
@@ -1061,8 +1016,7 @@
       "description": "This heavy Russian machine gun is used by the militaries of several eastern European and Near East countries, primarily as a vehicle-mounted support weapon. Equipped with a detachable tripod, the RPK is usually fired from a prone, sitting, or kneeling position when not mounted on a vehicle.",
       "source": "CRB"
     },
-    {
-      "name": "Ares Antioch-2",
+    "ares_antioch_2": {
       "category": "Heavy Weapons",
       "subcategory": "Cannons/Launchers",
       "skill": "Heavy Weapons",
@@ -1077,8 +1031,7 @@
       "description": "The Antioch–2 features a classic grenade launcher design combined with an integral smartlink system. It is one of the more affordable grenade launchers on the market.",
       "source": "CRB"
     },
-    {
-      "name": "ArmTech MGL-12",
+    "armtech_mgl_12": {
       "category": "Heavy Weapons",
       "subcategory": "Cannons/Launchers",
       "skill": "Heavy Weapons",
@@ -1093,8 +1046,7 @@
       "description": "This bullpup-configuration grenade launcher is popular, since it can fire in semi-auto mode and carries substantially more minigrenades than its competitors.",
       "source": "CRB"
     },
-    {
-      "name": "Aztechnology Striker",
+    "aztechnology_striker": {
       "category": "Heavy Weapons",
       "subcategory": "Cannons/Launchers",
       "skill": "Heavy Weapons",
@@ -1109,8 +1061,7 @@
       "description": "The Striker is an extremely light disposable launcher—perfect when you want to deliver a punch and make a quick, unencumbered getaway.",
       "source": "CRB"
     },
-    {
-      "name": "Krime Cannon",
+    "krime_cannon": {
       "category": "Heavy Weapons",
       "subcategory": "Cannons/Launchers",
       "skill": "Heavy Weapons",
@@ -1125,8 +1076,7 @@
       "description": "Krime may be a small-time manufacturer, but their assault cannon, simply called the Cannon, is a cheap heavy weapon big on attitude and firepower. It comes standard with modification for trolls, and so is the first weapon in the Sixth World to be intended for larger customers.",
       "source": "CRB"
     },
-    {
-      "name": "Onotari Interceptor",
+    "onotari_interceptor": {
       "category": "Heavy Weapons",
       "subcategory": "Cannons/Launchers",
       "skill": "Heavy Weapons",
@@ -1141,8 +1091,7 @@
       "description": "This Saeder-Krupp-developed military missile launcher is designed to fire rockets or guided missiles, of any type. It has two separate barrels and firing chambers, and can load up to two missiles at once, which need not be of the same type. Due to backblast issues, it is not capable of “giving ‘em both barrels.” It features an internal smartgun system.",
       "source": "CRB"
     },
-    {
-      "name": "Panther XXL",
+    "panther_xxl": {
       "category": "Heavy Weapons",
       "subcategory": "Cannons/Launchers",
       "skill": "Heavy Weapons",
@@ -1157,8 +1106,7 @@
       "description": "This huge fragging gun is an assault cannon that uses ammunition similar to the primary weapon in many small tanks. It comes with a built-in smartgun system.",
       "source": "CRB"
     },
-    {
-      "name": "Flash-Bang Grenade",
+    "flash_bang_grenade": {
       "category": "Explosives",
       "subcategory": "Grenades",
       "skill": "Throwing Weapons / Heavy Weapons",
@@ -1170,8 +1118,7 @@
       "description": "Upon detonation, these “concussion” or “stun” grenades explode to create a bright, loud, shocking blast distributed equally over a radius of 10 meters.",
       "source": "CRB"
     },
-    {
-      "name": "Flash-Pak",
+    "flash_pak": {
       "category": "Explosives",
       "subcategory": "Grenades",
       "skill": "Special",
@@ -1183,8 +1130,7 @@
       "description": "Not a grenade per se, this is an electronic unit the size of a pack of cigarettes containing four quartz-halogen micro-flashes designed to fire in random strobing sequence to blind opponents. Anyone looking in the direction of a flash-pak receives a –4 dice pool penalty on attack tests due to the strobing (flare compensation goggles, glasses, etc. reduce this modifier to –2, while flare compensation in cybereyes or as a retinal modification reduces this modifier to –1). The flash-pak has 10 charges; when activated it uses one charge per Combat Turn. When plugged in, it recharges one charge every 10 seconds.",
       "source": "CRB"
     },
-    {
-      "name": "Fragmentation Grenade",
+    "fragmentation_grenade": {
       "category": "Explosives",
       "subcategory": "Grenades",
       "skill": "Throwing Weapons / Heavy Weapons",
@@ -1196,8 +1142,7 @@
       "description": "These classic killing devices are designed to spread a cloud of deadly shrapnel over a large area, seriously injuring soft targets.",
       "source": "CRB"
     },
-    {
-      "name": "High-Explosive Grenade",
+    "high_explosive_grenade": {
       "category": "Explosives",
       "subcategory": "Grenades",
       "skill": "Throwing Weapons / Heavy Weapons",
@@ -1209,8 +1154,7 @@
       "description": "These grenades are designed to deliver a large blast and concentrated hurt.",
       "source": "CRB"
     },
-    {
-      "name": "Gas Grenade",
+    "gas_grenade": {
       "category": "Explosives",
       "subcategory": "Grenades",
       "skill": "Throwing Weapons / Heavy Weapons",
@@ -1222,8 +1166,7 @@
       "description": "Instead of exploding, the gas grenade releases a cloud of gas over an area with a radius of 10 meters. This is usually riot control/CS gas, but many other chemical or toxin payloads can be chosen (Toxins, Drugs, and BTLs). The cloud lasts for approximately 4 Combat Turns (less in windy areas, longer in confined areas with poor ventilation, at the gamemaster’s discretion).",
       "source": "CRB"
     },
-    {
-      "name": "Smoke Grenade",
+    "smoke_grenade": {
       "category": "Explosives",
       "subcategory": "Grenades",
       "skill": "Throwing Weapons / Heavy Weapons",
@@ -1235,8 +1178,7 @@
       "description": "Similar to the gas grenade, a smoke grenade releases a cloud of smoke over an area with a diameter of 10 meters. The cloud obscures vision, applying visibility modifiers for smoke to relevant tests. The cloud lasts for approximately 4 Combat Turns (less in windy areas, longer in confined areas with poor ventilation, at the gamemaster’s discretion).",
       "source": "CRB"
     },
-    {
-      "name": "Thermal Smoke Grenade",
+    "thermal_smoke_grenade": {
       "category": "Explosives",
       "subcategory": "Grenades",
       "skill": "Throwing Weapons / Heavy Weapons",
@@ -1248,8 +1190,7 @@
       "description": "Identical to a smoke grenade, except that the smoke contains hot particles designed to obscure thermographic vision. Apply the visibility modifiers for thermal smoke. The cloud lasts for approximately 4 Combat Turns (less in windy areas, longer in confined areas with poor ventilation, at the GM’s discretion).",
       "source": "CRB"
     },
-    {
-      "name": "Anti-Vehicle Rocket",
+    "anti_vehicle_rocket": {
       "category": "Explosives",
       "subcategory": "Rockets",
       "skill": "Heavy Weapons",
@@ -1261,8 +1202,7 @@
       "description": "AV rockets/missiles contain a shaped-charge warhead designed to burn or punch its way through a vehicle or barrier. Though the impact causes a blast, it is limited compared to that of a High-Explosive projectile. AV attacks have an AP of –10 against vehicles and barriers, –4 against other targets.",
       "source": "CRB"
     },
-    {
-      "name": "Fragmentation Rocket",
+    "fragmentation_rocket": {
       "category": "Explosives",
       "subcategory": "Rockets",
       "skill": "Heavy Weapons",
@@ -1274,8 +1214,7 @@
       "description": "Used principally against people, the warhead discharges high-speed metal or plastic-metal fragments designed to tear into unprotected flesh. These rockets/missiles are very effective against unprotected individuals, but fairly ineffective against barriers, structures, and vehicles.",
       "source": "CRB"
     },
-    {
-      "name": "High-Explosive Rocket",
+    "high_explosive_rocket": {
       "category": "Explosives",
       "subcategory": "Rockets",
       "skill": "Heavy Weapons",
@@ -1287,8 +1226,7 @@
       "description": "HE rockets/missiles are designed to do heavy damage to a large area. Their blast pattern is similar to that of a grenade, but much larger. They are not particularly effective against hardened targets, such as vehicles or protected military structures. HE weapons use the standard grenade rules for determining the blast and its effects.",
       "source": "CRB"
     },
-    {
-      "name": "Guided Missile",
+    "guided_missile": {
       "category": "Explosives",
       "subcategory": "Missiles",
       "skill": "Heavy Weapons",
@@ -1300,6 +1238,6 @@
       "description": "Missiles are rockets that carry internal guidance systems, making them more expensive than standard “dumb” rockets. Rockets and missiles are set to arm when they have traveled 10 meters from their point of origin and explode on impact. This safety feature can be disabled with an Armorer + Logic [Mental] (4, 5 Minutes) Extended Test.",
       "source": "CRB"
     }
-  ]
+  }
 }
 
