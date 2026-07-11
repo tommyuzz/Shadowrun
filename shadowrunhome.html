@@ -3,6 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script>
+    (async function ensureCurrentVersion() {
+      try {
+        const response = await fetch(
+                "/Shadowrun/version.json?_=" + Date.now(),
+                { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+          throw new Error("Version check failed: HTTP " + response.status);
+        }
+
+        const data = await response.json();
+        const currentVersion = String(data.version);
+
+        const url = new URL(window.location.href);
+
+        if (url.searchParams.get("v") !== currentVersion) {
+          url.searchParams.set("v", currentVersion);
+          window.location.replace(url.toString());
+        }
+      } catch (error) {
+        console.warn("Unable to check site version:", error);
+      }
+    })();
+  </script>
+
+
   <meta name="description" content="Shadowrun Fifth Edition reference archive home page.">
   <title>Shadowrun 5e // Operations Archive</title>
   <style>

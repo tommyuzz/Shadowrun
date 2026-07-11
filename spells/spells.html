@@ -3,6 +3,35 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script>
+    (async function ensureCurrentVersion() {
+      try {
+        const response = await fetch(
+                "/Shadowrun/version.json?_=" + Date.now(),
+                { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+          throw new Error("Version check failed: HTTP " + response.status);
+        }
+
+        const data = await response.json();
+        const currentVersion = String(data.version);
+
+        const url = new URL(window.location.href);
+
+        if (url.searchParams.get("v") !== currentVersion) {
+          url.searchParams.set("v", currentVersion);
+          window.location.replace(url.toString());
+        }
+      } catch (error) {
+        console.warn("Unable to check site version:", error);
+      }
+    })();
+  </script>
+
+
   <meta name="description" content="Shadowrun Fifth Edition spell reference browser.">
   <title>Shadowrun 5e // Spell Index</title>
   <style>
@@ -1220,7 +1249,7 @@
   (async function () {
     "use strict";
 
-    var response = await fetch("./spells.json");
+    var response = await fetch("./spells.json", { cache: "no-store" });
 
     if (!response.ok) {
       throw new Error("Failed to load spells.json: HTTP " + response.status);

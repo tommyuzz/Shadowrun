@@ -5,6 +5,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Shadowrun Fifth Edition Core Rulebook adept power reference browser.">
+
+  <script>
+    (async function ensureCurrentVersion() {
+      try {
+        const response = await fetch(
+                "/Shadowrun/version.json?_=" + Date.now(),
+                { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+          throw new Error("Version check failed: HTTP " + response.status);
+        }
+
+        const data = await response.json();
+        const currentVersion = String(data.version);
+
+        const url = new URL(window.location.href);
+
+        if (url.searchParams.get("v") !== currentVersion) {
+          url.searchParams.set("v", currentVersion);
+          window.location.replace(url.toString());
+        }
+      } catch (error) {
+        console.warn("Unable to check site version:", error);
+      }
+    })();
+  </script>
+
   <title>Shadowrun 5e // Adept Power Index</title>
   <style>
     :root {
@@ -1319,7 +1347,7 @@
   (async function () {
     "use strict";
 
-    var response = await fetch("./adeptpowers.json");
+    var response = await fetch("./adeptpowers.json", { cache: "no-store" });
     if (!response.ok) throw new Error("Failed to load adeptpowers.json: HTTP " + response.status);
 
     var powerData = await response.json();
