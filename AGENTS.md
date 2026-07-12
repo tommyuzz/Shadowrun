@@ -33,6 +33,7 @@ Use this structure for new reference modules:
 assets/
 └── css/
     ├── shared.css
+    ├── responsive.css
     └── pages/
         └── <module>.css
 ```
@@ -42,7 +43,10 @@ Every module page must load shared CSS before its page stylesheet:
 ```html
 <link rel="stylesheet" href="../assets/css/shared.css">
 <link rel="stylesheet" href="../assets/css/pages/<module>.css">
+<link rel="stylesheet" href="../assets/css/responsive.css">
 ```
+
+`responsive.css` must load last. It owns the final shared tablet, phone, touch-target, tab-overflow, and narrow-record behaviour. Page stylesheets may define specialised responsive layouts, but they must not undo the shared minimum mobile usability rules.
 
 The root home page uses paths without `../`.
 
@@ -271,7 +275,7 @@ Before completing a page:
 
 When modifying an existing page:
 
-1. Inspect `spells/spells.html`, `assets/css/shared.css`, and that page's stylesheet first.
+1. Inspect `spells/spells.html`, `assets/css/shared.css`, `assets/css/responsive.css`, and that page's stylesheet first.
 2. Identify whether each change is shared, reusable as a modifier, or page-specific.
 3. Make shared fixes once.
 4. Preserve unrelated behaviour and user-authored content.

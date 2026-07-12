@@ -1,0 +1,577 @@
+/*
+ * Shared responsive layer
+ * Loaded after each page stylesheet so mobile behaviour is consistent.
+ * Desktop rules are intentionally untouched.
+ */
+
+@media (max-width: 900px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .sheet {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
+    clip-path: none;
+  }
+
+  .sheet::before {
+    display: none;
+  }
+
+  .masthead {
+    grid-template-columns: 58px minmax(0, 1fr);
+    gap: 14px;
+    padding: 24px 20px 20px;
+  }
+
+  .brand-mark {
+    display: block;
+    width: 58px;
+    height: 58px;
+  }
+
+  .brand-title {
+    font-size: clamp(2.7rem, 10vw, 4.25rem);
+  }
+
+  .brand-subtitle {
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .record-id {
+    display: none;
+  }
+
+  .tabs-wrap {
+    max-width: 100%;
+  }
+
+  .tabs {
+    display: flex;
+    width: 100%;
+    max-width: none;
+    padding: 0 20px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 20px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: thin;
+    scrollbar-color: var(--red) transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .tabs::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .tabs::-webkit-scrollbar-thumb {
+    background: var(--red);
+  }
+
+  .tab,
+  .weapon-tabs .tab,
+  .vehicle-tabs .tab {
+    flex: 0 0 auto;
+    min-width: 128px;
+    min-height: 52px;
+    padding-inline: 14px;
+    scroll-snap-align: start;
+    white-space: nowrap;
+  }
+
+  .workspace {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    width: 100%;
+    padding: 20px;
+  }
+
+  .workspace > article,
+  .content-panel,
+  .spell-panel,
+  .power-panel,
+  .skill-panel,
+  .weapon-panel,
+  .vehicle-panel {
+    min-width: 0;
+    order: 1;
+  }
+
+  .sidebar {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    min-width: 0;
+    order: 2;
+  }
+
+  .sidebar .panel,
+  .panel + .panel {
+    min-width: 0;
+    margin-top: 0;
+  }
+
+  .panel-inner,
+  .content-panel > .panel-inner,
+  .spell-panel > .panel-inner,
+  .power-panel > .panel-inner,
+  .skill-panel > .panel-inner,
+  .weapon-panel > .panel-inner,
+  .vehicle-panel > .panel-inner {
+    min-width: 0;
+  }
+
+  .spell-list,
+  .power-list,
+  .skill-list,
+  .weapon-list,
+  .vehicle-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .spell-list-search,
+  .power-list-search,
+  .skill-list-filters,
+  .weapon-filters,
+  .vehicle-filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .power-list-search > .power-filter-field:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .filter-control,
+  .search,
+  select,
+  input {
+    min-width: 0;
+  }
+
+  .filter-toggle-button,
+  .back-button,
+  .filter-clear-button {
+    min-height: 44px;
+  }
+
+  .filter-clear-button {
+    width: 40px;
+    height: 44px;
+  }
+
+  .filter-control {
+    grid-template-columns: minmax(0, 1fr) 40px;
+  }
+
+  .search {
+    height: 44px;
+  }
+
+  .tag-row {
+    gap: 8px;
+  }
+
+  .tag-toggle,
+  .keyword-toggle {
+    min-height: 40px;
+    padding: 9px 12px 8px;
+  }
+
+  .tag-detail,
+  .keyword-detail {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .stat-grid,
+  .weapon-data-grid,
+  .vehicle-data-grid {
+    max-width: 100%;
+  }
+
+  .footer-frame {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .footer-warning {
+    display: none;
+  }
+
+  h1,
+  .content-title,
+  .module-name,
+  .spell-list-name,
+  .power-list-name,
+  .skill-list-name,
+  .weapon-list-name,
+  .vehicle-list-name {
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 650px) {
+  .masthead {
+    grid-template-columns: 50px minmax(0, 1fr);
+    gap: 12px;
+    padding: 20px 14px 17px;
+  }
+
+  .brand-mark {
+    display: block;
+    width: 50px;
+    height: 50px;
+  }
+
+  .kicker {
+    font-size: .67rem;
+  }
+
+  .brand-title {
+    font-size: clamp(2.35rem, 12vw, 3.35rem);
+    line-height: .9;
+  }
+
+  .brand-subtitle {
+    gap: 6px;
+    font-size: .62rem;
+    letter-spacing: .07em;
+  }
+
+  .brand-subtitle::before,
+  .brand-subtitle::after {
+    width: 12px;
+  }
+
+  .tabs {
+    padding-inline: 14px;
+    scroll-padding-inline: 14px;
+  }
+
+  .tab,
+  .weapon-tabs .tab,
+  .vehicle-tabs .tab {
+    min-width: 112px;
+    min-height: 48px;
+    padding-inline: 11px;
+    font-size: .68rem;
+  }
+
+  .workspace {
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .sidebar {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .content-panel > .panel-inner,
+  .spell-panel > .panel-inner,
+  .power-panel > .panel-inner,
+  .skill-panel > .panel-inner,
+  .weapon-panel > .panel-inner,
+  .vehicle-panel > .panel-inner {
+    padding: 22px 16px;
+  }
+
+  .spell-list-header,
+  .power-list-header,
+  .skill-list-header,
+  .weapon-list-header,
+  .vehicle-list-header {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .spell-list-header .filter-toggle-button,
+  .power-list-header .filter-toggle-button,
+  .skill-list-header .filter-toggle-button,
+  .weapon-list-header .filter-toggle-button,
+  .vehicle-list-header .filter-toggle-button {
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: end;
+    margin-bottom: 12px;
+  }
+
+  .spell-list-header .eyebrow,
+  .power-list-header .eyebrow,
+  .skill-list-header .eyebrow,
+  .weapon-list-header .eyebrow,
+  .vehicle-list-header .eyebrow {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .spell-list-header h1,
+  .power-list-header h1,
+  .skill-list-header h1,
+  .weapon-list-header h1,
+  .vehicle-list-header h1 {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .spell-record-view .spell-header,
+  .power-record-view .power-header,
+  .skill-record-view .skill-header,
+  .weapon-record-view .weapon-header,
+  .vehicle-record-view .vehicle-header {
+    padding-top: 52px;
+    padding-right: 0;
+  }
+
+  .spell-list-search,
+  .power-list-search,
+  .skill-list-filters,
+  .weapon-filters,
+  .vehicle-filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .power-list-search > .power-filter-field:first-child {
+    grid-column: auto;
+  }
+
+  .spell-list-summary,
+  .power-list-summary,
+  .skill-list-summary,
+  .weapon-list-summary,
+  .vehicle-list-summary {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .spell-list-item,
+  .power-list-item,
+  .skill-list-item,
+  .weapon-list-item,
+  .vehicle-list-item {
+    min-height: 64px;
+    gap: 9px;
+    padding: 11px 10px;
+  }
+
+  .spell-list-index,
+  .power-list-index,
+  .list-index {
+    min-width: 46px;
+  }
+
+  .spell-list-drain,
+  .power-list-cost,
+  .skill-list-group,
+  .weapon-list-value,
+  .vehicle-list-value {
+    max-width: 13ch;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .stat-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stat {
+    min-width: 0;
+    border-right: 1px solid var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .stat:nth-child(even) {
+    border-right: 0;
+  }
+
+  .weapon-data-grid,
+  .vehicle-data-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .telemetry-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .telemetry-heading span {
+    text-align: left;
+  }
+
+  .telemetry-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .module-button {
+    grid-template-columns: 58px minmax(0, 1fr);
+    min-height: 116px;
+    padding: 15px;
+  }
+
+  .module-symbol {
+    width: 56px;
+    height: 56px;
+  }
+
+  .module-name {
+    font-size: clamp(1.85rem, 10vw, 2.75rem);
+  }
+
+  footer {
+    padding-inline: 14px;
+  }
+
+  .footer-frame {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 14px;
+  }
+
+  .footer-bars {
+    display: none;
+  }
+}
+
+@media (max-width: 420px) {
+  .masthead {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .brand-mark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .brand-title {
+    font-size: clamp(2.05rem, 12vw, 2.75rem);
+  }
+
+  .brand-subtitle::before,
+  .brand-subtitle::after {
+    display: none;
+  }
+
+  .tab,
+  .weapon-tabs .tab,
+  .vehicle-tabs .tab {
+    min-width: 104px;
+  }
+
+  .workspace {
+    padding: 10px;
+  }
+
+  .content-panel > .panel-inner,
+  .spell-panel > .panel-inner,
+  .power-panel > .panel-inner,
+  .skill-panel > .panel-inner,
+  .weapon-panel > .panel-inner,
+  .vehicle-panel > .panel-inner {
+    padding: 18px 12px;
+  }
+
+  .spell-list-item,
+  .power-list-item,
+  .skill-list-item,
+  .weapon-list-item,
+  .vehicle-list-item {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .spell-list-drain,
+  .power-list-cost,
+  .skill-list-group,
+  .weapon-list-value,
+  .vehicle-list-value {
+    grid-column: 2;
+    justify-self: start;
+    max-width: 100%;
+    text-align: left;
+  }
+
+  .weapon-data-grid,
+  .vehicle-data-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .source-book {
+    grid-template-columns: minmax(76px, auto) minmax(0, 1fr);
+    width: 100%;
+    min-width: 0;
+  }
+
+  .source-code,
+  .source-title {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .tag-toggle,
+  .keyword-toggle {
+    flex: 1 1 auto;
+  }
+
+  .module-button {
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .module-symbol {
+    width: 46px;
+    height: 46px;
+  }
+
+  .module-code {
+    white-space: normal;
+  }
+
+  .footer-frame {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .sigil {
+    display: none;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  button,
+  input,
+  select,
+  a.module-button {
+    touch-action: manipulation;
+  }
+
+  .tab:hover,
+  .spell-list-item:hover,
+  .power-list-item:hover,
+  .skill-list-item:hover,
+  .weapon-list-item:hover,
+  .vehicle-list-item:hover {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tabs {
+    scroll-behavior: auto;
+  }
+
+  .module-button,
+  .spell-list-item,
+  .power-list-item,
+  .skill-list-item,
+  .weapon-list-item,
+  .vehicle-list-item {
+    transition: none;
+  }
+}
