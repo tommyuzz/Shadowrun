@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shadowrun Fifth Edition ritual spellcasting reference browser.">
+  <title>Shadowrun 5e // Ritual Index</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/pages/rituals.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+<div class="sheet">
+  <header class="masthead">
+    <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="50" cy="50" r="27" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 4"/><path d="M50 9 61 38l30 12-30 12-11 29-11-29L9 50l30-12Z" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="50" cy="50" r="8" fill="currentColor"/></svg>
+    <div><p class="kicker">Awakened operations archive</p><a class="brand-link" href="../shadowrunhome.html#magic" aria-label="Return to Shadowrun home page"><p class="brand-title">Shadowrun</p></a><p class="brand-subtitle">Fifth edition ritual index</p></div>
+    <div class="record-id" aria-label="Dataset identification"><strong>CEREMONY // 5E</strong><span>DATASET: RITUALS.JSON</span><div class="barcode" aria-hidden="true"></div></div>
+  </header>
+
+  <main class="workspace ritual-workspace">
+    <aside class="sidebar" aria-label="Ritual rules and notation">
+      <section class="panel category-panel"><div class="panel-inner"><h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Ritual protocol</h2><div class="category-description" id="category-copy"></div></div></section>
+      <section class="panel legend-panel"><div class="panel-inner"><h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Procedure key</h2><dl class="legend-grid"><div class="legend-row"><dt>F</dt><dd>Ritual Force</dd></div><div class="legend-row"><dt>TIME</dt><dd>Performance time</dd></div><div class="legend-row"><dt>DUR</dt><dd>Effect duration</dd></div><div class="legend-row"><dt>AREA</dt><dd>Area of effect</dd></div><div class="legend-row"><dt>LINK</dt><dd>Mystic or material link</dd></div><div class="legend-row"><dt>SEAL</dt><dd>Final sealing test</dd></div></dl></div></section>
+    </aside>
+
+    <article class="panel ritual-panel" aria-live="polite"><div class="panel-inner">
+      <section id="list-view">
+        <header class="ritual-header ritual-list-header"><button class="filter-toggle-button" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters">Filter</button><p class="eyebrow">Ceremonial archive // Ritual list</p><h1>Rituals</h1></header>
+        <div class="ritual-filters" id="filters" hidden><div><label class="search-label" for="search">Search rituals</label><div class="filter-control"><input class="search" id="search" type="search" placeholder="Enter ritual name…" autocomplete="off"><button class="filter-clear-button" id="search-clear" type="button" aria-label="Clear ritual search" disabled>×</button></div></div><div><label class="search-label" for="keyword-filter">Keyword</label><div class="filter-control"><select class="search keyword-filter" id="keyword-filter"><option value="">All keywords</option></select><button class="filter-clear-button" id="keyword-clear" type="button" aria-label="Clear ritual keyword filter" disabled>×</button></div></div></div>
+        <div class="ritual-list-summary"><span>Select a ritual to open its full procedure</span><strong id="list-count">0 records</strong></div><div class="ritual-list" id="ritual-list"></div>
+      </section>
+
+      <section id="record-view" hidden>
+        <header class="ritual-header ritual-record-header"><button class="back-button" id="back" type="button">Back to list</button><p class="eyebrow">Ritual spellcasting // Procedure record</p><h1 id="ritual-title">Ritual</h1><div class="tag-row" id="tags"></div></header>
+        <section class="tag-detail" id="tag-detail" aria-live="polite" hidden><strong class="tag-detail-title" id="tag-detail-title"></strong><div id="tag-detail-copy"></div></section>
+
+        <article class="ritual-procedure" aria-labelledby="procedure-title">
+          <header class="procedure-banner"><div><span>Extended magical operation</span><h2 id="procedure-title">Ritual procedure</h2></div><strong id="ritual-code">RT-000</strong></header>
+          <dl class="procedure-grid"><div><dt>Ritual time</dt><dd id="ritual-time">—</dd></div><div><dt>Duration</dt><dd id="duration">—</dd></div><div id="area-field"><dt>Area</dt><dd id="area">—</dd></div></dl>
+          <section class="spell-requirement" id="spell-requirement-section" hidden><span>Incorporated spell requirement</span><strong id="spell-requirement">—</strong></section>
+        </article>
+
+        <section class="section ritual-description"><h2 class="section-title">Ritual effect</h2><p id="description"></p></section>
+
+        <section class="minion-profile" id="minion-profile" aria-labelledby="minion-title" hidden>
+          <header><span>Created entity // Force-derived profile</span><h2 id="minion-title">Minion statistics</h2></header>
+          <dl class="minion-stat-grid" id="minion-stat-grid"></dl>
+          <div class="minion-capabilities"><section id="minion-skills-section"><h3>Skills</h3><ul id="minion-skills"></ul></section><section id="minion-powers-section"><h3>Powers</h3><ul id="minion-powers"></ul></section><section id="minion-notes-section"><h3>Notes</h3><ul id="minion-notes"></ul></section></div>
+        </section>
+
+        <section class="section"><div class="source-book"><span class="source-code" id="source-code">CRB</span><strong class="source-title" id="source-title">Shadowrun Fifth Edition Core Rulebook</strong></div></section>
+      </section>
+    </div></article>
+  </main>
+  <footer><div class="footer-frame"><div class="footer-bars" aria-hidden="true"></div><div class="footer-copy">&gt;&gt; GATHER. PREPARE. SEAL.<br>SHAPE THE MANA.</div><div class="footer-warning">Every participant shares the Drain.<br>Protect the foundation.</div><span class="sigil" aria-hidden="true">⌁</span></div></footer>
+</div>
+
+<script>
+(async function () {
+  "use strict";
+  var response = await fetch("./rituals.json", { cache: "no-store" });
+  if (!response.ok) throw new Error("Failed to load rituals.json: HTTP " + response.status);
+  var payload = await response.json();
+  if (!payload || !payload.rituals || !payload.category || !payload.keywords) throw new Error("rituals.json must contain rituals, category and keywords.");
+  var rituals = Object.keys(payload.rituals).map(function (name) { return Object.assign({ name: name }, payload.rituals[name]); });
+  var sourceLabels = { CRB: "Shadowrun Fifth Edition Core Rulebook" };
+  var statLabels = { body: "Body", agility: "Agility", reaction: "Reaction", strength: "Strength", willpower: "Willpower", logic: "Logic", intuition: "Intuition", charisma: "Charisma", initiative: "Initiative", movement: "Movement" };
+  var state = { ritual: "", query: "", keyword: "", filtersOpen: false, tag: "" };
+  var listView = document.getElementById("list-view"), recordView = document.getElementById("record-view"), list = document.getElementById("ritual-list"), search = document.getElementById("search"), keywordFilter = document.getElementById("keyword-filter"), tagDetail = document.getElementById("tag-detail");
+  function setText(id, value) { document.getElementById(id).textContent = value == null || value === "" ? "—" : value; }
+  function filtered() { var query = state.query.trim().toLowerCase(); return rituals.filter(function (ritual) { return (!query || ritual.name.toLowerCase().includes(query)) && (!state.keyword || (ritual.keywords || []).includes(state.keyword)); }); }
+  function fillKeywords() { keywordFilter.replaceChildren(); var all = document.createElement("option"); all.value = ""; all.textContent = "All keywords"; keywordFilter.appendChild(all); Object.keys(payload.keywords).sort().forEach(function (value) { var option = document.createElement("option"); option.value = value; option.textContent = value; keywordFilter.appendChild(option); }); keywordFilter.value = state.keyword; }
+  function renderControls() { document.getElementById("filters").hidden = !state.filtersOpen; document.getElementById("filter-toggle").setAttribute("aria-expanded", state.filtersOpen ? "true" : "false"); search.value = state.query; document.getElementById("search-clear").disabled = !state.query; document.getElementById("keyword-clear").disabled = !state.keyword; }
+  function renderList() { var rows = filtered(), hasFilters = Boolean(state.query || state.keyword); setText("list-count", hasFilters ? rows.length + " of " + rituals.length + " records" : rituals.length + " records"); list.replaceChildren(); if (!rows.length) { var empty = document.createElement("div"); empty.className = "empty-message"; empty.textContent = "No rituals match the current filters."; list.appendChild(empty); return; } rows.forEach(function (ritual) { var button = document.createElement("button"); button.type = "button"; button.className = "ritual-list-item"; button.setAttribute("aria-label", "Open " + ritual.name + " ritual record"); var index = document.createElement("span"); index.className = "ritual-list-index"; index.textContent = "RT-" + String(rituals.indexOf(ritual) + 1).padStart(3, "0"); index.setAttribute("aria-hidden", "true"); var name = document.createElement("span"); name.className = "ritual-list-name"; name.textContent = ritual.name; var time = document.createElement("span"); time.className = "ritual-list-value"; time.textContent = ritual.ritual_time || "—"; button.append(index, name, time); button.addEventListener("click", function () { openRitual(ritual.name); }); list.appendChild(button); }); }
+  function renderTags(ritual) { var tags = document.getElementById("tags"); tags.replaceChildren(); state.tag = ""; (ritual.keywords || []).forEach(function (keyword) { var button = document.createElement("button"); button.type = "button"; button.className = "tag-toggle"; button.dataset.tag = keyword; button.setAttribute("aria-pressed", "false"); button.textContent = keyword; button.addEventListener("click", function () { state.tag = state.tag === keyword ? "" : keyword; renderTagDetail(); }); tags.appendChild(button); }); }
+  function renderTagDetail() { Array.prototype.forEach.call(document.querySelectorAll("#tags button"), function (button) { button.setAttribute("aria-pressed", button.dataset.tag === state.tag ? "true" : "false"); }); if (!state.tag) { tagDetail.hidden = true; return; } setText("tag-detail-title", state.tag); document.getElementById("tag-detail-copy").innerHTML = payload.keywords[state.tag] || "No keyword details are available."; tagDetail.hidden = false; }
+  function renderListItems(id, values) { var target = document.getElementById(id); target.replaceChildren(); (Array.isArray(values) ? values : []).forEach(function (value) { var item = document.createElement("li"); item.textContent = value; target.appendChild(item); }); }
+  function renderMinion(stats) { var profile = document.getElementById("minion-profile"); profile.hidden = !stats; if (!stats) return; var grid = document.getElementById("minion-stat-grid"); grid.replaceChildren(); Object.keys(statLabels).forEach(function (key) { if (stats[key] == null || stats[key] === "") return; var row = document.createElement("div"), term = document.createElement("dt"), value = document.createElement("dd"); term.textContent = statLabels[key]; value.textContent = stats[key]; row.append(term, value); grid.appendChild(row); }); [["minion-skills-section", "minion-skills", stats.skills], ["minion-powers-section", "minion-powers", stats.powers], ["minion-notes-section", "minion-notes", stats.notes]].forEach(function (entry) { var populated = Array.isArray(entry[2]) && entry[2].length; document.getElementById(entry[0]).hidden = !populated; renderListItems(entry[1], entry[2]); }); }
+  function renderRecord(ritual) { setText("ritual-title", ritual.name); setText("ritual-code", "RT-" + String(rituals.indexOf(ritual) + 1).padStart(3, "0")); setText("ritual-time", ritual.ritual_time); setText("duration", ritual.duration); var areaField = document.getElementById("area-field"); areaField.hidden = !ritual.area; if (ritual.area) setText("area", ritual.area); var spellSection = document.getElementById("spell-requirement-section"); spellSection.hidden = !ritual.spell_requirement; if (ritual.spell_requirement) setText("spell-requirement", ritual.spell_requirement); setText("description", ritual.description || "No description is available."); renderTags(ritual); renderTagDetail(); renderMinion(ritual.stats); var source = String(ritual.source || "—"), match = source.match(/^[A-Za-z0-9]+/), code = match ? match[0].toUpperCase() : "—"; setText("source-code", code); setText("source-title", sourceLabels[code] || "Source unavailable"); }
+  function updateHash() { var hash = state.ritual ? "#" + encodeURIComponent(state.ritual) : "#rituals"; if (location.hash !== hash) history.replaceState(null, "", hash); }
+  function showList(skipHash) { state.ritual = ""; state.tag = ""; recordView.hidden = true; listView.hidden = false; renderList(); if (!skipHash) updateHash(); }
+  function openRitual(name, skipHash) { var ritual = rituals.find(function (entry) { return entry.name === name; }); if (!ritual) return; state.ritual = name; renderRecord(ritual); listView.hidden = true; recordView.hidden = false; if (!skipHash) updateHash(); window.scrollTo(0, 0); }
+  document.getElementById("category-copy").innerHTML = payload.category.Rituals || ""; fillKeywords(); renderControls();
+  document.getElementById("filter-toggle").addEventListener("click", function () { state.filtersOpen = !state.filtersOpen; renderControls(); if (state.filtersOpen) search.focus(); }); search.addEventListener("input", function () { state.query = search.value; renderControls(); renderList(); }); keywordFilter.addEventListener("change", function () { state.keyword = keywordFilter.value; renderControls(); renderList(); }); document.getElementById("search-clear").addEventListener("click", function () { state.query = ""; renderControls(); renderList(); search.focus(); }); document.getElementById("keyword-clear").addEventListener("click", function () { state.keyword = ""; keywordFilter.value = ""; renderControls(); renderList(); keywordFilter.focus(); }); document.getElementById("back").addEventListener("click", function () { showList(); });
+  function readHash() { var name = decodeURIComponent(location.hash.slice(1)); if (name && name !== "rituals" && rituals.some(function (ritual) { return ritual.name === name; })) openRitual(name, true); else showList(true); }
+  window.addEventListener("hashchange", readHash); readHash(); updateHash();
+}()).catch(function (error) { console.error("Failed to initialise ritual page:", error); var panel = document.querySelector(".ritual-panel .panel-inner"); if (panel) panel.innerHTML = '<div class="empty-message"><strong>Failed to load rituals.json.</strong><br>Serve rituals.html and rituals.json from the same folder over HTTP or HTTPS.</div>'; });
+</script>
+</body>
+</html>

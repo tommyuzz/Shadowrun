@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shadowrun Fifth Edition metatype reference browser.">
+  <title>Shadowrun 5e // Metatype Index</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/pages/metatypes.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+<div class="sheet">
+  <header class="masthead">
+    <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="50" cy="33" r="12" fill="none" stroke="currentColor" stroke-width="4"/><path d="M24 79c2-21 11-32 26-32s24 11 26 32M16 28h16M68 28h16M50 5v14" fill="none" stroke="currentColor" stroke-width="4"/><path d="M37 62h26M32 71h36" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+    <div><p class="kicker">Population records archive</p><a class="brand-link" href="../shadowrunhome.html#corerules" aria-label="Return to Shadowrun home page"><p class="brand-title">Shadowrun</p></a><p class="brand-subtitle">Fifth edition metatype index</p></div>
+    <div class="record-id" aria-label="Dataset identification"><strong>DEMOGRAPHIC // 5E</strong><span>DATASET: METATYPES.JSON</span><div class="barcode" aria-hidden="true"></div></div>
+  </header>
+
+  <main class="workspace metatype-workspace">
+    <aside class="sidebar" aria-label="Metatype rules and attribute key">
+      <section class="panel category-panel"><div class="panel-inner"><h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Metatype protocol</h2><div class="category-description" id="category-copy"></div></div></section>
+      <section class="panel legend-panel"><div class="panel-inner"><h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Attribute key</h2><dl class="legend-grid"><div class="legend-row"><dt>MIN</dt><dd>Racial minimum</dd></div><div class="legend-row"><dt>MAX</dt><dd>Natural maximum</dd></div><div class="legend-row"><dt>EDG</dt><dd>Edge range</dd></div><div class="legend-row"><dt>ESS</dt><dd>Base Essence</dd></div><div class="legend-row"><dt>WALK</dt><dd>Walking rate</dd></div><div class="legend-row"><dt>RUN</dt><dd>Running rate</dd></div></dl></div></section>
+    </aside>
+
+    <article class="panel metatype-panel" aria-live="polite"><div class="panel-inner">
+      <section id="list-view">
+        <header class="metatype-header metatype-list-header"><button class="filter-toggle-button" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters">Filter</button><p class="eyebrow">Population archive // Metatype list</p><h1>Metatypes</h1></header>
+        <div class="metatype-filters" id="filters" hidden><div><label class="search-label" for="search">Search metatypes</label><div class="filter-control"><input class="search" id="search" type="search" placeholder="Enter metatype name…" autocomplete="off"><button class="filter-clear-button" id="search-clear" type="button" aria-label="Clear metatype search" disabled>×</button></div></div><div><label class="search-label" for="trait-filter">Racial trait</label><div class="filter-control"><select class="search keyword-filter" id="trait-filter"><option value="">All racial traits</option></select><button class="filter-clear-button" id="trait-clear" type="button" aria-label="Clear racial trait filter" disabled>×</button></div></div></div>
+        <div class="metatype-list-summary"><span>Select a metatype to open its full profile</span><strong id="list-count">0 records</strong></div><div class="metatype-list" id="metatype-list"></div>
+      </section>
+
+      <section id="record-view" hidden>
+        <header class="metatype-header metatype-record-header"><button class="back-button" id="back" type="button">Back to list</button><p class="eyebrow">Demographic record // Metatype profile</p><h1 id="metatype-title">Metatype</h1><p class="scientific-name" id="scientific-name"></p><div class="tag-row" id="trait-tags" aria-label="Racial traits"></div></header>
+        <section class="tag-detail" id="trait-detail" aria-live="polite" hidden><strong class="tag-detail-title" id="trait-detail-title"></strong><div id="trait-detail-copy"></div></section>
+
+        <article class="metatype-profile" aria-labelledby="profile-title">
+          <header class="profile-banner"><div><span>Natural capability ranges</span><h2 id="profile-title">Metatype attribute profile</h2></div><strong id="metatype-code">MT-000</strong></header>
+          <section class="attribute-section"><div class="range-key"><span>Racial minimum</span><span>Natural maximum</span></div><dl class="attribute-grid" id="attribute-grid"></dl></section>
+          <dl class="identity-strip"><div><dt>Average height</dt><dd id="height">—</dd></div><div><dt>Average weight</dt><dd id="weight">—</dd></div><div><dt>Average lifespan</dt><dd id="lifespan">—</dd></div></dl>
+          <dl class="movement-grid"><div><dt>Initiative</dt><dd id="initiative">—</dd></div><div><dt>Walk</dt><dd id="walk">—</dd></div><div><dt>Run</dt><dd id="run">—</dd></div><div><dt>Sprint increase</dt><dd id="sprint">—</dd></div></dl>
+        </article>
+
+        <section class="section priority-section"><h2 class="section-title">Metatype priority options</h2><dl id="priority-options"></dl></section>
+        <section class="section metatype-description"><h2 class="section-title">Metatype profile</h2><p id="description"></p></section>
+        <section class="section"><div class="source-book"><span class="source-code" id="source-code">CRB</span><strong class="source-title" id="source-title">Shadowrun Fifth Edition Core Rulebook</strong></div></section>
+      </section>
+    </div></article>
+  </main>
+  <footer><div class="footer-frame"><div class="footer-bars" aria-hidden="true"></div><div class="footer-copy">&gt;&gt; ORIGIN. APTITUDE. IDENTITY.<br>DEFINE THE RUNNER.</div><div class="footer-warning">Natural limits shape potential.<br>They do not define the individual.</div><span class="sigil" aria-hidden="true">⌁</span></div></footer>
+</div>
+
+<script>
+(async function () {
+  "use strict";
+  var response = await fetch("./metatypes.json", { cache: "no-store" });
+  if (!response.ok) throw new Error("Failed to load metatypes.json: HTTP " + response.status);
+  var payload = await response.json();
+  if (!payload || !payload.metatypes || !payload.category || !payload.racial_traits) throw new Error("metatypes.json must contain metatypes, category and racial_traits.");
+  var metatypes = Object.keys(payload.metatypes).map(function (name) { return Object.assign({ name: name }, payload.metatypes[name]); });
+  var sourceLabels = { CRB: "Shadowrun Fifth Edition Core Rulebook" };
+  var attributeLabels = { body: ["Body", "BOD"], agility: ["Agility", "AGI"], reaction: ["Reaction", "REA"], strength: ["Strength", "STR"], willpower: ["Willpower", "WIL"], logic: ["Logic", "LOG"], intuition: ["Intuition", "INT"], charisma: ["Charisma", "CHA"], edge: ["Edge", "EDG"] };
+  var state = { metatype: "", query: "", trait: "", filtersOpen: false, selectedTrait: "" };
+  var listView = document.getElementById("list-view"), recordView = document.getElementById("record-view"), list = document.getElementById("metatype-list"), search = document.getElementById("search"), traitFilter = document.getElementById("trait-filter"), traitDetail = document.getElementById("trait-detail");
+  function setText(id, value) { document.getElementById(id).textContent = value == null || value === "" ? "—" : value; }
+  function traitKey(value) { value = String(value || ""); if (value === "Low-Light Vision" || value === "Thermographic Vision") return value; if (/pathogen|toxin/i.test(value)) return "Pathogen and Toxin Resistance"; if (/Reach/i.test(value)) return "Reach"; if (/Dermal Armor/i.test(value)) return "Dermal Armor"; if (/Lifestyle cost/i.test(value)) return "Lifestyle Cost"; return value; }
+  function traitsFor(metatype) { return Array.from(new Set((metatype.racial_traits || []).map(traitKey).filter(Boolean))); }
+  function filtered() { var query = state.query.trim().toLowerCase(); return metatypes.filter(function (metatype) { return (!query || metatype.name.toLowerCase().includes(query) || String(metatype.scientific_name).toLowerCase().includes(query)) && (!state.trait || traitsFor(metatype).includes(state.trait)); }); }
+  function fillTraits() { traitFilter.replaceChildren(); var all = document.createElement("option"); all.value = ""; all.textContent = "All racial traits"; traitFilter.appendChild(all); Object.keys(payload.racial_traits).sort().forEach(function (value) { var option = document.createElement("option"); option.value = value; option.textContent = value; traitFilter.appendChild(option); }); traitFilter.value = state.trait; }
+  function renderControls() { document.getElementById("filters").hidden = !state.filtersOpen; document.getElementById("filter-toggle").setAttribute("aria-expanded", state.filtersOpen ? "true" : "false"); search.value = state.query; document.getElementById("search-clear").disabled = !state.query; document.getElementById("trait-clear").disabled = !state.trait; }
+  function renderList() { var rows = filtered(), hasFilters = Boolean(state.query || state.trait); setText("list-count", hasFilters ? rows.length + " of " + metatypes.length + " records" : metatypes.length + " records"); list.replaceChildren(); if (!rows.length) { var empty = document.createElement("div"); empty.className = "empty-message"; empty.textContent = "No metatypes match the current filters."; list.appendChild(empty); return; } rows.forEach(function (metatype) { var button = document.createElement("button"); button.type = "button"; button.className = "metatype-list-item"; button.setAttribute("aria-label", "Open " + metatype.name + " metatype record"); var index = document.createElement("span"); index.className = "metatype-list-index"; index.textContent = "MT-" + String(metatypes.indexOf(metatype) + 1).padStart(3, "0"); index.setAttribute("aria-hidden", "true"); var name = document.createElement("span"); name.className = "metatype-list-name"; name.textContent = metatype.name; var bodyRange = metatype.attributes && metatype.attributes.body, value = document.createElement("span"); value.className = "metatype-list-value"; value.textContent = bodyRange ? "BOD " + bodyRange.minimum + "–" + bodyRange.maximum : "—"; button.append(index, name, value); button.addEventListener("click", function () { openMetatype(metatype.name); }); list.appendChild(button); }); }
+  function renderTraits(metatype) { var tags = document.getElementById("trait-tags"); tags.replaceChildren(); state.selectedTrait = ""; traitsFor(metatype).forEach(function (trait) { var button = document.createElement("button"); button.type = "button"; button.className = "tag-toggle"; button.dataset.trait = trait; button.setAttribute("aria-pressed", "false"); button.textContent = trait; button.addEventListener("click", function () { state.selectedTrait = state.selectedTrait === trait ? "" : trait; renderTraitDetail(); }); tags.appendChild(button); }); }
+  function renderTraitDetail() { Array.prototype.forEach.call(document.querySelectorAll("#trait-tags button"), function (button) { button.setAttribute("aria-pressed", button.dataset.trait === state.selectedTrait ? "true" : "false"); }); if (!state.selectedTrait) { traitDetail.hidden = true; return; } setText("trait-detail-title", state.selectedTrait); document.getElementById("trait-detail-copy").innerHTML = payload.racial_traits[state.selectedTrait] || "No racial trait details are available."; traitDetail.hidden = false; }
+  function renderAttributes(metatype) { var grid = document.getElementById("attribute-grid"); grid.replaceChildren(); Object.keys(attributeLabels).forEach(function (key) { var range = metatype.attributes && metatype.attributes[key]; if (!range) return; var item = document.createElement("div"), term = document.createElement("dt"), values = document.createElement("dd"), minimum = document.createElement("span"), separator = document.createElement("i"), maximum = document.createElement("strong"), code = document.createElement("small"); term.textContent = attributeLabels[key][0]; minimum.textContent = range.minimum; separator.textContent = "→"; maximum.textContent = range.maximum; code.textContent = attributeLabels[key][1]; values.append(minimum, separator, maximum); item.append(term, values, code); grid.appendChild(item); }); var essence = metatype.attributes && metatype.attributes.essence; if (essence != null) { var item = document.createElement("div"), term = document.createElement("dt"), value = document.createElement("dd"), code = document.createElement("small"); term.textContent = "Essence"; value.textContent = essence; code.textContent = "ESS"; item.className = "essence-attribute"; item.append(term, value, code); grid.appendChild(item); } }
+  function renderPriorities(options) { var target = document.getElementById("priority-options"); target.replaceChildren(); Object.keys(options || {}).forEach(function (priority) { var item = document.createElement("div"), term = document.createElement("dt"), value = document.createElement("dd"); term.textContent = "Priority " + priority; value.textContent = options[priority] + " Special Attribute Points"; item.append(term, value); target.appendChild(item); }); }
+  function renderRecord(metatype) { setText("metatype-title", metatype.name); setText("scientific-name", metatype.scientific_name); setText("metatype-code", "MT-" + String(metatypes.indexOf(metatype) + 1).padStart(3, "0")); renderAttributes(metatype); setText("height", metatype.average_height); setText("weight", metatype.average_weight); setText("lifespan", metatype.average_lifespan); setText("initiative", metatype.initiative); setText("walk", metatype.movement && metatype.movement.walk); setText("run", metatype.movement && metatype.movement.run); setText("sprint", metatype.movement && metatype.movement.sprint_increase); renderPriorities(metatype.priority_options); setText("description", metatype.description || "No description is available."); renderTraits(metatype); renderTraitDetail(); var source = String(metatype.source || "—"), match = source.match(/^[A-Za-z0-9]+/), code = match ? match[0].toUpperCase() : "—"; setText("source-code", code); setText("source-title", sourceLabels[code] || "Source unavailable"); }
+  function updateHash() { var hash = state.metatype ? "#" + encodeURIComponent(state.metatype) : "#metatypes"; if (location.hash !== hash) history.replaceState(null, "", hash); }
+  function showList(skipHash) { state.metatype = ""; state.selectedTrait = ""; recordView.hidden = true; listView.hidden = false; renderList(); if (!skipHash) updateHash(); }
+  function openMetatype(name, skipHash) { var metatype = metatypes.find(function (entry) { return entry.name === name; }); if (!metatype) return; state.metatype = name; renderRecord(metatype); listView.hidden = true; recordView.hidden = false; if (!skipHash) updateHash(); window.scrollTo(0, 0); }
+  document.getElementById("category-copy").innerHTML = payload.category.Metatypes || ""; fillTraits(); renderControls();
+  document.getElementById("filter-toggle").addEventListener("click", function () { state.filtersOpen = !state.filtersOpen; renderControls(); if (state.filtersOpen) search.focus(); }); search.addEventListener("input", function () { state.query = search.value; renderControls(); renderList(); }); traitFilter.addEventListener("change", function () { state.trait = traitFilter.value; renderControls(); renderList(); }); document.getElementById("search-clear").addEventListener("click", function () { state.query = ""; renderControls(); renderList(); search.focus(); }); document.getElementById("trait-clear").addEventListener("click", function () { state.trait = ""; traitFilter.value = ""; renderControls(); renderList(); traitFilter.focus(); }); document.getElementById("back").addEventListener("click", function () { showList(); });
+  function readHash() { var name = decodeURIComponent(location.hash.slice(1)); if (name && name !== "metatypes" && metatypes.some(function (metatype) { return metatype.name === name; })) openMetatype(name, true); else showList(true); }
+  window.addEventListener("hashchange", readHash); readHash(); updateHash();
+}()).catch(function (error) { console.error("Failed to initialise metatype page:", error); var panel = document.querySelector(".metatype-panel .panel-inner"); if (panel) panel.innerHTML = '<div class="empty-message"><strong>Failed to load metatypes.json.</strong><br>Serve metatypes.html and metatypes.json from the same folder over HTTP or HTTPS.</div>'; });
+</script>
+</body>
+</html>

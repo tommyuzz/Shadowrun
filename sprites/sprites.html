@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Shadowrun Fifth Edition sprite reference browser.">
+  <title>Shadowrun 5e // Sprite Index</title>
+  <link rel="stylesheet" href="../assets/css/shared.css">
+  <link rel="stylesheet" href="../assets/css/pages/sprites.css">
+  <link rel="stylesheet" href="../assets/css/responsive.css">
+</head>
+<body>
+<div class="sheet">
+  <header class="masthead">
+    <svg class="brand-mark" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="currentColor" stroke-width="3"/><path d="M26 34 50 19l24 15v32L50 81 26 66Z" fill="none" stroke="currentColor" stroke-width="4"/><path d="M26 34 50 49l24-15M50 49v32" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="50" cy="49" r="7" fill="currentColor"/><circle cx="26" cy="34" r="4" fill="currentColor"/><circle cx="74" cy="34" r="4" fill="currentColor"/><circle cx="50" cy="81" r="4" fill="currentColor"/></svg>
+    <div><p class="kicker">Resonance operations archive</p><a class="brand-link" href="../shadowrunhome.html#hacking" aria-label="Return to Shadowrun home page"><p class="brand-title">Shadowrun</p></a><p class="brand-subtitle">Fifth edition sprite index</p></div>
+    <div class="record-id" aria-label="Dataset identification"><strong>RESONANCE // 5E</strong><span>DATASET: SPRITES.JSON</span><div class="barcode" aria-hidden="true"></div></div>
+  </header>
+
+  <main class="workspace sprite-workspace">
+    <aside class="sidebar" aria-label="Sprite rules and Matrix key">
+      <section class="panel category-panel"><div class="panel-inner"><h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Sprite protocol</h2><div class="category-description" id="category-copy"></div></div></section>
+      <section class="panel legend-panel"><div class="panel-inner"><h2 class="panel-heading"><span class="crosshair" aria-hidden="true"></span>Resonance key</h2><dl class="legend-grid"><div class="legend-row"><dt>L</dt><dd>Sprite Level</dd></div><div class="legend-row"><dt>ATT</dt><dd>Attack</dd></div><div class="legend-row"><dt>SLZ</dt><dd>Sleaze</dd></div><div class="legend-row"><dt>DP</dt><dd>Data Processing</dd></div><div class="legend-row"><dt>FW</dt><dd>Firewall</dd></div><div class="legend-row"><dt>RES</dt><dd>Resonance</dd></div><div class="legend-row"><dt>CM</dt><dd>Matrix Condition Monitor</dd></div></dl></div></section>
+    </aside>
+
+    <article class="panel sprite-panel" aria-live="polite"><div class="panel-inner">
+      <section id="list-view">
+        <header class="sprite-header sprite-list-header"><button class="filter-toggle-button" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters">Filter</button><p class="eyebrow">Resonance archive // Sprite list</p><h1>Sprites</h1></header>
+        <div class="sprite-filters" id="filters" hidden><div><label class="search-label" for="search">Search sprites</label><div class="filter-control"><input class="search" id="search" type="search" placeholder="Enter sprite name…" autocomplete="off"><button class="filter-clear-button" id="search-clear" type="button" aria-label="Clear sprite search" disabled>×</button></div></div><div><label class="search-label" for="power-filter">Power</label><div class="filter-control"><select class="search keyword-filter" id="power-filter"><option value="">All powers</option></select><button class="filter-clear-button" id="power-clear" type="button" aria-label="Clear sprite power filter" disabled>×</button></div></div><div><label class="search-label" for="skill-filter">Skill</label><div class="filter-control"><select class="search keyword-filter" id="skill-filter"><option value="">All skills</option></select><button class="filter-clear-button" id="skill-clear" type="button" aria-label="Clear sprite skill filter" disabled>×</button></div></div></div>
+        <div class="sprite-list-summary"><span>Select a sprite to open its full Resonance profile</span><strong id="list-count">0 records</strong></div><div class="sprite-list" id="sprite-list"></div>
+      </section>
+
+      <section id="record-view" hidden>
+        <header class="sprite-header sprite-record-header"><button class="back-button" id="back" type="button">Back to list</button><p class="eyebrow">Compiled entity // Sprite record</p><h1 id="sprite-title">Sprite</h1><div class="tag-row" id="power-tags" aria-label="Sprite powers"></div></header>
+        <section class="tag-detail" id="power-detail" aria-live="polite" hidden><strong class="tag-detail-title" id="power-detail-title"></strong><div id="power-detail-copy"></div></section>
+
+        <article class="sprite-profile" aria-labelledby="profile-title">
+          <header class="profile-banner"><div><span>Level-derived Matrix entity</span><h2 id="profile-title">Resonance profile</h2></div><strong id="sprite-code">SR-000</strong></header>
+          <section class="matrix-attribute-section"><h3>Matrix attributes</h3><dl class="matrix-attribute-grid"><div data-attribute="attack"><dt>Attack</dt><dd id="attack">—</dd><span>ATT</span></div><div data-attribute="sleaze"><dt>Sleaze</dt><dd id="sleaze">—</dd><span>SLZ</span></div><div data-attribute="data-processing"><dt>Data Processing</dt><dd id="data-processing">—</dd><span>DP</span></div><div data-attribute="firewall"><dt>Firewall</dt><dd id="firewall">—</dd><span>FW</span></div></dl></section>
+          <dl class="resonance-strip"><div><dt>Resonance</dt><dd id="resonance">—</dd></div><div><dt>Device Rating</dt><dd id="device-rating">—</dd></div><div><dt>Condition Monitor</dt><dd id="condition-monitor">—</dd></div></dl>
+          <dl class="initiative-strip"><div><dt>Initiative</dt><dd id="initiative">—</dd></div><div><dt>Initiative dice</dt><dd id="initiative-dice">—</dd></div></dl>
+        </article>
+
+        <section class="section sprite-description"><h2 class="section-title">Operational profile</h2><p id="description"></p></section>
+        <section class="section skill-section"><h2 class="section-title">Skills</h2><ul id="skills"></ul></section>
+        <section class="section"><div class="source-book"><span class="source-code" id="source-code">CRB</span><strong class="source-title" id="source-title">Shadowrun Fifth Edition Core Rulebook</strong></div></section>
+      </section>
+    </div></article>
+  </main>
+  <footer><div class="footer-frame"><div class="footer-bars" aria-hidden="true"></div><div class="footer-copy">&gt;&gt; COMPILE. TASK. REGISTER.<br>FOLLOW THE RESONANCE.</div><div class="footer-warning">Level shapes the entity.<br>Every service has a cost.</div><span class="sigil" aria-hidden="true">⌁</span></div></footer>
+</div>
+
+<script>
+(async function () {
+  "use strict";
+  var response = await fetch("./sprites.json", { cache: "no-store" });
+  if (!response.ok) throw new Error("Failed to load sprites.json: HTTP " + response.status);
+  var payload = await response.json();
+  if (!payload || !payload.sprites || !payload.sprite_powers || !payload.category) throw new Error("sprites.json must contain sprites, sprite_powers and category.");
+  var sprites = Object.keys(payload.sprites).map(function (name) { return Object.assign({ name: name }, payload.sprites[name]); });
+  var sourceLabels = { CRB: "Shadowrun Fifth Edition Core Rulebook" };
+  var matrixAttributes = [["attack", "ATT"], ["sleaze", "SLZ"], ["data_processing", "DP"], ["firewall", "FW"]];
+  var state = { sprite: "", query: "", power: "", skill: "", filtersOpen: false, selectedPower: "" };
+  var listView = document.getElementById("list-view"), recordView = document.getElementById("record-view"), list = document.getElementById("sprite-list"), search = document.getElementById("search"), powerFilter = document.getElementById("power-filter"), skillFilter = document.getElementById("skill-filter"), powerDetail = document.getElementById("power-detail");
+  function setText(id, value) { document.getElementById(id).textContent = value == null || value === "" ? "—" : value; }
+  function filtered() { var query = state.query.trim().toLowerCase(); return sprites.filter(function (sprite) { return (!query || sprite.name.toLowerCase().includes(query)) && (!state.power || (sprite.powers || []).includes(state.power)) && (!state.skill || (sprite.skills || []).includes(state.skill)); }); }
+  function fillSelect(select, values, label) { select.replaceChildren(); var all = document.createElement("option"); all.value = ""; all.textContent = label; select.appendChild(all); values.forEach(function (value) { var option = document.createElement("option"); option.value = value; option.textContent = value; select.appendChild(option); }); }
+  function renderFilters() { fillSelect(powerFilter, Object.keys(payload.sprite_powers).sort(), "All powers"); fillSelect(skillFilter, Array.from(new Set(sprites.flatMap(function (sprite) { return sprite.skills || []; }))).sort(), "All skills"); powerFilter.value = state.power; skillFilter.value = state.skill; }
+  function renderControls() { document.getElementById("filters").hidden = !state.filtersOpen; document.getElementById("filter-toggle").setAttribute("aria-expanded", state.filtersOpen ? "true" : "false"); search.value = state.query; document.getElementById("search-clear").disabled = !state.query; document.getElementById("power-clear").disabled = !state.power; document.getElementById("skill-clear").disabled = !state.skill; }
+  function attributeOffset(value) { var match = String(value || "").match(/L\s*([+-])\s*(\d+)/i); return match ? (match[1] === "+" ? Number(match[2]) : -Number(match[2])) : 0; }
+  function strongestAttribute(sprite) { return matrixAttributes.reduce(function (best, entry) { return attributeOffset(sprite[entry[0]]) > attributeOffset(sprite[best[0]]) ? entry : best; }, matrixAttributes[0]); }
+  function renderList() { var rows = filtered(), hasFilters = Boolean(state.query || state.power || state.skill); setText("list-count", hasFilters ? rows.length + " of " + sprites.length + " records" : sprites.length + " records"); list.replaceChildren(); if (!rows.length) { var empty = document.createElement("div"); empty.className = "empty-message"; empty.textContent = "No sprites match the current filters."; list.appendChild(empty); return; } rows.forEach(function (sprite) { var button = document.createElement("button"); button.type = "button"; button.className = "sprite-list-item"; button.setAttribute("aria-label", "Open " + sprite.name + " record"); var index = document.createElement("span"); index.className = "sprite-list-index"; index.textContent = "SR-" + String(sprites.indexOf(sprite) + 1).padStart(3, "0"); index.setAttribute("aria-hidden", "true"); var name = document.createElement("span"); name.className = "sprite-list-name"; name.textContent = sprite.name; var strongest = strongestAttribute(sprite), value = document.createElement("span"); value.className = "sprite-list-value"; value.textContent = strongest[1] + " " + sprite[strongest[0]]; button.append(index, name, value); button.addEventListener("click", function () { openSprite(sprite.name); }); list.appendChild(button); }); }
+  function renderPowerTags(sprite) { var tags = document.getElementById("power-tags"); tags.replaceChildren(); state.selectedPower = ""; (sprite.powers || []).forEach(function (power) { var button = document.createElement("button"); button.type = "button"; button.className = "tag-toggle"; button.dataset.power = power; button.setAttribute("aria-pressed", "false"); button.textContent = power; button.addEventListener("click", function () { state.selectedPower = state.selectedPower === power ? "" : power; renderPowerDetail(); }); tags.appendChild(button); }); }
+  function renderPowerDetail() { Array.prototype.forEach.call(document.querySelectorAll("#power-tags button"), function (button) { button.setAttribute("aria-pressed", button.dataset.power === state.selectedPower ? "true" : "false"); }); var power = payload.sprite_powers[state.selectedPower]; if (!power) { powerDetail.hidden = true; return; } setText("power-detail-title", state.selectedPower); var copy = document.getElementById("power-detail-copy"); copy.replaceChildren(); if (power.test) { var test = document.createElement("p"), label = document.createElement("strong"); label.textContent = "Test: "; test.append(label, document.createTextNode(power.test)); copy.appendChild(test); } var description = document.createElement("p"); description.textContent = power.description || "No power description is available."; copy.appendChild(description); powerDetail.hidden = false; }
+  function renderListItems(id, values) { var target = document.getElementById(id); target.replaceChildren(); (Array.isArray(values) ? values : []).forEach(function (value) { var item = document.createElement("li"); item.textContent = value; target.appendChild(item); }); }
+  function renderRecord(sprite) { setText("sprite-title", sprite.name); setText("sprite-code", "SR-" + String(sprites.indexOf(sprite) + 1).padStart(3, "0")); setText("attack", sprite.attack); setText("sleaze", sprite.sleaze); setText("data-processing", sprite.data_processing); setText("firewall", sprite.firewall); setText("resonance", sprite.resonance); setText("device-rating", sprite.device_rating); setText("condition-monitor", sprite.matrix_condition_monitor); setText("initiative", sprite.initiative); setText("initiative-dice", sprite.initiative_dice); setText("description", sprite.description || "No description is available."); renderListItems("skills", sprite.skills); renderPowerTags(sprite); renderPowerDetail(); var source = String(sprite.source || "—"), match = source.match(/^[A-Za-z0-9]+/), code = match ? match[0].toUpperCase() : "—"; setText("source-code", code); setText("source-title", sourceLabels[code] || "Source unavailable"); }
+  function updateHash() { var hash = state.sprite ? "#" + encodeURIComponent(state.sprite) : "#sprites"; if (location.hash !== hash) history.replaceState(null, "", hash); }
+  function showList(skipHash) { state.sprite = ""; state.selectedPower = ""; recordView.hidden = true; listView.hidden = false; renderList(); if (!skipHash) updateHash(); }
+  function openSprite(name, skipHash) { var sprite = sprites.find(function (entry) { return entry.name === name; }); if (!sprite) return; state.sprite = name; renderRecord(sprite); listView.hidden = true; recordView.hidden = false; if (!skipHash) updateHash(); window.scrollTo(0, 0); }
+  document.getElementById("category-copy").innerHTML = payload.category.Sprites || ""; renderFilters(); renderControls();
+  document.getElementById("filter-toggle").addEventListener("click", function () { state.filtersOpen = !state.filtersOpen; renderControls(); if (state.filtersOpen) search.focus(); }); search.addEventListener("input", function () { state.query = search.value; renderControls(); renderList(); }); powerFilter.addEventListener("change", function () { state.power = powerFilter.value; renderControls(); renderList(); }); skillFilter.addEventListener("change", function () { state.skill = skillFilter.value; renderControls(); renderList(); }); document.getElementById("search-clear").addEventListener("click", function () { state.query = ""; renderControls(); renderList(); search.focus(); }); document.getElementById("power-clear").addEventListener("click", function () { state.power = ""; powerFilter.value = ""; renderControls(); renderList(); powerFilter.focus(); }); document.getElementById("skill-clear").addEventListener("click", function () { state.skill = ""; skillFilter.value = ""; renderControls(); renderList(); skillFilter.focus(); }); document.getElementById("back").addEventListener("click", function () { showList(); });
+  function readHash() { var name = decodeURIComponent(location.hash.slice(1)); if (name && name !== "sprites" && sprites.some(function (sprite) { return sprite.name === name; })) openSprite(name, true); else showList(true); }
+  window.addEventListener("hashchange", readHash); readHash(); updateHash();
+}()).catch(function (error) { console.error("Failed to initialise sprite page:", error); var panel = document.querySelector(".sprite-panel .panel-inner"); if (panel) panel.innerHTML = '<div class="empty-message"><strong>Failed to load sprites.json.</strong><br>Serve sprites.html and sprites.json from the same folder over HTTP or HTTPS.</div>'; });
+</script>
+</body>
+</html>
