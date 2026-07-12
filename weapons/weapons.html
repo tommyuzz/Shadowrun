@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../assets/css/shared.css">
   <link rel="stylesheet" href="../assets/css/pages/weapons.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+  <script src="../assets/js/reference-browser.js"></script>
+  <script src="../assets/js/source-books.js"></script>
 </head>
 <body>
 <div class="sheet">
@@ -58,7 +60,7 @@
 
     <article class="panel weapon-panel" id="weapon-panel" role="tabpanel" aria-labelledby="all-tab" aria-live="polite"><div class="panel-inner">
       <section class="weapon-list-view" id="list-view">
-        <header class="weapon-header weapon-list-header">
+        <header class="reference-header reference-list-header weapon-header weapon-list-header">
           <p class="eyebrow" id="list-eyebrow">Complete archive // Weapon list</p>
           <h1 id="list-title">All weapons</h1>
           <button class="filter-toggle-button" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters">Filter</button>
@@ -79,12 +81,12 @@
           </div>
         </div>
 
-        <div class="weapon-list-summary"><span>Select a weapon to open its full record</span><strong id="list-count">0 records</strong></div>
-        <div class="weapon-list" id="weapon-list"></div>
+        <div class="reference-list-summary weapon-list-summary"><span>Select a weapon to open its full record</span><strong id="list-count">0 records</strong></div>
+        <div class="reference-list weapon-list" id="weapon-list"></div>
       </section>
 
       <section class="weapon-record-view" id="record-view" hidden>
-        <header class="weapon-header">
+        <header class="reference-header reference-record-header weapon-header">
           <p class="eyebrow" id="record-eyebrow">Weapon record</p>
           <h1 id="weapon-title">Weapon</h1>
           <button class="back-button" id="back" type="button">Back to list</button>
@@ -109,9 +111,7 @@
 <script>
   (async function () {
     "use strict";
-    var response = await fetch("./weapons.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Failed to load weapons.json: HTTP " + response.status);
-    var payload = await response.json();
+    var payload = await ShadowrunReference.fetchJson("./weapons.json");
     if (!payload || !payload.weapons || !payload.subcategories) {
       throw new Error("weapons.json must contain weapons and subcategories objects.");
     }
@@ -137,7 +137,7 @@
     });
 
     var categories = ["All", "Melee", "Projectile", "Firearms", "Heavy Weapons", "Explosives"];
-    var sourceLabels = { CRB: "Shadowrun Fifth Edition Core Rulebook" };
+    var sourceLabels = ShadowrunSourceBooks;
     var state = { category: "All", weapon: null, query: "", subcategory: "", legality: "", filtersOpen: false, recordTag: "" };
     var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
     var listView = document.getElementById("list-view");
@@ -203,10 +203,10 @@
       }
 
       rows.forEach(function (weapon) {
-        var button = document.createElement("button"); button.type = "button"; button.className = "weapon-list-item"; button.dataset.weapon = weapon.key; button.setAttribute("aria-label", "Open " + weapon.name + " weapon record");
-        var index = document.createElement("span"); index.className = "list-index"; index.textContent = "WP-" + String(allIndex(weapon.key)).padStart(3, "0"); index.setAttribute("aria-hidden", "true");
-        var name = document.createElement("span"); name.className = "weapon-list-name"; name.textContent = weapon.name;
-        var value = document.createElement("span"); value.className = "weapon-list-value"; value.textContent = weapon.subcategory || "Uncategorised";
+        var button = document.createElement("button"); button.type = "button"; button.className = "reference-list-item weapon-list-item"; button.dataset.weapon = weapon.key; button.setAttribute("aria-label", "Open " + weapon.name + " weapon record");
+        var index = document.createElement("span"); index.className = "reference-list-index list-index"; index.textContent = "WP-" + String(allIndex(weapon.key)).padStart(3, "0"); index.setAttribute("aria-hidden", "true");
+        var name = document.createElement("span"); name.className = "reference-list-name weapon-list-name"; name.textContent = weapon.name;
+        var value = document.createElement("span"); value.className = "reference-list-meta weapon-list-value"; value.textContent = weapon.subcategory || "Uncategorised";
         button.append(index, name, value); button.addEventListener("click", function () { selectWeapon(weapon.key); }); weaponList.appendChild(button);
       });
     }

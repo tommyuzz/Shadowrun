@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../assets/css/shared.css">
     <link rel="stylesheet" href="../assets/css/pages/cyberdecks.css">
     <link rel="stylesheet" href="../assets/css/responsive.css">
+    <script src="../assets/js/reference-browser.js"></script>
+    <script src="../assets/js/source-books.js"></script>
 </head>
 <body>
 <div class="sheet">
@@ -59,12 +61,10 @@
 <script>
     (async function () {
         "use strict";
-        var response = await fetch("./cyberdecks.json", { cache: "no-store" });
-        if (!response.ok) throw new Error("Failed to load cyberdecks.json: HTTP " + response.status);
-        var payload = await response.json();
+        var payload = await ShadowrunReference.fetchJson("./cyberdecks.json");
         if (!payload || !payload.cyberdecks || !payload.software || !payload.category || !payload.subcategories) throw new Error("cyberdecks.json must contain cyberdecks, software, category and subcategories.");
         var data = { Cyberdecks: Object.keys(payload.cyberdecks).map(function (name) { return Object.assign({ name: name }, payload.cyberdecks[name]); }), Software: Object.keys(payload.software).map(function (name) { return Object.assign({ name: name }, payload.software[name]); }) };
-        var sourceLabels = { CRB: "Shadowrun Fifth Edition Core Rulebook" };
+        var sourceLabels = ShadowrunSourceBooks;
         var state = { category: "Cyberdecks", record: "", query: "", type: "", filtersOpen: false, tag: "" };
         var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab")), listView = document.getElementById("list-view"), recordView = document.getElementById("record-view"), list = document.getElementById("matrix-list"), search = document.getElementById("search"), typeFilter = document.getElementById("type-filter"), tagDetail = document.getElementById("tag-detail");
         function setText(id, value) { document.getElementById(id).textContent = value == null || value === "" ? "—" : value; }

@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../assets/css/shared.css">
   <link rel="stylesheet" href="../assets/css/pages/vehicles.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+  <script src="../assets/js/reference-browser.js"></script>
+  <script src="../assets/js/source-books.js"></script>
 </head>
 <body>
 <div class="sheet">
@@ -60,7 +62,7 @@
 
     <article class="panel vehicle-panel" id="vehicle-panel" role="tabpanel" aria-labelledby="all-tab" aria-live="polite"><div class="panel-inner">
       <section class="vehicle-list-view" id="list-view">
-        <header class="vehicle-header vehicle-list-header">
+        <header class="reference-header reference-list-header vehicle-header vehicle-list-header">
           <p class="eyebrow" id="list-eyebrow">Complete archive // Vehicle list</p>
           <h1 id="list-title">All vehicles</h1>
           <button class="filter-toggle-button" id="filter-toggle" type="button" aria-expanded="false" aria-controls="filters">Filter</button>
@@ -71,12 +73,12 @@
           <div class="vehicle-filter-field"><label class="search-label" for="subcategory">Vehicle type</label><div class="filter-control"><select class="search keyword-filter" id="subcategory"><option value="">All types</option></select><button class="filter-clear-button" id="subcategory-clear" type="button" aria-label="Clear vehicle type filter" title="Clear vehicle type" disabled>×</button></div></div>
         </div>
 
-        <div class="vehicle-list-summary"><span>Select a vehicle to open its full record</span><strong id="list-count">0 records</strong></div>
-        <div class="vehicle-list" id="vehicle-list"></div>
+        <div class="reference-list-summary vehicle-list-summary"><span>Select a vehicle to open its full record</span><strong id="list-count">0 records</strong></div>
+        <div class="reference-list vehicle-list" id="vehicle-list"></div>
       </section>
 
       <section class="vehicle-record-view" id="record-view" hidden>
-        <header class="vehicle-header">
+        <header class="reference-header reference-record-header vehicle-header">
           <p class="eyebrow" id="record-eyebrow">Vehicle record</p>
           <h1 id="vehicle-title">Vehicle</h1>
           <button class="back-button" id="back" type="button">Back to list</button>
@@ -115,13 +117,11 @@
 <script>
   (async function () {
     "use strict";
-    var response = await fetch("./vehicles.json", { cache: "no-store" });
-    if (!response.ok) throw new Error("Failed to load vehicles.json: HTTP " + response.status);
-    var payload = await response.json();
+    var payload = await ShadowrunReference.fetchJson("./vehicles.json");
     if (!payload || !payload.vehicles || !payload.category || !payload.subcategories) throw new Error("vehicles.json must contain vehicles, category and subcategories objects.");
 
     var categories = ["All", "Groundcraft", "Watercraft", "Aircraft"];
-    var sourceLabels = { CRB: "Shadowrun Fifth Edition Core Rulebook" };
+    var sourceLabels = ShadowrunSourceBooks;
     var categoryRules = payload.category;
     var subcategoryRules = payload.subcategories;
     var vehicles = Object.keys(payload.vehicles).map(function (name) { return Object.assign({ name: name }, payload.vehicles[name]); });
@@ -168,10 +168,10 @@
       vehicleList.replaceChildren();
       if (!rows.length) { var empty = document.createElement("div"); empty.className = "empty-message"; empty.textContent = hasFilters ? "No vehicles match the current filters." : "No vehicles are listed in this category."; vehicleList.appendChild(empty); return; }
       rows.forEach(function (vehicle) {
-        var button = document.createElement("button"); button.type = "button"; button.className = "vehicle-list-item"; button.dataset.category = vehicle.category; button.setAttribute("aria-label", "Open " + vehicle.name + " vehicle record");
-        var index = document.createElement("span"); index.className = "list-index"; index.textContent = "VH-" + String(allIndex(vehicle.name)).padStart(3, "0"); index.setAttribute("aria-hidden", "true");
-        var name = document.createElement("span"); name.className = "vehicle-list-name"; name.textContent = vehicle.name;
-        var value = document.createElement("span"); value.className = "vehicle-list-value"; value.textContent = vehicle.subcategory || "Uncategorised";
+        var button = document.createElement("button"); button.type = "button"; button.className = "reference-list-item vehicle-list-item"; button.dataset.category = vehicle.category; button.setAttribute("aria-label", "Open " + vehicle.name + " vehicle record");
+        var index = document.createElement("span"); index.className = "reference-list-index list-index"; index.textContent = "VH-" + String(allIndex(vehicle.name)).padStart(3, "0"); index.setAttribute("aria-hidden", "true");
+        var name = document.createElement("span"); name.className = "reference-list-name vehicle-list-name"; name.textContent = vehicle.name;
+        var value = document.createElement("span"); value.className = "reference-list-meta vehicle-list-value"; value.textContent = vehicle.subcategory || "Uncategorised";
         button.append(index, name, value); button.addEventListener("click", function () { selectVehicle(vehicle.name); }); vehicleList.appendChild(button);
       });
     }

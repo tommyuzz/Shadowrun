@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="../assets/css/shared.css">
   <link rel="stylesheet" href="../assets/css/pages/matrixinteraction.css">
   <link rel="stylesheet" href="../assets/css/responsive.css">
+  <script src="../assets/js/reference-browser.js"></script>
+  <script src="../assets/js/source-books.js"></script>
 </head>
 <body>
 <div class="sheet">
@@ -59,12 +61,10 @@
 <script>
 (async function () {
   "use strict";
-  var response = await fetch("./matrixinteraction.json", { cache: "no-store" });
-  if (!response.ok) throw new Error("Failed to load matrixinteraction.json: HTTP " + response.status);
-  var payload = await response.json();
+  var payload = await ShadowrunReference.fetchJson("./matrixinteraction.json");
   if (!payload || !payload.matrix_actions || !payload.complex_forms || !payload.category || !payload.subcategories) throw new Error("matrixinteraction.json must contain matrix_actions, complex_forms, category and subcategories.");
   var data = { "Matrix Actions": Object.keys(payload.matrix_actions).map(function (name) { return Object.assign({ name: name }, payload.matrix_actions[name]); }), "Complex Forms": Object.keys(payload.complex_forms).map(function (name) { return Object.assign({ name: name }, payload.complex_forms[name]); }) };
-  var sourceLabels = { CRB: "Shadowrun Fifth Edition Core Rulebook" };
+  var sourceLabels = ShadowrunSourceBooks;
   var attributeCodes = { Attack: "ATT", Sleaze: "SLZ", "Data Processing": "DP", Firewall: "FW", Variable: "VAR" };
   var actionLegend = [["ACT", "Matrix action type"], ["MRK", "Marks required"], ["ATT", "Attack"], ["SLZ", "Sleaze"], ["DP", "Data Processing"], ["FW", "Firewall"]];
   var formLegend = [["L", "Complex Form Level"], ["FAD", "Fading Value"], ["I", "Instant duration"], ["S", "Sustained duration"], ["P", "Permanent duration"], ["V", "Opposed test"]];
