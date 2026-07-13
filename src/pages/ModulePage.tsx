@@ -1,12 +1,18 @@
-import { useEffect, useMemo, useState, type KeyboardEvent } from "react";
+import { useCallback, useDeferredValue, useEffect, useMemo, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { ArchiveAtmosphere } from "../components/ArchiveAtmosphere";
+import { ArchivePageFrame } from "../components/ArchivePageFrame";
+import { ArchiveEmpty, ArchiveError, ArchiveLoading } from "../components/ArchiveStates";
+import { ComparisonPanel } from "../components/ComparisonPanel";
 import { Masthead } from "../components/Masthead";
 import { ModuleFooter, ModuleSidebar } from "../components/ModuleChrome";
 import { RecordDetail, RecordHeaderExtra } from "../components/RecordDetail";
 import { loadData, matchesSearch, slug } from "../data";
+import { runArchiveTransition } from "../motion";
 import { presentations, titleCase, valueText } from "../presentation";
 import { recordTags } from "../record-tags";
 import { modulesById } from "../registry";
+import type { ComparisonModule } from "../comparison";
 import type { PagePresentation } from "../presentation";
 import type { ReferenceCategory, ReferenceData, ReferenceRecord } from "../types";
 
@@ -43,6 +49,15 @@ function listMeta(moduleId: string, record: ReferenceRecord, presentation: PageP
   return <span className={presentation.metaClass}>{value}</span>;
 }
 
+function HighlightedName({ name, query }: { name: string; query: string }) {
+  const terms = Array.from(new Set(query.trim().split(/\s+/).filter((term) => term && name.toLocaleLowerCase("en-GB").includes(term.toLocaleLowerCase("en-GB")))));
+  if (!terms.length) return <>{name}</>;
+  const escaped = terms.map((term) => term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const expression = new RegExp(`(${escaped.join("|")})`, "gi");
+  const matches = new Set(terms.map((term) => term.toLocaleLowerCase("en-GB")));
+  return <>{name.split(expression).map((part, index) => matches.has(part.toLocaleLowerCase("en-GB")) ? <mark key={`${part}-${index}`}>{part}</mark> : part)}</>;
+}
+
 function ArchiveTabs({ moduleId, data, category, chooseCategory, moveCategory }: { moduleId: string; data: ReferenceData; category: ReferenceCategory; chooseCategory: (id: string) => void; moveCategory: (event: KeyboardEvent<HTMLButtonElement>, index: number) => void }) {
   const presentation = presentations[moduleId];
   if (data.categories.length <= 1) return null;
@@ -63,12 +78,18 @@ export function ModulePage() {
   const navigate = useNavigate();
   const module = modulesById[moduleId];
   const presentation = presentations[moduleId];
-  const [data, setData] = useState<ReferenceData | null>(null);
-  const [loadError, setLoadError] = useState("");
+  const [loadedData, setLoadedData] = useState<{ moduleId: string; data: ReferenceData } | null>(null);
+  const [loadError, setLoadError] = useState<{ moduleId: string; message: string } | null>(null);
+  const [loadAttempt, setLoadAttempt] = useState(0);
   const [query, setQuery] = useState("");
   const [filterValues, setFilterValues] = useState<Record<string, string>>({});
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [selectedTag, setSelectedTag] = useState("");
+  const [comparisonOpen, setComparisonOpen] = useState(false);
+  const data = loadedData?.moduleId === moduleId ? loadedData.data : null;
+  const currentLoadError = loadError?.moduleId === moduleId ? loadError.message : "";
+  const deferredQuery = useDeferredValue(query);
+  const deferredFilterValues = useDeferredValue(filterValues);
 
   const defaultCategory = data?.categories.find((item) => item.id === module?.defaultCategoryId) || data?.categories[0];
   const category = data?.categories.find((item) => item.id === categoryId) || defaultCategory;
@@ -78,18 +99,21 @@ export function ModulePage() {
     filter,
     options: Array.from(new Set(categoryRecords.flatMap((record) => filter.values(record)).filter(Boolean))).sort((a, b) => a.localeCompare(b, "en-GB", { numeric: true }))
   })).filter((entry) => entry.options.length > 0), [module, categoryRecords]);
-  const records = useMemo(() => categoryRecords.filter((record) => matchesSearch(record, query) && availableFilters.every(({ filter }) => {
-    const selectedValue = filterValues[filter.id];
+  const records = useMemo(() => categoryRecords.filter((record) => matchesSearch(record, deferredQuery) && availableFilters.every(({ filter }) => {
+    const selectedValue = deferredFilterValues[filter.id];
     return !selectedValue || filter.values(record).includes(selectedValue);
-  })), [categoryRecords, query, filterValues, availableFilters]);
+  })), [categoryRecords, deferredQuery, deferredFilterValues, availableFilters]);
 
   useEffect(() => {
     if (!module) return;
+    let active = true;
     document.title = `Shadowrun 5e // ${module.name}`;
-    setData(null);
-    setLoadError("");
-    loadData(module.id).then(setData).catch((error: unknown) => setLoadError(error instanceof Error ? error.message : "The dataset could not be loaded."));
-  }, [module]);
+    setLoadError(null);
+    loadData(module.id)
+      .then((nextData) => { if (active) setLoadedData({ moduleId: module.id, data: nextData }); })
+      .catch((error: unknown) => { if (active) setLoadError({ moduleId: module.id, message: error instanceof Error ? error.message : "The dataset could not be loaded." }); });
+    return () => { active = false; };
+  }, [module, loadAttempt]);
 
   useEffect(() => {
     if (!module || !data || categoryId) return;
@@ -97,15 +121,23 @@ export function ModulePage() {
     if (target) navigate(`/${module.id}/${target.id}`, { replace: true });
   }, [module, data, categoryId, navigate]);
 
-  useEffect(() => { setQuery(""); setFilterValues({}); setFiltersOpen(false); setSelectedTag(""); }, [category?.id]);
+  useEffect(() => { setQuery(""); setFilterValues({}); setFiltersOpen(false); setSelectedTag(""); setComparisonOpen(false); }, [category?.id]);
   useEffect(() => { setSelectedTag(""); }, [recordId]);
 
+  const closeComparison = useCallback(() => setComparisonOpen(false), []);
+
   if (!module || !presentation) return <Navigate to="/" replace />;
-  if (loadError) return <div className={presentation.pageClass}><div className="sheet"><Masthead module={module}/><main className="loading-panel"><strong>Archive load failure</strong><p>{loadError}</p></main></div></div>;
-  if (!data) return <div className={presentation.pageClass}><div className="sheet"><Masthead module={module}/><main className="loading-panel" aria-live="polite"><span className="loading-code">SYNC // DATASET</span><strong>Opening {module.name} archive…</strong></main></div></div>;
+  if (currentLoadError) return <ArchivePageFrame className={`${presentation.pageClass} archive-page`} moduleId={module.id} motionKey={`${module.id}-error-${loadAttempt}`} key={`${module.id}-error-${loadAttempt}`}>
+    <ArchiveAtmosphere module={module} motionKey={`${module.id}-error-${loadAttempt}`}/>
+    <div className="sheet"><Masthead module={module}/><ArchiveError module={module} message={currentLoadError} retry={() => setLoadAttempt((attempt) => attempt + 1)}/><ModuleFooter moduleId={module.id}/></div>
+  </ArchivePageFrame>;
+  if (!data) return <ArchivePageFrame className={`${presentation.pageClass} archive-page`} moduleId={module.id} motionKey={`${module.id}-loading-${loadAttempt}`} key={`${module.id}-loading-${loadAttempt}`}>
+    <ArchiveAtmosphere module={module} motionKey={`${module.id}-loading-${loadAttempt}`}/>
+    <div className="sheet"><Masthead module={module}/><ArchiveLoading module={module}/><ModuleFooter moduleId={module.id}/></div>
+  </ArchivePageFrame>;
   if (!category) return <Navigate to="/" replace />;
 
-  function chooseCategory(id: string) { navigate(`/${module!.id}/${id}`); }
+  function chooseCategory(id: string) { runArchiveTransition(() => navigate(`/${module!.id}/${id}`)); }
   function moveCategory(event: KeyboardEvent<HTMLButtonElement>, index: number) {
     if (!["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
     event.preventDefault();
@@ -114,24 +146,39 @@ export function ModulePage() {
     chooseCategory(data!.categories[next].id);
     requestAnimationFrame(() => document.getElementById(`${data!.categories[next].id}-tab`)?.focus());
   }
-  function openRecord(id: string) { navigate(`/${module!.id}/${category!.id}/${id}`); window.scrollTo({ top: 0, behavior: "auto" }); }
-  function showList() { navigate(`/${module!.id}/${category!.id}`); setSelectedTag(""); }
+  function openRecord(id: string) { runArchiveTransition(() => navigate(`/${module!.id}/${category!.id}/${id}`)); window.scrollTo({ top: 0, behavior: "auto" }); }
+  function showList() { runArchiveTransition(() => navigate(`/${module!.id}/${category!.id}`)); setSelectedTag(""); }
   function setFilter(id: string, nextValue: string) { setFilterValues((current) => ({ ...current, [id]: nextValue })); }
+  function clearFilters() { setQuery(""); setFilterValues({}); }
 
   const hasFilters = Boolean(query || Object.values(filterValues).some(Boolean));
+  const isFiltering = query !== deferredQuery || filterValues !== deferredFilterValues;
   const tags = selected ? recordTags(module.id, selected, data) : [];
   const activeTag = tags.find((tag) => tag.key === selectedTag);
   const detailNumber = selected ? (localDetailNumbers.has(module.id) ? categoryRecords.indexOf(selected) : data.records.indexOf(selected)) + 1 : 0;
+  const comparisonModule: ComparisonModule | null = module.id === "weapons" || module.id === "cyberdecks" ? module.id : null;
+  const comparisonRecords = module.id === "cyberdecks" ? data.records.filter((record) => record.category === "Cyberdecks") : module.id === "weapons" ? data.records : [];
+  const canCompare = Boolean(comparisonModule && comparisonRecords.length > 1 && (module.id !== "cyberdecks" || category.label === "Cyberdecks"));
+  const filterMotionKey = `${deferredQuery}|${Object.entries(deferredFilterValues).sort(([a], [b]) => a.localeCompare(b)).map(([key, value]) => `${key}:${value}`).join("|")}`;
+  const viewMotionKey = `${module.id}-${category.id}-${selected?.id || "list"}`;
 
-  return <div className={presentation.pageClass}><div className="sheet">
+  function openComparedRecord(record: ReferenceRecord) {
+    setComparisonOpen(false);
+    runArchiveTransition(() => navigate(`/${module!.id}/${slug(record.category)}/${record.id}`));
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  return <ArchivePageFrame className={`${presentation.pageClass} archive-page`} moduleId={module.id} motionKey={viewMotionKey} key={viewMotionKey}>
+    <ArchiveAtmosphere module={module} motionKey={viewMotionKey}/>
+    <div className="sheet">
     <Masthead module={module}/>
     <ArchiveTabs moduleId={module.id} data={data} category={category} chooseCategory={chooseCategory} moveCategory={moveCategory}/>
     <main className={presentation.workspaceClass}>
       <ModuleSidebar module={module} category={category} data={data}/>
-      <article className={`panel ${presentation.panelClass}`} role="tabpanel" aria-live="polite"><div className="panel-inner">
-        {!selected ? <section className={presentation.listViewClass}>
+      <article className={`panel ${presentation.panelClass}`} role="tabpanel" aria-live="polite"><div className="panel-inner archive-view" key={viewMotionKey}>
+        {!selected ? <section className={presentation.listViewClass} aria-busy={isFiltering || undefined} data-filtering={isFiltering || undefined}>
           <header className={`${presentation.headerClass} ${presentation.listHeaderClass}`.trim()}><button className="filter-toggle-button" type="button" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(!filtersOpen)}>Filter</button><p className="eyebrow">{presentation.listEyebrow(category)}</p><h1 id={titleIds[module.id]?.[0]}>{presentation.listTitle(category)}</h1></header>
-          {filtersOpen ? <div className={presentation.filtersClass}>
+          {filtersOpen ? <div className={`${presentation.filtersClass} archive-filter-panel`.trim()}>
             <div className={presentation.filterFieldClass}><label className="search-label" htmlFor={`${module.id}-record-search`}>{presentation.searchLabel}</label><div className="filter-control"><input className="search" id={`${module.id}-record-search`} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={presentation.searchPlaceholder} autoFocus/><button className="filter-clear-button" type="button" disabled={!query} onClick={() => setQuery("")} aria-label="Clear search">×</button></div></div>
             {availableFilters.map(({ filter, options }) => {
               const filterLabel = typeof filter.label === "function" ? filter.label(category) : filter.label;
@@ -140,18 +187,21 @@ export function ModulePage() {
               return <div className={presentation.filterFieldClass} key={filter.id}><label className="search-label" htmlFor={`${module.id}-${filter.id}-filter`}>{filterLabel}</label><div className="filter-control"><select className="search keyword-filter" id={`${module.id}-${filter.id}-filter`} value={selectedValue} onChange={(event) => setFilter(filter.id, event.target.value)}><option value="">{allLabel}</option>{options.map((option) => <option value={option} key={option}>{filter.formatValue ? filter.formatValue(option) : option}</option>)}</select><button className="filter-clear-button" type="button" disabled={!selectedValue} onClick={() => setFilter(filter.id, "")} aria-label={`Clear ${filterLabel.toLowerCase()} filter`}>×</button></div></div>;
             })}
           </div> : null}
-          <div className={presentation.summaryClass}><span>{module.listInstruction}</span><strong>{hasFilters ? `${records.length} of ${categoryRecords.length} records` : `${records.length} ${records.length === 1 ? "record" : "records"}`}</strong></div>
-          <div className={presentation.listClass}>{records.map((item) => {
+          <div className={`${presentation.summaryClass} archive-list-summary`.trim()}><span>{module.listInstruction}</span><span className="archive-summary-tools"><strong className="archive-result-count" key={`${records.length}-${isFiltering}`}>{hasFilters ? `${records.length} of ${categoryRecords.length} records` : `${records.length} ${records.length === 1 ? "record" : "records"}`}</strong>{canCompare ? <button className="compare-launch-button" type="button" onClick={() => setComparisonOpen(true)}>Compare {module.id === "weapons" ? "weapons" : "cyberdecks"}</button> : null}</span></div>
+          <div className={`${presentation.listClass} archive-record-list`.trim()}>{records.map((item, index) => {
             const listNumber = (localListNumbers.has(module.id) ? categoryRecords.indexOf(item) : data.records.indexOf(item)) + 1;
-            return <button className={presentation.itemClass} type="button" key={item.id} onClick={() => openRecord(item.id)} aria-label={`Open ${item.name} ${module.singular.toLowerCase()} record`}><span className={presentation.indexClass} aria-hidden="true">{presentation.indexPrefix(category)}-{String(listNumber).padStart(3, "0")}</span><span className={presentation.nameClass}>{item.name}</span>{listMeta(module.id, item, presentation)}</button>;
-          })}{!records.length ? <div className="empty-message">No records match the current filters.</div> : null}</div>
+            const motionStyle = { "--archive-order": Math.min(index, 12) } as CSSProperties;
+            return <button className={`${presentation.itemClass} archive-list-item`.trim()} style={motionStyle} type="button" key={`${filterMotionKey}:${item.id}`} onClick={() => openRecord(item.id)} aria-label={`Open ${item.name} ${module.singular.toLowerCase()} record`}><span className={presentation.indexClass} aria-hidden="true">{presentation.indexPrefix(category)}-{String(listNumber).padStart(3, "0")}</span><span className={presentation.nameClass}><HighlightedName name={item.name} query={deferredQuery}/></span>{listMeta(module.id, item, presentation)}</button>;
+          })}{!records.length ? <ArchiveEmpty module={module} reset={clearFilters}/> : null}</div>
         </section> : <section className={presentation.recordViewClass} data-category={module.id === "vehicles" ? slug(selected.category) : undefined}>
-          <header className={`${presentation.headerClass} ${presentation.recordHeaderClass}`.trim()}><button className="back-button" type="button" onClick={showList}>{presentation.backLabel || "Back to list"}</button><p className="eyebrow">{presentation.recordEyebrow(selected)}</p><h1 id={titleIds[module.id]?.[1]}>{selected.name}</h1><RecordHeaderExtra moduleId={module.id} record={selected}/>{tags.length ? <div className="tag-row" aria-label={`${module.singular} classifications`}>{tags.map((tag) => <button type="button" className={presentation.tagButtonClass} aria-pressed={selectedTag === tag.key} key={tag.key} onClick={() => setSelectedTag(selectedTag === tag.key ? "" : tag.key)}>{tag.label}</button>)}</div> : null}</header>
+          <header className={`${presentation.headerClass} ${presentation.recordHeaderClass}`.trim()}><button className="back-button" type="button" onClick={showList}>{presentation.backLabel || "Back to list"}</button>{canCompare ? <button className="compare-launch-button compare-record-button" type="button" onClick={() => setComparisonOpen(true)}>Compare</button> : null}<p className="eyebrow">{presentation.recordEyebrow(selected)}</p><h1 id={titleIds[module.id]?.[1]}>{selected.name}</h1><RecordHeaderExtra moduleId={module.id} record={selected}/>{tags.length ? <div className="tag-row" aria-label={`${module.singular} classifications`}>{tags.map((tag) => <button type="button" className={presentation.tagButtonClass} aria-pressed={selectedTag === tag.key} key={tag.key} onClick={() => setSelectedTag(selectedTag === tag.key ? "" : tag.key)}>{tag.label}</button>)}</div> : null}</header>
           {activeTag ? <section className={presentation.tagDetailClass} aria-live="polite"><strong className={presentation.tagDetailTitleClass}>{activeTag.label}</strong><div className={presentation.tagDetailCopyClass} dangerouslySetInnerHTML={{ __html: activeTag.html }}/></section> : null}
           <RecordDetail moduleId={module.id} record={selected} data={data} recordNumber={detailNumber}/>
         </section>}
       </div></article>
     </main>
     <ModuleFooter moduleId={module.id}/>
-  </div></div>;
+    </div>
+    {comparisonOpen && comparisonModule ? <ComparisonPanel moduleId={comparisonModule} records={comparisonRecords} initialRecord={selected} close={closeComparison} openRecord={openComparedRecord}/> : null}
+  </ArchivePageFrame>;
 }

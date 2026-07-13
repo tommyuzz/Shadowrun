@@ -31,6 +31,18 @@ Home-page links prefetch their dataset on hover or focus. Vite emits every datas
 
 The original page stylesheets are retained in `assets/css/pages/`. `scripts/scope-page-styles.mjs` uses PostCSS to generate one scoped stylesheet at build time, so every unique visual rule remains intact without leaking into another module. Shared React state and routing can therefore evolve independently of the original visual language.
 
+## Motion and interaction
+
+`runArchiveTransition` progressively uses the browser View Transition API and falls back to normal synchronous React navigation. Dossier, list and record animations use opacity and transforms only. `ArchivePageFrame` removes completed animation declarations after the activation sequence, releasing temporary compositor layers and restoring the exact settled page raster.
+
+The interface follows `prefers-reduced-motion`: activation motifs are removed and all other transition durations are reduced to effectively zero. No essential information or navigation depends on animation.
+
+Search input is deferred from list calculation so typing remains responsive. Matching records receive short entrance transitions, visible title terms are highlighted, and the themed empty state provides an immediate reset action.
+
+## Comparison
+
+Weapon and cyberdeck comparison is computed entirely from the already loaded reference records. `src/comparison.ts` defines visible fields, normalised values and safe numeric ranking directions. `ComparisonPanel` provides the modal dossier, focus containment, Escape dismissal, mobile table scrolling and direct record navigation. No comparison state is persisted or sent outside the browser.
+
 ## Compatibility
 
 The prebuild script creates lightweight redirects for the former URLs such as `spells/spells.html`. Existing hashes are converted to stable slug routes where possible.
