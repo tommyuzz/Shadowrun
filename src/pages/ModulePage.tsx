@@ -40,7 +40,7 @@ function compactPowerCost(record: ReferenceRecord) {
 
 function listMeta(moduleId: string, record: ReferenceRecord, presentation: PagePresentation) {
   const raw = record.raw;
-  if (moduleId === "adeptpowers") return <span className={presentation.metaClass}><span className="power-list-cost">{compactPowerCost(record)}</span><span className="power-list-activation">{valueText(raw.activation, "")}</span></span>;
+  if (moduleId === "adeptpowers") return <span className={`${presentation.metaClass} archive-list-meta`.trim()}><span className="power-list-cost">{compactPowerCost(record)}</span><span className="power-list-activation">{valueText(raw.activation, "")}</span></span>;
   let value = "";
   switch (moduleId) {
     case "skills": value = raw.skillgroup ? titleCase(raw.skillgroup) : "Standalone"; break;
@@ -54,7 +54,7 @@ function listMeta(moduleId: string, record: ReferenceRecord, presentation: PageP
     case "weapons": case "vehicles": case "drones": value = record.subcategory || "Uncategorised"; break;
     case "equipment": value = valueText(raw.cost); break;
   }
-  return <span className={presentation.metaClass}>{value}</span>;
+  return <span className={`${presentation.metaClass} archive-list-meta`.trim()}>{value}</span>;
 }
 
 function HighlightedName({ name, query }: { name: string; query: string }) {
@@ -66,18 +66,27 @@ function HighlightedName({ name, query }: { name: string; query: string }) {
   return <>{name.split(expression).map((part, index) => matches.has(part.toLocaleLowerCase("en-GB")) ? <mark key={`${part}-${index}`}>{part}</mark> : part)}</>;
 }
 
+function ArchiveTitle({ id, title }: { id?: string; title: string }) {
+  const longestWord = Math.max(1, ...title.split(/[^\p{L}\p{N}]+/u).map((word) => word.length));
+  const mobileScale = Math.max(6, Math.min(11, 108 / longestWord));
+  const style = { "--archive-title-mobile-scale": `${mobileScale}vw` } as CSSProperties;
+  return <h1 className="archive-title" id={id} style={style}>{title}</h1>;
+}
+
 function ArchiveTabs({ moduleId, data, records, category, chooseCategory, moveCategory }: { moduleId: string; data: ReferenceData; records: ReferenceRecord[]; category: ReferenceCategory; chooseCategory: (id: string) => void; moveCategory: (event: KeyboardEvent<HTMLButtonElement>, index: number) => void }) {
   const presentation = presentations[moduleId];
   if (data.categories.length <= 1) return null;
   const equipment = moduleId === "equipment";
-  return <nav className={`tabs-wrap${equipment ? " equipment-category-nav" : ""}`} aria-label={`${moduleId} categories`}>
+  const pickerId = `${moduleId}-category-picker`;
+  const pickerLabel = equipment ? "Product department" : "Archive category";
+  return <nav className={`tabs-wrap archive-category-nav${equipment ? " equipment-category-nav" : ""}`} aria-label={`${moduleId} categories`}>
     <div className={`tabs${presentation.tabsClass ? ` ${presentation.tabsClass}` : ""}`} role="tablist" aria-label={`${moduleId} categories`}>
       {data.categories.map((item, index) => {
         const count = item.id === "all" ? records.length : records.filter((record) => slug(record.category) === item.id).length;
         return <button className="tab" id={`${item.id}-tab`} key={item.id} type="button" role="tab" aria-selected={category.id === item.id} tabIndex={category.id === item.id ? 0 : -1} onClick={() => chooseCategory(item.id)} onKeyDown={(event) => moveCategory(event, index)}>{equipment ? <><span>{item.label}</span><small aria-label={`${count} products`}>{count}</small></> : presentation.tabLabel ? presentation.tabLabel(item) : item.label}</button>;
       })}
     </div>
-    {equipment ? <div className="equipment-category-picker"><label htmlFor="category-picker">Product department</label><select id="category-picker" aria-label="Product department" value={category.id} onChange={(event) => chooseCategory(event.target.value)}>{data.categories.map((item) => { const count = item.id === "all" ? records.length : records.filter((record) => slug(record.category) === item.id).length; return <option value={item.id} key={item.id}>{item.label} ({count})</option>; })}</select></div> : null}
+    <div className={`archive-category-picker${equipment ? " equipment-category-picker" : ""}`}><label htmlFor={pickerId}>{pickerLabel}</label><select id={pickerId} aria-label={pickerLabel} value={category.id} onChange={(event) => chooseCategory(event.target.value)}>{data.categories.map((item) => { const count = item.id === "all" ? records.length : records.filter((record) => slug(record.category) === item.id).length; return <option value={item.id} key={item.id}>{item.label} ({count})</option>; })}</select></div>
   </nav>;
 }
 
@@ -193,7 +202,7 @@ export function ModulePage() {
       <ModuleSidebar module={module} category={category} data={data}/>
       <article className={`panel ${presentation.panelClass}`} role="tabpanel" aria-live="polite"><div className="panel-inner archive-view" key={viewMotionKey}>
         {!selected ? (excludedSelected ? <ArchiveSourceExcluded module={module} recordName={excludedSelected.name} source={excludedSelected.source} include={() => includeSource(excludedSelected.source)} back={showList}/> : <section className={presentation.listViewClass} aria-busy={isFiltering || undefined} data-filtering={isFiltering || undefined}>
-          <header className={`${presentation.headerClass} ${presentation.listHeaderClass}`.trim()}><button className="filter-toggle-button" type="button" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(!filtersOpen)}>Filter</button><p className="eyebrow">{presentation.listEyebrow(category)}</p><h1 id={titleIds[module.id]?.[0]}>{presentation.listTitle(category)}</h1></header>
+          <header className={`${presentation.headerClass} ${presentation.listHeaderClass} archive-list-header`.trim()}><button className="filter-toggle-button" type="button" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(!filtersOpen)}>Filter</button><p className="eyebrow">{presentation.listEyebrow(category)}</p><ArchiveTitle id={titleIds[module.id]?.[0]} title={presentation.listTitle(category)}/></header>
           {filtersOpen ? <div className={`${presentation.filtersClass} archive-filter-panel`.trim()}>
             <div className={presentation.filterFieldClass}><label className="search-label" htmlFor={`${module.id}-record-search`}>{presentation.searchLabel}</label><div className="filter-control"><input className="search" id={`${module.id}-record-search`} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={presentation.searchPlaceholder} autoFocus/><button className="filter-clear-button" type="button" disabled={!query} onClick={() => setQuery("")} aria-label="Clear search">×</button></div></div>
             {availableFilters.map(({ filter, options }) => {
@@ -207,10 +216,10 @@ export function ModulePage() {
           <div className={`${presentation.listClass} archive-record-list`.trim()}>{records.map((item, index) => {
             const listNumber = (localListNumbers.has(module.id) ? allCategoryRecords.indexOf(item) : data.records.indexOf(item)) + 1;
             const motionStyle = { "--archive-order": Math.min(index, 12) } as CSSProperties;
-            return <button className={`${presentation.itemClass} archive-list-item`.trim()} style={motionStyle} type="button" key={`${filterMotionKey}:${item.id}`} onClick={() => openRecord(item.id)} aria-label={`Open ${item.name} ${module.singular.toLowerCase()} record`}><span className={presentation.indexClass} aria-hidden="true">{presentation.indexPrefix(category)}-{String(listNumber).padStart(3, "0")}</span><span className={presentation.nameClass}><HighlightedName name={item.name} query={deferredQuery}/></span>{listMeta(module.id, item, presentation)}</button>;
+            return <button className={`${presentation.itemClass} archive-list-item`.trim()} style={motionStyle} type="button" key={`${filterMotionKey}:${item.id}`} onClick={() => openRecord(item.id)} aria-label={`Open ${item.name} ${module.singular.toLowerCase()} record`}><span className={`${presentation.indexClass} archive-list-index`.trim()} aria-hidden="true">{presentation.indexPrefix(category)}-{String(listNumber).padStart(3, "0")}</span><span className={`${presentation.nameClass} archive-list-name`.trim()}><HighlightedName name={item.name} query={deferredQuery}/></span>{listMeta(module.id, item, presentation)}</button>;
           })}{!records.length ? categoryRecords.length ? <ArchiveEmpty module={module} reset={clearFilters}/> : <ArchiveSourceEmpty module={module} hiddenCount={allCategoryRecords.length} includeAll={enableAllSources}/> : null}</div>
         </section>) : <section className={presentation.recordViewClass} data-category={module.id === "vehicles" ? slug(selected.category) : undefined}>
-          <header className={`${presentation.headerClass} ${presentation.recordHeaderClass}`.trim()}><button className="back-button" type="button" onClick={showList}>{presentation.backLabel || "Back to list"}</button>{canCompare ? <button className="compare-launch-button compare-record-button" type="button" onClick={() => setComparisonOpen(true)}>Compare</button> : null}<p className="eyebrow">{presentation.recordEyebrow(selected)}</p><h1 id={titleIds[module.id]?.[1]}>{selected.name}</h1><RecordHeaderExtra moduleId={module.id} record={selected}/>{tags.length ? <div className="tag-row" aria-label={`${module.singular} classifications`}>{tags.map((tag) => <button type="button" className={presentation.tagButtonClass} aria-pressed={selectedTag === tag.key} key={tag.key} onClick={() => setSelectedTag(selectedTag === tag.key ? "" : tag.key)}>{tag.label}</button>)}</div> : null}</header>
+          <header className={`${presentation.headerClass} ${presentation.recordHeaderClass} archive-record-header`.trim()}><button className="back-button" type="button" onClick={showList}>{presentation.backLabel || "Back to list"}</button>{canCompare ? <button className="compare-launch-button compare-record-button" type="button" onClick={() => setComparisonOpen(true)}>Compare</button> : null}<p className="eyebrow">{presentation.recordEyebrow(selected)}</p><ArchiveTitle id={titleIds[module.id]?.[1]} title={selected.name}/><RecordHeaderExtra moduleId={module.id} record={selected}/>{tags.length ? <div className="tag-row" aria-label={`${module.singular} classifications`}>{tags.map((tag) => <button type="button" className={presentation.tagButtonClass} aria-pressed={selectedTag === tag.key} key={tag.key} onClick={() => setSelectedTag(selectedTag === tag.key ? "" : tag.key)}>{tag.label}</button>)}</div> : null}</header>
           {activeTag ? <section className={presentation.tagDetailClass} aria-live="polite"><strong className={presentation.tagDetailTitleClass}>{activeTag.label}</strong><div className={presentation.tagDetailCopyClass} dangerouslySetInnerHTML={{ __html: activeTag.html }}/></section> : null}
           <RecordDetail moduleId={module.id} record={selected} data={data} recordNumber={detailNumber}/>
         </section>}

@@ -1,6 +1,26 @@
-# Release 1.3.0 — Source controls and expanded comparison
+# Release notes
 
-## Added
+## 1.4.0 — Mobile readability and reflow
+
+### Added and corrected
+
+- Replaced mobile category tab strips with a full-width archive picker, including the home sectors.
+- Converted every mobile record card to a shared two-row layout at 650px and below.
+- Restored natural word boundaries for titles, record names, metadata and action buttons.
+- Added content-aware mobile title scaling based on the longest word.
+- Normalised masthead sizing at narrow widths so the archive title and Sources control stay within the viewport.
+- Removed page-level overflow masking after constraining the actual components.
+
+### Validation
+
+- 67 responsive browser checks passed at 320, 360, 390, 412, 430, 480 and 640px.
+- All 13 archives, all four home sectors, long record headings and the Manipulation spell category were checked for clipped controls, page overflow and mid-word wrapping.
+- Before-and-after desktop screenshots across home and all 13 archives reported zero changed pixels.
+- No browser console or page errors were detected.
+
+## 1.3.0 — Source controls and expanded comparison
+
+### Added
 
 - Two- or three-record comparison dossiers for vehicles.
 - Two- or three-record comparison dossiers for drones.
@@ -12,13 +32,13 @@
 
 The bundled datasets currently contain records from `CRB` only, so that is the initial source option. New source codes found in subsequently loaded datasets register automatically; friendly source-book names can be added once to `sourceBooks` in `src/data.ts`.
 
-## Comparison fields
+### Comparison fields
 
 Vehicle comparison covers class, type, control skill, handling, speed, acceleration, Body, Armor, Pilot, Sensor, seats, availability, cost and source. Drone comparison covers drone class, control skill, handling, speed, acceleration, Body, Armor, Pilot, Sensor, availability, cost and source.
 
 Numeric advantages are marked only where a higher or lower value has an unambiguous meaning. Compound vehicle handling and speed profiles remain highlighted as differences without declaring a winner.
 
-## Validation
+### Validation
 
 - 13 datasets and 766 records validated.
 - 25 unit tests passed.

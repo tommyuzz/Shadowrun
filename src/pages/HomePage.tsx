@@ -40,9 +40,9 @@ export function HomePage() {
 
   return <ArchivePageFrame className="page-home archive-page" motionKey={`home-${sector}`} key={`home-${sector}`}><div className="sheet">
     <Masthead />
-    <nav className="tabs-wrap" aria-label="Reference categories"><div className="tabs" role="tablist" aria-label="Shadowrun reference sections">
+    <nav className="tabs-wrap archive-category-nav" aria-label="Reference categories"><div className="tabs" role="tablist" aria-label="Shadowrun reference sections">
       {sectors.map((item, index) => <button className="tab" id={`${item.id}-tab`} key={item.id} type="button" role="tab" aria-selected={sector === item.id} tabIndex={sector === item.id ? 0 : -1} onClick={() => activate(item.id)} onKeyDown={(event) => moveTab(event, index)}>{item.label}</button>)}
-    </div></nav>
+    </div><div className="archive-category-picker"><label htmlFor="home-sector-picker">Archive sector</label><select id="home-sector-picker" aria-label="Archive sector" value={sector} onChange={(event) => activate(event.target.value)}>{sectors.map((item) => <option value={item.id} key={item.id}>{item.label}</option>)}</select></div></nav>
     <main className="workspace">
       <aside className="sidebar" aria-label="Reference archive information">
         <section className="panel"><div className="panel-inner"><h2 className="panel-heading"><span className="crosshair" aria-hidden="true"/>Operations index protocol</h2><p className="protocol-copy">Central access point for the Shadowrun Fifth Edition reference archive. Select a discipline above, then open the relevant data module.</p></div></section>

@@ -31,6 +31,12 @@ Home-page links prefetch their dataset on hover or focus. Vite emits every datas
 
 The original page stylesheets are retained in `assets/css/pages/`. `scripts/scope-page-styles.mjs` uses PostCSS to generate one scoped stylesheet at build time, so every unique visual rule remains intact without leaking into another module. Shared React state and routing can therefore evolve independently of the original visual language.
 
+## Responsive composition
+
+List records expose shared structural classes for their index, name and metadata while retaining every page-specific class. At 650px and below, the common layer changes those cards from three columns to a stable two-row name-and-metadata layout. Human-readable text uses normal word boundaries; title sizing derives a mobile-only scale from the longest word so headings remain complete even at 320px.
+
+Desktop category tabs remain unchanged. The same category data also renders a native, fully labelled picker that is hidden on desktop and replaces the tab strip on phones. The home sectors use the same pattern. This avoids horizontal clipping without duplicating category state or navigation logic.
+
 ## Motion and interaction
 
 `runArchiveTransition` progressively uses the browser View Transition API and falls back to normal synchronous React navigation. Dossier, list and record animations use opacity and transforms only. `ArchivePageFrame` removes completed animation declarations after the activation sequence, releasing temporary compositor layers and restoring the exact settled page raster.

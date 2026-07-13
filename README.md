@@ -10,6 +10,8 @@ Weapons, cyberdecks, vehicles and drones can be compared from their list or reco
 
 The **Sources** control in every masthead includes or excludes source books across all archives. The selection is stored in the browser, survives route changes and reloads, and is applied to lists, category counts, direct record links and comparison candidates. Dataset source codes are registered automatically when their archive loads; full source-book names are maintained once in `src/data.ts`.
 
+At phone widths, category tabs become a full-width archive picker, record cards move metadata beneath the name, and headings scale according to their longest word. Human-readable labels wrap only at natural boundaries. These rules are isolated to viewports of 650px or narrower; the settled desktop rendering remains pixel-identical to the original archive presentation.
+
 ## Local development
 
 ```bash
