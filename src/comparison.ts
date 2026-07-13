@@ -1,6 +1,6 @@
 import type { ReferenceRecord } from "./types";
 
-export type ComparisonModule = "weapons" | "cyberdecks";
+export type ComparisonModule = "weapons" | "cyberdecks" | "vehicles" | "drones";
 export type ComparisonDirection = "higher" | "lower";
 
 export interface ComparisonField {
@@ -42,6 +42,36 @@ export const comparisonFields: Record<ComparisonModule, ComparisonField[]> = {
     { key: "device_rating", label: "Device rating", direction: "higher", score: numberScore },
     { key: "attribute_array", label: "Attribute array", direction: "higher", score: sumScore },
     { key: "programs", label: "Program capacity", direction: "higher", score: numberScore },
+    { key: "availability", label: "Availability" },
+    { key: "cost", label: "Cost", direction: "lower", score: numberScore },
+    { key: "source", label: "Source" }
+  ],
+  vehicles: [
+    { key: "category", label: "Vehicle class" },
+    { key: "subcategory", label: "Vehicle type" },
+    { key: "skill", label: "Control skill" },
+    { key: "handling", label: "Handling" },
+    { key: "speed", label: "Speed" },
+    { key: "acceleration", label: "Acceleration", direction: "higher", score: numberScore },
+    { key: "body", label: "Body", direction: "higher", score: numberScore },
+    { key: "armor", label: "Armor", direction: "higher", score: numberScore },
+    { key: "pilot", label: "Pilot", direction: "higher", score: numberScore },
+    { key: "sensor", label: "Sensor", direction: "higher", score: numberScore },
+    { key: "seats", label: "Seats", direction: "higher", score: numberScore },
+    { key: "availability", label: "Availability" },
+    { key: "cost", label: "Cost", direction: "lower", score: numberScore },
+    { key: "source", label: "Source" }
+  ],
+  drones: [
+    { key: "subcategory", label: "Drone class" },
+    { key: "skill", label: "Control skill" },
+    { key: "handling", label: "Handling", direction: "higher", score: numberScore },
+    { key: "speed", label: "Speed", direction: "higher", score: numberScore },
+    { key: "acceleration", label: "Acceleration", direction: "higher", score: numberScore },
+    { key: "body", label: "Body", direction: "higher", score: numberScore },
+    { key: "armor", label: "Armor", direction: "higher", score: numberScore },
+    { key: "pilot", label: "Pilot", direction: "higher", score: numberScore },
+    { key: "sensor", label: "Sensor", direction: "higher", score: numberScore },
     { key: "availability", label: "Availability" },
     { key: "cost", label: "Cost", direction: "lower", score: numberScore },
     { key: "source", label: "Source" }

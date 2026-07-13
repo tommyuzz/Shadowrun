@@ -41,3 +41,26 @@ export function ArchiveEmpty({ module, reset }: { module: ModuleDefinition; rese
     <button type="button" className="archive-state-action" onClick={reset}>Clear active filters</button>
   </section>;
 }
+
+export function ArchiveSourceEmpty({ module, hiddenCount, includeAll }: { module: ModuleDefinition; hiddenCount: number; includeAll: () => void }) {
+  return <section className="archive-empty-state archive-source-empty" aria-live="polite">
+    <span className="archive-state-code">SOURCE LOCK // {module.archiveCode}</span>
+    <span className="archive-empty-reticle" aria-hidden="true"/>
+    <h2>{hiddenCount === 1 ? "Record source excluded" : "Record sources excluded"}</h2>
+    <p>{hiddenCount} {hiddenCount === 1 ? "record belongs" : "records belong"} to source books currently disabled in the global header control.</p>
+    <button type="button" className="archive-state-action" onClick={includeAll}>Include all source books</button>
+  </section>;
+}
+
+export function ArchiveSourceExcluded({ module, recordName, source, include, back }: { module: ModuleDefinition; recordName: string; source: string; include: () => void; back: () => void }) {
+  return <section className="archive-state-panel archive-source-excluded" aria-live="polite">
+    <span className="archive-state-code">SOURCE EXCLUDED // {source}</span>
+    <span className="archive-state-symbol" aria-hidden="true">×</span>
+    <h1>Record hidden</h1>
+    <p><strong>{recordName}</strong> is indexed under {source}, which is currently excluded from every archive.</p>
+    <div className="archive-state-actions">
+      <button type="button" className="archive-state-action" onClick={include}>Include {source}</button>
+      <button type="button" className="archive-state-secondary" onClick={back}>Back to {module.name}</button>
+    </div>
+  </section>;
+}

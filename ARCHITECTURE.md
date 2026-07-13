@@ -39,9 +39,15 @@ The interface follows `prefers-reduced-motion`: activation motifs are removed an
 
 Search input is deferred from list calculation so typing remains responsive. Matching records receive short entrance transitions, visible title terms are highlighted, and the themed empty state provides an immediate reset action.
 
+## Source selection
+
+`SourceSelectionProvider` owns one shared exclusion set for the entire application. It persists that set in `localStorage`, synchronises changes between browser tabs and defaults newly encountered source codes to included. `ModulePage` applies the selection before category counts, search filters and comparison candidates are calculated. A direct link to an excluded record resolves to an explicit recovery state rather than silently showing the wrong list.
+
+The source catalog begins with the friendly names in `src/data.ts`. Additional codes found in a dynamically loaded dataset are registered automatically, so adding records from another book does not require page-specific code.
+
 ## Comparison
 
-Weapon and cyberdeck comparison is computed entirely from the already loaded reference records. `src/comparison.ts` defines visible fields, normalised values and safe numeric ranking directions. `ComparisonPanel` provides the modal dossier, focus containment, Escape dismissal, mobile table scrolling and direct record navigation. No comparison state is persisted or sent outside the browser.
+Weapon, cyberdeck, vehicle and drone comparison is computed entirely from the already loaded, source-enabled reference records. `src/comparison.ts` defines visible fields, normalised values and safe numeric ranking directions. `ComparisonPanel` provides the modal dossier, focus containment, Escape dismissal, mobile table scrolling and direct record navigation. No comparison state is persisted or sent outside the browser.
 
 ## Compatibility
 

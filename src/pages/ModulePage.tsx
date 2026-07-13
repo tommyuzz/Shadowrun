@@ -2,7 +2,7 @@ import { useCallback, useDeferredValue, useEffect, useMemo, useState, type CSSPr
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { ArchiveAtmosphere } from "../components/ArchiveAtmosphere";
 import { ArchivePageFrame } from "../components/ArchivePageFrame";
-import { ArchiveEmpty, ArchiveError, ArchiveLoading } from "../components/ArchiveStates";
+import { ArchiveEmpty, ArchiveError, ArchiveLoading, ArchiveSourceEmpty, ArchiveSourceExcluded } from "../components/ArchiveStates";
 import { ComparisonPanel } from "../components/ComparisonPanel";
 import { Masthead } from "../components/Masthead";
 import { ModuleFooter, ModuleSidebar } from "../components/ModuleChrome";
@@ -12,12 +12,20 @@ import { runArchiveTransition } from "../motion";
 import { presentations, titleCase, valueText } from "../presentation";
 import { recordTags } from "../record-tags";
 import { modulesById } from "../registry";
+import { useSourceSelection } from "../source-selection";
 import type { ComparisonModule } from "../comparison";
 import type { PagePresentation } from "../presentation";
 import type { ReferenceCategory, ReferenceData, ReferenceRecord } from "../types";
 
 const localListNumbers = new Set(["spells", "cyberdecks", "matrixinteraction", "drones", "equipment"]);
 const localDetailNumbers = new Set(["cyberdecks", "matrixinteraction"]);
+const comparisonModules = new Set<ComparisonModule>(["weapons", "cyberdecks", "vehicles", "drones"]);
+const comparisonLabels: Record<ComparisonModule, string> = {
+  weapons: "weapons",
+  cyberdecks: "cyberdecks",
+  vehicles: "vehicles",
+  drones: "drones"
+};
 const titleIds: Record<string, [string | undefined, string | undefined]> = {
   skills: ["skill-list-title", "skill-title"], metatypes: [undefined, "metatype-title"], cyberdecks: ["list-title", "record-title"], matrixinteraction: ["list-title", "record-title"],
   sprites: [undefined, "sprite-title"], spells: ["spell-list-title", "spell-title"], adeptpowers: ["power-list-title", "power-title"], rituals: [undefined, "ritual-title"], spirits: [undefined, "spirit-title"],
@@ -58,24 +66,25 @@ function HighlightedName({ name, query }: { name: string; query: string }) {
   return <>{name.split(expression).map((part, index) => matches.has(part.toLocaleLowerCase("en-GB")) ? <mark key={`${part}-${index}`}>{part}</mark> : part)}</>;
 }
 
-function ArchiveTabs({ moduleId, data, category, chooseCategory, moveCategory }: { moduleId: string; data: ReferenceData; category: ReferenceCategory; chooseCategory: (id: string) => void; moveCategory: (event: KeyboardEvent<HTMLButtonElement>, index: number) => void }) {
+function ArchiveTabs({ moduleId, data, records, category, chooseCategory, moveCategory }: { moduleId: string; data: ReferenceData; records: ReferenceRecord[]; category: ReferenceCategory; chooseCategory: (id: string) => void; moveCategory: (event: KeyboardEvent<HTMLButtonElement>, index: number) => void }) {
   const presentation = presentations[moduleId];
   if (data.categories.length <= 1) return null;
   const equipment = moduleId === "equipment";
   return <nav className={`tabs-wrap${equipment ? " equipment-category-nav" : ""}`} aria-label={`${moduleId} categories`}>
     <div className={`tabs${presentation.tabsClass ? ` ${presentation.tabsClass}` : ""}`} role="tablist" aria-label={`${moduleId} categories`}>
       {data.categories.map((item, index) => {
-        const count = item.id === "all" ? data.records.length : data.records.filter((record) => slug(record.category) === item.id).length;
+        const count = item.id === "all" ? records.length : records.filter((record) => slug(record.category) === item.id).length;
         return <button className="tab" id={`${item.id}-tab`} key={item.id} type="button" role="tab" aria-selected={category.id === item.id} tabIndex={category.id === item.id ? 0 : -1} onClick={() => chooseCategory(item.id)} onKeyDown={(event) => moveCategory(event, index)}>{equipment ? <><span>{item.label}</span><small aria-label={`${count} products`}>{count}</small></> : presentation.tabLabel ? presentation.tabLabel(item) : item.label}</button>;
       })}
     </div>
-    {equipment ? <div className="equipment-category-picker"><label htmlFor="category-picker">Product department</label><select id="category-picker" aria-label="Product department" value={category.id} onChange={(event) => chooseCategory(event.target.value)}>{data.categories.map((item) => { const count = item.id === "all" ? data.records.length : data.records.filter((record) => slug(record.category) === item.id).length; return <option value={item.id} key={item.id}>{item.label} ({count})</option>; })}</select></div> : null}
+    {equipment ? <div className="equipment-category-picker"><label htmlFor="category-picker">Product department</label><select id="category-picker" aria-label="Product department" value={category.id} onChange={(event) => chooseCategory(event.target.value)}>{data.categories.map((item) => { const count = item.id === "all" ? records.length : records.filter((record) => slug(record.category) === item.id).length; return <option value={item.id} key={item.id}>{item.label} ({count})</option>; })}</select></div> : null}
   </nav>;
 }
 
 export function ModulePage() {
   const { moduleId = "", categoryId, recordId } = useParams();
   const navigate = useNavigate();
+  const { isSourceEnabled, includeSource, registerSources, enableAllSources } = useSourceSelection();
   const module = modulesById[moduleId];
   const presentation = presentations[moduleId];
   const [loadedData, setLoadedData] = useState<{ moduleId: string; data: ReferenceData } | null>(null);
@@ -93,8 +102,11 @@ export function ModulePage() {
 
   const defaultCategory = data?.categories.find((item) => item.id === module?.defaultCategoryId) || data?.categories[0];
   const category = data?.categories.find((item) => item.id === categoryId) || defaultCategory;
-  const categoryRecords = useMemo(() => !data ? [] : data.records.filter((item) => category?.id === "all" || slug(item.category) === category?.id), [data, category]);
+  const sourceRecords = useMemo(() => !data ? [] : data.records.filter((item) => isSourceEnabled(item.source)), [data, isSourceEnabled]);
+  const allCategoryRecords = useMemo(() => !data ? [] : data.records.filter((item) => category?.id === "all" || slug(item.category) === category?.id), [data, category]);
+  const categoryRecords = useMemo(() => sourceRecords.filter((item) => category?.id === "all" || slug(item.category) === category?.id), [sourceRecords, category]);
   const selected = categoryRecords.find((item) => item.id === recordId);
+  const excludedSelected = !selected && recordId ? allCategoryRecords.find((item) => item.id === recordId) : undefined;
   const availableFilters = useMemo(() => !module ? [] : module.filters.map((filter) => ({
     filter,
     options: Array.from(new Set(categoryRecords.flatMap((record) => filter.values(record)).filter(Boolean))).sort((a, b) => a.localeCompare(b, "en-GB", { numeric: true }))
@@ -114,6 +126,10 @@ export function ModulePage() {
       .catch((error: unknown) => { if (active) setLoadError({ moduleId: module.id, message: error instanceof Error ? error.message : "The dataset could not be loaded." }); });
     return () => { active = false; };
   }, [module, loadAttempt]);
+
+  useEffect(() => {
+    if (data) registerSources(data.records.map((record) => record.source));
+  }, [data, registerSources]);
 
   useEffect(() => {
     if (!module || !data || categoryId) return;
@@ -155,12 +171,12 @@ export function ModulePage() {
   const isFiltering = query !== deferredQuery || filterValues !== deferredFilterValues;
   const tags = selected ? recordTags(module.id, selected, data) : [];
   const activeTag = tags.find((tag) => tag.key === selectedTag);
-  const detailNumber = selected ? (localDetailNumbers.has(module.id) ? categoryRecords.indexOf(selected) : data.records.indexOf(selected)) + 1 : 0;
-  const comparisonModule: ComparisonModule | null = module.id === "weapons" || module.id === "cyberdecks" ? module.id : null;
-  const comparisonRecords = module.id === "cyberdecks" ? data.records.filter((record) => record.category === "Cyberdecks") : module.id === "weapons" ? data.records : [];
+  const detailNumber = selected ? (localDetailNumbers.has(module.id) ? allCategoryRecords.indexOf(selected) : data.records.indexOf(selected)) + 1 : 0;
+  const comparisonModule: ComparisonModule | null = comparisonModules.has(module.id as ComparisonModule) ? module.id as ComparisonModule : null;
+  const comparisonRecords = module.id === "cyberdecks" ? sourceRecords.filter((record) => record.category === "Cyberdecks") : comparisonModule ? sourceRecords : [];
   const canCompare = Boolean(comparisonModule && comparisonRecords.length > 1 && (module.id !== "cyberdecks" || category.label === "Cyberdecks"));
   const filterMotionKey = `${deferredQuery}|${Object.entries(deferredFilterValues).sort(([a], [b]) => a.localeCompare(b)).map(([key, value]) => `${key}:${value}`).join("|")}`;
-  const viewMotionKey = `${module.id}-${category.id}-${selected?.id || "list"}`;
+  const viewMotionKey = `${module.id}-${category.id}-${selected?.id || excludedSelected?.id || "list"}`;
 
   function openComparedRecord(record: ReferenceRecord) {
     setComparisonOpen(false);
@@ -172,11 +188,11 @@ export function ModulePage() {
     <ArchiveAtmosphere module={module} motionKey={viewMotionKey}/>
     <div className="sheet">
     <Masthead module={module}/>
-    <ArchiveTabs moduleId={module.id} data={data} category={category} chooseCategory={chooseCategory} moveCategory={moveCategory}/>
+    <ArchiveTabs moduleId={module.id} data={data} records={sourceRecords} category={category} chooseCategory={chooseCategory} moveCategory={moveCategory}/>
     <main className={presentation.workspaceClass}>
       <ModuleSidebar module={module} category={category} data={data}/>
       <article className={`panel ${presentation.panelClass}`} role="tabpanel" aria-live="polite"><div className="panel-inner archive-view" key={viewMotionKey}>
-        {!selected ? <section className={presentation.listViewClass} aria-busy={isFiltering || undefined} data-filtering={isFiltering || undefined}>
+        {!selected ? (excludedSelected ? <ArchiveSourceExcluded module={module} recordName={excludedSelected.name} source={excludedSelected.source} include={() => includeSource(excludedSelected.source)} back={showList}/> : <section className={presentation.listViewClass} aria-busy={isFiltering || undefined} data-filtering={isFiltering || undefined}>
           <header className={`${presentation.headerClass} ${presentation.listHeaderClass}`.trim()}><button className="filter-toggle-button" type="button" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(!filtersOpen)}>Filter</button><p className="eyebrow">{presentation.listEyebrow(category)}</p><h1 id={titleIds[module.id]?.[0]}>{presentation.listTitle(category)}</h1></header>
           {filtersOpen ? <div className={`${presentation.filtersClass} archive-filter-panel`.trim()}>
             <div className={presentation.filterFieldClass}><label className="search-label" htmlFor={`${module.id}-record-search`}>{presentation.searchLabel}</label><div className="filter-control"><input className="search" id={`${module.id}-record-search`} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={presentation.searchPlaceholder} autoFocus/><button className="filter-clear-button" type="button" disabled={!query} onClick={() => setQuery("")} aria-label="Clear search">×</button></div></div>
@@ -187,13 +203,13 @@ export function ModulePage() {
               return <div className={presentation.filterFieldClass} key={filter.id}><label className="search-label" htmlFor={`${module.id}-${filter.id}-filter`}>{filterLabel}</label><div className="filter-control"><select className="search keyword-filter" id={`${module.id}-${filter.id}-filter`} value={selectedValue} onChange={(event) => setFilter(filter.id, event.target.value)}><option value="">{allLabel}</option>{options.map((option) => <option value={option} key={option}>{filter.formatValue ? filter.formatValue(option) : option}</option>)}</select><button className="filter-clear-button" type="button" disabled={!selectedValue} onClick={() => setFilter(filter.id, "")} aria-label={`Clear ${filterLabel.toLowerCase()} filter`}>×</button></div></div>;
             })}
           </div> : null}
-          <div className={`${presentation.summaryClass} archive-list-summary`.trim()}><span>{module.listInstruction}</span><span className="archive-summary-tools"><strong className="archive-result-count" key={`${records.length}-${isFiltering}`}>{hasFilters ? `${records.length} of ${categoryRecords.length} records` : `${records.length} ${records.length === 1 ? "record" : "records"}`}</strong>{canCompare ? <button className="compare-launch-button" type="button" onClick={() => setComparisonOpen(true)}>Compare {module.id === "weapons" ? "weapons" : "cyberdecks"}</button> : null}</span></div>
+          <div className={`${presentation.summaryClass} archive-list-summary`.trim()}><span>{module.listInstruction}</span><span className="archive-summary-tools"><strong className="archive-result-count" key={`${records.length}-${isFiltering}`}>{hasFilters ? `${records.length} of ${categoryRecords.length} records` : `${records.length} ${records.length === 1 ? "record" : "records"}`}</strong>{canCompare && comparisonModule ? <button className="compare-launch-button" type="button" onClick={() => setComparisonOpen(true)}>Compare {comparisonLabels[comparisonModule]}</button> : null}</span></div>
           <div className={`${presentation.listClass} archive-record-list`.trim()}>{records.map((item, index) => {
-            const listNumber = (localListNumbers.has(module.id) ? categoryRecords.indexOf(item) : data.records.indexOf(item)) + 1;
+            const listNumber = (localListNumbers.has(module.id) ? allCategoryRecords.indexOf(item) : data.records.indexOf(item)) + 1;
             const motionStyle = { "--archive-order": Math.min(index, 12) } as CSSProperties;
             return <button className={`${presentation.itemClass} archive-list-item`.trim()} style={motionStyle} type="button" key={`${filterMotionKey}:${item.id}`} onClick={() => openRecord(item.id)} aria-label={`Open ${item.name} ${module.singular.toLowerCase()} record`}><span className={presentation.indexClass} aria-hidden="true">{presentation.indexPrefix(category)}-{String(listNumber).padStart(3, "0")}</span><span className={presentation.nameClass}><HighlightedName name={item.name} query={deferredQuery}/></span>{listMeta(module.id, item, presentation)}</button>;
-          })}{!records.length ? <ArchiveEmpty module={module} reset={clearFilters}/> : null}</div>
-        </section> : <section className={presentation.recordViewClass} data-category={module.id === "vehicles" ? slug(selected.category) : undefined}>
+          })}{!records.length ? categoryRecords.length ? <ArchiveEmpty module={module} reset={clearFilters}/> : <ArchiveSourceEmpty module={module} hiddenCount={allCategoryRecords.length} includeAll={enableAllSources}/> : null}</div>
+        </section>) : <section className={presentation.recordViewClass} data-category={module.id === "vehicles" ? slug(selected.category) : undefined}>
           <header className={`${presentation.headerClass} ${presentation.recordHeaderClass}`.trim()}><button className="back-button" type="button" onClick={showList}>{presentation.backLabel || "Back to list"}</button>{canCompare ? <button className="compare-launch-button compare-record-button" type="button" onClick={() => setComparisonOpen(true)}>Compare</button> : null}<p className="eyebrow">{presentation.recordEyebrow(selected)}</p><h1 id={titleIds[module.id]?.[1]}>{selected.name}</h1><RecordHeaderExtra moduleId={module.id} record={selected}/>{tags.length ? <div className="tag-row" aria-label={`${module.singular} classifications`}>{tags.map((tag) => <button type="button" className={presentation.tagButtonClass} aria-pressed={selectedTag === tag.key} key={tag.key} onClick={() => setSelectedTag(selectedTag === tag.key ? "" : tag.key)}>{tag.label}</button>)}</div> : null}</header>
           {activeTag ? <section className={presentation.tagDetailClass} aria-live="polite"><strong className={presentation.tagDetailTitleClass}>{activeTag.label}</strong><div className={presentation.tagDetailCopyClass} dangerouslySetInnerHTML={{ __html: activeTag.html }}/></section> : null}
           <RecordDetail moduleId={module.id} record={selected} data={data} recordNumber={detailNumber}/>

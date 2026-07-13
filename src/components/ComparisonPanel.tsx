@@ -15,6 +15,13 @@ interface ComparisonPanelProps {
   openRecord: (record: ReferenceRecord) => void;
 }
 
+const comparisonNouns: Record<ComparisonModule, string> = {
+  weapons: "weapon",
+  cyberdecks: "cyberdeck",
+  vehicles: "vehicle",
+  drones: "drone"
+};
+
 function initialSelection(records: ReferenceRecord[], initialRecord?: ReferenceRecord): string[] {
   const first = initialRecord && records.some((record) => record.id === initialRecord.id)
     ? initialRecord
@@ -35,7 +42,7 @@ export function ComparisonPanel({ moduleId, records, initialRecord, close, openR
   const slots = showThird ? 3 : 2;
   const selectedRecords = selectedIds.slice(0, slots).map((id) => records.find((record) => record.id === id));
   const fields = visibleComparisonFields(moduleId, selectedRecords);
-  const noun = moduleId === "weapons" ? "weapon" : "cyberdeck";
+  const noun = comparisonNouns[moduleId];
 
   useEffect(() => {
     const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;

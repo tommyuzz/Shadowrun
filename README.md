@@ -6,7 +6,9 @@ Each archive retains its subject-specific filters. Search covers record names, d
 
 The interface adds brief archive-specific activation sequences, smooth record and filter transitions, animated data readouts, themed loading and error states, and complete reduced-motion support. Entry animations release their compositor layers after settling, returning the page to the original static presentation without leaving continuous background effects running.
 
-Weapons and cyberdecks can be compared from their list or record page. The comparison dossier supports two or three records, marks changed rows, identifies directly comparable numeric advantages and links back to each full record. Comparison remains temporary browser state and does not require an account or storage service.
+Weapons, cyberdecks, vehicles and drones can be compared from their list or record page. The comparison dossier supports two or three records, marks changed rows, identifies directly comparable numeric advantages and links back to each full record. Comparison remains temporary browser state and does not require an account or storage service.
+
+The **Sources** control in every masthead includes or excludes source books across all archives. The selection is stored in the browser, survives route changes and reloads, and is applied to lists, category counts, direct record links and comparison candidates. Dataset source codes are registered automatically when their archive loads; full source-book names are maintained once in `src/data.ts`.
 
 ## Local development
 
@@ -55,9 +57,10 @@ Compatibility redirect pages retain the former module URLs.
 ```text
 src/components/     Shared visual components
 src/pages/          Home and reference module pages
-src/comparison.ts   Weapon and cyberdeck comparison definitions
+src/comparison.ts   Weapon, cyberdeck, vehicle and drone comparison definitions
 src/data.ts         Dataset adapters and stable record identifiers
 src/motion.ts       Progressive route-transition helper
+src/source-selection.tsx  Persistent global source-book selection
 src/registry.ts     Module metadata and home-page registration
 src/presentation.ts Page-specific class names, labels and archive copy
 src/record-tags.ts  Page-specific tag and rule presentation
