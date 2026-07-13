@@ -1,5 +1,25 @@
 # Release notes
 
+## 1.5.0 — Mobile comparison dossier
+
+### Added and corrected
+
+- Replaced the 680px horizontally scrolling comparison table on phones and small tablets with full-width specification cards.
+- Added a full-screen, dynamic-viewport dossier with one predictable vertical scroll surface and safe-area support.
+- Added compact A/B/C record controls that collapse after selection and can be restored with **Edit records**.
+- Replaced long mobile record dropdowns with a searchable archive picker covering names, categories, sources and complete record fields.
+- Added a mobile **Differences only** mode and a clear no-differences recovery state.
+- Preserved two- and three-record comparison, optimal-value marking, direct record navigation, focus containment and source-book exclusions.
+- Restored natural word wrapping throughout comparison titles, record names and values, with touch targets of at least 44px.
+
+### Validation
+
+- Responsive comparison checks passed at 320, 360, 390, 430, 480, 640 and 700px, plus a 667×375 landscape viewport.
+- Weapons, cyberdecks, vehicles and drones were checked for viewport fit, horizontal overflow, clipped controls and correct mobile/desktop presentation selection.
+- Search, picker focus, Escape handling, automatic control collapse, differences-only filtering, third-record selection and removal were exercised in a real browser.
+- Before-and-after screenshots for all four desktop comparison dialogs reported zero changed pixels.
+- 26 unit tests and the production TypeScript/Vite build passed with no browser console or page errors.
+
 ## 1.4.0 — Mobile readability and reflow
 
 ### Added and corrected

@@ -53,7 +53,9 @@ The source catalog begins with the friendly names in `src/data.ts`. Additional c
 
 ## Comparison
 
-Weapon, cyberdeck, vehicle and drone comparison is computed entirely from the already loaded, source-enabled reference records. `src/comparison.ts` defines visible fields, normalised values and safe numeric ranking directions. `ComparisonPanel` provides the modal dossier, focus containment, Escape dismissal, mobile table scrolling and direct record navigation. No comparison state is persisted or sent outside the browser.
+Weapon, cyberdeck, vehicle and drone comparison is computed entirely from the already loaded, source-enabled reference records. `src/comparison.ts` defines visible fields, normalised values, candidate searching and safe numeric ranking directions. `ComparisonPanel` renders the unchanged desktop matrix above 700px and a mobile card stream at 700px and below; both consume the same selected records and calculated rows rather than maintaining parallel comparison logic.
+
+The mobile dossier uses the dynamic viewport as one vertical scroll surface. Compact record controls open a focus-contained searchable picker over the dossier, collapse after a choice and can be restored without losing the result position. Each specification card repeats the slot marker, record name and value so context never depends on horizontal scrolling. Differences-only filtering, third-record selection, optimal-value indicators, direct record navigation and the global source selection all operate on the shared comparison state. No comparison state is persisted or sent outside the browser.
 
 ## Compatibility
 

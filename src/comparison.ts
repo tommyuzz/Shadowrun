@@ -93,6 +93,25 @@ export function visibleComparisonFields(moduleId: ComparisonModule, records: Arr
   );
 }
 
+export function matchesComparisonSearch(record: ReferenceRecord, query: string, sourceName = ""): boolean {
+  const terms = query
+    .trim()
+    .toLocaleLowerCase("en-GB")
+    .split(/\s+/)
+    .filter(Boolean);
+  if (!terms.length) return true;
+
+  const searchable = [
+    record.name,
+    record.category,
+    record.subcategory,
+    record.source,
+    sourceName,
+    record.searchText
+  ].filter(Boolean).join(" ").toLocaleLowerCase("en-GB");
+  return terms.every((term) => searchable.includes(term));
+}
+
 export function bestComparisonIndexes(field: ComparisonField, values: string[]): number[] {
   if (!field.direction) return [];
   const score = field.score || numberScore;

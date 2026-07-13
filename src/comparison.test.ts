@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { bestComparisonIndexes, comparisonFields, comparisonValue, visibleComparisonFields } from "./comparison";
+import { bestComparisonIndexes, comparisonFields, comparisonValue, matchesComparisonSearch, visibleComparisonFields } from "./comparison";
 import type { ReferenceRecord } from "./types";
 
 function record(id: string, raw: Record<string, unknown>): ReferenceRecord {
@@ -10,7 +10,7 @@ function record(id: string, raw: Record<string, unknown>): ReferenceRecord {
     subcategory: String(raw.subcategory || "Heavy Pistols"),
     source: String(raw.source || "CRB"),
     tags: [],
-    searchText: "",
+    searchText: Object.values(raw).join(" ").toLocaleLowerCase("en-GB"),
     raw
   };
 }
@@ -41,6 +41,14 @@ describe("archive comparison", () => {
     const fields = visibleComparisonFields("weapons", [record("A", { accuracy: "5" }), record("B", { accuracy: "6" })]);
     expect(fields.map((field) => field.key)).toContain("accuracy");
     expect(fields.map((field) => field.key)).not.toContain("blast");
+  });
+
+  it("searches comparison candidates across identity, classification, source and record fields", () => {
+    const item = record("Ares Predator V", { manufacturer: "Ares Macrotechnology", accuracy: "5" });
+    expect(matchesComparisonSearch(item, "predator heavy")).toBe(true);
+    expect(matchesComparisonSearch(item, "ares macrotechnology")).toBe(true);
+    expect(matchesComparisonSearch(item, "fifth edition", "Shadowrun Fifth Edition Core Rulebook")).toBe(true);
+    expect(matchesComparisonSearch(item, "Renraku")).toBe(false);
   });
 
   it("marks the best numeric value using each field's direction", () => {
