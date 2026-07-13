@@ -1,0 +1,107 @@
+import { titleCase, valueText } from "./presentation";
+import type { RawRecord, ReferenceData, ReferenceRecord } from "./types";
+
+export interface RecordTag {
+  key: string;
+  label: string;
+  html: string;
+}
+
+const strings = (value: unknown): string[] => Array.isArray(value) ? value.map(String).filter(Boolean) : [];
+const recordMap = (data: ReferenceData, key: string): RawRecord => {
+  const value = data.payload[key];
+  return value && typeof value === "object" && !Array.isArray(value) ? value as RawRecord : {};
+};
+const legality = (availability: unknown, open = "Legal") => /F$/.test(String(availability || "")) ? "Forbidden" : /R$/.test(String(availability || "")) ? "Restricted" : open;
+
+function traitKey(input: string): string {
+  if (input === "Low-Light Vision" || input === "Thermographic Vision") return input;
+  if (/pathogen|toxin/i.test(input)) return "Pathogen and Toxin Resistance";
+  if (/Reach/i.test(input)) return "Reach";
+  if (/Dermal Armor/i.test(input)) return "Dermal Armor";
+  if (/Lifestyle cost/i.test(input)) return "Lifestyle Cost";
+  return input;
+}
+
+export function recordTags(moduleId: string, record: ReferenceRecord, data: ReferenceData): RecordTag[] {
+  const raw = record.raw;
+  switch (moduleId) {
+    case "skills": {
+      const attribute = titleCase(raw.attribute);
+      const group = raw.skillgroup ? titleCase(raw.skillgroup) : "";
+      const groupSkills = group ? data.records.filter((item) => item.raw.skillgroup === raw.skillgroup).map((item) => item.name).sort((a, b) => a.localeCompare(b)) : [];
+      const groupList = groupSkills.length ? `<br><br><strong>Skills in this group</strong><ul>${groupSkills.map((name) => `<li>${name}</li>`).join("")}</ul>` : "";
+      return [
+        { key: "attribute", label: `${attribute} linked`, html: `<strong>Linked attribute</strong><br>This skill is linked to <strong>${attribute}</strong>. A normal skill test uses the linked attribute plus the skill rating, unless a specific rule calls for a different dice pool.` },
+        { key: "default", label: raw.default ? "Defaultable" : "No default", html: raw.default ? "<strong>Defaulting</strong><br>This skill may be attempted without a skill rating. Roll the linked attribute with a <strong>–1 dice pool modifier</strong>, before applying any other relevant modifiers." : "<strong>Defaulting</strong><br>This skill <strong>cannot be defaulted</strong>. A character needs an appropriate skill rating before attempting tests that require it." },
+        { key: "group", label: group ? `${group} group` : "Standalone skill", html: group ? `<strong>Skill group</strong><br>This skill belongs to the <strong>${group}</strong> skill group. Skill groups allow related skills to be improved together while the group remains intact.${groupList}` : "<strong>Standalone skill</strong><br>This skill is not part of a skill group and is improved individually." }
+      ];
+    }
+    case "metatypes": {
+      const definitions = recordMap(data, "racial_traits");
+      return Array.from(new Set(strings(raw.racial_traits).map(traitKey))).map((trait) => ({ key: trait, label: trait, html: String(definitions[trait] || "No racial trait details are available.") }));
+    }
+    case "cyberdecks": {
+      const definitions = recordMap(data, "subcategories");
+      return [
+        { key: "subcategory", label: valueText(raw.subcategory), html: String(definitions[String(raw.subcategory)] || "No classification details are available.") },
+        { key: "legality", label: legality(raw.availability, "Open market"), html: `<strong>Market status</strong><br>This record has an Availability value of <strong>${valueText(raw.availability)}</strong>.` }
+      ];
+    }
+    case "matrixinteraction": {
+      const definitions = recordMap(data, "subcategories");
+      return Array.from(new Set([valueText(raw.subcategory, ""), ...strings(raw.functions)].filter(Boolean))).map((name) => ({ key: name, label: name, html: String(definitions[name] || "No function details are available.") }));
+    }
+    case "sprites": {
+      const definitions = recordMap(data, "sprite_powers");
+      return strings(raw.powers).map((power) => ({ key: power, label: power, html: String((definitions[power] as RawRecord | undefined)?.description || definitions[power] || "No power details are available.") }));
+    }
+    case "spells": {
+      const category = data.payload[record.category.toLowerCase()] as RawRecord | undefined;
+      const definitions = category?.keywords as RawRecord | undefined;
+      return strings(raw.keywords).map((keyword) => ({ key: keyword, label: titleCase(keyword), html: String(definitions?.[keyword] || "No keyword description is listed for this entry.") }));
+    }
+    case "adeptpowers": {
+      const definitions = recordMap(data, "rules");
+      return strings(raw.ruleTags).map((rule) => ({ key: rule, label: titleCase(rule), html: String(definitions[rule] || "No rule details are available.") }));
+    }
+    case "rituals": {
+      const definitions = recordMap(data, "keywords");
+      return strings(raw.keywords).map((keyword) => ({ key: keyword, label: keyword, html: String(definitions[keyword] || "No keyword details are available.") }));
+    }
+    case "weapons": {
+      const definitions = recordMap(data, "subcategories");
+      const legal = legality(raw.availability);
+      return [
+        { key: "category", label: record.category, html: `<strong>Weapon category</strong><br>This weapon is indexed under <strong>${titleCase(record.category)}</strong>. Use the matching archive tab to browse comparable weapons.` },
+        { key: "type", label: valueText(raw.subcategory), html: String(definitions[String(raw.subcategory)] || "<strong>Weapon type</strong><br>No additional rules are available for this subcategory.") },
+        { key: "legality", label: legal, html: `<strong>Legality</strong><br><strong>${legal}</strong> availability is indicated by <strong>${valueText(raw.availability)}</strong> in this record.` }
+      ];
+    }
+    case "vehicles": {
+      const categories = recordMap(data, "category");
+      const definitions = recordMap(data, "subcategories");
+      const legal = legality(raw.availability);
+      return [
+        { key: "category", label: record.category, html: String(categories[record.category] || "<strong>Vehicle category</strong><br>No category rules are available.") },
+        { key: "type", label: valueText(raw.subcategory), html: String(definitions[String(raw.subcategory)] || "<strong>Vehicle type</strong><br>No subcategory rules are available.") },
+        { key: "legality", label: legal, html: `<strong>Legality</strong><br><strong>${legal}</strong> availability is indicated by <strong>${valueText(raw.availability)}</strong> in this record.` }
+      ];
+    }
+    case "drones": {
+      const definitions = recordMap(data, "subcategories");
+      return [
+        { key: "size", label: valueText(raw.subcategory), html: String(definitions[String(raw.subcategory)] || "No size-class notes available.") },
+        { key: "legality", label: legality(raw.availability), html: `<strong>Legality</strong><br>Availability code: <strong>${valueText(raw.availability)}</strong>.` }
+      ];
+    }
+    case "equipment": {
+      const definitions = recordMap(data, "subcategories");
+      return [
+        { key: "subcategory", label: valueText(raw.subcategory), html: String(definitions[String(raw.subcategory)] || "No product-type rules are available.") },
+        { key: "legality", label: legality(raw.availability, "Open market"), html: `<strong>Market status</strong><br>This listing has an Availability value of <strong>${valueText(raw.availability)}</strong>.` }
+      ];
+    }
+    default: return [];
+  }
+}

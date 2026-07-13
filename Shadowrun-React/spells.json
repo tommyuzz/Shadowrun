@@ -1,0 +1,1052 @@
+{
+  "combat": {
+    "description": "Combat spells use mana to create damaging effects, either by direct or indirect means. They’re a mana-slinger’s guns, and are treated that way by law enforcement.",
+    "keywords": {
+      "direct": "Direct combat spells channel magical energy directly into the target.<br><br><strong>Opposed Test</strong><ul><li><strong>Physical spell:</strong> Spellcasting + Magic [Force] vs. Body.</li><li><strong>Mana spell:</strong> Spellcasting + Magic [Force] vs. Willpower.</li><li>If the target is protected by Spell Defense, allocated Counterspelling dice may be added to the target's defense test.</li></ul><strong>Damage</strong><br>The spell inflicts a number of boxes of damage equal to the caster's <strong>net hits</strong>.<br><br>The target receives <strong>no separate Damage Resistance Test</strong>; the opposed Spellcasting Test is the target's resistance to the damage.<br><br><strong>Wound Modifiers</strong><br>Wound modifiers do not apply to tests made to resist direct combat spells.",
+      "indirect": "Indirect combat spells create an external damaging effect near the magician and launch it toward the target, functioning much like a ranged weapon.<br><br><strong>Single-Target Attack</strong><br>Roll:<br><br><strong>Spellcasting + Magic [Force] vs. Reaction + Intuition</strong><br><br>The spell requires a <strong>clear line of fire</strong>. The magician does not necessarily need to see the target directly and may cast while blindfolded or using artificial image enhancement, provided a clear line of fire exists.<br><br><strong>Damage</strong><ul><li><strong>Damage Value:</strong> Force + net hits.</li><li><strong>Armor Penetration:</strong> –Force.</li><li>Damage is resisted with <strong>Body + modified Armor</strong>.</li></ul><strong>Area Indirect Spells</strong><br>Area versions use a grenade-like procedure. Roll:<br><br><strong>Spellcasting + Magic [Force] (3)</strong><br><br>Scatter is normally <strong>2D6 metres</strong>.<ul><li>If the threshold is met, add the caster's net hits to the spell's Damage Value.</li><li>If the threshold is not met, the spell still detonates.</li><li>Each hit on a failed test reduces scatter by <strong>1 metre</strong>.</li></ul>",
+      "elemental (acid)": "Acid damage is <strong>Physical</strong> and damages both its target and protective Armor.<br><br><strong>Initial Effect</strong><ul><li>Resolve the attack's normal Physical damage.</li><li>Any Armor hit by the acid has its rating reduced by <strong>1</strong>.</li></ul><strong>Continuing Acid Damage</strong><br>If the acid remains on the target, it continues to burn each Combat Turn:<ul><li>Reduce the acid's base DV by <strong>1</strong>.</li><li>Apply the remaining acid damage again.</li><li>Reduce the target's Armor rating by another <strong>1</strong>.</li></ul>This continues until the acid is removed, neutralized, or its base DV reaches <strong>0</strong>.<br><br>Armor reduction is normally applied to worn Armor first, though the gamemaster may allow it to affect Armor accessories instead.<br><br><strong>Spell-Created Acid</strong><br>Acid created by an instantaneous spell evaporates back into mana when the spell ends. Accordingly, <strong>Acid Stream</strong> and <strong>Toxic Wave</strong> inflict the immediate Acid damage and Armor reduction, but their acid quickly evaporates rather than continuing to burn in later Combat Turns.<br><br>At the gamemaster's discretion, acid may also produce <strong>Light Smoke</strong> around the target.",
+      "elemental (cold)": "Cold damage is <strong>Physical</strong>. It may also freeze liquids, gum up lubricants, make materials brittle, and produce other effects appropriate to extreme cold.<br><br><strong>Armor Test</strong><br>Anything directly hit by Cold damage makes an Armor Test.<ul><li><strong>1 or more hits:</strong> The Armor remains usable.</li><li><strong>No hits:</strong> The Armor breaks and cannot be used as Armor until repaired using the Building & Repairing rules.</li><li><strong>Glitch:</strong> The Armor is destroyed beyond repair.</li><li><strong>Critical Glitch:</strong> The Armor is destroyed beyond repair in a dangerous way.</li></ul>",
+      "elemental (electricity)": "Electricity damage may be <strong>Stun or Physical</strong> depending on its source and target. Core spells such as Lightning Bolt and Ball Lightning inflict Physical damage.<br><br><strong>Protection</strong><br>The <strong>Nonconductivity</strong> Armor modification adds its full rating to Armor against Electricity damage. The gamemaster may apply other situational modifiers, such as increased conductivity when a target is covered in water.<br><br><strong>Secondary Effects on Characters</strong><br>Secondary effects occur only if the attack inflicts at least <strong>1 box of damage</strong>.<ul><li><strong>–1 dice pool</strong> to all actions and Defense Tests, excluding Damage Resistance Tests, for 1 Combat Turn.</li><li><strong>–5 Initiative Score</strong> immediately.</li></ul>These penalties do not increase in magnitude when several damaging Electricity attacks strike the same character. Each additional successful damaging attack instead extends the duration of the <strong>–1 dice pool penalty by 1 Combat Turn</strong>.<br><br>If the Initiative reduction lowers the character's Initiative Score to <strong>0 or less</strong>, they lose their last remaining action. If they have no Initiative Score remaining when struck, the reduction is applied at the start of the next Combat Turn.<br><br><strong>Electronics and Drones</strong><ul><li>Electricity damage is always <strong>Physical</strong> against electronics and drones.</li><li>If at least 1 box of Physical damage is inflicted, the device also suffers <strong>Matrix damage equal to half the Physical damage dealt, rounded down</strong>.</li></ul><strong>Vehicles</strong><br>Vehicles can suffer Electricity damage but do not suffer its secondary effects. Individual vehicle systems may be targeted with a Called Shot.",
+      "elemental (fire)": "Fire damage is <strong>Physical</strong> and may cause targets to catch fire.<br><br><strong>Ignition Test</strong><br>To determine whether something ignites, roll:<br><br><strong>Armor Value + Fire Resistance – Fire AP</strong><br><br>The threshold equals the <strong>net hits of the fire-based attack</strong>. If the test succeeds, the item does not catch fire.<br><br>Armor accessories are normally excluded from this test, though the gamemaster may require them to test separately.<br><br><strong>Fire Armor Penetration</strong><ul><li><strong>Open flame:</strong> AP –2.</li><li><strong>Fire-based spell:</strong> AP equal to –spell Force.</li><li><strong>Flame-based weapon:</strong> AP –6.</li></ul><strong>Burning</strong><ul><li>A fire begins at <strong>DV 3</strong>.</li><li>Damage is applied at the <strong>end of each Combat Turn</strong>.</li><li>The fire's DV increases by <strong>1 at the start of each subsequent Combat Turn</strong>.</li><li>The fire continues until the target is destroyed or the flames are extinguished.</li></ul><strong>Extinguishing the Fire</strong><br>Water, smothering, or another suitable method may be used. Make an:<br><br><strong>Agility + Intuition Test</strong><br><br>Reduce the fire's DV by <strong>1 per hit</strong>.<br><br>While it continues to burn, the fire may ignite nearby flammable objects or creatures."
+    },
+    "spells": {
+      "acid stream": {
+        "keywords": [
+          "indirect",
+          "elemental (acid)"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell creates a powerful corrosive that sprays the target, causing terrible burns and eating away organic and metallic material—treat it as Acid damage, with appropriate effects on the affected area and any objects therein. The acid quickly evaporates, but the damage it inflicts remains. Acid Stream is a single-target spell."
+      },
+      "toxic wave": {
+        "keywords": [
+          "indirect",
+          "elemental (acid)"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "This spell creates a powerful corrosive that sprays the target, causing terrible burns and eating away organic and metallic material—treat it as Acid damage, with appropriate effects on the affected area and any objects therein. The acid quickly evaporates, but the damage it inflicts remains. Toxic Wave is an area spell."
+      },
+      "punch": {
+        "keywords": [
+          "indirect"
+        ],
+        "type": "P",
+        "range": "T",
+        "damage": "S",
+        "duration": "I",
+        "drain": "F - 6",
+        "source": "CRB",
+        "description": "This spell smacks the target(s) with invisible psychokinetic force, similar to a bruising punch, that inflicts Stun damage. Punch requires you to touch the target."
+      },
+      "clout": {
+        "keywords": [
+          "indirect"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "damage": "S",
+        "duration": "I",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell smacks the target(s) with invisible psychokinetic force, similar to a bruising punch, that inflicts Stun damage. Clout affects a single target."
+      },
+      "blast": {
+        "keywords": [
+          "indirect"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "damage": "S",
+        "duration": "I",
+        "drain": "F",
+        "source": "CRB",
+        "description": "This spell smacks the target(s) with invisible psychokinetic force, similar to a bruising punch, that inflicts Stun damage. Punch requires you to touch the target. Clout affects a single target, while Blast is an area spell."
+      },
+      "death touch": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "M",
+        "range": "T",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 6",
+        "source": "CRB",
+        "description": "Death Touch channels destructive magical power into the target, doing Physical damage. The damage inflicted is similar to massive cellular die off from radiation or necrotizing fasciitis, but without the continuing effects. But still, ick. Since they are mana spells, spells in this group only affect living and magical targets and are resisted with Willpower. Death Touch requires the magician to touch the target."
+      },
+      "manabolt": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "Manabolt channels destructive magical power into the target, doing Physical damage. The damage inflicted is similar to massive cellular die off from radiation or necrotizing fasciitis, but without the continuing effects. But still, ick. Since they are mana spells, spells in this group only affect living and magical targets and are resisted with Willpower. Manabolt affects a single target."
+      },
+      "manaball": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F",
+        "source": "CRB",
+        "description": "Manaball channels destructive magical power into the target, doing Physical damage. The damage inflicted is similar to massive cellular die off from radiation or necrotizing fasciitis, but without the continuing effects. But still, ick. Since they are mana spells, spells in this group only affect living and magical targets and are resisted with Willpower. Manaball is an area-effect spell."
+      },
+      "flamethrower": {
+        "keywords": [
+          "indirect",
+          "elemental (fire)"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell creates an explosion of flames that flash into existence and scorch the target(s), giving them the double benefit of causing pain and being intimidating as hell. These spells deal Fire damage. These flames burn out after striking the target, but their secondary effects may ignite flammable materials that continue to burn after the spell is exhausted. Flamethrower is a single-target spell."
+      },
+      "fireball": {
+        "keywords": [
+          "indirect",
+          "elemental (fire)"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "This spell creates an explosion of flames that flash into existence and scorch the target(s), giving them the double benefit of causing pain and being intimidating as hell. These spells deal Fire damage. These flames burn out after striking the target, but their secondary effects may ignite flammable materials that continue to burn after the spell is exhausted. Fireball is an area spell."
+      },
+      "lightning bolt": {
+        "keywords": [
+          "indirect",
+          "elemental (electricity)"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell creates and direct vicious strikes of electricity that cause Electricity damage. Lightning Bolt is a single target spell."
+      },
+      "ball lightning": {
+        "keywords": [
+          "indirect",
+          "elemental (electricity)"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "This spell creates and direct vicious strikes of electricity that cause Electricity damage. Ball Lightning is an area spell."
+      },
+      "shatter": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "P",
+        "range": "T",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 6",
+        "source": "CRB",
+        "description": "This spell channels destructive magical power into the targets causing Physical damage. The target is cooked from the inside, like magically microwaving a hot dog. As physical energies, they can affect both living and non-living targets and are resisted by the target’s Body. Shatter requires you to touch the target."
+      },
+      "powerbolt": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell channels destructive magical power into the targets causing Physical damage. The target is cooked from the inside, like magically microwaving a hot dog. As physical energies, they can affect both living and non-living targets and are resisted by the target’s Body. Powerbolt affects a single target."
+      },
+      "powerball": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "damage": "P",
+        "duration": "I",
+        "drain": "F",
+        "source": "CRB",
+        "description": "This spell channels destructive magical power into the targets causing Physical damage. The target is cooked from the inside, like magically microwaving a hot dog. As physical energies, they can affect both living and non-living targets and are resisted by the target’s Body. Powerball is an area spell."
+      },
+      "knockout": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "M",
+        "range": "T",
+        "damage": "S",
+        "duration": "I",
+        "drain": "F - 6",
+        "source": "CRB",
+        "description": "This spell channels magical energy directly into the target, causing Stun damage. They are sometimes referred to as “sleep” spells because they can render targets unconscious but keep them alive, in the cases where you’d prefer more polite violence. Knockout requires the magician to touch the target."
+      },
+      "stunbolt": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "damage": "S",
+        "duration": "I",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell channels magical energy directly into the target, causing Stun damage. They are sometimes referred to as “sleep” spells because they can render targets unconscious but keep them alive, in the cases where you’d prefer more polite violence. Stunbolt affects a single target."
+      },
+      "stunball": {
+        "keywords": [
+          "direct"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "damage": "S",
+        "duration": "I",
+        "drain": "F",
+        "source": "CRB",
+        "description": "This spell channels magical energy directly into the target, causing Stun damage. They are sometimes referred to as “sleep” spells because they can render targets unconscious but keep them alive, in the cases where you’d prefer more polite violence. Stunball is an area spell."
+      }
+    }
+  },
+  "detection": {
+    "description": "Detection spells grant a new sense or improve an existing one while sustained. They may be cast on the magician or another subject within touch range. Standard sensory range is Force × Magic metres; Extended versions use Force × Magic × 10 metres. Net hits determine the detail obtained, and using the sense may require an Observe in Detail Simple Action.",
+    "glitches": "A glitch may provide false or misleading information. A critical glitch may increase drain, make drain Physical, temporarily remove one of the subject’s senses, or grant the spell’s sense to others within range.",
+    "keywords": {
+      "active": "Active Detection spells require an <strong>Opposed Test</strong> between the caster's Spellcasting + Magic [Force] and the appropriate resistance pool for whatever the spell is attempting to detect.<br><br><strong>Resistance</strong><ul><li><strong>Living beings with auras:</strong> Willpower + Logic, plus Counterspelling if available, limited by Mental.</li><li><strong>Magical objects:</strong> Force × 2.</li><li><strong>Mundane objects:</strong> Object Resistance.</li></ul>Counterspelling may defend against an Active Detection spell even when the target is unaware that the spell has been cast.<br><br><strong>Multiple or Later Targets</strong><br>The caster makes only <strong>one Spellcasting Test</strong>. Each potential target makes its own resistance test against that original result. A target that later enters the spell's range also resists against the caster's original Spellcasting Test.",
+      "passive": "A Passive Detection spell is continuously active while sustained and feeds sensory information directly to the subject without requiring interpretation.<br><br><strong>Perception Tests</strong><br>When the granted sense is used for a Perception Test, the test's limit is the spell's <strong>net hits</strong> rather than the subject's Mental limit.<br><br><strong>Counterspelling</strong><br>Counterspelling cannot be used to defend against a Passive Detection sense.<br><br><strong>Dispelling</strong><br>Once an opposing spellcaster recognises the active sustained spell, they may attempt to dispel it by rolling:<br><br><strong>Counterspelling + Magic [Astral] vs. spell Force + caster's Magic</strong><br><br>If the spell was quickened, add the Karma spent on quickening to the opposing dice pool. Each net hit by the dispeller reduces the original caster's spellcasting hits by <strong>1</strong>. If reduced to <strong>0 hits</strong>, the spell ends completely.<br><br>The dispeller must also resist the spell's Drain as though they had cast it. The Drain is Physical if the spell's Force exceeds the dispeller's Magic rating; otherwise it is Stun.",
+      "directional": "The Detection spell's sense operates in a <strong>chosen direction</strong>, similar to ordinary sight.<br><br>The standard sensory range for a Detection spell is a radius of:<br><br><strong>Force × caster's Magic metres</strong><br><br>The individual spell may impose additional rules for where or how the sensory point can be directed.",
+      "area": "The Detection spell's sense operates in <strong>all directions simultaneously</strong>, similar to ordinary hearing.<br><br>The standard sensory range extends from the subject of the spell to a radius of:<br><br><strong>Force × caster's Magic metres</strong>",
+      "extended area": "An Extended Area Detection spell operates in <strong>all directions simultaneously</strong> but has ten times the standard Detection range.<br><br><strong>Extended Range</strong><br><br><strong>Force × caster's Magic × 10 metres</strong>",
+      "psychic": "The spell grants a <strong>non-standard psychic sense</strong> rather than a conventional sense such as vision or hearing. Examples include telepathy, precognition, and subconscious awareness of danger.<br><br>The exact information supplied and any actions required to use the sense are determined by the individual spell."
+    },
+    "spells": {
+      "analyze device": {
+        "keywords": [
+          "active",
+          "directional"
+        ],
+        "type": "P",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell allows the subject to analyze the purpose and operation of a device or piece of equipment within range of the sense. The casting of the spell is opposed by the object’s resistance. Each net hit can be used to provide a piece of information about the device that would not be readily apparent (for example, it would not give the information that it is a Renraku-manufactured device if the thing is emblazoned with a huge Renraku logo, but it might say what the basic function of the thing is). Each net hit also gives the subject a bonus die while operating the device and allows the subject to ignore any skill-defaulting modifiers for using it as long as the spell is sustained."
+      },
+      "analyze magic": {
+        "keywords": [
+          "active",
+          "directional"
+        ],
+        "type": "P",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell allows the subject to analyze the purpose of a magical object (e.g., foci, alchemical preparations, magical lodges, active rituals). Treat the net hits from the Spellcasting Test as hits on the Assensing Table, except the subject isn’t required to be perceiving astrally."
+      },
+      "analyze truth": {
+        "keywords": [
+          "active",
+          "directional"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "The subject can tell whether a target’s statements are the truth (or at least if the subject honestly believes them to be true).The spell needs at least 1 net hit to determine validity of a selected statement. The spell does not work on written materials or items recorded through any sort of technological medium. The subject must hear a statement in person (with the target within range) to be able to judge its truth."
+      },
+      "clairaudience": {
+        "keywords": [
+          "passive",
+          "directional"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "The subject can hear distant sounds as if physically present at a chosen point within the sensory range of the spell. The listening point may be moved to any other point within range of the spell as a Complex Action. While using Clairaudience, the subject cannot use her normal hearing. This spell doesn’t translate visual images, only sounds (and only sounds within the subject’s natural range of hearing; augmented hearing does not apply)."
+      },
+      "clairvoyance": {
+        "keywords": [
+          "passive",
+          "directional"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "The subject can see distant scenes as if physically present at a chosen point within the sensory range of the spell. The visual point may be moved to any other point within range of the spell as a Complex Action. The subject can’t use normal vision or astral perception while using Clairvoyance. This spell doesn’t translate sound, only vision, and it doesn’t work with augmented vision. You can’t target spells through Clairvoyance."
+      },
+      "combat sense": {
+        "keywords": [
+          "passive",
+          "psychic"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F",
+        "source": "CRB",
+        "description": "The subject can subconsciously analyze combat and other dangerous situations within range, sensing events a split-second before they happen. Every hit on the Spellcasting Test adds 1 die for Reaction on Surprise Tests, and also to rolls made when defending against ranged and melee attacks as long as the spell remains in effect."
+      },
+      "detect enemies": {
+        "keywords": [
+          "active",
+          "area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "The subject can detect living targets within range who have hostile intentions toward him. The spell does not detect traps (since they aren’t alive), nor can it detect someone about to shoot into a crowd at random (since the hostility is not directed at the subject of the spell). The spell can detect targets preparing an ambush or other surprise attack directed at the subject."
+      },
+      "detect enemies, extended": {
+        "keywords": [
+          "active",
+          "extended area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F",
+        "source": "CRB",
+        "description": "The subject can detect living targets within range who have hostile intentions toward him. The spell does not detect traps (since they aren’t alive), nor can it detect someone about to shoot into a crowd at random (since the hostility is not directed at the subject of the spell). The spell can detect targets preparing an ambush or other surprise attack directed at the subject."
+      },
+      "detect individual": {
+        "keywords": [
+          "active",
+          "area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "The subject can detect the presence of a particular individual anywhere within range of the sense. You need to specify the individual during casting, someone you know or at least have met in the past."
+      },
+      "detect life": {
+        "keywords": [
+          "active",
+          "area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "The subject detects all living beings (but not spirits) within range of the sense and knows their number and relative location. In a crowded area, the spell is virtually useless, picking up a blurred mass of traces of life."
+      },
+      "detect life, extended": {
+        "keywords": [
+          "active",
+          "extended area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "The subject detects all living beings (but not spirits) within range of the sense and knows their number and relative location. In a crowded area, the spell is virtually useless, picking up a blurred mass of traces of life."
+      },
+      "detect [life form]": {
+        "keywords": [
+          "active",
+          "area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "The subject detects all of a specified type of life form within the range of the sense and knows their number and relative location. This is actually several different spells that must be learned separately, one for each type of life form that a caster might like to detect (Detect Orks, Detect Elves, Detect Dragons, and so forth), which are learned separately."
+      },
+      "detect [life form], extended": {
+        "keywords": [
+          "active",
+          "extended area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F",
+        "source": "CRB",
+        "description": "The subject detects all of a specified type of life form within the range of the sense and knows their number and relative location. This is actually several different spells that must be learned separately, one for each type of life form that a caster might like to detect (Detect Orks, Detect Elves, Detect Dragons, and so forth), which are learned separately."
+      },
+      "detect magic": {
+        "keywords": [
+          "active",
+          "area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "The subject can detect the presence of all foci, spells, wards, magical lodges, alchemical preparations, active rituals, and spirits within range of the sense. It does not detect Awakened characters or critters, astral signatures, alchemical preparations that that have expired or already triggered, or the effects of permanent spells once they have become permanent."
+      },
+      "detect magic, extended": {
+        "keywords": [
+          "active",
+          "extended area"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F",
+        "source": "CRB",
+        "description": "The subject can detect the presence of all foci, spells, wards, magical lodges, alchemical preparations, active rituals, and spirits within range of the sense. It does not detect Awakened characters or critters, astral signatures, alchemical preparations that that have expired or already triggered, or the effects of permanent spells once they have become permanent."
+      },
+      "detect [object]": {
+        "keywords": [
+          "active",
+          "area"
+        ],
+        "type": "P",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "The subject detects all of a specified type of object within range of the sense and knows their number and relative location. Each type of object requires a separate spell (Detect Guns, Detect Computers, Detect Explosives, and so forth). These spells must all be learned and cast separately."
+      },
+      "mindlink": {
+        "keywords": [
+          "active",
+          "psychic"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "Mindlink allows the magician and one voluntary subject to communicate mentally, exchanging conversation, emotions, and mental images. One hit on the Spellcasting Test is enough to establish the link. The subject must remain within range of the magician for the Mindlink to work."
+      },
+      "mind probe": {
+        "keywords": [
+          "active",
+          "directional"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F",
+        "source": "CRB",
+        "description": "This spell allows the subject to telepathically probe the mind of a specific target within range of the sense (chosen when the spell is cast). The target is aware of the probing, though they may not know the source of the spell. The number of net hits you get on the spell determines what kind of information the subject can read, given on the table. The subject may probe for one piece of information per Complex Action while the spell is sustained. Additional uses of Mind Probe against the same target within a number of hours equal to the target’s Willpower inflict a –2 dice pool modifier on the Spellcasting attempt."
+      }
+    }
+  },
+  "health": {
+    "description": "Health spells affect the condition and performance of living bodies. They can heal injury, combat disease or toxins, and increase or decrease Attributes. All Health spells require the magician to touch the subject.",
+    "keywords": {
+      "essence": "Characters with reduced Essence are harder to affect with Health spells carrying the <strong>Essence</strong> keyword, because magic has greater difficulty restoring or altering a body that has been unnaturally modified.<br><br><strong>Dice Pool Modifier</strong><br>Apply a modifier equal to:<br><br><strong>Current Essence – Maximum Essence</strong><br><br>Round the result <strong>up</strong>. The result will normally be <strong>0 or a negative number</strong> and modifies the magician's Spellcasting dice pool.<br><br><strong>Example</strong><br>A character with <strong>Essence 3.7</strong> and a maximum Essence of <strong>6</strong> gives the caster:<br><br><strong>3.7 – 6 = –2.3, rounded up to –2 dice</strong><br><br>This modifier applies only to Health spells specifically marked with the <strong>Essence</strong> keyword."
+    },
+    "spells": {
+      "antidote": {
+        "keywords": [],
+        "type": "M",
+        "range": "T",
+        "duration": "P",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell helps a poisoned subject overcome a toxin. Casters use it after the target has been poisoned, but before the target needs to make her Toxin Resistance Test, based on the Speed of the toxin. Add the hits from this spell directly to the hits from the Toxin Resistance Test."
+      },
+      "cure disease": {
+        "keywords": [
+          "essence"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "P",
+        "drain": "F - 4",
+        "source": "CRB",
+        "description": "This spell is used at any point after infection to help a patient overcome illness. The infected character receives a number of additional dice on her Disease Resistance Test equal to the spell’s net hits until the patient recovers (or dies). It does not heal any damage already inflicted by the disease (that requires a separate Healing spell)."
+      },
+      "decrease [attribute]": {
+        "keywords": [
+          "essence"
+        ],
+        "type": "P",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "This spell weakens the target by decreasing a designated Attribute. A version of this spell exists for each Physical and Mental attribute, but not for Special attributes (Initiative, Edge, Essence, Magic, or Resonance). It affects both natural and augmented Attributes. This spell is cast with an Opposed Spellcasting + Magic [Force] v. (targeted Attribute) + Willpower Test. If the magician wins, the Attribute is reduced by the spell’s net hits. If a Physical Attribute is reduced to 0, the victim is incapacitated and paralyzed. If a Mental Attribute is reduced to 0, the victim stands still, mindlessly confused. Decreasing an Attribute also affects any other derived statistics that use it (for example, if Reaction or Intuition is lowered, Initiative is lowered as well) as long as the spell is sustained."
+      },
+      "detox": {
+        "keywords": [],
+        "type": "M",
+        "range": "T",
+        "duration": "P",
+        "drain": "F - 6",
+        "source": "CRB",
+        "description": "Detox relieves the side effects of a drug or poison. The Force of the spell must equal or exceed the toxin’s base DV. A single hit is sufficient to eliminate all symptoms. Detox does not heal or prevent damage done by toxins, but it eliminates any side effects they may have on the victim (dizziness, hallucinations, nausea, pain, and so forth). Detox is the hangover cure of choice among those who can afford it."
+      },
+      "heal": {
+        "keywords": [
+          "essence"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "P",
+        "drain": "F - 4",
+        "source": "CRB",
+        "description": "Heal repairs physical injuries. It heals a number of boxes of Physical damage equal to the spell’s hits from the Spellcasting Test. Hits can also be used to reduce the base time for the spell to become permanent; each hit spent this way shaves off 1 Combat Turn (you can split hits between healing and reducing time). Any boxes of Physical damage your target still has after any boxes are healed magically can only be healed by time and rest."
+      },
+      "increase [attribute]": {
+        "keywords": [
+          "essence"
+        ],
+        "type": "P",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "This spell increases an Attribute (natural or augmented) on a voluntary subject. A version of this spell exists for each Physical and Mental attribute, but not for Special Attributes (Initiative, Edge, Essence, Magic, or Resonance). The Force of the spell must equal or exceed the (augmented) value of the Attribute being affected. The Attribute is increased by an amount equal to the hits scored, up to the target’s augmented maximum (any hits that would increase the Attribute beyond its augmented maximum are ignored). Each Attribute can only be affected by a single Increase Attribute spell at a time. Note that increasing an Attribute may affect other derived statistics (Increase Reaction also affects Initiative, for example, while Increase Body adds extra boxes to the character’s Physical Condition Monitor for as long as the spell lasts)."
+      },
+      "increase reflexes": {
+        "keywords": [
+          "essence"
+        ],
+        "type": "P",
+        "range": "T",
+        "duration": "S",
+        "drain": "F",
+        "source": "CRB",
+        "description": "This spell increases the initiative of a subject. Each hit rolled on the Spellcasting Test adds +1 to the target’s Initiative, and every two hits adds one Initiative Die. A character can only be affected by a single Increase Reflexes spell at a time, and the maximum Initiative Dice anyone can have is +5D6."
+      },
+      "oxygenate": {
+        "keywords": [],
+        "type": "P",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 5",
+        "source": "CRB",
+        "description": "This spell oxygenates the blood of a voluntary subject, providing extra Body dice (1 die for every hit) to re- sist suffocation, strangulation, the effects of inhaled gas, or any other effect of oxygen deprivation. The spell also allows the subject to breathe underwater."
+      },
+      "prophylaxis": {
+        "keywords": [],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 4",
+        "source": "CRB",
+        "description": "This spell provides an extra die per hit for a subject to resist infection, drugs, or toxins. The spell does not discriminate between harmful and beneficial drugs, so the subject also resists medicines and other helpful drugs while under its effects. Reduce the bonuses of a beneficial drug by 1 for every hit rolled in the casting; three or more hits block effects that do not have a bonus or penalty associated with them."
+      },
+      "resist pain": {
+        "keywords": [],
+        "type": "M",
+        "range": "T",
+        "duration": "P",
+        "drain": "F - 4",
+        "source": "CRB",
+        "description": "Resist Pain allows the subject to ignore the pain of injuries, reducing penalties from Physical or Stun damage. Each hit on the Spellcasting Test removes the effect of one box of damage from each of the subject’s Condition Monitor tracks. It does not remove the damage itself; it only eliminates the modifiers. If all of the boxes on the track are filled, the character still falls unconscious. The spell is permanent in that the boost to the patient’s endorphin levels does not wear off. If the subject’s damage rises above the level at which the patient is resisting pain or if the existing injuries heal, the spell dissipates. A person can only be under the effects of one Resist Pain spell at a time (the one with the most hits)."
+      },
+      "stabilize": {
+        "keywords": [],
+        "type": "M",
+        "range": "T",
+        "duration": "P",
+        "drain": "F - 4",
+        "source": "CRB",
+        "description": "When applied to a character with a filled Physical damage track, this spell stabilizes all vital functions and prevents the character from dying. The spell’s Force must equal or exceed the overflow damage already taken when the spell starts. The full time must be taken for the spell to become permanent before the character is truly stabilized; hits reduce the time it takes by 1 Combat Turn each. If successful, the spell prevents the character from taking further damage from Physical Damage Overflow"
+      }
+    }
+  },
+  "illusion": {
+    "description": "Illusion spells manipulate perception. They cannot directly inflict lasting physical harm, although false sensations and deceptive environments can still place victims in danger. Illusions may be obvious or realistic, affect one or several senses, and use mana or physical effects.",
+    "keywords": {
+      "obvious": "Obvious illusions are intended for <strong>entertainment or openly artificial effects</strong>. They cannot fool observers into believing that the illusion is real.<br><br>The spell's <strong>Mana or Physical Type</strong> still determines what can perceive it:<ul><li><strong>Mana illusions</strong> affect minds and cannot be detected by technological viewing systems such as cameras.</li><li><strong>Physical illusions</strong> create or alter actual sensory phenomena such as light or sound and can therefore affect both living observers and technological sensors.</li></ul>",
+      "realistic": "Realistic illusions are designed to appear <strong>completely real</strong> to affected observers.<br><br><strong>Mana Illusions</strong><ul><li>Affect the mind.</li><li>Do not affect technological viewing systems such as cameras.</li><li>Are resisted with <strong>Logic + Willpower</strong>.</li><li>May exist on the astral plane, but their magical auras reveal them as illusions to anyone succeeding on an Assensing Test.</li><li>Cannot fool Assensing or disguise, conceal, or create auras.</li></ul><strong>Physical Illusions</strong><ul><li>Create actual sensory phenomena or alter physical properties such as light or sound.</li><li>Can affect both living observers and technological systems.</li><li>Living observers resist with <strong>Intuition + Logic</strong>.</li><li>Non-living devices resist with their <strong>Object Resistance</strong>.</li></ul>The magician must generate <strong>more hits than the observer</strong> for a realistic illusion to be accepted as real. If the illusion is not completely resisted, the observer is fully affected by it.",
+      "single-sense": "A Single-Sense illusion affects <strong>one sense only</strong>.<br><br>Examples include an illusion affecting only sight, only hearing, or only the sensation of pain. Other senses remain unaffected unless the individual spell states otherwise.",
+      "multi-sense": "A Multi-Sense illusion affects <strong>all senses</strong>, allowing the illusion to include combinations of sight, sound, touch, smell, taste, and other appropriate sensory information.<br><br>Whether technological sensors can perceive the illusion depends on whether the spell is a <strong>Mana</strong> or <strong>Physical</strong> illusion.",
+      "area": "An Area illusion affects eligible subjects throughout the spell's area.<br><br><strong>Area of Effect</strong><br>Unless the spell specifies otherwise, an Area spell forms a sphere centred on a visible target or visible point in space with a radius equal to:<br><br><strong>Spell Force in metres</strong><br><br>All valid targets within that area whom the magician can see may be affected, including both allies and enemies. A potential target hidden from the magician's vision, such as one behind an opaque screen, is not affected.<br><br><strong>Moving a Sustained Area</strong><br>A sustained Area spell may be moved as a <strong>Complex Action</strong>, provided the spell's area remains within the magician's line of sight.<ul><li>Characters leaving the area are no longer affected.</li><li>Characters newly enveloped by the area must defend against the spell as appropriate.</li></ul>"
+    },
+    "spells": {
+      "agony": {
+        "keywords": [
+          "realistic",
+          "single-sense"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 4",
+        "source": "CRB",
+        "description": "A favorite of mages going through bad break-ups, Agony inflicts an illusion of terrible pain on the target. Each net hit scored by the magician temporarily inflicts 1 box of Physical and 1 box of Stun damage on the target. It is not actual damage, only a measure of the effect of the spell. The target is affected the same as if the damage were real, with the usual injury penalties. If the target’s damage boxes are completely filled, he is racked with pain, unable to move or act. Once the spell is ended, the pain and damage boxes immediately go away. Agony affects a single target, while Mass Agony is an area spell."
+      },
+      "mass agony": {
+        "keywords": [
+          "realistic",
+          "single-sense"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "A favorite of mages going through bad break-ups, Agony inflicts an illusion of terrible pain on the target. Each net hit scored by the magician temporarily inflicts 1 box of Physical and 1 box of Stun damage on the target. It is not actual damage, only a measure of the effect of the spell. The target is affected the same as if the damage were real, with the usual injury penalties. If the target’s damage boxes are completely filled, he is racked with pain, unable to move or act. Once the spell is ended, the pain and damage boxes immediately go away. Agony affects a single target, while Mass Agony is an area spell."
+      },
+      "bugs": {
+        "keywords": [
+          "realistic",
+          "multi-sense"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "These spells make the target believe that small bugs of various persuasions are crawling over their entire body, biting them, scurrying about, and crawling into assorted orifices. The bugs look, feel, smell, and even taste real. The illusion is usually enough to make any target who fails to resist freak out. For each net hit you get, the target loses 2 from their Initiative Score. If you sustain the spell, they lose the same amount from their Initiative Score at the beginning of each Combat Turn. Bugs affects a single target, Swarm is an area spell."
+      },
+      "swarm": {
+        "keywords": [
+          "realistic",
+          "multi-sense"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "These spells make the target believe that small bugs of various persuasions are crawling over their entire body, biting them, scurrying about, and crawling into assorted orifices. The bugs look, feel, smell, and even taste real. The illusion is usually enough to make any target who fails to resist freak out. For each net hit you get, the target loses 2 from their Initiative Score. If you sustain the spell, they lose the same amount from their Initiative Score at the beginning of each Combat Turn. Bugs affects a single target, Swarm is an area spell."
+      },
+      "confusion": {
+        "keywords": [
+          "realistic",
+          "multi-sense"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "These spells produce a storm of conflicting sensations and images to confuse the senses. For each net hit on the Spellcasting Test, the target suffers a –1 dice pool modifier to all tests due to the distraction. Confusion affects a single target. Mass Confusion is an area spell. The Chaos spell is a physical version of Confusion (above), so it also affects technological systems and sensing devices. Chaotic World is an area version of Chaos."
+      },
+      "mass confusion": {
+        "keywords": [
+          "realistic",
+          "multi-sense",
+          "area"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "These spells produce a storm of conflicting sensations and images to confuse the senses. For each net hit on the Spellcasting Test, the target suffers a –1 dice pool modifier to all tests due to the distraction. Confusion affects a single target. Mass Confusion is an area spell. The Chaos spell is a physical version of Confusion (above), so it also affects technological systems and sensing devices. Chaotic World is an area version of Chaos."
+      },
+      "chaos": {
+        "keywords": [
+          "realistic",
+          "multi-sense"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "These spells produce a storm of conflicting sensations and images to confuse the senses. For each net hit on the Spellcasting Test, the target suffers a –1 dice pool modifier to all tests due to the distraction. Confusion affects a single target. Mass Confusion is an area spell. The Chaos spell is a physical version of Confusion (above), so it also affects technological systems and sensing devices. Chaotic World is an area version of Chaos."
+      },
+      "chaotic world": {
+        "keywords": [
+          "realistic",
+          "multi-sense",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F",
+        "source": "CRB",
+        "description": "These spells produce a storm of conflicting sensations and images to confuse the senses. For each net hit on the Spellcasting Test, the target suffers a –1 dice pool modifier to all tests due to the distraction. Confusion affects a single target. Mass Confusion is an area spell. The Chaos spell is a physical version of Confusion (above), so it also affects technological systems and sensing devices. Chaotic World is an area version of Chaos."
+      },
+      "entertainment": {
+        "keywords": [
+          "obvious",
+          "multi-sense",
+          "area"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "These area spells create obvious, but entertaining, illusions. Hits on the Spellcasting Test measure how detailed, interesting, and captivating the audience finds the illusion. The magician can reproduce just about anything from her imagination, or re-create something she has experienced. Entertainment affects the minds of the subjects and cannot be detected by non-living sensors. Trid Entertainment is a physical spell and can be perceived by both living subjects and non-living sensors. These spells are used for amusement as well as art. The entertainment industry uses illusionists as literal special effects wizards. Magical designers and artists work to create new and interesting sensations, including sensations that can’t otherwise be experienced in the real world. Only the wealthy can afford the unique experiences offered by such magicians firsthand."
+      },
+      "trid entertainment": {
+        "keywords": [
+          "obvious",
+          "multi-sense",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "These area spells create obvious, but entertaining, illusions. Hits on the Spellcasting Test measure how detailed, interesting, and captivating the audience finds the illusion. The magician can reproduce just about anything from her imagination, or re-create something she has experienced. Entertainment affects the minds of the subjects and cannot be detected by non-living sensors. Trid Entertainment is a physical spell and can be perceived by both living subjects and non-living sensors. These spells are used for amusement as well as art. The entertainment industry uses illusionists as literal special effects wizards. Magical designers and artists work to create new and interesting sensations, including sensations that can’t otherwise be experienced in the real world. Only the wealthy can afford the unique experiences offered by such magicians firsthand."
+      },
+      "invisibility": {
+        "keywords": [
+          "realistic",
+          "single-sense"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "This spell makes the subject more difficult to detect by normal visual senses (including low-light, thermographic, and other senses that rely on the visual spectrum). The subject is completely tangible and detectable by the other senses (hearing, smell, touch, and even taste, if it somehow comes to that). Her aura is still visible to astral perception. Anyone who might be in a position to perceive the subject must first successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone that resists at a later point. Even if the spell is resisted, the subject might remain undetected if she’s good enough with her Sneaking Test. An invisible character may still be detected by non-visual means, such as hearing or smell. Attacks against invisible targets suffer the Blind Fire modifier if the attacker is unable to see or otherwise sense the subject of the spell. Invisibility affects the minds of viewers. Improved Invisibility mimics the subject’s surroundings from all angles and affects technological sensors as well."
+      },
+      "improved invisibility": {
+        "keywords": [
+          "realistic",
+          "single-sense"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "This spell makes the subject more difficult to detect by normal visual senses (including low-light, thermographic, and other senses that rely on the visual spectrum). The subject is completely tangible and detectable by the other senses (hearing, smell, touch, and even taste, if it somehow comes to that). Her aura is still visible to astral perception. Anyone who might be in a position to perceive the subject must first successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone that resists at a later point. Even if the spell is resisted, the subject might remain undetected if she’s good enough with her Sneaking Test. An invisible character may still be detected by non-visual means, such as hearing or smell. Attacks against invisible targets suffer the Blind Fire modifier if the attacker is unable to see or otherwise sense the subject of the spell. Invisibility affects the minds of viewers. Improved Invisibility mimics the subject’s surroundings from all angles and affects technological sensors as well."
+      },
+      "mask": {
+        "keywords": [
+          "realistic",
+          "multi-sense"
+        ],
+        "type": "M",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "The Mask spell requires the magician to touch the subject. The subject assumes a different physical appearance (of the same basic size and shape as her natural form) chosen by the magician. This spell can alter the subject’s voice, scent, and other physical characteristics as well. Anyone who might see through the disguise must first successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone that resists at a later point. Mask affects the minds of viewers. Physical Mask creates an illusion that affects technological sensors as well."
+      },
+      "physical mask": {
+        "keywords": [
+          "realistic",
+          "multi-sense"
+        ],
+        "type": "P",
+        "range": "T",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "The Mask spell requires the magician to touch the subject. The subject assumes a different physical appearance (of the same basic size and shape as her natural form) chosen by the magician. This spell can alter the subject’s voice, scent, and other physical characteristics as well. Anyone who might see through the disguise must first successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone that resists at a later point. Mask affects the minds of viewers. Physical Mask creates an illusion that affects technological sensors as well."
+      },
+      "phantasm": {
+        "keywords": [
+          "realistic",
+          "multi-sense",
+          "area"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "These area spells create convincing illusions of any object, creature, or scene the magician desires. They can create an illusion of anything the magician has seen before, from a flower or a credstick to a dragon breathing fire, as long as the illusion is no larger than the spell’s area of effect. Anyone who might pierce the illusion must successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone attempting to resist at a later point. Phantasm only affects living beings, while Trid Phantasm affects technological sensors as well."
+      },
+      "trid phantasm": {
+        "keywords": [
+          "realistic",
+          "multi-sense",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F",
+        "source": "CRB",
+        "description": "These area spells create convincing illusions of any object, creature, or scene the magician desires. They can create an illusion of anything the magician has seen before, from a flower or a credstick to a dragon breathing fire, as long as the illusion is no larger than the spell’s area of effect. Anyone who might pierce the illusion must successfully resist the spell. Simply make one Spellcasting Test and use the hits scored as the threshold for anyone attempting to resist at a later point. Phantasm only affects living beings, while Trid Phantasm affects technological sensors as well."
+      },
+      "hush": {
+        "keywords": [
+          "realistic",
+          "single-sense",
+          "area"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "These spells create an area that dampens sound. Sonic attacks into or out of the field, as well as critter powers using a sonic medium (such as Paralyzing Howl), are reduced by –1 per hit on the Spellcasting Test. Anyone attempting to hear a sound from within or across the silenced area must successfully resist the spell. Hush is a mana spell and so only affects living beings and magic sonic attacks. Silence affects technological devices and is useful for jamming alarms, detection devices, sonar, and tactical communications, as well as technological sonic weapons."
+      },
+      "silence": {
+        "keywords": [
+          "realistic",
+          "single-sense",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "These spells create an area that dampens sound. Sonic attacks into or out of the field, as well as critter powers using a sonic medium (such as Paralyzing Howl), are reduced by –1 per hit on the Spellcasting Test. Anyone attempting to hear a sound from within or across the silenced area must successfully resist the spell. Hush is a mana spell and so only affects living beings and magic sonic attacks. Silence affects technological devices and is useful for jamming alarms, detection devices, sonar, and tactical communications, as well as technological sonic weapons."
+      },
+      "stealth": {
+        "keywords": [
+          "realistic",
+          "single-sense"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "Stealth makes the subject less audible to normal and augmented hearing. The subject moves in silence, making less or no noise. Things not directly touched by the subject can still make noise, so a character under a Stealth spell would make no noise knocking on a door, but the door would make noise hitting the floor or wall if it was kicked in. Anyone who might hear the subject must first successfully resist the spell. Make a single Spellcasting Test and use the hits scored as the threshold for anyone who resists at a later point. Even if the spell is resisted, the subject might remain unnoticed if her Sneaking Tests are up to par."
+      }
+    }
+  },
+  "manipulation": {
+    "description": "Manipulation spells control, animate, or transform matter and energy.",
+    "keywords": {
+      "damaging": "A Damaging Manipulation spell directly inflicts damage according to the standard Manipulation spell rules.<br><br><strong>Damage</strong><ul><li><strong>Damage Value:</strong> Equal to the spell's Force.</li><li><strong>Armor Penetration:</strong> 0.</li><li><strong>Resistance:</strong> Body + Armor.</li></ul>Hits on the Spellcasting Test <strong>do not increase the Damage Value</strong>.",
+      "mental": "Mental Manipulation spells control or influence a target's thoughts, decisions, or physical actions.<br><br><strong>Initial Resistance</strong><br>Targets resist with:<br><br><strong>Logic + Willpower</strong><br><br>Keep track of the caster's <strong>net hits</strong>, as they determine how long control can be maintained.<br><br><strong>Breaking Free</strong><br>While the spell is sustained, the victim may take a <strong>Complex Action</strong> on their turn to roll:<br><br><strong>Logic + Willpower – spell Force</strong><br><br>Each hit reduces the caster's remaining net hits by <strong>1</strong>. The spell ends when those net hits are reduced to <strong>0</strong>.<br><br>The victim may take this Complex Action even when the spell would otherwise prevent them from receiving an action.<br><br><strong>Noticing the Manipulation</strong><br>A victim may attempt to notice the magical effect using the normal Perceiving Magic rules:<br><br><strong>Perception + Intuition [Mental]</strong><br><br>The threshold is the performing magician's relevant <strong>Skill Rating – spell Force</strong>, with a minimum threshold of <strong>1</strong>. If no skill is involved, use <strong>6 – Force</strong>, again with a minimum of 1.<br><br>A character with any magic-related Active or Knowledge Skill receives <strong>+2 dice</strong> on this test. Particularly blatant magical effects may be obvious enough to require no test.",
+      "environmental": "Environmental Manipulation spells do not directly target a creature or object. They instead <strong>alter an area of the environment</strong>.<br><br>Where the spell uses an Area range, the normal Area Spell rules apply unless the individual spell states otherwise:<ul><li>The default area is a sphere with a radius equal to the spell's <strong>Force in metres</strong>.</li><li>The area is centred on a visible target or visible point in space.</li><li>Valid targets concealed from the magician's sight are normally unaffected.</li></ul>A sustained Area spell can be moved as a <strong>Complex Action</strong> while remaining within the magician's line of sight.",
+      "physical": "Physical Manipulation spells affect <strong>physical forms</strong>.<br><br>They are usually resisted by:<ul><li><strong>Living targets:</strong> Body + Strength.</li><li><strong>Inanimate objects:</strong> Object Resistance.</li></ul>The individual spell may specify a different test or additional requirements.<br><br><strong>Object Resistance</strong><ul><li><strong>Natural objects:</strong> 3 dice.<br>Trees, soil, unprocessed water, hand-carved wood, and metal cold-worked by hand.</li><li><strong>Manufactured low-tech objects and materials:</strong> 6 dice.<br>Brick, leather, and simple plastics.</li><li><strong>Manufactured high-tech objects and materials:</strong> 9 dice.<br>Advanced plastics, alloys, electronic equipment, and sensors.</li><li><strong>Highly processed objects:</strong> 15+ dice.<br>Computers, complex toxic wastes, drones, and vehicles.</li></ul>",
+      "area": "An Area Manipulation spell affects eligible targets or objects throughout its area.<br><br><strong>Area of Effect</strong><br>Unless the individual spell states otherwise, the spell forms a sphere centred on a visible target or visible point in space with a radius equal to:<br><br><strong>Spell Force in metres</strong><br><br>All valid targets in the area that the magician can see may be affected. This includes allies and enemies alike. Potential targets concealed from the magician's vision are normally unaffected.<br><br><strong>Moving a Sustained Area</strong><br>A sustained Area spell may be moved as a <strong>Complex Action</strong> while its area remains within the magician's line of sight.<ul><li>Targets leaving the affected area cease to be affected.</li><li>Targets newly entering the area must defend against the spell as appropriate.</li></ul>"
+    },
+    "spells": {
+      "animate": {
+        "keywords": [
+          "physical"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "This spell causes inanimate objects to move. The object moves according to its structure (balls can roll, rugs may crawl, humanoid statues can walk, and so on). The spell imparts a limited flexibility, allowing solid objects such as statues to shamble a bit as if they had joints. You need to get net successes against the target’s Object Resistance; larger items (over 200 kilograms) have their resistance increased by 2 for every full 200 kilos they weigh. Controlling the object takes only a Simple Action; objects can also be ordered to maintain their movement while you direct your attention elsewhere. You only have rough control over the object’s movement and can’t manipulate individual parts or components (finer control requires a spell like Magic Fingers, p. 294). The maximum movement rate for objects is (Force) meters per turn, subject to the gamemaster’s discretion. If the object is held by someone else, you need to win an Opposed Test using Force x 2 against the holder’s Strength + Body to break the object free. If it’s fastened, make this Force x 2 Success Test against an appropriate gamemaster-determined threshold. Animate affects a single non-living object; Mass Animate is an area spell that can get a number of objects moving at once (like a room full of brooms, for example)."
+      },
+      "mass animate": {
+        "keywords": [
+          "physical",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F + 1",
+        "source": "CRB",
+        "description": "This spell causes inanimate objects to move. The object moves according to its structure (balls can roll, rugs may crawl, humanoid statues can walk, and so on). The spell imparts a limited flexibility, allowing solid objects such as statues to shamble a bit as if they had joints. You need to get net successes against the target’s Object Resistance; larger items (over 200 kilograms) have their resistance increased by 2 for every full 200 kilos they weigh. Controlling the object takes only a Simple Action; objects can also be ordered to maintain their movement while you direct your attention elsewhere. You only have rough control over the object’s movement and can’t manipulate individual parts or components (finer control requires a spell like Magic Fingers, p. 294). The maximum movement rate for objects is (Force) meters per turn, subject to the gamemaster’s discretion. If the object is held by someone else, you need to win an Opposed Test using Force x 2 against the holder’s Strength + Body to break the object free. If it’s fastened, make this Force x 2 Success Test against an appropriate gamemaster-determined threshold. Animate affects a single non-living object; Mass Animate is an area spell that can get a number of objects moving at once (like a room full of brooms, for example)."
+      },
+      "armor": {
+        "keywords": [
+          "physical"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "This spell creates a glowing field of magical energy around the subject that protects against Physical Damage. It provides Armor equal to the hits scored and is cumulative with other armor. It is not included in any calculations to determine armor encumbrance (see Armor and Encumbrance, p. 169)."
+      },
+      "control actions": {
+        "keywords": [
+          "mental"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "You control the physical actions of your target like a puppeteer pulling strings. The victim’s consciousness is unaffected, but you control the victim’s body. Use your own skills when forcing your target to perform actions. It takes a Complex Action to make the target perform any action. Control Actions only affects a single target, Mob Control affects any living targets within the area of effect. Victims of Mob Control may be manipulated individually (with separate actions) or issued the same command as a group (with a single action)."
+      },
+      "mob control": {
+        "keywords": [
+          "mental",
+          "area"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F + 1",
+        "source": "CRB",
+        "description": "You control the physical actions of your target like a puppeteer pulling strings. The victim’s consciousness is unaffected, but you control the victim’s body. Use your own skills when forcing your target to perform actions. It takes a Complex Action to make the target perform any action. Control Actions only affects a single target, Mob Control affects any living targets within the area of effect. Victims of Mob Control may be manipulated individually (with separate actions) or issued the same command as a group (with a single action)."
+      },
+      "control thoughts": {
+        "keywords": [
+          "mental"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "The magician seizes control of the target’s mind, directing everything the target thinks. The magician mentally gives commands with a Standard Action, and the target is compelled to obey as if it were his own idea. Control Thoughts affects a single target, while Mob Mind affects any living targets within the area of effect. Victims of a Mob Mind may be manipulated individually (with separate actions) or issued the same command as a group (with a single action)."
+      },
+      "mob mind": {
+        "keywords": [
+          "mental",
+          "area"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F + 1",
+        "source": "CRB",
+        "description": "The magician seizes control of the target’s mind, directing everything the target thinks. The magician mentally gives commands with a Standard Action, and the target is compelled to obey as if it were his own idea. Control Thoughts affects a single target, while Mob Mind affects any living targets within the area of effect. Victims of a Mob Mind may be manipulated individually (with separate actions) or issued the same command as a group (with a single action)."
+      },
+      "fling": {
+        "keywords": [
+          "physical",
+          "damaging"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "I",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "This spell psychokinetically hurls a single object of no more than (Force) kilograms at a designated target. Use your Spellcasting Test in place of a normal Ranged Combat Test for the purposes of the item hitting the target, and use your Magic instead of Strength for determining Damage Value and range. Use standard grenade ranges (see Range Table, p. 185)"
+      },
+      "ice sheet": {
+        "keywords": [
+          "environmental",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "I",
+        "drain": "F",
+        "source": "CRB",
+        "description": "This spell creates a slippery sheet of ice over the area of effect. Characters crossing the ice must make an Agility + Reaction Test with a threshold equal to the hits you score to avoid falling prone. Vehicles must make an immediate Crash Test. The sheet melts at a rate of 1 square meter per minute at room temperature (faster when it’s hotter, slower when it’s colder, or not at all if it’s below freezing)."
+      },
+      "ignite": {
+        "keywords": [
+          "physical"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "P",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "The Ignite spell accelerates molecular motion in the target, causing it to catch fire once the spell becomes permanent. Against non-living targets, the magician must succeed against the target’s Object Resistance dice pool. Once the target ignites, it burns normally until it is consumed or extinguished. Against living targets, treat Ignite as a Spellcasting + Magic [Force] v. Body + Reaction Test. If successful, the spell wraps a living target in heat and flames, eventually setting the target on fire (Fire Damage p. 171)."
+      },
+      "influence": {
+        "keywords": [
+          "mental"
+        ],
+        "type": "M",
+        "range": "LOS",
+        "duration": "P",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "You implant a single suggestion in the victim’s mind, like a powerful post-hypnotic command. For example, you might have your target think that FizzyFluid is the best drink on the market, or that he can’t remember his best friend’s name, or that he should let you past a locked door. The target carries out this suggestion as if it were his own idea. If confronted with the wrongness of the suggestion (like when the reality of the flavor of FizzyFluid in his mouth contrasts with his belief that it’s good), the subject can attempt to overcome it using the rules for overcoming mental manipulations. In any case, the suggestion fades naturally after a number of minutes equal to your net hits."
+      },
+      "levitate": {
+        "keywords": [
+          "physical"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "Levitate allows you to telekinetically lift a person or object and move it around. You have to beat a threshold equal to the subject’s mass divided by 200 kilograms, rounded up. The subject of the spell can be moved anywhere in your line of sight at a movement rate equal to the spell’s Force in meters per Combat Turn. If you’re trying to levitate an item held by a living being, or levitate an unwilling living being, that being can defend against the Spellcasting Test with Strength + Body. You can use this spell to levitate yourself, if you need a view from a higher perspective or desire some parachute-free sky diving."
+      },
+      "light": {
+        "keywords": [
+          "environmental",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 4",
+        "source": "CRB",
+        "description": "This spell creates a mobile point of light, illuminating a radius around it equal to the spell’s Force in meters. The spell cannot be used to blind a target, but it offsets darkness visibility modifiers. Each hit on the Spellcasting Test counters a –1 die penalty due to light conditions."
+      },
+      "magic fingers": {
+        "keywords": [
+          "physical"
+        ],
+        "type": "P",
+        "range": "LOS",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "Magic Fingers creates a psychokinetic effect as a sort of invisible hand that can hold or manipulate items. The hits on the Spellcasting + Magic Test become the spell’s effective Strength and Agility. You can use skills remotely with Magic Fingers, replacing your inherent limits with the spell’s Force. The spell has problems with fine control, so even simple actions such as picking up a coin may require a test (at the gamemaster’s discretion). You can fight, pick a lock, or perform any other action, using the magic fingers as if they were your real hands. The magic fingers can manipulate objects within your line of sight, but only objects within a meter or so of one another at any given moment (the “hands” can’t be farther away from each other than your arm span). This spell comes in very handy (no pun intended) for disarming bombs and handling other hazardous work from a safe distance."
+      },
+      "mana barrier": {
+        "keywords": [
+          "environmental",
+          "area"
+        ],
+        "type": "M",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "Mana Barrier creates an invisible barrier of magical energy. It has a barrier rating equal to the net hits scored and follows the rules for mana barriers. This barrier does not restrict living beings or physical objects, but it impedes spirits, foci, dual beings, and spells on the plane in which you cast it (physical or astral). If cast on the astral plane, it also impedes astral forms and reduces visibility."
+      },
+      "physical barrier": {
+        "keywords": [
+          "environmental",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 1",
+        "source": "CRB",
+        "description": "This spell creates a glowing, translucent force field with 1 point of both Armor and Structure rating per hit. You can form the barrier as a dome with a radius and height equal to the spell’s normal radius. Alternately, you can use it to form a wall with a height equal to the spell’s Force and a length equal to its Force x 2. Physical Barrier creates a physical wall. Anything the size of a molecule (or less) can pass through the barrier, including air or other gases. Anything bigger treats the barrier as a normal physical wall. The wall is translucent but shimmers, the equivalent of Light Fog. The barrier does not impede spellcasting (other than visibility penalties), except for spells with physical components like indirect combat spells. The barrier can be brought down by physical attacks, but as long as you sustain it will regenerate all of its Structure Rating at the beginning of each Combat Turn. If the barrier is reduced to Structure Rating 0, it collapses and the spell ends."
+      },
+      "poltergeist": {
+        "keywords": [
+          "environmental",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 2",
+        "source": "CRB",
+        "description": "Poltergeist picks up all small objects (up to a kilogram in mass) within the spell’s area and whirls them around in random patterns. This creates the equivalent visibility penalty of Light Fog. The spell inflicts 2 boxes of Stun damage (resisted with Body + Armor) to anyone in the area each Combat Turn, whacking them with flying debris. Poltergeist may do more damage in cluttered environments, or inflict Physical damage if the gamemaster feels the debris is sufficiently dangerous (broken glass and nails, for example). If there is no debris lying around, this spell doesn’t do much more than make a spooky noise."
+      },
+      "shadow": {
+        "keywords": [
+          "environmental",
+          "area"
+        ],
+        "type": "P",
+        "range": "LOS (A)",
+        "duration": "S",
+        "drain": "F - 3",
+        "source": "CRB",
+        "description": "Shadow creates a globe of darkness with a radius equal to the spell’s Force in meters. For every two hits, increase the light penalty by one catagory—2 hits for Partial Light, 4 hits for Dim Light, and 6 hits for Total Darkness. This spell doesn’t cause more than Total Darkness."
+      }
+    }
+  }
+}

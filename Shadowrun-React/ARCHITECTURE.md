@@ -6,7 +6,7 @@ The archive is one statically hosted React application. `HashRouter` keeps direc
 
 The home page is generated from `src/registry.ts`. Adding a module to the registry makes it available to home navigation without editing a separate set of links.
 
-The same registry defines each module's specialised filters. Shared filter rendering therefore supports module-specific controls without duplicating filtering code. Search always indexes the complete record payload, including nested values, while each archive keeps its original filter choices.
+The same registry defines each module's specialised filters. Shared filter rendering therefore supports module-specific controls without duplicating filtering code.
 
 ## Data loading
 
@@ -23,13 +23,11 @@ Search text is generated once when a record is adapted. It includes the record n
 
 Home-page links prefetch their dataset on hover or focus. Vite emits every dataset with a content hash, allowing normal long-lived browser caching without query-string versions.
 
-## Faithful page-specific presentation
+## Shared presentation
 
 `HomePage` and `ModulePage` own page composition. Shared controls and framing live in `src/components`. Common list, record, filter, tag, source and responsive rules are loaded once.
 
-`RecordDetail` contains the specialised archive views used by the original site: skill sections, metatype profiles, cyberdeck consoles, Matrix protocols, sprite and spirit profiles, spell and adept grids, ritual procedures, weapon specifications, vehicle dashboards, drone control stacks and equipment market listings. `ModuleChrome` supplies the matching sidebars, legends and footer treatments.
-
-The original page stylesheets are retained in `assets/css/pages/`. `scripts/scope-page-styles.mjs` uses PostCSS to generate one scoped stylesheet at build time, so every unique visual rule remains intact without leaking into another module. Shared React state and routing can therefore evolve independently of the original visual language.
+Module-specific data is presented through a consistent specification grid. A module can supply a specialised detail component through the registry without changing routing, search, filtering, source handling or navigation.
 
 ## Compatibility
 

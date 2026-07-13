@@ -1,0 +1,412 @@
+{
+  "software": {
+    "Browse": {
+      "category": "Software",
+      "subcategory": "Common Cyberprograms",
+      "availability": "—",
+      "cost": "80¥",
+      "description": "Cuts the time required for a Matrix Search action in half.",
+      "source": "CRB"
+    },
+    "Configurator": {
+      "category": "Software",
+      "subcategory": "Common Cyberprograms",
+      "availability": "—",
+      "cost": "80¥",
+      "description": "Stores an alternate full cyberdeck configuration. When reconfiguring the deck, the user may switch to the stored configuration instead of only swapping two attributes or one running program.",
+      "source": "CRB"
+    },
+    "Edit": {
+      "category": "Software",
+      "subcategory": "Common Cyberprograms",
+      "availability": "—",
+      "cost": "80¥",
+      "description": "Adds 2 to the Data Processing limit for Edit tests made while the program is running.",
+      "source": "CRB"
+    },
+    "Encryption": {
+      "category": "Software",
+      "subcategory": "Common Cyberprograms",
+      "availability": "—",
+      "cost": "80¥",
+      "description": "Adds +1 to the device's Firewall attribute while running.",
+      "source": "CRB"
+    },
+    "Signal Scrub": {
+      "category": "Software",
+      "subcategory": "Common Cyberprograms",
+      "availability": "—",
+      "cost": "80¥",
+      "description": "Provides Rating 2 noise reduction while running.",
+      "source": "CRB"
+    },
+    "Toolbox": {
+      "category": "Software",
+      "subcategory": "Common Cyberprograms",
+      "availability": "—",
+      "cost": "80¥",
+      "description": "Adds +1 to the device's Data Processing attribute while running.",
+      "source": "CRB"
+    },
+    "Virtual Machine": {
+      "category": "Software",
+      "subcategory": "Common Cyberprograms",
+      "availability": "—",
+      "cost": "80¥",
+      "description": "Allows the cyberdeck to run two additional programs. Whenever the persona takes Matrix damage, it suffers one additional box of Matrix damage that cannot be resisted.",
+      "source": "CRB"
+    },
+    "Armor": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Provides a +2 dice pool modifier to resist Matrix damage.",
+      "source": "CRB"
+    },
+    "Baby Monitor": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Continuously tracks the user's Matrix activity so the user always knows their current Overwatch Score.",
+      "source": "CRB"
+    },
+    "Biofeedback": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "When an attack causes Matrix damage to a biological target, the target also suffers an equal amount of biofeedback damage: Stun in cold-sim or Physical in hot-sim. Biofeedback damage is resisted with Willpower + Firewall.",
+      "source": "CRB"
+    },
+    "Biofeedback Filter": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Provides a +2 dice pool modifier to resist biofeedback damage.",
+      "source": "CRB"
+    },
+    "Blackout": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Functions like Biofeedback but always inflicts Stun damage, including against targets using hot-sim.",
+      "source": "CRB"
+    },
+    "Decryption": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Adds +1 to the device's Attack attribute while running.",
+      "source": "CRB"
+    },
+    "Defuse": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Provides a +4 dice pool modifier to resist damage from a Data Bomb.",
+      "source": "CRB"
+    },
+    "Demolition": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Adds 1 to the Rating of any Data Bomb set while the program is running.",
+      "source": "CRB"
+    },
+    "Exploit": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Provides a +2 bonus to Sleaze when attempting a Hack on the Fly action.",
+      "source": "CRB"
+    },
+    "Fork": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Allows a single Matrix action to target two icons at once. Make one test, include modifiers from both targets, and resolve each target's defense and result separately.",
+      "source": "CRB"
+    },
+    "Guard": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Reduces the extra damage taken from marks by 1 DV per mark.",
+      "source": "CRB"
+    },
+    "Hammer": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Adds +2 DV whenever the user causes Matrix damage with an action. This does not apply to damage a target suffers from failing an Attack action against the user.",
+      "source": "CRB"
+    },
+    "Lockdown": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "When the user causes damage to a persona, that persona becomes link-locked until this program stops running or the target successfully Jacks Out.",
+      "source": "CRB"
+    },
+    "Mugger": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Increases bonus damage from marks by 1 DV per mark.",
+      "source": "CRB"
+    },
+    "Shell": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Provides a +1 dice pool modifier to resist both Matrix damage and biofeedback damage. This stacks with similar modifiers from other programs.",
+      "source": "CRB"
+    },
+    "Sneak": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Provides a +2 dice pool modifier to defend against Trace Icon actions. If a demiGOD converges while Sneak is running, it does not obtain the user's physical location, although other convergence effects still apply.",
+      "source": "CRB"
+    },
+    "Stealth": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Adds +1 to the device's Sleaze attribute while running.",
+      "source": "CRB"
+    },
+    "Track": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Either adds 2 to Data Processing for Trace Icon tests or negates the +2 defense bonus from a target running Sneak. Choose one benefit for a given use.",
+      "source": "CRB"
+    },
+    "Wrapper": {
+      "category": "Software",
+      "subcategory": "Hacking Cyberprograms",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Allows the user to disguise Matrix icons as other kinds of icons when using Change Icon. A suspicious observer can identify the true icon with Matrix Perception.",
+      "source": "CRB"
+    },
+    "Agent": {
+      "category": "Software",
+      "subcategory": "Agents",
+      "rating": "1-6",
+      "availability": "Rating × 3",
+      "cost": "Rating 1-3: Rating × 1,000¥; Rating 4-6: Rating × 2,000¥",
+      "description": "An autonomous program rated from 1 to 6. It occupies one program slot, uses the Matrix attributes of the device it runs on, and has Computer, Hacking, and Cybercombat skills equal to its Rating. It can perform Matrix actions independently and use other programs running on the same device.",
+      "source": "CRB"
+    },
+    "Clearsight": {
+      "category": "Software",
+      "subcategory": "Autosofts",
+      "rating": "1-6",
+      "availability": "Rating × 2",
+      "cost": "Rating × 500¥",
+      "description": "Acts as a drone's Perception skill.",
+      "source": "CRB"
+    },
+    "Electronic Warfare Autosoft": {
+      "category": "Software",
+      "subcategory": "Autosofts",
+      "rating": "1-6",
+      "availability": "Rating × 2",
+      "cost": "Rating × 500¥",
+      "description": "Acts as the Electronic Warfare skill for a drone or vehicle Pilot program.",
+      "source": "CRB"
+    },
+    "[Model] Evasion": {
+      "category": "Software",
+      "subcategory": "Autosofts",
+      "rating": "1-6",
+      "availability": "Rating × 2",
+      "cost": "Rating × 500¥",
+      "description": "Helps a specific drone or vehicle model avoid being locked onto by Sensors. Each copy is model-specific.",
+      "source": "CRB"
+    },
+    "[Model] Maneuvering": {
+      "category": "Software",
+      "subcategory": "Autosofts",
+      "rating": "1-6",
+      "availability": "Rating × 2",
+      "cost": "Rating × 500¥",
+      "description": "Acts as the relevant Pilot skill for one specific drone or vehicle model. Each copy is model-specific.",
+      "source": "CRB"
+    },
+    "[Model] Stealth": {
+      "category": "Software",
+      "subcategory": "Autosofts",
+      "rating": "1-6",
+      "availability": "Rating × 2",
+      "cost": "Rating × 500¥",
+      "description": "Acts as the stealth skill for one specific drone or vehicle model. Each copy is model-specific.",
+      "source": "CRB"
+    },
+    "[Weapon] Targeting": {
+      "category": "Software",
+      "subcategory": "Autosofts",
+      "rating": "1-6",
+      "availability": "Rating × 2",
+      "cost": "Rating × 500¥",
+      "description": "Acts as the Gunnery skill for one specific weapon model mounted on a drone or vehicle.",
+      "source": "CRB"
+    },
+    "Datasoft": {
+      "category": "Software",
+      "subcategory": "Reference & Utility Software",
+      "availability": "4",
+      "cost": "120¥",
+      "description": "A database focused on a particular subject. An appropriate datasoft provides +1 to the Mental limit for related Knowledge Skill Tests.",
+      "source": "CRB"
+    },
+    "Mapsoft": {
+      "category": "Software",
+      "subcategory": "Reference & Utility Software",
+      "availability": "4",
+      "cost": "100¥",
+      "description": "Detailed mapping software for a particular area. At the gamemaster's discretion, an appropriate mapsoft provides +1 to the limit of Navigation Tests in the covered area. Wireless access keeps the map updated through GridGuide but also allows location tracking.",
+      "source": "CRB"
+    },
+    "Shopsoft": {
+      "category": "Software",
+      "subcategory": "Reference & Utility Software",
+      "availability": "4",
+      "cost": "150¥",
+      "description": "Market-specific shopping software containing prices, reviews, and purchasing information. An appropriate shopsoft provides +1 to the Social limit for Availability and Negotiation tests to buy or sell the covered product type.",
+      "source": "CRB"
+    },
+    "Tutorsoft": {
+      "category": "Software",
+      "subcategory": "Reference & Utility Software",
+      "rating": "1-6",
+      "availability": "Rating",
+      "cost": "Rating × 400¥",
+      "description": "A virtual tutor for a specific skill. It makes Instruction Tests with a dice pool equal to Rating × 2 and cannot teach skills based on Magic or Resonance.",
+      "source": "CRB"
+    }
+  },
+  "cyberdecks": {
+    "Erika MCD-1": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "1",
+      "attribute_array": "4 / 3 / 2 / 1",
+      "programs": "1",
+      "availability": "3R",
+      "cost": "49,500¥",
+      "source": "CRB"
+    },
+    "Microdeck Summit": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "1",
+      "attribute_array": "4 / 3 / 3 / 1",
+      "programs": "1",
+      "availability": "3R",
+      "cost": "58,000¥",
+      "source": "CRB"
+    },
+    "Microtrónica Azteca 200": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "2",
+      "attribute_array": "5 / 4 / 3 / 2",
+      "programs": "2",
+      "availability": "6R",
+      "cost": "110,250¥",
+      "source": "CRB"
+    },
+    "Hermes Chariot": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "2",
+      "attribute_array": "5 / 4 / 4 / 2",
+      "programs": "2",
+      "availability": "6R",
+      "cost": "123,000¥",
+      "source": "CRB"
+    },
+    "Novatech Navigator": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "3",
+      "attribute_array": "6 / 5 / 4 / 3",
+      "programs": "3",
+      "availability": "9R",
+      "cost": "205,750¥",
+      "source": "CRB"
+    },
+    "Renraku Tsurugi": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "3",
+      "attribute_array": "6 / 5 / 5 / 3",
+      "programs": "3",
+      "availability": "9R",
+      "cost": "214,125¥",
+      "source": "CRB"
+    },
+    "Sony CIY-720": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "4",
+      "attribute_array": "7 / 6 / 5 / 4",
+      "programs": "4",
+      "availability": "12R",
+      "cost": "345,000¥",
+      "source": "CRB"
+    },
+    "Shiawase Cyber-5": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "5",
+      "attribute_array": "8 / 7 / 6 / 5",
+      "programs": "5",
+      "availability": "15R",
+      "cost": "549,375¥",
+      "source": "CRB"
+    },
+    "Fairlight Excalibur": {
+      "category": "Cyberdecks",
+      "subcategory": "Standard Cyberdecks",
+      "device_rating": "6",
+      "attribute_array": "9 / 8 / 7 / 6",
+      "programs": "6",
+      "availability": "18R",
+      "cost": "823,250¥",
+      "source": "CRB"
+    }
+  },
+  "category": {
+    "Software": "<strong>Software</strong><br>Software is purchased as a download or on physical chip. Cyberprograms and agents run on cyberdecks, autosofts provide skills to drone and vehicle Pilot programs, reference software provides information or task-specific bonuses, and skillsofts provide recorded skills when used with compatible augmentations.",
+    "Cyberdecks": "<strong>Cyberdecks</strong><br>A cyberdeck provides the four Matrix attributes <strong>Attack, Sleaze, Data Processing, and Firewall</strong>. Its four-value attribute array can be assigned among those attributes when the deck boots. A deck may store any number of programs but can run only its listed number at once unless another rule changes that limit. Reconfiguring a deck is a Free Action on the user's own Action Phase and can swap two Matrix attributes or exchange a running program for a stored one."
+  },
+  "subcategories": {
+    "Common Cyberprograms": "<strong>Common Cyberprograms</strong><br>Legal cyberdeck utilities that improve searching, editing, defense, noise handling, data processing, deck configuration, or program capacity. Each common cyberprogram costs <strong>80¥</strong> in the Core Rulebook.",
+    "Hacking Cyberprograms": "<strong>Hacking Cyberprograms</strong><br>Restricted programs used for intrusion, cybercombat, stealth, tracking, data bombs, and Matrix defense. This JSON uses the <strong>6R</strong> Availability and <strong>250¥</strong> cost from the Street Gear purchasing table.",
+    "Agents": "<strong>Agents</strong><br>Autonomous programs rated from 1 to 6. An agent occupies one program slot, uses the host device's Matrix attributes, and has Computer, Hacking, and Cybercombat skills equal to its Rating. Damage to an agent is applied to the device on which it runs.",
+    "Autosofts": "<strong>Autosofts</strong><br>Specialized programs that act as skills for drones and vehicle Pilot programs. Autosofts are rated from 1 to 6. Entries marked <strong>[Model]</strong> only work with one specific drone or vehicle model; <strong>[Weapon] Targeting</strong> is specific to one weapon model.",
+    "Reference & Utility Software": "<strong>Reference & Utility Software</strong><br>Datasofts, mapsofts, shopsofts, and tutorsofts provide subject knowledge, navigation support, market assistance, or instruction. They can be stored and accessed on commlinks, dataterminals, or cyberdecks.",
+    "Standard Cyberdecks": "<strong>Standard Cyberdecks</strong><br>Core Rulebook cyberdecks provide a Device Rating, a four-number Matrix attribute array, and a limit on simultaneously running programs. The user assigns the array values among Attack, Sleaze, Data Processing, and Firewall when configuring the deck."
+  }
+}

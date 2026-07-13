@@ -1,0 +1,26 @@
+/* React-only states. Archive presentation rules are generated from the original page CSS. */
+.loading-panel {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  justify-content: center;
+  min-height: 48vh;
+  padding: 40px;
+  text-align: center;
+}
+
+.loading-panel strong {
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: clamp(2rem, 6vw, 4rem);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.loading-code {
+  color: var(--red);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .12em;
+}
