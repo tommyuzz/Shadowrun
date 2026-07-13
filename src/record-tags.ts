@@ -41,6 +41,21 @@ export function recordTags(moduleId: string, record: ReferenceRecord, data: Refe
       const definitions = recordMap(data, "racial_traits");
       return Array.from(new Set(strings(raw.racial_traits).map(traitKey))).map((trait) => ({ key: trait, label: trait, html: String(definitions[trait] || "No racial trait details are available.") }));
     }
+    case "qualities": {
+      const categories = recordMap(data, "category");
+      const structuredKeys = ["options", "levels", "variants", "rarity", "severity", "target_prevalence", "degree", "possible_side_effects"];
+      const limit = raw.max_rating ?? raw.max_level;
+      const structure = limit != null ? "Rated" : structuredKeys.some((key) => raw[key] && typeof raw[key] === "object") ? "Choice-based" : "Fixed";
+      const structureCopy = limit != null
+        ? `<strong>Rated quality</strong><br>This quality can be purchased up to Rating <strong>${valueText(limit)}</strong>. Apply the listed Karma value for each rating or level.`
+        : structure === "Choice-based"
+          ? "<strong>Choice-based quality</strong><br>This record includes selectable levels, variants, degrees, or options. Review the structured choice cards below before applying it to a character."
+          : "<strong>Fixed quality</strong><br>This quality has no separate rating or structured variant in the supplied record.";
+      return [
+        { key: "category", label: record.category, html: String(categories[record.category] || `<strong>${record.category}</strong><br>No category rules are available.`) },
+        { key: "structure", label: limit != null ? `${structure} · Max ${valueText(limit)}` : structure, html: structureCopy }
+      ];
+    }
     case "cyberdecks": {
       const definitions = recordMap(data, "subcategories");
       return [

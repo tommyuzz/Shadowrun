@@ -8,6 +8,7 @@ const pages = [
   ["home", "home.css"],
   ["skills", "skills.css"],
   ["metatypes", "metatypes.css"],
+  ["qualities", "qualities.css"],
   ["cyberdecks", "cyberdecks.css"],
   ["matrixinteraction", "matrixinteraction.css"],
   ["sprites", "sprites.css"],

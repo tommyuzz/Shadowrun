@@ -193,6 +193,51 @@ function SpiritDetail({ record, recordNumber }: { record: ReferenceRecord; recor
   </>;
 }
 
+const qualityStructureLabels: [string, string][] = [
+  ["options", "Available options"],
+  ["levels", "Quality levels"],
+  ["variants", "Quality variants"],
+  ["rarity", "Target rarity"],
+  ["severity", "Severity"],
+  ["target_prevalence", "Target prevalence"],
+  ["degree", "Degree"],
+  ["possible_side_effects", "Possible side effects"]
+];
+
+function QualityDescription({ value }: { value: unknown }) {
+  const parts = valueText(value, "No quality description is available.").split(/\s*•\s*/).map((part) => part.trim()).filter(Boolean);
+  return <div className="quality-description-copy"><p>{parts[0]}</p>{parts.length > 1 ? <ul>{parts.slice(1).map((part, index) => <li key={`${part.slice(0, 32)}-${index}`}>{part}</li>)}</ul> : null}</div>;
+}
+
+function QualityChoice({ name, value }: { name: string; value: unknown }) {
+  const fields = asObject(value);
+  if (!Object.keys(fields).length) return <article className="quality-choice"><h3>{name}</h3><p>{valueText(value)}</p></article>;
+  return <article className="quality-choice"><h3>{name}</h3><dl>{Object.entries(fields).map(([field, fieldValue]) => <div key={field}><dt>{titleCase(field)}</dt><dd>{valueText(fieldValue)}</dd></div>)}</dl></article>;
+}
+
+function QualityDetail({ record, recordNumber }: { record: ReferenceRecord; recordNumber: number }) {
+  const raw = record.raw;
+  const positive = record.category === "Positive Qualities";
+  const karma = positive ? raw.karma_cost : raw.karma_bonus;
+  const maximum = raw.max_rating ?? raw.max_level;
+  const sections = qualityStructureLabels.map(([key, label]) => ({ key, label, entries: Object.entries(asObject(raw[key])) })).filter((section) => section.entries.length);
+  const structure = maximum != null ? "Rated" : sections.length ? "Choice-based" : "Fixed";
+  return <>
+    <article className="quality-ledger" data-polarity={positive ? "positive" : "negative"} aria-labelledby="quality-ledger-title">
+      <header className="quality-ledger-banner"><div><span>Character creation dossier</span><h2 id="quality-ledger-title">Quality ledger</h2></div><strong>{code(positive ? "PQ" : "NQ", recordNumber)}</strong></header>
+      <div className="quality-ledger-grid">
+        <section className="quality-polarity"><span>Quality class</span><strong>{positive ? "Positive" : "Negative"}</strong><p>{positive ? "Character advantage" : "Character complication"}</p></section>
+        <section className="quality-karma"><span>{positive ? "Purchase cost" : "Karma bonus"}</span><strong>{valueText(karma)}</strong><p>Karma</p></section>
+        <dl className="quality-ledger-stats"><div><dt>Structure</dt><dd>{structure}</dd></div>{maximum != null ? <div><dt>Maximum rating</dt><dd>{valueText(maximum)}</dd></div> : <div><dt>Selection</dt><dd>{sections.length ? `${sections.length} option ${sections.length === 1 ? "group" : "groups"}` : "Single quality"}</dd></div>}</dl>
+      </div>
+      <div className="quality-ledger-rule"><span>{positive ? "+" : "−"}</span><strong>{positive ? "Benefit acquired with Karma" : "Disadvantage awarded with bonus Karma"}</strong></div>
+    </article>
+    <section className="section quality-description"><h2 className="section-title">Quality effect</h2><QualityDescription value={raw.description}/></section>
+    {sections.map((section) => <section className="section quality-structure" key={section.key}><h2 className="section-title">{section.label}</h2><div className="quality-choice-grid">{section.entries.map(([name, value]) => <QualityChoice name={name} value={value} key={name}/>)}</div></section>)}
+    <Source value={raw.source}/>
+  </>;
+}
+
 function WeaponDetail({ record }: { record: ReferenceRecord }) {
   const raw = record.raw;
   const fields: [string, unknown][] = [["Accuracy", raw.accuracy], ["Damage", raw.damage], ["Armor penetration", raw.ap], [raw.blast ? "Blast" : "Reach", raw.blast || raw.reach], ["Firing mode", raw.mode], ["Recoil compensation", raw.rc], ["Ammunition", raw.ammo], ["Rating", raw.rating], ["Availability", raw.availability], ["Cost", raw.cost]];
@@ -265,6 +310,7 @@ export function RecordDetail({ moduleId, record, data, recordNumber }: DetailPro
   switch (moduleId) {
     case "skills": return <SkillDetail record={record}/>;
     case "metatypes": return <MetatypeDetail record={record} recordNumber={recordNumber}/>;
+    case "qualities": return <QualityDetail record={record} recordNumber={recordNumber}/>;
     case "cyberdecks": return <CyberdeckDetail record={record} recordNumber={recordNumber}/>;
     case "matrixinteraction": return <MatrixDetail record={record} recordNumber={recordNumber}/>;
     case "sprites": return <SpriteDetail record={record} recordNumber={recordNumber}/>;

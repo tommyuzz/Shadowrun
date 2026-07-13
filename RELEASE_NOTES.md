@@ -1,5 +1,41 @@
 # Release notes
 
+## 1.6.1 — Core Rules home correction
+
+### Corrected
+
+- Changed the initial home sector from Magic to **Core Rules**, making the new **Qualities** archive button visible immediately on first load.
+- Preserved explicit home links to Magic, Hacking and Items sectors.
+- Added rendered-home regression coverage that verifies the Qualities link and all three Core Rules module cards.
+
+### Validation
+
+- 31 unit tests passed, including initial and explicitly selected home-sector rendering.
+- Production browser checks confirmed the Qualities card on the direct desktop and 320px home routes.
+- The complete data, production build, source-selection and responsive Qualities checks continue to pass.
+
+## 1.6.0 — Positive and Negative Qualities archive
+
+### Added
+
+- Added **Qualities** to the **Core Rules** home section.
+- Added all 31 Positive and 28 Negative Qualities from the supplied `qualities.json` dataset.
+- Added dedicated All, Positive and Negative routes with stable deep links for every quality.
+- Added full-record search across descriptions, requirements and every nested level, variant, degree, side effect and option field.
+- Added a Quality Structure filter for fixed, rated and choice-based entries.
+- Added a character-quality ledger showing category, Karma cost or bonus, structure, rating limit and record code.
+- Added structured option cards for levels, variants, rarity, severity, prevalence, degree and possible side effects.
+- Added quality-specific category rules, notation legend, tags, iconography and footer treatment.
+- Integrated Qualities with the persistent source-book selector and legacy redirect generation.
+
+### Validation
+
+- 14 datasets and 825 reference records validated.
+- 29 unit tests passed, including nested quality search, filter registration and exact Positive/Negative record counts.
+- Browser checks passed for all 59 records, nested search, structure filtering, detail cards, Core Rules registration and deep routes.
+- List and record layouts passed horizontal-overflow checks at 320, 390 and 640px with no console or page errors.
+- Production TypeScript and Vite build passed.
+
 ## 1.5.0 — Mobile comparison dossier
 
 ### Added and corrected

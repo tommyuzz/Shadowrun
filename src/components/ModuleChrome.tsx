@@ -17,6 +17,7 @@ const skillDescriptions: Record<string, string> = {
 
 const legends: Record<string, [string, string][]> = {
   metatypes: [["MIN", "Racial minimum"], ["MAX", "Natural maximum"], ["EDG", "Edge range"], ["ESS", "Base Essence"], ["WALK", "Walking rate"], ["RUN", "Running rate"]],
+  qualities: [["KARMA", "Listed purchase cost or awarded bonus"], ["RTG", "Rated quality with a maximum level"], ["OPTION", "Selectable variant, degree, or level"], ["×2", "Normal post-creation purchase or buy-off multiplier"]],
   cyberdecks: [["DR", "Device Rating"], ["ATT", "Attack"], ["SLZ", "Sleaze"], ["DP", "Data Processing"], ["FW", "Firewall"], ["PRG", "Running program capacity"]],
   sprites: [["L", "Sprite Level"], ["ATT", "Attack"], ["SLZ", "Sleaze"], ["DP", "Data Processing"], ["FW", "Firewall"], ["RES", "Resonance"], ["CM", "Matrix Condition Monitor"]],
   spells: [["M / P", "Mana / Physical spell type"], ["T", "Touch range"], ["LOS", "Line of sight"], ["(A)", "Area effect"], ["S / P", "Stun / Physical damage"], ["I / S / P", "Instant / Sustained / Permanent duration"], ["F", "Force used in Drain Value"]],
@@ -59,6 +60,7 @@ export function ModuleSidebar({ module, category, data }: { module: ModuleDefini
 
   switch (module.id) {
     case "metatypes": title = "Metatype protocol"; copy = String(categories.Metatypes || copy); legendTitle = "Attribute key"; break;
+    case "qualities": title = category.id === "all" ? "Quality protocol" : category.label; copy = category.id === "all" ? "Positive and Negative Qualities define character advantages, complications, Karma values, requirements, ratings, and selectable variants. Choose a category above to review its creation and advancement rules." : String(categories[category.label] || copy); legendTitle = "Quality key"; break;
     case "cyberdecks": title = category.label === "Cyberdecks" ? "Cyberdeck protocol" : "Software protocol"; copy = String(categories[category.label] || copy); legendTitle = "Matrix key"; break;
     case "matrixinteraction": title = category.label === "Matrix Actions" ? "Matrix action protocol" : "Complex form protocol"; copy = String(categories[category.label] || copy); legendTitle = category.label === "Matrix Actions" ? "Action key" : "Resonance key"; rows = category.label === "Matrix Actions" ? matrixActionLegend : complexFormLegend; break;
     case "sprites": title = "Sprite protocol"; copy = String(categories.Sprites || copy); legendTitle = "Resonance key"; break;
@@ -82,6 +84,7 @@ export function ModuleSidebar({ module, category, data }: { module: ModuleDefini
 const footers: Record<string, [string, string, string]> = {
   skills: [">> LEARN. ADAPT. SURVIVE.\nKNOW THE RULES. CONTROL THE FIELD.", "The corporations own everything.\nInformation is power. Stay sharp.", "✦"],
   metatypes: [">> ORIGIN. APTITUDE. IDENTITY.\nDEFINE THE RUNNER.", "Natural limits shape potential.\nThey do not define the individual.", "⌁"],
+  qualities: [">> CHOOSE. DEFINE. COMPLICATE.\nMAKE THE RUNNER DISTINCT.", "Every advantage has a cost.\nEvery complication creates a story.", "±"],
   cyberdecks: [">> JACK IN. CONFIGURE. EXECUTE.\nCONTROL THE GRID.", "Every action leaves a signature.\nWatch the overwatch score.", "⌁"],
   matrixinteraction: [">> ACCESS. EXECUTE. RESOLVE.\nLEAVE NO SIGNATURE.", "Every illegal action raises the score.\nKnow the test. Watch the grid.", "⌁"],
   sprites: [">> COMPILE. TASK. REGISTER.\nFOLLOW THE RESONANCE.", "Level shapes the entity.\nEvery service has a cost.", "⌁"],

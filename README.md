@@ -4,6 +4,8 @@ This version is a single React and TypeScript application built with Vite. It pr
 
 Each archive retains its subject-specific filters. Search covers record names, descriptions, tags, statistics, tests, sources and nested field values rather than being limited to title text.
 
+The **Qualities** archive appears under **Core Rules** and contains all supplied Positive and Negative Qualities. The home page opens Core Rules by default so its Skills, Metatypes and Qualities buttons are visible immediately. The archive presents Karma costs or bonuses, rating limits, selectable options, levels, variants, degrees and side effects in a dedicated character-quality ledger while retaining the complete authored descriptions.
+
 The interface adds brief archive-specific activation sequences, smooth record and filter transitions, animated data readouts, themed loading and error states, and complete reduced-motion support. Entry animations release their compositor layers after settling, returning the page to the original static presentation without leaving continuous background effects running.
 
 Weapons, cyberdecks, vehicles and drones can be compared from their list or record page. The comparison dossier supports two or three records, marks changed rows, identifies directly comparable numeric advantages and links back to each full record. At 700px and below it becomes a full-screen, single-scroll analysis view: specifications are readable cards, record controls collapse after selection, a searchable archive picker replaces long native menus, and an optional differences-only mode reduces the result set. Comparison remains temporary browser state and does not require an account or storage service.
@@ -50,6 +52,7 @@ GitHub Pages-compatible hash routes are used for reliable direct links:
 /#/
 /#/spells/combat
 /#/spells/combat/acid-stream
+/#/qualities/negative-qualities/addiction
 ```
 
 Compatibility redirect pages retain the former module URLs.

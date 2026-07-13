@@ -7,6 +7,7 @@ const collections = {
   equipment: ["equipment"],
   matrixinteraction: ["matrix_actions", "complex_forms"],
   metatypes: ["metatypes"],
+  qualities: ["positive_qualities", "negative_qualities"],
   rituals: ["rituals"],
   skills: ["skills"],
   spirits: ["spirits"],
@@ -34,4 +35,4 @@ for (const [category, value] of Object.entries(spellPayload)) {
   count += Object.keys(value.spells).length;
 }
 
-console.log(`Validated 13 datasets and ${count} reference records.`);
+console.log(`Validated ${Object.keys(collections).length + 1} datasets and ${count} reference records.`);

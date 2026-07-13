@@ -50,6 +50,13 @@ export const presentations: Record<string, PagePresentation> = {
     searchLabel: "Search all metatype fields", searchPlaceholder: "Enter name, trait or attribute…", listTitle: () => "Metatypes", listEyebrow: () => "Population archive // Metatype list", recordEyebrow: () => "Demographic record // Metatype profile",
     indexPrefix: () => "MT", tagButtonClass: "tag-toggle", tagDetailClass: "tag-detail", tagDetailTitleClass: "tag-detail-title"
   },
+  qualities: {
+    pageClass: "page-qualities", workspaceClass: "workspace", panelClass: "quality-panel", listViewClass: "quality-list-view", recordViewClass: "quality-record-view",
+    headerClass: "reference-header quality-header", listHeaderClass: "reference-list-header quality-list-header", recordHeaderClass: "reference-record-header quality-record-header", filtersClass: "quality-filters", filterFieldClass: "quality-filter-field",
+    summaryClass: "reference-list-summary quality-list-summary", listClass: "reference-list quality-list", itemClass: "reference-list-item quality-list-item", indexClass: "reference-list-index quality-list-index", nameClass: "reference-list-name quality-list-name", metaClass: "reference-list-meta quality-list-value", tabsClass: "quality-tabs",
+    searchLabel: "Search all quality fields", searchPlaceholder: "Enter name, effect, Karma, requirement or variant…", listTitle: (c) => c.id === "all" ? "All qualities" : c.label, listEyebrow: (c) => archiveEyebrow(c, "Quality"), recordEyebrow: (r) => `${r.category} // Character quality record`,
+    indexPrefix: (c) => c.id === "positive-qualities" ? "PQ" : c.id === "negative-qualities" ? "NQ" : "QL", tagButtonClass: "tag-toggle", tagDetailClass: "tag-detail", tagDetailTitleClass: "tag-detail-title", tagDetailCopyClass: "tag-detail-copy", backLabel: "Back to quality index", tabLabel: (c) => c.id === "all" ? "All Qualities" : c.label
+  },
   cyberdecks: {
     pageClass: "page-cyberdecks", workspaceClass: "workspace", panelClass: "matrix-panel", headerClass: "matrix-header", listHeaderClass: "matrix-list-header", recordHeaderClass: "matrix-record-header", filtersClass: "matrix-filters",
     summaryClass: "matrix-list-summary", listClass: "matrix-list", itemClass: "matrix-list-item", indexClass: "matrix-list-index", nameClass: "matrix-list-name", metaClass: "matrix-list-cost", tabsClass: "matrix-tabs",

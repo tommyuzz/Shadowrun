@@ -3,7 +3,7 @@ import type { RawRecord, ReferenceCategory, ReferenceData, ReferenceRecord } fro
 const jsonLoaders = import.meta.glob<Record<string, unknown>>([
   "../adeptpowers.json", "../cyberdecks.json", "../drones.json", "../equipment.json",
   "../matrixinteraction.json", "../metatypes.json", "../rituals.json", "../skills.json",
-  "../spells.json", "../spirits.json", "../sprites.json", "../vehicles.json", "../weapons.json"
+  "../qualities.json", "../spells.json", "../spirits.json", "../sprites.json", "../vehicles.json", "../weapons.json"
 ], { import: "default" });
 const dataCache = new Map<string, Promise<ReferenceData>>();
 
@@ -151,6 +151,19 @@ function matrixData(payload: Record<string, unknown>): ReferenceData {
   return { records, categories: categoriesFrom(records, lookupDefinitions(payload.category) as Record<string, string>, false), definitions: lookupDefinitions(payload.subcategories), payload };
 }
 
+function qualityData(payload: Record<string, unknown>): ReferenceData {
+  const records = [
+    ...objectEntries(payload.positive_qualities).map(([name, raw]) => record(name, raw, text(raw.category) || "Positive Qualities")),
+    ...objectEntries(payload.negative_qualities).map(([name, raw]) => record(name, raw, text(raw.category) || "Negative Qualities"))
+  ];
+  return {
+    records,
+    categories: categoriesFrom(records, lookupDefinitions(payload.category) as Record<string, string>, true),
+    definitions: {},
+    payload
+  };
+}
+
 export async function loadData(moduleId: string): Promise<ReferenceData> {
   const existing = dataCache.get(moduleId);
   if (existing) return existing;
@@ -170,6 +183,7 @@ async function loadUncached(moduleId: string): Promise<ReferenceData> {
     case "adeptpowers": return adeptData(payload);
     case "cyberdecks": return cyberdeckData(payload);
     case "matrixinteraction": return matrixData(payload);
+    case "qualities": return qualityData(payload);
     case "weapons": return simpleData(payload, "weapons", "category", true);
     case "vehicles": return simpleData(payload, "vehicles", "category", true);
     case "drones": return simpleData(payload, "drones", "subcategory", true);

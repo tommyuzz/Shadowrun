@@ -5,6 +5,7 @@ import { modules, modulesById } from "./registry";
 const expectedFilters: Record<string, string[]> = {
   skills: ["skill-group"],
   metatypes: ["racial-trait"],
+  qualities: ["structure"],
   cyberdecks: ["subcategory"],
   matrixinteraction: ["function", "context"],
   sprites: ["power", "skill"],
@@ -59,5 +60,23 @@ describe("full-record search", () => {
     expect(bruteForce).toBeDefined();
     expect(matchesSearch(bruteForce!, "CYBERCOMBAT firewall")).toBe(true);
     expect(matchesSearch(bruteForce!, "cybercombat nonexistent-value")).toBe(false);
+  });
+
+  it("matches nested quality levels and fields outside the title", async () => {
+    const data = await loadData("qualities");
+    const addiction = data.records.find((record) => record.id === "addiction");
+    expect(addiction).toBeDefined();
+    expect(matchesSearch(addiction!, "withdrawal penalty daily")).toBe(true);
+    expect(matchesSearch(addiction!, "social penalty -3")).toBe(true);
+  });
+});
+
+describe("qualities dataset", () => {
+  it("preserves both quality categories and every supplied record", async () => {
+    const data = await loadData("qualities");
+    expect(data.records).toHaveLength(59);
+    expect(data.records.filter((record) => record.category === "Positive Qualities")).toHaveLength(31);
+    expect(data.records.filter((record) => record.category === "Negative Qualities")).toHaveLength(28);
+    expect(data.categories.map((category) => category.id)).toEqual(["all", "positive-qualities", "negative-qualities"]);
   });
 });

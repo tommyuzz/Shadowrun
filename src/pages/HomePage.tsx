@@ -11,8 +11,8 @@ export function HomePage() {
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
   const requested = params.get("sector");
-  const [sector, setSector] = useState(sectors.some((item) => item.id === requested) ? requested! : "magic");
-  const current = sectors.find((item) => item.id === sector) || sectors[2];
+  const [sector, setSector] = useState(sectors.some((item) => item.id === requested) ? requested! : "corerules");
+  const current = sectors.find((item) => item.id === sector) || sectors[0];
 
   useEffect(() => { document.title = "Shadowrun 5e // Operations Archive"; }, []);
 

@@ -26,10 +26,16 @@ const traitKey = (input: string): string => {
 
 const legality = (availability: unknown): string => /F$/.test(String(availability || "")) ? "Forbidden" : /R$/.test(String(availability || "")) ? "Restricted" : "Legal";
 const costTypes = ["fixed cost", "per level", "variable cost"];
+const qualityStructures = ["options", "levels", "variants", "rarity", "severity", "target_prevalence", "degree", "possible_side_effects"];
 
 const filterDefinitions: Record<string, FilterDefinition[]> = {
   skills: [{ ...fieldFilter("skill-group", "Skill group", "All skill groups", "skillgroup"), formatValue: titleCase }],
   metatypes: [{ id: "racial-trait", label: "Racial trait", allLabel: "All racial traits", values: (record) => values(record, "racial_traits").map(traitKey) }],
+  qualities: [{ id: "structure", label: "Quality structure", allLabel: "All structures", values: (record) => {
+    if (record.raw.max_rating != null || record.raw.max_level != null || /per (?:rating|level)/i.test(String(record.raw.karma_cost || record.raw.karma_bonus || ""))) return ["Rated"];
+    if (qualityStructures.some((key) => record.raw[key] && typeof record.raw[key] === "object")) return ["Choice-based"];
+    return ["Fixed"];
+  } }],
   cyberdecks: [subcategoryFilter("Software type", "All software types", "Software")],
   matrixinteraction: [
     { id: "function", label: "Function", allLabel: "All functions", values: (record) => Array.from(new Set([...(record.subcategory ? [record.subcategory] : []), ...values(record, "functions")])) },
@@ -59,6 +65,7 @@ const filterDefinitions: Record<string, FilterDefinition[]> = {
 const moduleRows: Omit<ModuleDefinition, "filters">[] = [
   { id: "skills", name: "Skills", singular: "Skill", sector: "corerules", kicker: "Operational capability archive", subtitle: "Fifth edition active skill index", archiveCode: "SKILLS // 5E", moduleCode: "Competency // Skill index", intro: "Active skills, linked attributes, groups, defaulting and common tests.", listInstruction: "Select a skill to open its full record", listMeta: (r) => value(r, "skillgroup") !== "—" ? value(r, "skillgroup") : "Standalone", defaultCategoryId: "all" },
   { id: "metatypes", name: "Metatypes", singular: "Metatype", sector: "corerules", kicker: "Population records archive", subtitle: "Fifth edition metatype index", archiveCode: "DEMOGRAPHIC // 5E", moduleCode: "Demographic // Metatype index", intro: "Metatype attributes, movement, racial traits and priority options.", listInstruction: "Select a metatype to open its full profile", listMeta: (r) => { const a = r.raw.attributes as Record<string, Record<string, unknown>> | undefined; return a?.body ? `BOD ${a.body.minimum}–${a.body.maximum}` : "Profile"; } },
+  { id: "qualities", name: "Qualities", singular: "Quality", sector: "corerules", kicker: "Character profile archive", subtitle: "Fifth edition quality index", archiveCode: "QUALITIES // 5E", moduleCode: "Character // Quality ledger", intro: "Positive and Negative Qualities, Karma values, requirements, ratings and variants.", listInstruction: "Select a quality to open its full character record", listMeta: (r) => value(r, r.category === "Positive Qualities" ? "karma_cost" : "karma_bonus"), defaultCategoryId: "all" },
   { id: "cyberdecks", name: "Cyberdecks", singular: "Matrix Record", sector: "hacking", kicker: "Matrix operations archive", subtitle: "Fifth edition Matrix catalogue", archiveCode: "GRID-SCAN // 5E", moduleCode: "Grid-scan // Matrix catalogue", intro: "Cyberdeck hardware, Matrix attributes and executable software.", listInstruction: "Select a record to open its full specification", listMeta: (r) => value(r, "cost") },
   { id: "matrixinteraction", name: "Matrix Interaction", singular: "Interaction", sector: "hacking", kicker: "Matrix operations archive", subtitle: "Fifth edition interaction index", archiveCode: "PROTOCOL // 5E", moduleCode: "Protocol // Interaction index", intro: "Matrix actions and technomancer complex forms.", listInstruction: "Select an interaction to open its complete protocol", listMeta: (r) => value(r, r.category === "Complex Forms" ? "fading_value" : "action_type") },
   { id: "sprites", name: "Sprites", singular: "Sprite", sector: "hacking", kicker: "Resonance operations archive", subtitle: "Fifth edition sprite index", archiveCode: "RESONANCE // 5E", moduleCode: "Resonance // Sprite index", intro: "Sprite Matrix attributes, skills, powers and Resonance capabilities.", listInstruction: "Select a sprite to open its full Resonance profile", listMeta: () => "Level" },
