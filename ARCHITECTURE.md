@@ -21,7 +21,9 @@ The original JSON datasets remain separate source files. `src/data.ts` dynamical
 
 Search text is generated once when a record is adapted. It includes the record name, category, tags, source and all nested field names and values, with authored HTML reduced to searchable text.
 
-The Qualities adapter combines the supplied `positive_qualities` and `negative_qualities` objects into one routeable archive while preserving their category rules and nested option structures. Category counts, full-record search and the shared source selector therefore work without maintaining a second page implementation.
+The Qualities adapter combines the supplied `positive_qualities` and `negative_qualities` objects into one routeable archive while preserving their category rules, quality types and nested option structures. Category counts, full-record search and the shared source selector therefore work without maintaining a second page implementation. `quality_type` participates in the shared filter index; `quality_types` supplies the definition shown by the matching record-tag button.
+
+The Lifestyles adapter applies the same pattern to `lifestyle_extras` and `lifestyle_options`. It retains each record's original category, subtype, source, cost fields, restrictions, notes and nested variants. Variant minimum-lifestyle values are included in the shared filter index, and all nested keys and values remain available to full-record search.
 
 Home-page links prefetch their dataset on hover or focus. Vite emits every dataset with a content hash, allowing normal long-lived browser caching without query-string versions.
 
@@ -29,7 +31,7 @@ Home-page links prefetch their dataset on hover or focus. Vite emits every datas
 
 `HomePage` and `ModulePage` own page composition. Shared controls and framing live in `src/components`. Common list, record, filter, tag, source and responsive rules are loaded once.
 
-`RecordDetail` contains the specialised archive views used by the original site: skill sections, metatype profiles, character-quality ledgers, cyberdeck consoles, Matrix protocols, sprite and spirit profiles, spell and adept grids, ritual procedures, weapon specifications, vehicle dashboards, drone control stacks and equipment market listings. `ModuleChrome` supplies the matching sidebars, legends and footer treatments.
+`RecordDetail` contains the specialised archive views used by the original site: skill sections, metatype profiles, character-quality ledgers, lifestyle dossiers, cyberdeck consoles, Matrix protocols, sprite and spirit profiles, spell and adept grids, ritual procedures, weapon specifications, vehicle dashboards, drone control stacks and equipment market listings. `ModuleChrome` supplies the matching sidebars, legends and footer treatments.
 
 The original page stylesheets are retained in `assets/css/pages/`. `scripts/scope-page-styles.mjs` uses PostCSS to generate one scoped stylesheet at build time, so every unique visual rule remains intact without leaking into another module. Shared React state and routing can therefore evolve independently of the original visual language.
 

@@ -1,5 +1,42 @@
 # Release notes
 
+## 1.7.1 — Quality type filtering and definitions
+
+### Added
+
+- Replaced the Quality dataset with the supplied version containing General, Metagenic, Infected and Lifestyle type metadata.
+- Added **Quality Type** to the existing Quality filter panel alongside full-record search and Quality Structure.
+- Added a clickable type button beneath each typed Quality record title; selecting it reveals the authored type definition using the established tag-detail pattern.
+- Kept the 31 records without a supplied `quality_type` visible under **All quality types** without inventing classifications.
+- Expanded the Quality filter panel responsively for its third control and updated the notation legend and archive guidance.
+
+### Validation
+
+- 15 datasets and 1,049 reference records validated, including all four type definitions.
+- 36 unit tests passed, including exact type-filter options, missing-field behavior and Metagenic tag-definition rendering.
+- Production TypeScript and Vite build passed.
+- Production browser checks passed for the four filter options, the 74-record Metagenic result set, clickable definitions, missing-type handling and 320px horizontal fit.
+
+## 1.7.0 — Lifestyle extras and options archive
+
+### Added
+
+- Added **Lifestyles** beneath **Core Rules** on the generated home page.
+- Added all 26 Entertainment extras and 14 Lifestyle Options from the supplied `lifestyle_extras.json` dataset.
+- Added All, Entertainment and Lifestyle Options routes with stable deep links for every record.
+- Added full-record search across effects, costs, restrictions, notes and nested variant fields.
+- Added Lifestyle Type and Minimum Lifestyle filters; nested variant thresholds participate in filtering.
+- Added a dedicated safehouse dossier with point costs or adjustments, monthly costs, minimum lifestyle thresholds, restrictions, notes and structured configuration cards.
+- Added lifestyle-specific category rules, notation legend, tags, iconography, footer treatment and narrow-screen layouts.
+- Integrated the SRF records with the existing persistent source-book selector and compatibility redirect generation.
+
+### Validation
+
+- 15 datasets and 1,049 reference records validated.
+- 35 unit tests passed, including nested lifestyle search, variant filtering, exact collection counts and Core Rules registration.
+- Production TypeScript and Vite build passed.
+- Production browser checks passed for home registration, the 40-record list, SRF naming, nested search, variant filtering, detail rendering, restrictions and 320px horizontal fit.
+
 ## 1.6.1 — Core Rules home correction
 
 ### Corrected

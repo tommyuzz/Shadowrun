@@ -3,7 +3,7 @@ import type { RawRecord, ReferenceCategory, ReferenceData, ReferenceRecord } fro
 const jsonLoaders = import.meta.glob<Record<string, unknown>>([
   "../adeptpowers.json", "../cyberdecks.json", "../drones.json", "../equipment.json",
   "../matrixinteraction.json", "../metatypes.json", "../rituals.json", "../skills.json",
-  "../qualities.json", "../spells.json", "../spirits.json", "../sprites.json", "../vehicles.json", "../weapons.json"
+  "../qualities.json", "../lifestyle_extras.json", "../spells.json", "../spirits.json", "../sprites.json", "../vehicles.json", "../weapons.json"
 ], { import: "default" });
 const dataCache = new Map<string, Promise<ReferenceData>>();
 
@@ -160,7 +160,20 @@ function qualityData(payload: Record<string, unknown>): ReferenceData {
   return {
     records,
     categories: categoriesFrom(records, lookupDefinitions(payload.category) as Record<string, string>, true),
-    definitions: {},
+    definitions: lookupDefinitions(payload.quality_types),
+    payload
+  };
+}
+
+function lifestyleData(payload: Record<string, unknown>): ReferenceData {
+  const records = [
+    ...objectEntries(payload.lifestyle_extras).map(([name, raw]) => record(name, raw, text(raw.category) || "Entertainment", raw.subcategory ? [text(raw.subcategory)] : [])),
+    ...objectEntries(payload.lifestyle_options).map(([name, raw]) => record(name, raw, text(raw.category) || "Lifestyle Options", raw.subcategory ? [text(raw.subcategory)] : []))
+  ];
+  return {
+    records,
+    categories: categoriesFrom(records, lookupDefinitions(payload.category) as Record<string, string>, true),
+    definitions: lookupDefinitions(payload.subcategories),
     payload
   };
 }
@@ -175,7 +188,8 @@ export async function loadData(moduleId: string): Promise<ReferenceData> {
 }
 
 async function loadUncached(moduleId: string): Promise<ReferenceData> {
-  const loader = jsonLoaders[`../${moduleId}.json`];
+  const path = moduleId === "lifestyles" ? "../lifestyle_extras.json" : `../${moduleId}.json`;
+  const loader = jsonLoaders[path];
   if (!loader) throw new Error(`No dataset is registered for '${moduleId}'.`);
   const payload = await loader();
   switch (moduleId) {
@@ -185,6 +199,7 @@ async function loadUncached(moduleId: string): Promise<ReferenceData> {
     case "cyberdecks": return cyberdeckData(payload);
     case "matrixinteraction": return matrixData(payload);
     case "qualities": return qualityData(payload);
+    case "lifestyles": return lifestyleData(payload);
     case "weapons": return simpleData(payload, "weapons", "category", true);
     case "vehicles": return simpleData(payload, "vehicles", "category", true);
     case "drones": return simpleData(payload, "drones", "subcategory", true);

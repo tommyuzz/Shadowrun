@@ -43,8 +43,10 @@ export function recordTags(moduleId: string, record: ReferenceRecord, data: Refe
     }
     case "qualities": {
       const categories = recordMap(data, "category");
+      const qualityTypes = recordMap(data, "quality_types");
       const structuredKeys = ["options", "levels", "variants", "rarity", "severity", "target_prevalence", "degree", "possible_side_effects"];
       const limit = raw.max_rating ?? raw.max_level;
+      const qualityType = valueText(raw.quality_type, "");
       const structure = limit != null ? "Rated" : structuredKeys.some((key) => raw[key] && typeof raw[key] === "object") ? "Choice-based" : "Fixed";
       const structureCopy = limit != null
         ? `<strong>Rated quality</strong><br>This quality can be purchased up to Rating <strong>${valueText(limit)}</strong>. Apply the listed Karma value for each rating or level.`
@@ -53,7 +55,18 @@ export function recordTags(moduleId: string, record: ReferenceRecord, data: Refe
           : "<strong>Fixed quality</strong><br>This quality has no separate rating or structured variant in the supplied record.";
       return [
         { key: "category", label: record.category, html: String(categories[record.category] || `<strong>${record.category}</strong><br>No category rules are available.`) },
+        ...(qualityType ? [{ key: "quality-type", label: qualityType, html: String(qualityTypes[qualityType] || `<strong>${qualityType}</strong><br>No quality type rules are available.`) }] : []),
         { key: "structure", label: limit != null ? `${structure} · Max ${valueText(limit)}` : structure, html: structureCopy }
+      ];
+    }
+    case "lifestyles": {
+      const categories = recordMap(data, "category");
+      const subcategories = recordMap(data, "subcategories");
+      const variantCount = raw.variants && typeof raw.variants === "object" && !Array.isArray(raw.variants) ? Object.keys(raw.variants).length : 0;
+      return [
+        { key: "category", label: record.category, html: String(categories[record.category] || `<strong>${record.category}</strong><br>No category rules are available.`) },
+        { key: "subcategory", label: valueText(raw.subcategory), html: String(subcategories[String(raw.subcategory)] || `<strong>${valueText(raw.subcategory)}</strong><br>No lifestyle type details are available.`) },
+        ...(variantCount ? [{ key: "variants", label: `${variantCount} ${variantCount === 1 ? "variant" : "variants"}`, html: `<strong>Selectable variants</strong><br>This entry has <strong>${variantCount}</strong> configured ${variantCount === 1 ? "variant" : "variants"}. Point cost, monthly cost, minimum lifestyle, and effects may differ by selection.` }] : [])
       ];
     }
     case "cyberdecks": {

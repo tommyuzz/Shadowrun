@@ -5,6 +5,7 @@ const collections = {
   cyberdecks: ["cyberdecks", "software"],
   drones: ["drones"],
   equipment: ["equipment"],
+  lifestyle_extras: ["lifestyle_extras", "lifestyle_options"],
   matrixinteraction: ["matrix_actions", "complex_forms"],
   metatypes: ["metatypes"],
   qualities: ["positive_qualities", "negative_qualities"],
@@ -27,6 +28,12 @@ for (const [file, required] of Object.entries(collections)) {
       count += 1;
     }
   }
+}
+
+const qualityPayload = JSON.parse(await readFile("qualities.json", "utf8"));
+if (!qualityPayload.quality_types || typeof qualityPayload.quality_types !== "object" || Array.isArray(qualityPayload.quality_types)) throw new Error("qualities.json: missing object 'quality_types'");
+for (const [name, description] of Object.entries(qualityPayload.quality_types)) {
+  if (!name.trim() || typeof description !== "string" || !description.trim()) throw new Error(`qualities.json: invalid quality type definition '${name}'`);
 }
 
 const spellPayload = JSON.parse(await readFile("spells.json", "utf8"));

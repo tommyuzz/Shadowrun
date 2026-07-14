@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { loadData, matchesSearch } from "./data";
 import { modules, modulesById } from "./registry";
+import { recordTags } from "./record-tags";
 
 const expectedFilters: Record<string, string[]> = {
   skills: ["skill-group"],
   metatypes: ["racial-trait"],
-  qualities: ["structure"],
+  qualities: ["quality-type", "structure"],
+  lifestyles: ["subcategory", "minimum-lifestyle"],
   cyberdecks: ["subcategory"],
   matrixinteraction: ["function", "context"],
   sprites: ["power", "skill"],
@@ -69,6 +71,16 @@ describe("full-record search", () => {
     expect(matchesSearch(addiction!, "withdrawal penalty daily")).toBe(true);
     expect(matchesSearch(addiction!, "social penalty -3")).toBe(true);
   });
+
+  it("matches nested lifestyle variants and restrictions", async () => {
+    const data = await loadData("lifestyles");
+    const garage = data.records.find((record) => record.id === "garage");
+    const safehouse = data.records.find((record) => record.id === "safehouse");
+    expect(garage).toBeDefined();
+    expect(safehouse).toBeDefined();
+    expect(matchesSearch(garage!, "helicopter pad access luxury")).toBe(true);
+    expect(matchesSearch(safehouse!, "cannot purchase entertainment assets")).toBe(true);
+  });
 });
 
 describe("qualities dataset", () => {
@@ -78,5 +90,35 @@ describe("qualities dataset", () => {
     expect(data.records.filter((record) => record.category === "Positive Qualities")).toHaveLength(142);
     expect(data.records.filter((record) => record.category === "Negative Qualities")).toHaveLength(101);
     expect(data.categories.map((category) => category.id)).toEqual(["all", "positive-qualities", "negative-qualities"]);
+  });
+
+  it("exposes supplied quality types as filters and record definition tags", async () => {
+    const data = await loadData("qualities");
+    const typeFilter = modulesById.qualities.filters.find((filter) => filter.id === "quality-type")!;
+    const options = Array.from(new Set(data.records.flatMap((record) => typeFilter.values(record)))).sort();
+    const metagenic = data.records.find((record) => record.id === "360-degree-eyesight")!;
+    const typeTag = recordTags("qualities", metagenic, data).find((tag) => tag.key === "quality-type");
+    expect(options).toEqual(["General", "Infected", "Lifestyle", "Metagenic"]);
+    expect(data.records.filter((record) => typeFilter.values(record).length === 0)).toHaveLength(31);
+    expect(typeTag?.label).toBe("Metagenic");
+    expect(typeTag?.html).toContain("SURGE mutations");
+  });
+});
+
+describe("lifestyles dataset", () => {
+  it("preserves both lifestyle collections and every supplied record", async () => {
+    const data = await loadData("lifestyles");
+    expect(data.records).toHaveLength(40);
+    expect(data.records.filter((record) => record.category === "Entertainment")).toHaveLength(26);
+    expect(data.records.filter((record) => record.category === "Lifestyle Options")).toHaveLength(14);
+    expect(data.categories.map((category) => category.id)).toEqual(["all", "entertainment", "lifestyle-options"]);
+  });
+
+  it("exposes minimum lifestyles declared by selectable variants", async () => {
+    const data = await loadData("lifestyles");
+    const garage = data.records.find((record) => record.id === "garage")!;
+    const minimumFilter = modulesById.lifestyles.filters.find((filter) => filter.id === "minimum-lifestyle")!;
+    expect(minimumFilter.values(garage)).toEqual(expect.arrayContaining(["Medium", "High", "Luxury"]));
+    expect(minimumFilter.values(garage)).not.toContain("*");
   });
 });

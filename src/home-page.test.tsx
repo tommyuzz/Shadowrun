@@ -15,11 +15,12 @@ function renderHome(route: string) {
 }
 
 describe("home page module navigation", () => {
-  it("opens Core Rules by default and renders a Qualities archive button", () => {
+  it("opens Core Rules by default and renders Qualities and Lifestyles archive buttons", () => {
     const html = renderHome("/");
     expect(html).toContain("<h2 class=\"content-title\">Core Rules</h2>");
     expect(html).toMatch(/href="\/qualities"[^>]*>[\s\S]*?<span class="module-name">Qualities<\/span>/);
-    expect(html.match(/class="module-button archive-module-button"/g)).toHaveLength(3);
+    expect(html).toMatch(/href="\/lifestyles"[^>]*>[\s\S]*?<span class="module-name">Lifestyles<\/span>/);
+    expect(html.match(/class="module-button archive-module-button"/g)).toHaveLength(4);
   });
 
   it("still honours an explicitly selected home sector", () => {

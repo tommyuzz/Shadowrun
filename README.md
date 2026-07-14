@@ -4,7 +4,9 @@ This version is a single React and TypeScript application built with Vite. It pr
 
 Each archive retains its subject-specific filters. Search covers record names, descriptions, tags, statistics, tests, sources and nested field values rather than being limited to title text.
 
-The **Qualities** archive appears under **Core Rules** and contains all supplied Positive and Negative Qualities. The home page opens Core Rules by default so its Skills, Metatypes and Qualities buttons are visible immediately. The archive presents Karma costs or bonuses, rating limits, selectable options, levels, variants, degrees and side effects in a dedicated character-quality ledger while retaining the complete authored descriptions.
+The **Qualities** archive appears under **Core Rules** and contains all supplied Positive and Negative Qualities. The home page opens Core Rules by default so its Skills, Metatypes, Qualities and Lifestyles buttons are visible immediately. The archive presents Karma costs or bonuses, rating limits, selectable options, levels, variants, degrees and side effects in a dedicated character-quality ledger while retaining the complete authored descriptions. Supplied General, Metagenic, Infected and Lifestyle types are searchable and filterable; a type button beneath each typed record title opens the corresponding authored definition.
+
+The **Lifestyles** archive also appears under **Core Rules**. It combines every supplied Entertainment extra and Lifestyle Option into one routeable catalogue, with All, Entertainment and Lifestyle Options views. Full-record search covers nested configurations and restrictions; filters cover lifestyle type and minimum lifestyle. Dedicated dossiers preserve point costs, monthly adjustments, thresholds, restrictions, operational notes and every selectable variant from `lifestyle_extras.json`.
 
 The interface adds brief archive-specific activation sequences, smooth record and filter transitions, animated data readouts, themed loading and error states, and complete reduced-motion support. Entry animations release their compositor layers after settling, returning the page to the original static presentation without leaving continuous background effects running.
 
@@ -53,6 +55,7 @@ GitHub Pages-compatible hash routes are used for reliable direct links:
 /#/spells/combat
 /#/spells/combat/acid-stream
 /#/qualities/negative-qualities/addiction
+/#/lifestyles/entertainment/garage
 ```
 
 Compatibility redirect pages retain the former module URLs.
@@ -71,7 +74,7 @@ src/presentation.ts Page-specific class names, labels and archive copy
 src/record-tags.ts  Page-specific tag and rule presentation
 src/styles/         Shared CSS and generated scoped original page CSS
 assets/css/pages/   Original page stylesheets retained as source files
-*.json              Original reference datasets
+*.json              Original reference datasets, including lifestyle_extras.json
 scripts/            Build-time validation and compatibility generation
 ```
 

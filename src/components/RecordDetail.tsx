@@ -238,6 +238,56 @@ function QualityDetail({ record, recordNumber }: { record: ReferenceRecord; reco
   </>;
 }
 
+const lifestyleVariantOrder = ["point_cost", "monthly_cost", "minimum_lifestyle"];
+
+function textValues(value: unknown): string[] {
+  if (Array.isArray(value)) return value.map(String).filter(Boolean);
+  return value == null || value === "" ? [] : [String(value)];
+}
+
+function LifestyleVariant({ name, value }: { name: string; value: unknown }) {
+  const variant = asObject(value);
+  const details = [
+    ...lifestyleVariantOrder.filter((key) => variant[key] != null && variant[key] !== "").map((key) => [key, variant[key]] as const),
+    ...Object.entries(variant).filter(([key, fieldValue]) => !lifestyleVariantOrder.includes(key) && key !== "effect" && key !== "notes" && fieldValue != null && fieldValue !== "")
+  ];
+  const notes = textValues(variant.notes);
+  return <article className="lifestyle-variant">
+    <header><span>Selectable configuration</span><h3>{name}</h3></header>
+    {details.length ? <dl>{details.map(([key, fieldValue]) => <div key={key}><dt>{titleCase(key)}</dt><dd>{valueText(fieldValue)}</dd></div>)}</dl> : null}
+    {variant.effect ? <Html className="lifestyle-variant-effect" value={variant.effect}/> : null}
+    {notes.length ? <ul className="lifestyle-variant-notes">{notes.map((note, index) => <li key={`${note.slice(0, 32)}-${index}`}>{note}</li>)}</ul> : null}
+  </article>;
+}
+
+function LifestyleDetail({ record, recordNumber }: { record: ReferenceRecord; recordNumber: number }) {
+  const raw = record.raw;
+  const entertainment = record.category === "Entertainment";
+  const positive = record.subcategory === "Positive";
+  const variants = Object.entries(asObject(raw.variants));
+  const notes = textValues(raw.notes);
+  const classification = valueText(raw.subcategory, entertainment ? "Extra" : "Option");
+  return <>
+    <article className="lifestyle-dossier" data-kind={entertainment ? "extra" : positive ? "positive" : "negative"} aria-labelledby="lifestyle-dossier-title">
+      <header className="lifestyle-dossier-banner"><div><span>{entertainment ? "Residential resource configuration" : "Lifestyle-wide modifier"}</span><h2 id="lifestyle-dossier-title">Lifestyle dossier</h2></div><strong>{code(entertainment ? "EX" : "LO", recordNumber)}</strong></header>
+      <div className="lifestyle-dossier-grid">
+        <section className="lifestyle-classification"><span>Entry class</span><strong>{classification}</strong><p>{entertainment ? "Entertainment extra" : `${classification} lifestyle option`}</p></section>
+        <dl className="lifestyle-cost-grid">
+          <div><dt>{entertainment ? "Point cost" : "Point adjustment"}</dt><dd>{valueText(entertainment ? raw.point_cost : raw.point_adjustment)}</dd><small>Lifestyle points</small></div>
+          <div><dt>{entertainment ? "Monthly cost" : "Monthly adjustment"}</dt><dd>{valueText(raw.monthly_cost)}</dd><small>Nuyen per month</small></div>
+          <div><dt>{entertainment ? "Minimum lifestyle" : "Option class"}</dt><dd>{entertainment ? valueText(raw.minimum_lifestyle) : classification}</dd><small>{entertainment ? "Cost-waiver threshold" : "Lifestyle modifier"}</small></div>
+        </dl>
+      </div>
+      <div className="lifestyle-dossier-rule"><span>{entertainment ? "⌂" : positive ? "+" : "−"}</span><strong>{entertainment ? "Points always apply // Monthly cost is waived only at the listed lifestyle threshold" : "Apply the lifestyle-wide benefit, cost adjustment, and restriction exactly as listed"}</strong></div>
+    </article>
+    <section className="section lifestyle-description"><h2 className="section-title">{entertainment ? "Extra effect" : "Option effect"}</h2><Html className="lifestyle-description-copy" value={raw.description} fallback="No lifestyle description is available."/></section>
+    {!entertainment ? <section className="section lifestyle-restriction"><h2 className="section-title">Restrictions</h2><Html className="lifestyle-restriction-copy" value={raw.restriction} fallback="No specific restriction is listed."/></section> : null}
+    {variants.length ? <section className="section lifestyle-variants"><h2 className="section-title">Available configurations</h2><div className="lifestyle-variant-grid">{variants.map(([name, value]) => <LifestyleVariant name={name} value={value} key={name}/>)}</div></section> : null}
+    {notes.length ? <section className="section lifestyle-notes"><h2 className="section-title">Operational notes</h2><ul>{notes.map((note, index) => <li key={`${note.slice(0, 32)}-${index}`}>{note}</li>)}</ul></section> : null}
+    <Source value={raw.source}/>
+  </>;
+}
+
 function WeaponDetail({ record }: { record: ReferenceRecord }) {
   const raw = record.raw;
   const fields: [string, unknown][] = [["Accuracy", raw.accuracy], ["Damage", raw.damage], ["Armor penetration", raw.ap], [raw.blast ? "Blast" : "Reach", raw.blast || raw.reach], ["Firing mode", raw.mode], ["Recoil compensation", raw.rc], ["Ammunition", raw.ammo], ["Rating", raw.rating], ["Availability", raw.availability], ["Cost", raw.cost]];
@@ -311,6 +361,7 @@ export function RecordDetail({ moduleId, record, data, recordNumber }: DetailPro
     case "skills": return <SkillDetail record={record}/>;
     case "metatypes": return <MetatypeDetail record={record} recordNumber={recordNumber}/>;
     case "qualities": return <QualityDetail record={record} recordNumber={recordNumber}/>;
+    case "lifestyles": return <LifestyleDetail record={record} recordNumber={recordNumber}/>;
     case "cyberdecks": return <CyberdeckDetail record={record} recordNumber={recordNumber}/>;
     case "matrixinteraction": return <MatrixDetail record={record} recordNumber={recordNumber}/>;
     case "sprites": return <SpriteDetail record={record} recordNumber={recordNumber}/>;
