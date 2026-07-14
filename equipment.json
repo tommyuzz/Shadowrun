@@ -3160,6 +3160,1264 @@
       "cost": "20¥ per dram",
       "description": "Raw magical materials used in spellcasting, ritual magic, alchemy, enchanting, and other magical procedures.",
       "source": "CRB"
+    },
+    "EX-Explosive Rounds": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "+2",
+      "ap_modifier": "-1",
+      "availability": "14F",
+      "cost": "120¥ per 10 rounds",
+      "description": "Enhanced explosive ammunition with a larger charge than standard explosive rounds, increasing Damage Value by 2 and improving Armor Penetration by 1.",
+      "source": "SRG"
+    },
+    "Frangible": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-1",
+      "ap_modifier": "+4",
+      "availability": "2R",
+      "cost": "10¥ per 10 rounds",
+      "description": "Rounds designed to break apart on hard surfaces. They are less effective against armor and barriers; barriers count double their normal Armor against frangible ammunition.",
+      "source": "SRG"
+    },
+    "Flare": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-2 / +2",
+      "ap_modifier": "+2 / -3",
+      "availability": "6R",
+      "cost": "20¥ per 10 rounds",
+      "description": "Signal ammunition that ignites when fired and bursts into burning sparks at 60 meters. The first modifiers apply below 60 meters; the second apply from 60 to 62 meters. The round is ineffective beyond 62 meters and may set a struck target on fire.",
+      "source": "SRG"
+    },
+    "Tracker": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-2",
+      "ap_modifier": "-2",
+      "availability": "8R",
+      "cost": "150¥ per 10 rounds",
+      "description": "A bullet containing an RFID tag. If the attack damages the target, the tag remains lodged in the body; if all damage is resisted, it lodges in the armor. Tracker rounds use either security or stealth RFID tags.",
+      "source": "SRG"
+    },
+    "Capsule": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-4",
+      "ap_modifier": "+4",
+      "availability": "2",
+      "cost": "5¥ per 10 rounds",
+      "description": "Light rounds carrying a liquid payload. A successful hit, including a grazing hit, ruptures the capsule and exposes the target to the chemical inside. One chemical dose fills five rounds; filling each round requires a Logic + Armorer [Mental] (12, 1 minute) Extended Test. Capsule rounds always use Light Pistol ranges.",
+      "source": "SRG"
+    },
+    "Ammonium Nitrate": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "4",
+      "availability": "5",
+      "cost": "80¥ per kg",
+      "description": "A granular fertilizer compound that can be used as an explosive or oxidizer. It requires a container before a detonator can be fitted, will not detonate when wet, and burns rather than explodes unless suitably enclosed.",
+      "source": "SRG"
+    },
+    "ANFO": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "6",
+      "availability": "7",
+      "cost": "100¥ per kg",
+      "description": "Ammonium nitrate mixed with fuel oil. It is a common commercial blasting explosive and is insensitive to ordinary blasting caps, so it requires a primer such as dynamite or TNT.",
+      "source": "SRG"
+    },
+    "Dynamite": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "6",
+      "cost": "80¥ per kg",
+      "description": "A powerful traditional explosive commonly supplied in 0.25-kilogram sticks. Multiple sticks can be combined into larger charges, and dynamite can also serve as a primer for other explosives such as ANFO.",
+      "source": "SRG"
+    },
+    "Gunpowder": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "3",
+      "cost": "25¥ per kg",
+      "description": "A catch-all category for modern smokeless propellants, black powder, and similar firearm propellants. It must be enclosed before it can explode and neither burns nor detonates when wet.",
+      "source": "SRG"
+    },
+    "Nitroglycerin": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "6",
+      "availability": "10",
+      "cost": "150¥ per liter",
+      "description": "An exceptionally powerful but dangerously unstable liquid explosive. Handling it calls for an Agility + Reaction Test; a glitch causes accidental detonation. One liter is treated as one kilogram of Rating 6 explosive.",
+      "source": "SRG"
+    },
+    "TNT": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "10R",
+      "cost": "100¥ per kg",
+      "description": "Trinitrotoluene, the traditional standard against which explosive power is measured. It is sold in blocks of varying weight and can be cut or combined into larger charges.",
+      "source": "SRG"
+    },
+    "Detonating Cord (Low Yield)": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "3",
+      "availability": "10R",
+      "cost": "100¥ per meter",
+      "description": "A thin explosive-filled cord that can act as a charge, cutting line, breaching charge, or high-speed fuse. Low-yield cord has a base Damage Value of 3P per meter, adjusted by 1P for each one-third of a meter added or removed.",
+      "source": "SRG"
+    },
+    "Detonating Cord (High Yield)": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "6",
+      "availability": "14R",
+      "cost": "150¥ per meter",
+      "description": "A more powerful form of detonating cord for heavier materials. High-yield cord has a base Damage Value of 6P per meter, adjusted by 1P for each one-third of a meter added or removed.",
+      "source": "SRG"
+    },
+    "Binary Explosive": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-20",
+      "availability": "18F",
+      "cost": "Rating x 125¥ per kg",
+      "description": "An explosive created from components that are comparatively inert while separate and become dangerous when combined. It is available in Ratings 1 through 20.",
+      "source": "SRG"
+    },
+    "Linear Cutting Charge": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-25",
+      "availability": "16R",
+      "cost": "Rating x 250¥ per meter",
+      "description": "A V-shaped explosive sheath designed to focus a blast along a precise cutting line. It automatically tamps the explosive for a x4 multiplier when detonated, and one meter contains one kilogram of explosive at the charge's Rating.",
+      "source": "SRG"
+    },
+    "Liquid Explosive": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-25",
+      "availability": "16F",
+      "cost": "Rating x 150¥ per liter",
+      "description": "Liquid plastique that functions like plastic explosive but can be poured in precise quantities. One liter is approximately equivalent to one kilogram of plastic explosive and can be dispersed by an atomizer.",
+      "source": "SRG"
+    },
+    "Atomizer": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-10",
+      "availability": "(Rating x 2)R",
+      "cost": "Rating x 300¥",
+      "description": "A sprayer that holds liters of liquid explosive equal to its Rating and disperses one liter per Complex Action into a one-cubic-meter cloud. Damage Value remains constant throughout the cloud; normal blast reduction begins outside it.",
+      "source": "SRG"
+    },
+    "Electrical Exploder": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-6",
+      "availability": "8R",
+      "cost": "Rating x 150¥",
+      "description": "A handheld device that sends the electrical pulse needed to activate compatible electrical detonators. It can control circuits equal to its Rating and simultaneously trigger up to Rating x 4 detonators.",
+      "source": "SRG"
+    },
+    "Optical Exploder": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-6",
+      "availability": "14R",
+      "cost": "Rating x 250¥",
+      "description": "A handheld device that activates compatible optical detonators. Like an electrical exploder, it can control circuits equal to its Rating and trigger up to Rating x 4 detonators at once.",
+      "source": "SRG"
+    },
+    "Hard-Shell Briefcase (Hermetically Sealed)": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-12",
+      "availability": "10R",
+      "cost": "Rating x 100¥",
+      "description": "A sealed transport case that suppresses chemical traces. Its Rating applies as a negative dice-pool modifier to chemsniffers and olfactory sensors attempting to detect explosives inside.",
+      "source": "SRG"
+    },
+    "Safety Fuse": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "6R",
+      "cost": "5¥ per meter",
+      "description": "Waterproof fuse cord that burns at approximately one centimeter per second, or three centimeters per Combat Turn, providing a simple timed delay for a blasting cap.",
+      "source": "SRG"
+    },
+    "Redundant Power Supply": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "6R",
+      "cost": "50-500¥",
+      "description": "A backup power supply for a detonator. It reduces the risk that a failed primary supply prevents detonation, though adding redundancy makes the device more complex to build.",
+      "source": "SRG"
+    },
+    "Nanoprint Scanner": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-6",
+      "availability": "16F",
+      "cost": "Rating x 500¥",
+      "description": "A forensic scanner used in demolitions work to detect or analyze microscopic traces and signatures associated with explosive devices.",
+      "source": "SRG"
+    },
+    "Blasting Cap": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "8R",
+      "cost": "20¥",
+      "description": "A common construction and demolitions detonator available in electric, non-electric, and fuse forms. It provides the primary explosive impulse needed to set off a secondary charge.",
+      "source": "SRG"
+    },
+    "Electrical Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "(Rating x 4)R",
+      "cost": "Rating x 30¥",
+      "description": "A detonator activated by a strong electrical pulse. It can be wired into switches, vehicle ignitions, or other triggers and requires a suitable power source or electrical exploder.",
+      "source": "SRG"
+    },
+    "Optical Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-6",
+      "availability": "(Rating x 7)F",
+      "cost": "Rating x 200¥",
+      "description": "A smart detonator able to process external sensor data such as facial recognition or biometric scans. It uses its Device Rating as Data Processing when identifying a designated target.",
+      "source": "SRG"
+    },
+    "Pull Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "9F",
+      "cost": "80¥",
+      "description": "A mechanical detonator triggered when a ring is pulled. It can be connected to a tripwire or configured as a pull-release trap that also detonates if tension is removed.",
+      "source": "SRG"
+    },
+    "Push Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "9F",
+      "cost": "80¥",
+      "description": "A pressure-triggered detonator that can be set for a chosen minimum, maximum, or pressure-release condition.",
+      "source": "SRG"
+    },
+    "Radio Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-3",
+      "availability": "10R",
+      "cost": "75¥",
+      "description": "A wireless detonator triggered by a specific radio signal. Rating 1 adds 2 Noise, Rating 2 adds 1 Noise, and Rating 3 reduces Noise by 1.",
+      "source": "SRG"
+    },
+    "Timer Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-3",
+      "availability": "(Rating x 6)F",
+      "cost": "Rating x 50¥",
+      "description": "A mechanical or electronic timed detonator. Rating 1 may gain or lose up to two minutes, Rating 2 may vary by up to one minute, and Rating 3 keeps exact time.",
+      "source": "SRG"
+    },
+    "Armanté Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "4",
+      "availability": "10",
+      "cost": "2,500¥",
+      "description": "Neo-Aztec high-fashion armored suit. Wearing it increases Social Limit by 2; its wireless bonus gives +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Armanté Dress": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "4",
+      "availability": "10",
+      "cost": "2,500¥",
+      "description": "Neo-Aztec high-fashion armored dress. Wearing it increases Social Limit by 2; its wireless bonus gives +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Berwick Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "5",
+      "availability": "9",
+      "cost": "2,600¥",
+      "description": "Classic Mortimer of London tailored armor. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier; wireless use grants +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Berwick Dress": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "4",
+      "availability": "8",
+      "cost": "2,300¥",
+      "description": "Classic Mortimer of London tailored armored dress. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier; wireless use grants +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Crimson Sky Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "5",
+      "availability": "6",
+      "cost": "2,400¥",
+      "description": "An older Mortimer of London armored suit that remains suitable for high-society use. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier.",
+      "source": "SRG"
+    },
+    "Summit Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "6",
+      "availability": "7",
+      "cost": "2,500¥",
+      "description": "A classic Mortimer of London armored suit. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier.",
+      "source": "SRG"
+    },
+    "Summit Dress": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "5",
+      "availability": "7",
+      "cost": "2,200¥",
+      "description": "A classic Mortimer of London armored dress. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier.",
+      "source": "SRG"
+    },
+    "Greatcoat Coat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "10 / +3",
+      "capacity": "10",
+      "availability": "8",
+      "cost": "3,000¥",
+      "description": "A Mortimer of London armored greatcoat using Custom Fit (Stack). It increases Social Limit by 1, gives a -3 Concealability modifier, and can add +3 armor when stacked with a compatible custom-fitted set.",
+      "source": "SRG"
+    },
+    "Ulysses Coat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "10 / +3",
+      "capacity": "12",
+      "availability": "8",
+      "cost": "3,100¥",
+      "description": "A Mortimer of London Custom Fit (Stack) armored coat with high Capacity. It increases Social Limit by 1, gives a -3 Concealability modifier, and can add +3 armor when stacked with a compatible set.",
+      "source": "SRG"
+    },
+    "Argentum Coat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "12 / +4",
+      "capacity": "14",
+      "availability": "10",
+      "cost": "3,600¥",
+      "description": "A heavily armored Mortimer of London Custom Fit (Stack) coat. It increases Social Limit by 1, gives a -3 Concealability modifier, and can add +4 armor when stacked with a compatible set.",
+      "source": "SRG"
+    },
+    "Ace of Cups": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "1,600¥",
+      "description": "A Vashon Island Aces High armored coat in a high-collar, floor-length style. It increases Social Limit by 1 and gains +1 die to Social Tests wirelessly.",
+      "source": "SRG"
+    },
+    "Ace of Swords": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "1,300¥",
+      "description": "A Vashon Island armored pilot-style outfit with an integrated scabbard holster. Wireless use grants +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Ace of Wands": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "6",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "1,200¥",
+      "description": "A Vashon Island new-age wizard-styled armored outfit with Gear Access, reducing the action cost to retrieve prepared items.",
+      "source": "SRG"
+    },
+    "Ace of Coins": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "10",
+      "availability": "4",
+      "cost": "2,100¥",
+      "description": "A luxurious Vashon Island armored outfit decorated with premium materials. It increases Social Limit by 3 and gains +1 die to Social Tests wirelessly.",
+      "source": "SRG"
+    },
+    "Ace of Spades": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,000¥",
+      "description": "A Vashon Island armored outfit styled after a WWII US fighter pilot uniform and fitted with an integrated holster.",
+      "source": "SRG"
+    },
+    "Ace of Clubs": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,000¥",
+      "description": "A Vashon Island armored outfit styled after a WWII British bomber pilot uniform and fitted with an integrated holster.",
+      "source": "SRG"
+    },
+    "Aces of Hearts": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,000¥",
+      "description": "A Vashon Island armored outfit based on modern military pilot styling and fitted with an integrated holster.",
+      "source": "SRG"
+    },
+    "Ace of Diamonds": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "6",
+      "availability": "8",
+      "cost": "1,400¥",
+      "description": "A futuristic Vashon Island armored outfit inspired by the Spitfire Resurrection trid series. Its design provides a +2 Concealability modifier.",
+      "source": "SRG"
+    },
+    "Steampunk": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "10",
+      "capacity": "14",
+      "availability": "7",
+      "cost": "2,250¥",
+      "description": "A Vashon Island armored fashion line built around ornate steampunk styling and plentiful room for concealed gadgets. It is Custom Fit and wirelessly increases Social Limit by 1.",
+      "source": "SRG"
+    },
+    "Synergist Business Line": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "5",
+      "availability": "8",
+      "cost": "1,500¥",
+      "description": "A Vashon Island corporate suit with Custom Fit tailoring and a concealed holster. Its wireless bonus increases Social Limit by 1.",
+      "source": "SRG"
+    },
+    "Synergist Business Line Longcoat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "10 / +3",
+      "capacity": "6",
+      "availability": "8",
+      "cost": "2,300¥",
+      "description": "A Custom Fit (Stack) longcoat for the Synergist Business Line with an integrated holster. It can add +3 armor when stacked with the matching custom-fitted outfit.",
+      "source": "SRG"
+    },
+    "Sleeping Tiger": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "13",
+      "capacity": "10",
+      "availability": "10",
+      "cost": "13,500¥",
+      "description": "A premium Custom Fit Vashon Island armor line with a holster, Newest Model feature, and Rating 3 ruthenium polymer coating.",
+      "source": "SRG"
+    },
+    "Executive Suite": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "12",
+      "capacity": "4",
+      "availability": "12",
+      "cost": "2,000¥",
+      "description": "Zoé corporate high-fashion armor intended for megacorporate executive environments. It is Custom Fit, counts as the Newest Model, increases Social Limit by 1, and wirelessly increases it by 2.",
+      "source": "SRG"
+    },
+    "Heritage": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "4 / 6 / 8 / 10 / 12",
+      "capacity": "Armor ÷ 2",
+      "availability": "16",
+      "cost": "2,000¥ + (Armor Rating x 500¥)",
+      "description": "A prestige Zoé fashion line sold in multiple armor ratings. It is Custom Fit, counts as the Newest Model, and increases Social Limit by 2.",
+      "source": "SRG"
+    },
+    "Nightshade/Moonsilver": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "2",
+      "availability": "10",
+      "cost": "8,500¥",
+      "description": "Glowing high-society armor clothing with Custom Fit tailoring and a +1 Social Limit bonus. Its wireless lighting system can be upgraded for infrared and contact-lens use.",
+      "source": "SRG"
+    },
+    "Second Skin": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "6 / +2",
+      "capacity": "2",
+      "availability": "14",
+      "cost": "12,000¥",
+      "description": "An almost invisible full-body Custom Fit (Stack) unitard with Newest Model status and integrated Rating 4 ruthenium polymer coating. It may provide +2 armor when stacked with compatible custom-fitted gear.",
+      "source": "SRG"
+    },
+    "Globetrotter Jacket": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "12",
+      "capacity": "10",
+      "availability": "10",
+      "cost": "1,300¥",
+      "description": "Ares Victory outdoor armor with Custom Protection 4 and an integrated holster. Wireless use gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Globetrotter Vest": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "10",
+      "availability": "7",
+      "cost": "900¥",
+      "description": "Ares Victory outdoor armor with Custom Protection 3. Wireless use gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Globetrotter Clothing": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "10",
+      "availability": "6",
+      "cost": "600¥",
+      "description": "Ares Victory outdoor armored clothing with Custom Protection 2 and Gear Access. Wireless use gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Wild Hunt": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "12",
+      "capacity": "10",
+      "availability": "12",
+      "cost": "3,000¥",
+      "description": "Ares Victory heavy outdoor armor with Custom Protection 6, an integrated holster, and Gear Access. Wireless use gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Industrious": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,100¥",
+      "description": "Ares Victory corporate-workwear armor with Gear Access. It increases Social Limit by 1 when worn in an appropriate corporate environment and gives +1 die to matching Social Tests wirelessly.",
+      "source": "SRG"
+    },
+    "Big Game Hunter": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "14",
+      "capacity": "12",
+      "availability": "12",
+      "cost": "5,000¥",
+      "description": "Heavy Ares Victory wilderness armor with Custom Fit, Custom Protection 6, an integrated holster, and Gear Access. Wireless use gives +1 die to Survival Tests in the selected terrain.",
+      "source": "SRG"
+    },
+    "Rapid Transit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "6",
+      "availability": "10",
+      "cost": "400¥+",
+      "description": "Ares Victory everyday armor clothing. The base version can be upgraded to Elite (+1 Social Limit, +600¥), Platinum (+2 Social Limit, +1,100¥), or Diamond (+3 Social Limit, +2,400¥).",
+      "source": "SRG"
+    },
+    "Full-Suit Body Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "3",
+      "availability": "8",
+      "cost": "1,300¥",
+      "description": "Tailor-made form-fitting body armor covering the torso and limbs while leaving hands, feet, and head exposed. It is Custom Fit and imposes a -6 modifier on tests to notice it under other clothing.",
+      "source": "SRG"
+    },
+    "Hardened Mil-Spec Battle Armor (Light)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "15",
+      "availability": "16F",
+      "cost": "15,000¥",
+      "description": "Fully enclosed light military-grade battle armor. It is Custom Fit, has Holster and Gear Access features, increases Social Limit by 2 for Intimidation Tests, is Restrictive, and is treated as having the Hardened Armor critter power.",
+      "source": "SRG"
+    },
+    "Hardened Mil-Spec Battle Armor (Medium)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "18",
+      "capacity": "18",
+      "availability": "18F",
+      "cost": "20,000¥",
+      "description": "Fully enclosed medium military-grade battle armor. It is Custom Fit, has Holster and Gear Access features, increases Social Limit by 2 for Intimidation Tests, is Restrictive, and is treated as having the Hardened Armor critter power.",
+      "source": "SRG"
+    },
+    "Hardened Mil-Spec Battle Armor (Heavy)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "20",
+      "capacity": "20",
+      "availability": "22F",
+      "cost": "25,000¥",
+      "description": "Fully enclosed heavy military-grade battle armor. It is Custom Fit, has Holster and Gear Access features, increases Social Limit by 2 for Intimidation Tests, is Restrictive, and is treated as having the Hardened Armor critter power.",
+      "source": "SRG"
+    },
+    "Security Armor (Light)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "12",
+      "availability": "14R",
+      "cost": "8,000¥",
+      "description": "Light corporate security armor with Custom Fit, Holster, Gear Access, Restrictive construction, and +1 Social Limit for Intimidation Tests.",
+      "source": "SRG"
+    },
+    "Security Armor (Medium)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "18",
+      "capacity": "14",
+      "availability": "16R",
+      "cost": "14,000¥",
+      "description": "Medium corporate security armor with Custom Fit, Holster, Gear Access, Restrictive construction, and +1 Social Limit for Intimidation Tests.",
+      "source": "SRG"
+    },
+    "Security Armor (Heavy)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "20",
+      "capacity": "16",
+      "availability": "18R",
+      "cost": "20,000¥",
+      "description": "Heavy corporate security armor with Custom Fit, Holster, Gear Access, Restrictive construction, and +1 Social Limit for Intimidation Tests.",
+      "source": "SRG"
+    },
+    "Bike Racing Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "500¥",
+      "description": "Protective racing armor associated with motorcycles, go-gangs, combat biking, and Urban Brawl. It is conspicuous but socially normal in the right context.",
+      "source": "SRG"
+    },
+    "Bunker Gear": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "3,000¥",
+      "description": "Firefighter protective equipment with Fire Resistance 8 and Restrictive construction. It increases Social Limit by 2 in emergency situations; its wireless bonus gives +1 die on Social Tests to calm or pacify people at an emergency site.",
+      "source": "SRG"
+    },
+    "Riot Control Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "14",
+      "capacity": "8",
+      "availability": "10R",
+      "cost": "5,000¥",
+      "description": "Heavy padded riot gear designed for protection and intimidation. It is Restrictive and increases Social Limit by 1 for Intimidation Tests, or by 2 with its wireless bonus.",
+      "source": "SRG"
+    },
+    "SWAT Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "15",
+      "availability": "16R",
+      "cost": "8,000¥",
+      "description": "Tactical quick-response armor with Gear Access. It increases Social Limit by 2 for Intimidation Tests, reduces Social Limit by 1 for other Social Tests with the general public, and wirelessly increases the Intimidation bonus to +3.",
+      "source": "SRG"
+    },
+    "SecureTech PPP Arms Kit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+1",
+      "capacity": "1",
+      "availability": "6",
+      "cost": "250¥",
+      "description": "An armor augmentation kit for the arms that takes four Complex Actions to don. It decreases Social Limit by 1 and cannot be combined with full-body armor.",
+      "source": "SRG"
+    },
+    "SecureTech PPP Legs Kit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+1",
+      "capacity": "1",
+      "availability": "6",
+      "cost": "300¥",
+      "description": "An armor augmentation kit for the legs that takes four Complex Actions to don. It decreases Social Limit by 1 and cannot be combined with full-body armor.",
+      "source": "SRG"
+    },
+    "SecureTech PPP Vitals Kit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+1",
+      "capacity": "1",
+      "availability": "6",
+      "cost": "350¥",
+      "description": "An armor augmentation kit for vital areas that takes eight Complex Actions to don. It decreases Social Limit by 1 and cannot be combined with full-body armor, an armor vest, or an armor jacket.",
+      "source": "SRG"
+    },
+    "Body Armor Bag": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "4",
+      "availability": "8",
+      "cost": "750¥",
+      "description": "A multipurpose gear bag that can be emptied and worn as emergency armor. When worn it decreases Social Limit by 1, has -6 Concealability, and is Restrictive.",
+      "source": "SRG"
+    },
+    "Chain Mail": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "2",
+      "availability": "8",
+      "cost": "900¥",
+      "description": "Custom-fitted chain armor. It increases Social Limit by 1 with gang members and reduces Social Limit by 1 with the general public.",
+      "source": "SRG"
+    },
+    "Padded Leather": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "7",
+      "capacity": "2",
+      "availability": "8",
+      "cost": "600¥",
+      "description": "Custom-fitted padded leather armor common among gangs. It has the Padded feature, increases Social Limit by 1 with gang members, and reduces Social Limit by 1 with the general public.",
+      "source": "SRG"
+    },
+    "Murder Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "13",
+      "capacity": "4",
+      "availability": "12R",
+      "cost": "5,000¥",
+      "description": "Custom-fitted armor with a biomonitor, holster, and cinematic gore system. After being shot, the wearer may spend 5 Initiative to play dead using Charisma + Performance opposed by Intuition + Perception; observers suffer a -4 dice-pool modifier.",
+      "source": "SRG"
+    },
+    "Forearm Guards": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+1",
+      "capacity": "3",
+      "availability": "6",
+      "cost": "300¥",
+      "description": "Dermaplast or metallic bracers designed to turn aside melee blows and provide additional arm protection.",
+      "source": "SRG"
+    },
+    "Ghillie Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "4",
+      "capacity": "4",
+      "availability": "6",
+      "cost": "600¥",
+      "description": "Environment-specific camouflage armor. While immobile in its intended terrain, observers suffer -6 dice to Perception Tests to spot the wearer; while the wearer moves, the modifier is -2. The suit is Restrictive.",
+      "source": "SRG"
+    },
+    "Ares Armored Survivalist": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "6",
+      "availability": "10",
+      "cost": "1,500¥",
+      "description": "Armored hunting and field gear with Custom Protection 4. It reduces Social Limit by 1 and wirelessly gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Desert Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "3",
+      "capacity": "2",
+      "availability": "8",
+      "cost": "1,000¥",
+      "description": "A sealed heat-dissipating suit with Custom Fit and Flare Compensation. It cannot be worn with armor or restrictive clothing, grants +2 dice to desert Survival Tests, and wirelessly gives +1 die on Survival Tests in hot terrain.",
+      "source": "SRG"
+    },
+    "Snake Mesh Socks": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+2",
+      "capacity": "—",
+      "availability": "6",
+      "cost": "50¥",
+      "description": "Protective knee-length mesh socks that provide +2 Armor against attacks directed at the feet and lower legs, especially snake bites.",
+      "source": "SRG"
+    },
+    "Coldsuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "—",
+      "capacity": "4",
+      "availability": "4",
+      "cost": "800¥",
+      "description": "A layered cold-weather suit with Custom Protection (Insulation 4) and Flare Compensation. External armor can be layered over it at the cost of increased Cold Fatigue risk and a -2 dice-pool penalty; wireless use grants +1 die to Survival Tests in cold terrain.",
+      "source": "SRG"
+    },
+    "Polar Survival Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "capacity": "6",
+      "availability": "8",
+      "cost": "2,000¥",
+      "description": "A heavy cold-weather survival suit with Insulation 6, Thermal Damping 4, and Flare Compensation. Retractable climbing claws give +1 die to Climbing Tests and can attack for (STR + 1)P; no other armor may be worn with the suit.",
+      "source": "SRG"
+    },
+    "Ares Arctic Forces Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "14",
+      "availability": "16R",
+      "cost": "11,000¥",
+      "description": "Cold-weather special-operations armor with Custom Fit, Insulation 5, Thermal Damping 3, Flare Compensation, Gas Mask, and Gear Access. Retractable climbing claws give +1 die to Climbing Tests; wirelessly, Climbing Tests gain +1 Physical Limit.",
+      "source": "SRG"
+    },
+    "Ares Armored Coldsuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "9",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,200¥",
+      "description": "Armored cold-weather gear with Custom Fit, Insulation 4, Flare Compensation, and Restrictive construction. It imposes -2 dice on Fatigue Tests, reduced to -1 while wireless is active.",
+      "source": "SRG"
+    },
+    "Ares Polar Sneak Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "capacity": "4",
+      "availability": "16F",
+      "cost": "10,000¥",
+      "description": "A polar survival suit incorporating Custom Fit, Flare Compensation, and Rating 3 ruthenium polymer coating. Modifications are limited where they would interfere with the coating.",
+      "source": "SRG"
+    },
+    "Drysuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "—",
+      "capacity": "4",
+      "availability": "6",
+      "cost": "2,500¥",
+      "description": "A diving suit that encloses the wearer in a dry insulating air layer. With its hood up and face mask attached it has Chemical Seal and Custom Protection (Insulation 4); wirelessly it transmits environmental information.",
+      "source": "SRG"
+    },
+    "Diving Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "7",
+      "capacity": "4",
+      "availability": "6",
+      "cost": "1,750¥",
+      "description": "Armored diving gear with Chemical Protection 4. It normally imposes -2 dice on Swimming Tests, reduced to -1 while wireless is active.",
+      "source": "SRG"
+    },
+    "Arctic Diving Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "1",
+      "capacity": "4",
+      "availability": "8",
+      "cost": "3,000¥",
+      "description": "A heated suit with Insulation 8 while in water. It keeps the diver warm for 45 minutes before cold tests are required, extending to one hour with wireless active; recharging between dives takes two hours.",
+      "source": "SRG"
+    },
+    "Evo HEL Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "5",
+      "availability": "10",
+      "cost": "3,000¥",
+      "description": "A Hostile Environment Living suit with Custom Fit, Gas Mask, Insulation 4, Fire Resistance 2, Radiation Shielding 3, and Chemical Protection 2. Wirelessly it records and transmits environmental information.",
+      "source": "SRG"
+    },
+    "Spacesuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "12",
+      "capacity": "6",
+      "availability": "16",
+      "cost": "12,000¥",
+      "description": "A full spacesuit with biomonitor, Device Rating 3 commlink, Custom Fit, Chemical Seal, Insulation 6, Thermal Damping 4, and Flare Compensation. It carries twelve hours of oxygen and twenty-four hours of power and requires regular maintenance.",
+      "source": "SRG"
+    },
+    "Security Spacesuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "10",
+      "availability": "24",
+      "cost": "25,000¥",
+      "description": "A combat-capable security version of the standard spacesuit with the same core life-support features and greater protection.",
+      "source": "SRG"
+    },
+    "Evo Armadillo Armored Space Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "16",
+      "capacity": "10",
+      "availability": "24R",
+      "cost": "35,000¥",
+      "description": "A heavily armored spacesuit with Custom Fit, Chemical Seal, Fire Resistance 4, Insulation 6, Thermal Damping 4, and enhanced strength for climbing and lifting. Its self-sealing system automatically repairs one breach.",
+      "source": "SRG"
+    },
+    "Magnetic Boots": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "—",
+      "capacity": "4",
+      "availability": "12",
+      "cost": "2,500¥",
+      "description": "Custom-fitted boots using electromagnets and suction to adhere to surfaces. Movement is limited to one-quarter normal speed with no Sprint Tests, while Climbing Tests gain +3 dice but proceed at half normal pace.",
+      "source": "SRG"
+    },
+    "Survival Bubble": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "4",
+      "capacity": "4",
+      "rating": "1-6",
+      "availability": "Rating x 3",
+      "cost": "2,000¥",
+      "description": "A self-inflating emergency sphere for decompression survival. Its Rating, up to 6, determines occupancy; it carries an airlock, oxygen, emergency food and water, a 100-kilometer homing beacon, and a Rating 4 medkit.",
+      "source": "SRG"
+    },
+    "MCT EE Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "capacity": "5",
+      "availability": "10",
+      "cost": "2,500¥",
+      "description": "A Mitsuhama extreme-environment suit with Chemical Seal, Fire Resistance 4, and Radiation Shielding 6. Wirelessly it records and transmits environmental information.",
+      "source": "SRG"
+    },
+    "Gorepak": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "—",
+      "availability": "8R",
+      "cost": "200¥",
+      "description": "Replacement practical-effects reservoir for Murder Armor. Installing a new gorepak requires a Logic + Armorer [Mental] (4, 1 hour) Extended Test.",
+      "source": "SRG"
+    },
+    "Hardened Mil-Spec Battle Armor Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+3",
+      "capacity": "8",
+      "availability": "8F",
+      "cost": "10,000¥",
+      "description": "Helmet designed specifically for hardened mil-spec battle armor. It is the only additional worn armor permitted with that battle armor.",
+      "source": "SRG"
+    },
+    "Security Armor Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+3",
+      "capacity": "5",
+      "availability": "8R",
+      "cost": "5,000¥",
+      "description": "Helmet designed for light, medium, or heavy Security Armor, adding protection and Capacity for enhancements.",
+      "source": "SRG"
+    },
+    "Bike Racing Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "200¥",
+      "description": "Protective helmet designed to accompany Bike Racing Armor.",
+      "source": "SRG"
+    },
+    "Bunker Gear Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "capacity": "3",
+      "availability": "6",
+      "cost": "750¥",
+      "description": "Firefighter helmet designed to accompany Bunker Gear and protect the head during emergency operations.",
+      "source": "SRG"
+    },
+    "Riot Control Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "capacity": "6",
+      "availability": "6R",
+      "cost": "1,000¥",
+      "description": "Protective riot helmet designed to accompany Riot Control Armor.",
+      "source": "SRG"
+    },
+    "SWAT Armor Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+3",
+      "capacity": "8",
+      "availability": "10R",
+      "cost": "1,500¥",
+      "description": "Tactical helmet designed to accompany SWAT Armor and provide substantial Capacity for mission equipment.",
+      "source": "SRG"
+    },
+    "Ares FlaShield": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+6",
+      "capacity": "4",
+      "availability": "12R",
+      "cost": "4,000¥",
+      "description": "A riot shield with an integrated ten-charge flash-pak. The flash-pak normally takes a Complex Action to activate, reduced to a Simple Action with wireless functionality; it recharges one charge every ten seconds when connected to power.",
+      "source": "SRG"
+    },
+    "Ballistic Mask": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "150¥",
+      "description": "A protective mask that can accept vision enhancements and helmet-compatible modifications. It increases Social Limit by 1 for Intimidation Tests; customized versions increase the total bonus to 2 for an additional 150¥.",
+      "source": "SRG"
+    },
+    "Enclosed Breathing Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "—",
+      "capacity": "6",
+      "availability": "8",
+      "cost": "900¥",
+      "description": "A commercial diving helmet with halogen headlamp, external speakers, dataport, and low-light vision. It connects to an external air or mixed-gas supply and wirelessly transmits environmental information.",
+      "source": "SRG"
+    },
+    "Full Face Mask": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "—",
+      "capacity": "4",
+      "availability": "8",
+      "cost": "300¥",
+      "description": "A shallow-diving full-face breathing mask with accessory connections and integral gas-mask protection. Wirelessly it transmits environmental information.",
+      "source": "SRG"
+    },
+    "Auto-Injector": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[2]",
+      "availability": "4",
+      "cost": "1,500¥ + chemical costs",
+      "description": "An armor-mounted injector holding five doses in any combination. It can inject automatically when programmed conditions are met or on command from the wearer; refilling takes one minute per dose. Wireless activation is a Free Action.",
+      "source": "SRG"
+    },
+    "Fresnel Fabric": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[2]",
+      "rating": "Variable",
+      "availability": "14R",
+      "cost": "Rating x 1,000¥",
+      "description": "Directional signal-focusing fabric that reduces Noise by its Rating when the wearer aligns toward the device they are communicating with. Wireless use reduces Noise by 1 additional point.",
+      "source": "SRG"
+    },
+    "Pulse Weave": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[3]",
+      "rating": "Variable",
+      "availability": "+8R",
+      "cost": "3,000¥",
+      "description": "Turns a suit into a rechargeable flash effect. Anyone facing the wearer suffers -4 dice on direct physical attacks, reduced to -2 by flare compensation. The weave has charges equal to its Rating and needs fifteen minutes to recharge; wireless use increases the attack penalty by 1.",
+      "source": "SRG"
+    },
+    "Shock Weave": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[3]",
+      "availability": "8",
+      "cost": "1,000¥",
+      "description": "Electrified armor plates that inflict 8S(e) on anyone entering a Grapple or Clinch with the wearer. A successful Block can also expose an attacker to the shock; the normal Block requires 2 hits, reduced to 1 hit while wireless is active.",
+      "source": "SRG"
+    },
+    "Universal Mirror Material": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[3]",
+      "rating": "Variable",
+      "availability": "8F",
+      "cost": "Rating x 250¥ per square meter",
+      "description": "Signal-jamming material that imposes Noise equal to twice its Rating against anything enclosed by it.",
+      "source": "SRG"
+    },
+    "YNT SoftWeave Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "—",
+      "availability": "+4",
+      "cost": "Armor cost x 2",
+      "description": "A flexible armor-construction technique that increases the armor item's available Capacity by half.",
+      "source": "SRG"
+    },
+    "Ruthenium Polymer Coating": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[4]",
+      "rating": "1-4",
+      "availability": "16F",
+      "cost": "Rating x 5,000¥",
+      "description": "Adaptive camouflage for armor or clothing. The base Perception modifier to spot the wearer is -Rating, adjusted by coverage: full-body +2, almost full +1, half-body +0.",
+      "source": "SRG"
+    },
+    "Radiation Shielding": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[Rating]",
+      "rating": "Variable",
+      "availability": "Rating x 2",
+      "cost": "Rating x 200¥",
+      "description": "Adds one die per Rating to tests made to resist radiation damage.",
+      "source": "SRG"
+    },
+    "Gel Packs": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "—",
+      "availability": "6",
+      "cost": "1,500¥",
+      "description": "Externally mounted impact-absorbing gel packs that require no Capacity and increase the armor item's Armor Rating by 2. For knockdown comparisons, lower the wearer's Physical Limit by 2.",
+      "source": "SRG"
+    },
+    "Responsive Interface Gear (RIG)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[2] armor + [1] helmet",
+      "availability": "8",
+      "cost": "2,500¥",
+      "description": "An integrated trode net, sim module, and simrig connected to the wearer's PAN. It must be installed in both armor and helmet and only works while the full set is worn. Wireless use adds +1 Mental Limit on Perception Tests.",
+      "source": "SRG"
+    },
+    "Barbed Head": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "—",
+      "damage_modifier": "+1",
+      "ap_modifier": "—",
+      "availability": "5R",
+      "cost": "10¥",
+      "description": "A barbed arrowhead designed to cause additional injury when removed. Removing a barbed arrow without causing further damage requires a First Aid + Logic [Mental] (3) Test. On failure, the target suffers unresisted Physical damage equal to 3 minus the hits scored.",
+      "source": "SRG"
+    },
+    "Explosive Head": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-1",
+      "damage_modifier": "+2",
+      "ap_modifier": "-1",
+      "availability": "9F",
+      "cost": "15¥",
+      "description": "A shaped explosive charge mounted on an arrowhead. It applies -1 Accuracy, +2 Damage Value, and -1 Armor Penetration to the arrow.",
+      "source": "SRG"
+    },
+    "Hammerhead Arrowhead": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-1",
+      "damage_modifier": "+1S",
+      "ap_modifier": "+2",
+      "availability": "5",
+      "cost": "5¥",
+      "description": "A blunt arrowhead intended to incapacitate rather than puncture. It applies -1 Accuracy, changes the attack to Stun damage with a +1 DV modifier, and worsens Armor Penetration by 2.",
+      "source": "SRG"
+    },
+    "Incendiary Head": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-1",
+      "damage_modifier": "Special",
+      "ap_modifier": "—",
+      "availability": "12F",
+      "cost": "100¥",
+      "description": "A white-phosphorus arrowhead. On any successful hit, including a Grazing Hit, it erupts in fire for 8P damage with AP -6. The phosphorus then burns for 3 additional Combat Turns, causing 6P fire damage with AP -4 each turn and potentially igniting or damaging carried items. Wireless bonus: the head can detonate before impact and split between two targets within 1 meter of each other; each target defends separately, neither takes the initial 8P hit, and each instead suffers 6P with AP -4 for 4 Combat Turns including the current turn.",
+      "source": "SRG"
+    },
+    "Screamer Head": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-2",
+      "damage_modifier": "-2S",
+      "ap_modifier": "+6",
+      "availability": "2",
+      "cost": "5¥",
+      "description": "A hollow signaling arrowhead designed to produce a chosen audible sound in flight. Resetting the sound requires a Simple Action and a Logic + Intuition (1) Test. Wireless bonus: changing the sound becomes a Free Action and can be done while the arrow is in flight.",
+      "source": "SRG"
+    },
+    "Stick 'n' Shock Arrowhead": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-1",
+      "damage_modifier": "8S(e)",
+      "ap_modifier": "-5",
+      "availability": "6R",
+      "cost": "25¥",
+      "description": "An electrical arrowhead that replaces the arrow's normal damage with 8S(e), AP -5, and applies -1 Accuracy. For its full electrical potential, it can be combined with a Static Shaft.",
+      "source": "SRG"
+    },
+    "Static Shaft": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "—",
+      "damage_modifier": "+4S(e)",
+      "ap_modifier": "—",
+      "availability": "6R",
+      "cost": "Rating x 25¥",
+      "description": "An Ares arrow shaft filled with a powder that builds electrical charge during flight. It is designed to be combined with a Stick 'n' Shock arrowhead and adds +4S(e) to the attack's damage.",
+      "source": "SRG"
     }
   },
   "category": {
