@@ -74,9 +74,9 @@ describe("full-record search", () => {
 describe("qualities dataset", () => {
   it("preserves both quality categories and every supplied record", async () => {
     const data = await loadData("qualities");
-    expect(data.records).toHaveLength(59);
-    expect(data.records.filter((record) => record.category === "Positive Qualities")).toHaveLength(31);
-    expect(data.records.filter((record) => record.category === "Negative Qualities")).toHaveLength(28);
+    expect(data.records).toHaveLength(243);
+    expect(data.records.filter((record) => record.category === "Positive Qualities")).toHaveLength(142);
+    expect(data.records.filter((record) => record.category === "Negative Qualities")).toHaveLength(101);
     expect(data.categories.map((category) => category.id)).toEqual(["all", "positive-qualities", "negative-qualities"]);
   });
 });
