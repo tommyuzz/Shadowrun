@@ -8,7 +8,8 @@ const jsonLoaders = import.meta.glob<Record<string, unknown>>([
 const dataCache = new Map<string, Promise<ReferenceData>>();
 
 export const sourceBooks: Record<string, string> = {
-  CRB: "Shadowrun Fifth Edition Core Rulebook"
+  CRB: "Shadowrun Fifth Edition Core Rulebook",
+  SRF: "Shadowrun Run Faster"
 };
 
 export function slug(value: string): string {
