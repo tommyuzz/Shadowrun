@@ -315,10 +315,1990 @@
       },
       "description": "Trolls are the largest and physically most powerful of the five core metatypes. They possess exceptional natural Body and Strength, thermographic vision, extended Reach, and dermal armor. Their size also results in lower natural limits for several attributes and doubled Lifestyle costs because housing, equipment, and other necessities must be adapted to their massive frames.",
       "source": "CRB"
+    },
+    "Gnome": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens pumilionis",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "willpower": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "logic": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+1 meter per hit"
+      },
+      "average_height": "85 cm",
+      "average_weight": "Under 30 kg",
+      "average_lifespan": "Extended dwarf lifespan; exact average not specified",
+      "racial_traits": [
+        "+20% increased Lifestyle cost",
+        "Arcane Arrester (2)",
+        "Neoteny",
+        "Thermographic Vision"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "A very small dwarf metavariant with dense musculature, little body hair, strong mental aptitudes, and an unusual innate resistance to magic. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 7 Karma.",
+      "source": "SRF"
+    },
+    "Hanuman": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens pumilionis",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+1 meter per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Unverified",
+      "racial_traits": [
+        "+20% increased Lifestyle cost",
+        "Monkey Paws",
+        "Prehensile Tail",
+        "Thermographic Vision",
+        "Unusual Hair (Body)"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "A monkey-like dwarf metavariant found primarily around the Indian subcontinent, with elongated extremities, a prehensile tail, strong climbing ability, and a reputation for agility and outsider status. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 5 Karma.",
+      "source": "SRF"
+    },
+    "Koborokuru": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens pumilionis",
+      "attributes": {
+        "body": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "willpower": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 3",
+        "run": "Agility × 6",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Extended dwarf lifespan; exact average not specified",
+      "racial_traits": [
+        "+20% increased Lifestyle cost",
+        "Celerity",
+        "Resistance to Pathogens/Toxins",
+        "Thermographic Vision",
+        "Unusual Hair"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "A dwarf metavariant associated with Japan and nearby regions, distinguished by heavy body hair, greater speed, and strong resistance to disease and toxins. Run Faster's extended Priority A chart grants 7 Special Attribute Points with no additional Karma cost.",
+      "source": "SRF"
+    },
+    "Menehune": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens pumilionis",
+      "attributes": {
+        "body": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "strength": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+1 meter per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Extended dwarf lifespan; exact average not specified",
+      "racial_traits": [
+        "+20% increased Lifestyle cost",
+        "Resistance to Pathogens",
+        "Thermographic Vision",
+        "Underwater Vision",
+        "Webbed Digits"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "A Polynesian dwarf metavariant adapted to aquatic environments, with webbed extremities, underwater vision, and strong resistance to pathogens. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 2 Karma.",
+      "source": "SRF"
+    },
+    "Dryad": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens nobilis",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Long-lived elf lifespan; exact average not specified",
+      "racial_traits": [
+        "Glamour",
+        "Low-Light Vision",
+        "Symbiosis"
+      ],
+      "priority_options": {
+        "A": 8
+      },
+      "description": "An elf metavariant with supernatural personal magnetism and a powerful bond to the local environment. Dryads are strongly affected by the well-being of the place to which their Symbiosis is tied. Run Faster's extended Priority A chart grants 8 Special Attribute Points with no additional Karma cost.",
+      "source": "SRF"
+    },
+    "Nocturna": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens nobilis",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "agility": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Long-lived elf lifespan; exact average not specified",
+      "racial_traits": [
+        "Allergy (Sunlight, Mild)",
+        "Low-Light Vision",
+        "Keen-Eared",
+        "Nocturnal",
+        "Unusual Hair (Colored Fur)"
+      ],
+      "priority_options": {
+        "A": 8
+      },
+      "description": "A nocturnal elf metavariant with exceptional agility, acute hearing, low-light vision, and a coat of unusually colored fur. Sunlight causes a mild allergic reaction. Run Faster's extended Priority A chart grants 8 Special Attribute Points with no additional Karma cost.",
+      "source": "SRF"
+    },
+    "Wakyambi": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens nobilis",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 3",
+        "run": "Agility × 6",
+        "sprint_increase": "+3 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Long-lived elf lifespan; exact average not specified",
+      "racial_traits": [
+        "Celerity",
+        "Elongated Limbs",
+        "Low-Light Vision"
+      ],
+      "priority_options": {
+        "A": 8
+      },
+      "description": "A very tall, long-limbed African elf metavariant known for speed, reach, and keen intuition. Run Faster's extended Priority A chart grants 8 Special Attribute Points and requires an additional 12 Karma.",
+      "source": "SRF"
+    },
+    "Xapiri Thëpë": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens nobilis",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Long-lived elf lifespan; exact average not specified",
+      "racial_traits": [
+        "Allergy (Pollutants, Mild)",
+        "Low-Light Vision",
+        "Photometabolism"
+      ],
+      "priority_options": {
+        "A": 8
+      },
+      "description": "An Amazonian elf metavariant whose biology benefits from sunlight through photometabolism but reacts poorly to pollution. Run Faster's extended Priority A chart grants 8 Special Attribute Points with no additional Karma cost.",
+      "source": "SRF"
+    },
+    "Nartaki": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens sapiens",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Human lifespan; exact average not specified",
+      "racial_traits": [
+        "Shiva Arms",
+        "Striking Skin Pigmentation"
+      ],
+      "priority_options": {
+        "A": 8
+      },
+      "description": "A rare human metavariant associated particularly with India, distinguished by an additional pair of arms and unusual skin coloration. Run Faster's extended Priority A chart grants 8 Special Attribute Points with no additional Karma cost.",
+      "source": "SRF"
+    },
+    "Hobgoblin": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens robustus",
+      "attributes": {
+        "body": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Short-lived ork lifespan; exact average not specified",
+      "racial_traits": [
+        "Fangs",
+        "Keen-Eared",
+        "Low-Light Vision",
+        "Poor Self Control (Vindictive)"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "An ork metavariant with sharp fangs, acute hearing, low-light vision, and a strong vindictive streak. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 5 Karma.",
+      "source": "SRF"
+    },
+    "Ogre": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens robustus",
+      "attributes": {
+        "body": {
+          "minimum": 4,
+          "maximum": 9
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "strength": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "willpower": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Short-lived ork lifespan; exact average not specified",
+      "racial_traits": [
+        "Low-Light Vision",
+        "Ogre Stomach"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "A large ork metavariant with strong Body, Strength, and Willpower, plus an unusually adaptable digestive system capable of handling food and substances that would trouble most metahumans. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 8 Karma.",
+      "source": "SRF"
+    },
+    "Oni": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens robustus",
+      "attributes": {
+        "body": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Short-lived ork lifespan; exact average not specified",
+      "racial_traits": [
+        "Low-Light Vision",
+        "Striking Skin Pigmentation"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "A Japanese ork metavariant known for vivid skin coloration, improved agility, and greater natural charisma than most orks. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 4 Karma.",
+      "source": "SRF"
+    },
+    "Satyr": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens robustus",
+      "attributes": {
+        "body": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "strength": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 6",
+        "sprint_increase": "+3 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Short-lived ork lifespan; exact average not specified",
+      "racial_traits": [
+        "Low-Light Vision",
+        "Satyr Legs"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "An ork metavariant with quadruped-like lower legs and hooves, giving it exceptional running speed and stronger kicking attacks. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 10 Karma.",
+      "source": "SRF"
+    },
+    "Cyclops": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens ingentis",
+      "attributes": {
+        "body": {
+          "minimum": 5,
+          "maximum": 10
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 6,
+          "maximum": 11
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+1 meter per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Troll lifespan; exact average not specified",
+      "racial_traits": [
+        "+100% increased Lifestyle costs",
+        "Cyclopean Eye",
+        "+1 Reach",
+        "Thermographic Vision"
+      ],
+      "priority_options": {
+        "A": 5
+      },
+      "description": "A massively strong troll metavariant with a single central eye, thermographic vision, and natural Reach. Run Faster's extended Priority A chart grants 5 Special Attribute Points and requires an additional 2 Karma.",
+      "source": "SRF"
+    },
+    "Fomorian": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens ingentis",
+      "attributes": {
+        "body": {
+          "minimum": 4,
+          "maximum": 9
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 5,
+          "maximum": 10
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+1 meter per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Troll lifespan; exact average not specified",
+      "racial_traits": [
+        "+100% increased Lifestyle costs",
+        "Arcane Arrester (1)",
+        "Thermographic Vision",
+        "+1 Reach"
+      ],
+      "priority_options": {
+        "A": 5
+      },
+      "description": "An Irish troll metavariant that trades some raw physical mass for greater resistance to magic and somewhat less restrictive mental limits than some other troll variants. Run Faster's extended Priority A chart grants 5 Special Attribute Points and requires an additional 12 Karma.",
+      "source": "SRF"
+    },
+    "Giant": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens ingentis",
+      "attributes": {
+        "body": {
+          "minimum": 5,
+          "maximum": 10
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "strength": {
+          "minimum": 5,
+          "maximum": 10
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+1 meter per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Troll lifespan; exact average not specified",
+      "racial_traits": [
+        "+100% increased Lifestyle costs",
+        "Dermal Alteration (Bark)",
+        "Thermographic Vision",
+        "+1 Reach"
+      ],
+      "priority_options": {
+        "A": 5
+      },
+      "description": "A huge troll metavariant with bark-like natural armor, thermographic vision, and extended Reach. Run Faster's extended Priority A chart grants 5 Special Attribute Points and requires an additional 2 Karma.",
+      "source": "SRF"
+    },
+    "Minotaur": {
+      "category": "Metatypes",
+      "scientific_name": "Homo sapiens ingentis",
+      "attributes": {
+        "body": {
+          "minimum": 6,
+          "maximum": 11
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 5,
+          "maximum": 10
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+1 meter per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Troll lifespan; exact average not specified",
+      "racial_traits": [
+        "+100% increased Lifestyle costs",
+        "Goring Horns",
+        "Thermographic Vision",
+        "+1 Reach"
+      ],
+      "priority_options": {
+        "A": 5
+      },
+      "description": "A heavily built troll metavariant with natural horns suitable for goring attacks, exceptional Body, thermographic vision, and natural Reach. Run Faster's extended Priority A chart grants 5 Special Attribute Points and requires an additional 2 Karma.",
+      "source": "SRF"
+    },
+    "Centaur": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 1",
+        "run": "Agility × 4",
+        "sprint_increase": "+4 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "+150% increased Lifestyle costs",
+        "Low-Light Vision",
+        "Thermographic Vision",
+        "Magic 1",
+        "Magic Sense",
+        "Natural Weapon (Kick: DV (STR + 2)P, AP +1, +1 Reach)",
+        "Search"
+      ],
+      "priority_options": {
+        "A": 6
+      },
+      "description": "A four-legged metasapient combining a humanoid upper body with an equine lower body. Centaurs are naturally magical, highly mobile, possess multiple enhanced senses, and can deliver powerful kick attacks. Run Faster's extended Priority A chart grants 6 Special Attribute Points and requires an additional 25 Karma.",
+      "source": "SRF"
+    },
+    "Naga": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "reaction": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "strength": {
+          "minimum": 4,
+          "maximum": 9
+        },
+        "willpower": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 1 on land; Agility × 2 swimming",
+        "run": "Agility × 4 on land; Agility × 6 swimming",
+        "sprint_increase": "+1 meter per hit on land; +2 meters per hit swimming"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "+150% increased Lifestyle costs",
+        "Armor 8",
+        "Cold-Blooded",
+        "Dual Natured",
+        "Guard",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 1)P, AP -2, Reach -1)",
+        "Venom"
+      ],
+      "priority_options": {
+        "A": 4
+      },
+      "description": "An intelligent serpentine metasapient with natural armor, venom, innate magic, dual-natured perception, and strong physical and mental attributes. Run Faster's extended Priority A chart grants 4 Special Attribute Points and requires an additional 25 Karma.",
+      "source": "SRF"
+    },
+    "Pixie": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 2
+        },
+        "agility": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "reaction": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 2
+        },
+        "willpower": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "logic": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "intuition": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "charisma": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "edge": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 1 on the ground; Agility × 2 in flight",
+        "run": "Agility × 2 on the ground; Agility × 6 in flight",
+        "sprint_increase": "+1 meter per hit on the ground; +2 meters per hit in flight"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "+100% increased Lifestyle costs",
+        "Astral Perception",
+        "Concealment (Self Only)",
+        "Magic 1",
+        "Uneducated",
+        "Vanishing (Only Upon Death)"
+      ],
+      "priority_options": {
+        "A": 6
+      },
+      "description": "A tiny winged metasapient with exceptional agility, reaction, willpower, intuition, and charisma. Pixies can fly, perceive astrally, conceal themselves, and vanish upon death. Run Faster's extended Priority A chart grants 6 Special Attribute Points and requires an additional 15 Karma.",
+      "source": "SRF"
+    },
+    "Sasquatch": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 6,
+          "maximum": 11
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 5,
+          "maximum": 10
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 4",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "+100% increased Lifestyle costs",
+        "Dual Natured",
+        "Magic 1",
+        "Mimicry",
+        "Natural Weapon (Claws: DV (STR + 1)P, AP —, +1 Reach)",
+        "Uneducated"
+      ],
+      "priority_options": {
+        "A": 5
+      },
+      "description": "A massive, dual-natured metasapient with great Body and Strength, natural claws, and a remarkable ability to mimic sounds. Run Faster's extended Priority A chart grants 5 Special Attribute Points and requires an additional 20 Karma.",
+      "source": "SRF"
+    },
+    "Bovine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "strength": {
+          "minimum": 4,
+          "maximum": 9
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 1D6",
+      "movement": {
+        "walk": "Agility × 1",
+        "run": "Agility × 4",
+        "sprint_increase": "+1 meter per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Goring Horns",
+        "Magic 1",
+        "Shift (Metahuman Form)",
+        "Uneducated"
+      ],
+      "priority_options": {
+        "A": 8
+      },
+      "description": "A bovine natural animal capable of assuming a chosen metahuman form. It is physically powerful, naturally horned, and begins with innate Magic. Run Faster's extended Priority A chart grants 8 Special Attribute Points and requires an additional 5 Karma.",
+      "source": "SRF"
+    },
+    "Canine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "willpower": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 1D6",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 6",
+        "sprint_increase": "+3 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Broadened Auditory Spectrum (Ultrasonic)",
+        "Low-Light Vision",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 1)P, AP -1)",
+        "Shift (Metahuman Form)",
+        "Vomeronasal Organ"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "A canine natural animal capable of assuming a chosen metahuman form. It has excellent perception, speed, scent capabilities, and a natural bite. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 10 Karma.",
+      "source": "SRF"
+    },
+    "Equine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 4,
+          "maximum": 9
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 5,
+          "maximum": 10
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 1D6",
+      "movement": {
+        "walk": "Agility × 1",
+        "run": "Agility × 4",
+        "sprint_increase": "+4 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Keen-Eared",
+        "Magic 1",
+        "Shift (Metahuman Form)",
+        "Uneducated"
+      ],
+      "priority_options": {
+        "A": 6
+      },
+      "description": "An equine natural animal capable of assuming a chosen metahuman form. It combines great physical power with exceptional sprinting capacity and acute hearing. Run Faster's extended Priority A chart grants 6 Special Attribute Points and requires an additional 15 Karma.",
+      "source": "SRF"
+    },
+    "Falconine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 2D6",
+      "movement": {
+        "walk": "Agility × 1 on the ground; Agility × 2 in flight",
+        "run": "Agility × 2 on the ground; Agility × 6 in flight",
+        "sprint_increase": "+0.5 meters per hit on the ground; +2 meters per hit in flight"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Hawk Eyed",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 2)P, AP -1, Reach -1; Talons: DV (STR)P, AP —)",
+        "Shift (Metahuman Form)",
+        "Uneducated"
+      ],
+      "priority_options": {
+        "A": 7
+      },
+      "description": "A falcon natural animal capable of assuming a chosen metahuman form. It is exceptionally fast and perceptive, can fly, and attacks with beak and talons. Run Faster's extended Priority A chart grants 7 Special Attribute Points and requires an additional 10 Karma.",
+      "source": "SRF"
+    },
+    "Leonine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "reaction": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "strength": {
+          "minimum": 4,
+          "maximum": 9
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "intuition": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 2D6",
+      "movement": {
+        "walk": "Agility × 2",
+        "run": "Agility × 5",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Balance Receptor",
+        "Broadened Auditory Spectrum (Ultrasonic)",
+        "Low-Light Vision",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 1)P, AP -1; Claws: DV (STR + 1)P, AP -1, Reach +1)",
+        "Shift (Metahuman Form)",
+        "Uneducated"
+      ],
+      "priority_options": {
+        "A": 4
+      },
+      "description": "A lion natural animal capable of assuming a chosen metahuman form. It combines strong physical attributes with acute senses, balance, and powerful bite and claw attacks. Run Faster's extended Priority A chart grants 4 Special Attribute Points and requires an additional 20 Karma.",
+      "source": "SRF"
+    },
+    "Lupine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 2D6",
+      "movement": {
+        "walk": "Agility × 1",
+        "run": "Agility × 5",
+        "sprint_increase": "+3 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Broadened Auditory Spectrum (Ultrasonic)",
+        "Low-Light Vision",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 1)P, AP -1)",
+        "Shift (Metahuman Form)",
+        "Uneducated",
+        "Vomeronasal Organ"
+      ],
+      "priority_options": {
+        "A": 6
+      },
+      "description": "A wolf natural animal capable of assuming a chosen metahuman form. It is agile, fast, intuitive, and equipped with excellent low-light, ultrasonic, and scent-based senses. Run Faster's extended Priority A chart grants 6 Special Attribute Points and requires an additional 15 Karma.",
+      "source": "SRF"
+    },
+    "Pantherine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "charisma": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 2D6",
+      "movement": {
+        "walk": "Agility × 1",
+        "run": "Agility × 5",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Balance Receptor",
+        "Broadened Auditory Spectrum (Ultrasonic)",
+        "Low-Light Vision",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 2)P, AP -3; Claws: DV (STR + 1)P, AP —)",
+        "Shift (Metahuman Form)",
+        "Uneducated"
+      ],
+      "priority_options": {
+        "A": 4
+      },
+      "description": "A panther natural animal capable of assuming a chosen metahuman form. It has excellent agility, reaction, intuition, charisma, stealth-oriented senses, and dangerous natural weapons. Run Faster's extended Priority A chart grants 4 Special Attribute Points and requires an additional 25 Karma.",
+      "source": "SRF"
+    },
+    "Tigrine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "strength": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "intuition": {
+          "minimum": 3,
+          "maximum": 8
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 2D6",
+      "movement": {
+        "walk": "Agility × 1",
+        "run": "Agility × 5",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Balance Receptor",
+        "Broadened Auditory Spectrum (Ultrasonic)",
+        "Low-Light Vision",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 2)P, AP -2; Claws: DV (STR + 1)P, AP -1, Reach +1)",
+        "Shift (Metahuman Form)",
+        "Uneducated"
+      ],
+      "priority_options": {
+        "A": 4
+      },
+      "description": "A tiger natural animal capable of assuming a chosen metahuman form. It combines strong physical ability, keen instincts, powerful natural weapons, and superior low-light and ultrasonic senses. Run Faster's extended Priority A chart grants 4 Special Attribute Points and requires an additional 25 Karma.",
+      "source": "SRF"
+    },
+    "Ursine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 6,
+          "maximum": 11
+        },
+        "agility": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "strength": {
+          "minimum": 7,
+          "maximum": 12
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "charisma": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 1D6",
+      "movement": {
+        "walk": "Agility × 1",
+        "run": "Agility × 3",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Broadened Auditory Spectrum (Ultrasonic)",
+        "Keen-Eared",
+        "Low-Light Vision",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 2)P, AP -2; Claws: DV (STR + 3)P, AP -1, Reach +1)",
+        "Shift (Metahuman Form)",
+        "Uneducated",
+        "Vomeronasal Organ"
+      ],
+      "priority_options": {
+        "A": 4
+      },
+      "description": "A bear natural animal capable of assuming a chosen metahuman form. It has extraordinary Body and Strength, excellent senses, and extremely dangerous bite and claw attacks. Run Faster's extended Priority A chart grants 4 Special Attribute Points and requires an additional 20 Karma.",
+      "source": "SRF"
+    },
+    "Vulpine Shapeshifter": {
+      "category": "Metatypes",
+      "scientific_name": "Not specified in Run Faster",
+      "attributes": {
+        "body": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "agility": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "reaction": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "strength": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "willpower": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "logic": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "intuition": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "charisma": {
+          "minimum": 2,
+          "maximum": 7
+        },
+        "edge": {
+          "minimum": 1,
+          "maximum": 5
+        },
+        "essence": 6
+      },
+      "initiative": "Reaction + Intuition + 2D6",
+      "movement": {
+        "walk": "Agility × 1",
+        "run": "Agility × 3",
+        "sprint_increase": "+2 meters per hit"
+      },
+      "average_height": "Not specified in Run Faster",
+      "average_weight": "Not specified in Run Faster",
+      "average_lifespan": "Not specified in Run Faster",
+      "racial_traits": [
+        "Broadened Auditory Spectrum (Ultrasonic)",
+        "Keen-Eared",
+        "Low-Light Vision",
+        "Magic 1",
+        "Natural Weapon (Bite: DV (STR + 1)P, AP —)",
+        "Shift (Metahuman Form)",
+        "Uneducated",
+        "Vomeronasal Organ"
+      ],
+      "priority_options": {
+        "A": 8
+      },
+      "description": "A fox natural animal capable of assuming a chosen metahuman form. It is agile, intuitive, charismatic, and equipped with excellent hearing, scent, and low-light perception. Run Faster's extended Priority A chart grants 8 Special Attribute Points and requires an additional 5 Karma.",
+      "source": "SRF"
     }
   },
   "category": {
-    "Metatypes": "<strong>Metatypes</strong><br>The Shadowrun 5e Core Rulebook provides five player-character metatypes: <strong>Human, Elf, Dwarf, Ork, and Troll</strong>. Each metatype has its own racial minimums and natural maximums for attributes, as well as racial traits and, in some cases, additional Lifestyle costs.<br><br><strong>Attributes</strong><br>Characters begin at their metatype's listed racial minimums at no Attribute Point cost. Each Attribute Point spent during character creation raises one Mental or Physical attribute by 1. At character creation, only one Mental or Physical attribute may be at its natural maximum; special attributes are excluded from this restriction.<br><br><strong>Special Attributes</strong><br>Edge begins at the minimum listed for the metatype. Magic and Resonance begin at 0 unless granted through the Magic or Resonance priority selection. Special Attribute Points from the Metatype priority may be assigned to Edge and, where applicable, Magic or Resonance.<br><br><strong>Priority Options</strong><br>The value listed for each available priority is the number of Special Attribute Points granted by that Metatype priority selection."
+    "Metatypes": "<strong>Metatypes</strong><br>This file contains the five core metatypes from the Shadowrun 5e Core Rulebook together with the extended player-character metatype options from <em>Run Faster</em>: metavariants, metasapients, and shapeshifters.<br><br><strong>Attributes</strong><br>Characters begin at their metatype's listed racial minimums at no Attribute Point cost. Each Attribute Point spent during character creation raises one Mental or Physical attribute by 1. At character creation, only one Mental or Physical attribute may be at its natural maximum; special attributes are excluded from this restriction.<br><br><strong>Special Attributes</strong><br>Edge begins at the minimum listed for the metatype. Magic and Resonance normally begin at 0 unless another rule sets a different starting value. Metasapients and shapeshifters in Run Faster have a starting Magic rating of 1.<br><br><strong>Priority Options</strong><br>For the five core metatypes, the value listed under each available priority is the number of Special Attribute Points granted by that selection. Run Faster's extended metatypes use the Extended Priority A chart, so their <code>priority_options</code> field contains the Priority A Special Attribute Points. Any additional Karma cost required by that chart is stated in the metatype's description."
   },
   "racial_traits": {
     "Low-Light Vision": "<strong>Low-Light Vision</strong><br>Allows the character to see clearly in low-light conditions, reducing or eliminating visibility penalties where appropriate.",
@@ -326,6 +2306,46 @@
     "Pathogen and Toxin Resistance": "<strong>Pathogen and Toxin Resistance</strong><br>Dwarfs receive a <strong>+2 dice pool modifier</strong> on tests made to resist pathogens and toxins.",
     "Reach": "<strong>Reach</strong><br>Trolls have <strong>+1 natural Reach</strong>. Reach affects melee combat by modifying Defense Tests according to the difference between opponents' Reach values.",
     "Dermal Armor": "<strong>Dermal Armor</strong><br>Trolls possess <strong>+1 natural armor</strong> from dermal deposits. This protection is inherent to the metatype.",
-    "Lifestyle Cost": "<strong>Lifestyle Cost</strong><br>Dwarfs pay <strong>20% more</strong> for Lifestyle costs, while trolls pay <strong>100% more</strong>. These increases represent the additional expense of adapting living spaces, equipment, and services to their physical requirements."
+    "Lifestyle Cost": "<strong>Lifestyle Cost</strong><br>Dwarfs pay <strong>20% more</strong> for Lifestyle costs, while trolls pay <strong>100% more</strong>. These increases represent the additional expense of adapting living spaces, equipment, and services to their physical requirements.",
+    "Arcane Arrester": "<strong>Arcane Arrester</strong><br>When targeted by a spell (including a critter’s Innate Spell), the character is harder to affect. This potent ability makes casting both benevolent and malevolent spells on these characters much more difficult. The character adds (Level x 2) dice to their resistance test against any spell. If the spell is one that is not normally resisted (such as Invisibility), the character still rolls their Arcane Arrester dice pool of either two or four dice and reduces the hits rolled on the Spellcasting Test by any hits they roll. For instance, if a mage casts Invisibility on a character with Arcane Arrester 2 and gets 4 hits on a Spellcasting Test, the target character rolls 4 dice and gets 2 hits, meaning only two of the hits on the Spellcasting Test are used to make the target invisible. Arcane Arrester cannot be combined with Magic Resistance. This quality can be taken by characters with a Magic attribute, and it affects spells they cast on themselves.",
+    "Celerity": "<strong>Celerity</strong><br>This quality results in a strengthening of the musculature involved in running, causing leg muscles to become ropy and more prominent. The character increases her Walking and Running rates to Agility x 3 (Walking) and Agility x 6 (Running) and also adds +1m/ turn to her Sprint Increase. This quality cannot be combined with any leg- or muscle-altering system (i.e., cyberlimbs, muscle replacement, muscle toner, muscle augmentation) and is also incompatible with Satyr Legs.",
+    "Elongated Limbs": "<strong>Elongated Limbs</strong><br>The character’s arms and legs are elongated, granting her a greater effective reach. Characters with this trait gain Reach +1. This quality is cumulative with any existing Reach modifier. The character must buy special clothing and armor to accommodate this unusual physique at a ten percent cost increase. If the character tries to use ill-fitting armor, the armor rating is reduced by 10 percent (round up).",
+    "Fangs": "<strong>Fangs</strong><br>The character’s canine teeth are enlarged and sharpened like a carnivore’s. The fangs can be used to attack using the Unarmed Combat skill (DV (STR +1)P, Reach –1, AP —).",
+    "Glamour": "<strong>Glamour</strong><br>A character with Glamour is paranaturally gifted so that all sapient beings perceive him as moving with unearthly grace. His countenance always seems radiant, and his voice is soul wrenching and laden with emotion. People may describe him as angelic or fairylike, and everyone he speaks to cannot help but feel moved and inspired. Sapient beings always respond with awe, deference, and kindness to the character as long as he does not act hostile. The character adds 2 to his Social limit and has a +1 dice pool modifier to all Social Skill Tests, with the exception of Intimidation. This quality renders the character particularly memorable, and he suffers from the effects of Distinctive Style quality.",
+    "Goring Horns": "<strong>Goring Horns</strong><br>A single horn or horns express on the character’s head. If the character already had horns, these grow even bigger or more pronounced. The horns can be anything from ram horns to deer-like antlers to devil horns or even jagged crests of bone around the skull. Unlike most metatype horns, the character may use these in combat with the Exotic Melee Weapon (Horns) skill. Goring Horns have the following stats: DV (STR + 2)P, Reach —, AP –1.",
+    "Keen-Eared": "<strong>Keen-Eared</strong><br>Characters with this quality have extraordinarily keen hearing due to overly large ears. A character with this quality gains a +1 dice pool modifier to audio-based Perception Tests.",
+    "Monkey Paws": "<strong>Monkey Paws</strong><br>The character possesses monkey- or chameleon-like gripping feet with elongated, prehensile toes that enable him to climb more easily when barefoot. Non-tumbling Gymnastics, Climbing, and Movement in Zero Gravity tests gain a +2 dice pool modifier. If the character is not wearing shoes that accommodate this unusual physique, the dice pool modifier is reduced to +1.",
+    "Neoteny": "<strong>Neoteny</strong><br>Neotenous characters have halted during development and retain the physical traits of a child or adolescent (up to a thirteen-year-old) even though they are legally adults. Given the absence of certain traits common to adults (height, body hair, facial changes, deeper voice, and so on), they can easily be mistaken for children or teenagers. Gamemasters may modify certain Social Tests depending on how an NPC will interact with the character. People often underestimate children, which may give a neotenous character an advantage. The character’s lack of physical development reduces his default Physical Condition Monitor to 6 + (Body/2, rounded up) boxes and may result in social modifiers. Characters with Neoteny need custom armor and equipment, causing a ten percent increase in lifestyle. They also suffer social stigma and modifiers.",
+    "Nocturnal": "<strong>Nocturnal</strong><br>A character with this quality has an abnormal circadian rhythm. Instead of a typical diurnal cycle, the character has the opposite—she normally sleeps during the daytime and is active at night, though a crepuscular schedule (twilight activity) is also possible. All Mental attributes are reduced by 1 during daylight hours due to weariness.",
+    "Ogre Stomach": "<strong>Ogre Stomach</strong><br>The character’s unique stomach, intestinal organs, and unusual gut flora can digest a variety of substances that normal metahumans cannot or have trouble digesting, such as raw meat and cellulose-based plant material, including grass. Lifestyle costs for this character are reduced by twenty percent, and the character receives a +2 dice pool modifier on Toxin Resistance Tests to resist ingested toxins.",
+    "Photometabolism": "<strong>Photometabolism</strong><br>The character possesses an organ, such as chloroplast skin or grasslike body hair, that supplements his energy needs via photosynthesis. Even when the character’s organ is fully exposed to sunlight, this process only creates enough nourishment for the recipient to supplement his diet, not to replace it. Characters with Photometabolism reduce their Lifestyle costs by ten percent. However, since the character’s overall physical well-being and energy increase in the sunlight, the character feels uncomfortable at night or in the shade, suffering a –1 dice pool penalty on all Social Tests. Photometabolism is incompatible with the Nocturnal quality and with all skin and hair modifications.",
+    "Satyr Legs": "<strong>Satyr Legs</strong><br>The character’s legs are shaped like a quadruped’s hind legs, often with cloven hooves, though other types such as kangaroo or hare legs are possible. The legs also grow more hair, like those of a satyr. A character with Satyr Legs increases her Running rate to (Agility x 6) and also adds +1m/turn to her Sprint increase. The legs also provide a +2 Strength modifier to the damage of any kicking attacks. Characters with the Satyr Legs quality suffer social stigma and modifiers.",
+    "Shiva Arms": "<strong>Shiva Arms</strong><br>Certain rare changelings and one metavariant grant a character an additional set of arms that extend from modified shoulder joints. The character may hold and carry double the number of objects than normal. These so-called Shiva arms or Kali arms can be moved independently, but the character will still have one dominant hand unless she has the Ambidextrous quality, which can be taken multiple times, each time adding another dominant hand. Characters with Shiva Arms can wield multiple weapons: firearms, melee weapons, or a combination of the two. Weapons wielded in an off-hand suffer the usual penalty; this applies both to firearms and melee weapons. The character can use the Multiple Attacks Free Action with weapons in their extra hands, though the character must still split her dice pool between the weapons, and any penalties for using weapons in their off-hands still apply. This quality may be taken twice, for a total of six arms. Characters with the Shiva Arms quality suffer social stigma and modifiers.",
+    "Striking Skin Pigmentation": "<strong>Striking Skin Pigmentation</strong><br>The character’s skin takes on an unusual color, either in its entirety or in patches. For example, a character may acquire brown leopard spots across her neck, shoulders, and arms, or a character’s skin may turn entirely orange, blue, or golden. The value of this quality is contingent on the striking skin color being obvious and visible, and affecting a character’s chances of being noticed, recognized, or encountering prejudice. Due to the uniqueness and ease of identifying these features on characters, all Matrix Search Tests and tests to identify or locate the character get a +2 dice pool modifier. This metagenic quality is incompatible with bioware skin augmentations.",
+    "Symbiosis": "<strong>Symbiosis</strong><br>If the character sets up residence in a certain location for a sustained period of time (more than a season, though the gamemaster determines the specific time period) he gradually becomes attuned to the place and his surroundings. While this grants the character a preternaturally intuitive understanding of the environment and its inhabitants, the bonding can be fatal when it occurs in polluted or desolate urban environments. In game terms, the character’s biorhythm and senses gradually adapt to the environment (Essence x 100 meters in radius) around his permanent residence—the place where he spends most of his time. The character makes a Body +Willpower (3) Test each month; if they succeed, they are attuned to their environment. If they fail, they are unattuned and left to feel incomplete or lost. It may be that the area in which they live is one where they do not want to be attuned and they want to actively resist the attunement. In that case, they get a –1 dice pool modifier on the test. Once the bond is formed, it can only be broken if the character changes his home to form a new bond. They have to live in the new place for a full month to have a chance to break the old bond, and the bond is not broken until they succeed at the Body + Willpower (3) Test in the new neighborhood. Symbiosis provides the character with preternatural insight and connection to everything living within his sphere of attunement. This grants him a +1 dice pool modifier on any Skill Test involving the Outdoor Skill Group as well as a modifier to all Social Tests with individuals residing within the area. In addition, the character possesses an intuitive grasp of what’s going on around him, and he is emotionally affected by the condition of the land. If a fire breaks out, he instantly becomes alarmed. If all inhabitants in the area coexist peacefully, he is blissful and healthy, providing +1 to any Healing Tests performed while in the neighborhood. On the other hand, environmental and social problems—like drug abuse, gang violence, and pollution—produce a somatic response in the character, leaving him sick and depleted; treat as a persistent Mild Allergy until the situation is rectified.",
+    "Underwater Vision": "<strong>Underwater Vision</strong><br>The character develops an additional, specially adapted membrane to the outer eye that enables him to use his normal vision unrestricted in and out of water. This allows the character to use the underwater visibility modifiers as if he were wearing goggles or a mask.",
+    "Unusual Hair": "<strong>Unusual Hair</strong><br>The character’s hair changes to an unusual color or texture, or it grows from her body in unusual patterns or areas. For example, a character’s hair may be naturally violet, or she may sport a luxurious lion-like mane from her head and down her shoulders and back, or she may be entirely covered in a soft, downy fur like the nocturna elf metavariant or the monkey-like hanuman. Due to the uniqueness and ease of identifying these features on characters, all Matrix Search Tests and tests to identify or locate the character receive a +1 dice pool modifier. Unusual Hair is incompatible with other natural or artificial hair modifications.",
+    "Webbed Digits": "<strong>Webbed Digits</strong><br>The character has webbed fingers and toes similar to a seal, duck, or frog. This provides a +2 dice pool modifier to all Swimming Tests but inflicts a –1 dice pool modifier to any fine manipulations using the webbed digits.",
+    "Cold-blooded": "<strong>Cold-blooded</strong><br>The character’s blood runs cold, like that of a snake. This means she has a hard time maintaining her own body temperature and keeping everything running smoothly. Whenever the character is exposed to temperatures below thirty degrees Celsius, all tests related to Physical attributes face a –1 dice pool modifier. Below twenty degrees Celsius they face a –3 dice pool modifier. Below ten degrees Celsius they face a –5 dice pool modifier. At zero degrees Celsius the character ceases to function entirely and enters a comatose state until she is sufficiently warmed. The bodies of characters with this quality have temperatures close to the air temperature, providing a –2 dice pool modifier against detection or attack by anyone perceiving them solely through thermographic vision or thermal sensitivity.",
+    "Cyclopean Eye": "<strong>Cyclopean Eye</strong><br>Instead of two eyes, the character possesses a single huge eye directly above the nose, with the same natural vision abilities of his metatype. Because he lacks binocular vision cues, such as stereopsis and parallax, accurate hand-eye coordination, such as catching a basketball, is difficult. In game terms, characters with a Cyclopean Eye receive a –1 dice pool modifier for all Combat Tests and all technical and physical skill tests that require precision (gamemaster’s discretion). Cyclopean characters lack the cerebral lobe development and neural connections to process binocular vision, so they cannot compensate for this negative quality with a cybereye. Characters with the Cyclopean Eye quality suffer social stigma and modifiers.",
+    "Magic 1": "<strong>Magic 1</strong><br>The metatype begins with a natural Magic rating of 1.",
+    "Prehensile Tail": "<strong>Prehensile Tail</strong><br>A functional tail capable of grasping and limited object manipulation.",
+    "Resistance to Pathogens": "<strong>Resistance to Pathogens</strong><br>Provides an innate bonus to tests made to resist disease and other pathogens.",
+    "Search": "<strong>Search</strong><br>A critter power allowing the character to locate a person, place, or object through supernatural tracking.",
+    "Natural Weapon": "<strong>Natural Weapon</strong><br>An innate bodily weapon such as claws, teeth, horns, talons, or a kick. The exact Damage Value, Armor Penetration, and Reach are listed in the metatype entry.",
+    "Armor": "<strong>Armor</strong><br>Innate natural armor that adds to protection according to the rating listed in the metatype entry.",
+    "Dual Natured": "<strong>Dual Natured</strong><br>The character exists simultaneously on the physical and astral planes and can naturally perceive and interact with both.",
+    "Guard": "<strong>Guard</strong><br>A critter power that protects against accidents and certain environmental hazards.",
+    "Venom": "<strong>Venom</strong><br>The character can deliver a natural toxin through the attack method listed in its metatype entry.",
+    "Astral Perception": "<strong>Astral Perception</strong><br>The character can naturally perceive the astral plane.",
+    "Concealment": "<strong>Concealment</strong><br>A critter power that makes a subject more difficult to detect. The Pixie version applies to itself only.",
+    "Vanishing": "<strong>Vanishing</strong><br>For pixies, the body disappears upon death.",
+    "Mimicry": "<strong>Mimicry</strong><br>The character can reproduce sounds and voices with exceptional fidelity.",
+    "Shift (Metahuman Form)": "<strong>Shift (Metahuman Form)</strong><br>Allows a shapeshifter to transform between its natural animal body and a chosen metahuman form.",
+    "Vomeronasal Organ": "<strong>Vomeronasal Organ</strong><br>An enhanced scent organ that improves the character's ability to identify and track chemical and biological scents.",
+    "Broadened Auditory Spectrum (Ultrasonic)": "<strong>Broadened Auditory Spectrum (Ultrasonic)</strong><br>Allows hearing above the normal metahuman frequency range, including ultrasonic sounds.",
+    "Hawk Eyed": "<strong>Hawk Eyed</strong><br>Represents exceptionally sharp long-distance vision.",
+    "Balance Receptor": "<strong>Balance Receptor</strong><br>An enhanced sense of equilibrium that improves balance-related physical actions.",
+    "Dermal Alteration (Bark)": "<strong>Dermal Alteration (Bark)</strong><br>Bark-like skin provides natural protection and a visibly altered appearance."
   }
 }

@@ -9,7 +9,8 @@ const dataCache = new Map<string, Promise<ReferenceData>>();
 
 export const sourceBooks: Record<string, string> = {
   CRB: "Shadowrun Fifth Edition Core Rulebook",
-  SRF: "Shadowrun Run Faster"
+  SRF: "Shadowrun Run Faster",
+  SRG: "Shadowrun Run and Gun",
 };
 
 export function slug(value: string): string {
