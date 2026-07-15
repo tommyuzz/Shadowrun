@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 
 const collections = {
   adeptpowers: ["powers"],
+  attributes: ["attributes"],
   cyberdecks: ["cyberdecks", "software"],
   drones: ["drones"],
   equipment: ["equipment"],
@@ -35,6 +36,20 @@ const qualityPayload = JSON.parse(await readFile("qualities.json", "utf8"));
 if (!qualityPayload.quality_types || typeof qualityPayload.quality_types !== "object" || Array.isArray(qualityPayload.quality_types)) throw new Error("qualities.json: missing object 'quality_types'");
 for (const [name, description] of Object.entries(qualityPayload.quality_types)) {
   if (!name.trim() || typeof description !== "string" || !description.trim()) throw new Error(`qualities.json: invalid quality type definition '${name}'`);
+}
+
+const attributePayload = JSON.parse(await readFile("attributes.json", "utf8"));
+const attributeCategories = ["Physical", "Mental", "Special"];
+if (!attributePayload.categories || typeof attributePayload.categories !== "object" || Array.isArray(attributePayload.categories)) throw new Error("attributes.json: missing object 'categories'");
+if (!attributePayload.benchmark_scale || typeof attributePayload.benchmark_scale !== "object" || Array.isArray(attributePayload.benchmark_scale)) throw new Error("attributes.json: missing object 'benchmark_scale'");
+for (const category of attributeCategories) {
+  if (typeof attributePayload.categories[category] !== "string" || !attributePayload.categories[category].trim()) throw new Error(`attributes.json: missing category definition '${category}'`);
+}
+for (const [name, attribute] of Object.entries(attributePayload.attributes)) {
+  if (typeof attribute.abbreviation !== "string" || !attribute.abbreviation.trim()) throw new Error(`attributes.json: '${name}' has no abbreviation`);
+  if (!attributeCategories.includes(attribute.category)) throw new Error(`attributes.json: '${name}' has invalid category '${attribute.category}'`);
+  for (const field of ["used_for", "common_linked_skills"]) if (!Array.isArray(attribute[field])) throw new Error(`attributes.json: '${name}' has no '${field}' array`);
+  for (const field of ["derived_statistics", "benchmarks"]) if (!attribute[field] || typeof attribute[field] !== "object" || Array.isArray(attribute[field])) throw new Error(`attributes.json: '${name}' has no '${field}' object`);
 }
 
 const priorityPayload = JSON.parse(await readFile("priority_array.json", "utf8"));

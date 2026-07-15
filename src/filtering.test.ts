@@ -5,6 +5,7 @@ import { recordTags } from "./record-tags";
 
 const expectedFilters: Record<string, string[]> = {
   skills: ["skill-group"],
+  attributes: ["linked-skill"],
   metatypes: ["racial-trait"],
   qualities: ["quality-type", "structure"],
   lifestyles: ["subcategory", "minimum-lifestyle"],
@@ -81,6 +82,45 @@ describe("full-record search", () => {
     expect(safehouse).toBeDefined();
     expect(matchesSearch(garage!, "helicopter pad access luxury")).toBe(true);
     expect(matchesSearch(safehouse!, "cannot purchase entertainment assets")).toBe(true);
+  });
+
+  it("matches nested attribute tests, formulas and rating benchmarks", async () => {
+    const data = await loadData("attributes");
+    const body = data.records.find((record) => record.id === "body");
+    const resonance = data.records.find((record) => record.id === "resonance");
+    expect(body).toBeDefined();
+    expect(resonance).toBeDefined();
+    expect(matchesSearch(body!, "lifting and carrying test")).toBe(true);
+    expect(matchesSearch(body!, "physical condition monitor ceil")).toBe(true);
+    expect(matchesSearch(resonance!, "barely emergent")).toBe(true);
+  });
+});
+
+describe("attributes dataset", () => {
+  it("preserves every supplied Physical, Mental and Special Attribute", async () => {
+    const data = await loadData("attributes");
+    expect(data.records).toHaveLength(12);
+    expect(data.records.filter((record) => record.category === "Physical")).toHaveLength(4);
+    expect(data.records.filter((record) => record.category === "Mental")).toHaveLength(4);
+    expect(data.records.filter((record) => record.category === "Special")).toHaveLength(4);
+    expect(data.categories.map((category) => category.id)).toEqual(["all", "physical", "mental", "special"]);
+    expect(data.records.every((record) => record.source === "CRB")).toBe(true);
+  });
+
+  it("exposes linked skills as a usable filter without inventing links", async () => {
+    const data = await loadData("attributes");
+    const linkedSkillFilter = modulesById.attributes.filters.find((filter) => filter.id === "linked-skill")!;
+    const options = Array.from(new Set(data.records.flatMap((record) => linkedSkillFilter.values(record))));
+    expect(options).toEqual(expect.arrayContaining(["Hacking", "Perception", "Spellcasting", "Unarmed Combat"]));
+    expect(data.records.filter((record) => linkedSkillFilter.values(record).length === 0).map((record) => record.name)).toEqual(["Edge", "Essence"]);
+  });
+
+  it("retains supplied category definitions and benchmark guidance", async () => {
+    const data = await loadData("attributes");
+    const benchmarkScale = data.payload.benchmark_scale as Record<string, unknown>;
+    expect(data.definitions.Physical).toContain("Body, Agility, Reaction, and Strength");
+    expect(benchmarkScale.scope).toContain("not an official Core Rulebook rating table");
+    expect(benchmarkScale.special_attribute_note).toContain("dedicated benchmarks");
   });
 });
 

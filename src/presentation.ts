@@ -44,6 +44,13 @@ export const presentations: Record<string, PagePresentation> = {
     listTitle: (c) => c.id === "all" ? "All skills" : `${c.label} skills`, listEyebrow: (c) => c.id === "all" ? "Complete archive // Skill list" : `${c.label} protocol // Skill list`,
     recordEyebrow: (r) => `${r.category} protocol // Skill record`, indexPrefix: () => "SK", tagButtonClass: "tag-toggle", tagDetailClass: "tag-detail", tagDetailTitleClass: "tag-detail-title", tagDetailCopyClass: "tag-detail-copy", tabLabel: (c) => c.id === "all" ? "All Skills" : c.label
   },
+  attributes: {
+    pageClass: "page-attributes", workspaceClass: "workspace", panelClass: "attribute-panel", listViewClass: "attribute-list-view", recordViewClass: "attribute-record-view",
+    headerClass: "reference-header attribute-header", listHeaderClass: "reference-list-header attribute-list-header", recordHeaderClass: "reference-record-header attribute-record-header", filtersClass: "attribute-filters", filterFieldClass: "attribute-filter-field",
+    summaryClass: "reference-list-summary attribute-list-summary", listClass: "reference-list attribute-list", itemClass: "reference-list-item attribute-list-item", indexClass: "reference-list-index attribute-list-index", nameClass: "reference-list-name attribute-list-name", metaClass: "reference-list-meta attribute-list-code", tabsClass: "attribute-tabs",
+    searchLabel: "Search all attribute fields", searchPlaceholder: "Enter attribute, test, skill, formula or benchmark…", listTitle: (c) => c.id === "all" ? "All attributes" : `${c.label} attributes`, listEyebrow: (c) => archiveEyebrow(c, "Attribute"), recordEyebrow: (r) => `${r.category} protocol // Attribute record`,
+    indexPrefix: () => "AT", tagButtonClass: "tag-toggle", tagDetailClass: "tag-detail", tagDetailTitleClass: "tag-detail-title", tagDetailCopyClass: "tag-detail-copy", backLabel: "Back to attribute index", tabLabel: (c) => c.id === "all" ? "All Attributes" : c.label
+  },
   metatypes: {
     pageClass: "page-metatypes", workspaceClass: "workspace metatype-workspace", panelClass: "metatype-panel", headerClass: "metatype-header", listHeaderClass: "metatype-list-header", recordHeaderClass: "metatype-record-header",
     filtersClass: "metatype-filters", summaryClass: "metatype-list-summary", listClass: "metatype-list", itemClass: "metatype-list-item", indexClass: "metatype-list-index", nameClass: "metatype-list-name", metaClass: "metatype-list-value",

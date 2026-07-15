@@ -7,6 +7,7 @@ const output = path.join(root, "src/styles/original-pages.css");
 const pages = [
   ["home", "home.css"],
   ["skills", "skills.css"],
+  ["attributes", "attributes.css"],
   ["metatypes", "metatypes.css"],
   ["qualities", "qualities.css"],
   ["lifestyles", "lifestyles.css"],

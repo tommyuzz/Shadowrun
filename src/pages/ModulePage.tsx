@@ -12,7 +12,7 @@ import { runArchiveTransition } from "../motion";
 import { presentations, titleCase, valueText } from "../presentation";
 import { recordTags } from "../record-tags";
 import { modulesById } from "../registry";
-import { useSourceSelection } from "../source-selection";
+import { sourceRecordIsVisible, useSourceSelection } from "../source-selection";
 import type { ComparisonModule } from "../comparison";
 import type { PagePresentation } from "../presentation";
 import type { ReferenceCategory, ReferenceData, ReferenceRecord } from "../types";
@@ -27,7 +27,7 @@ const comparisonLabels: Record<ComparisonModule, string> = {
   drones: "drones"
 };
 const titleIds: Record<string, [string | undefined, string | undefined]> = {
-  skills: ["skill-list-title", "skill-title"], metatypes: [undefined, "metatype-title"], cyberdecks: ["list-title", "record-title"], matrixinteraction: ["list-title", "record-title"],
+  skills: ["skill-list-title", "skill-title"], attributes: ["attribute-list-title", "attribute-title"], metatypes: [undefined, "metatype-title"], cyberdecks: ["list-title", "record-title"], matrixinteraction: ["list-title", "record-title"],
   qualities: ["quality-list-title", "quality-title"], lifestyles: ["lifestyle-list-title", "lifestyle-title"],
   sprites: [undefined, "sprite-title"], spells: ["spell-list-title", "spell-title"], adeptpowers: ["power-list-title", "power-title"], rituals: [undefined, "ritual-title"], spirits: [undefined, "spirit-title"],
   weapons: ["list-title", "weapon-title"], vehicles: ["list-title", "vehicle-title"], drones: ["list-title", "drone-title"], equipment: ["list-title", "item-title"]
@@ -45,6 +45,7 @@ function listMeta(moduleId: string, record: ReferenceRecord, presentation: PageP
   let value = "";
   switch (moduleId) {
     case "skills": value = raw.skillgroup ? titleCase(raw.skillgroup) : "Standalone"; break;
+    case "attributes": value = valueText(raw.abbreviation); break;
     case "metatypes": { const body = raw.attributes && typeof raw.attributes === "object" ? (raw.attributes as Record<string, Record<string, unknown>>).body : undefined; value = body ? `BOD ${body.minimum}–${body.maximum}` : "—"; break; }
     case "cyberdecks": value = valueText(raw.cost); break;
     case "matrixinteraction": value = record.category === "Matrix Actions" ? valueText(raw.action_type).replace(/\s+Action$/, "") : valueText(raw.fading_value); break;
@@ -117,7 +118,7 @@ export function ModulePage() {
 
   const defaultCategory = data?.categories.find((item) => item.id === module?.defaultCategoryId) || data?.categories[0];
   const category = data?.categories.find((item) => item.id === categoryId) || defaultCategory;
-  const sourceRecords = useMemo(() => !data ? [] : data.records.filter((item) => isSourceEnabled(item.source)), [data, isSourceEnabled]);
+  const sourceRecords = useMemo(() => !data ? [] : data.records.filter((item) => sourceRecordIsVisible(moduleId, item.source, isSourceEnabled)), [data, isSourceEnabled, moduleId]);
   const allCategoryRecords = useMemo(() => !data ? [] : data.records.filter((item) => category?.id === "all" || slug(item.category) === category?.id), [data, category]);
   const categoryRecords = useMemo(() => sourceRecords.filter((item) => category?.id === "all" || slug(item.category) === category?.id), [sourceRecords, category]);
   const selected = categoryRecords.find((item) => item.id === recordId);
@@ -224,9 +225,9 @@ export function ModulePage() {
           <div className={`${presentation.listClass} archive-record-list`.trim()}>{records.map((item, index) => {
             const listNumber = (localListNumbers.has(module.id) ? allCategoryRecords.indexOf(item) : data.records.indexOf(item)) + 1;
             const motionStyle = { "--archive-order": Math.min(index, 12) } as CSSProperties;
-            return <button className={`${presentation.itemClass} archive-list-item`.trim()} data-category={module.id === "qualities" || module.id === "lifestyles" ? slug(item.category) : undefined} data-subcategory={module.id === "lifestyles" ? slug(item.subcategory || "") : undefined} style={motionStyle} type="button" key={`${filterMotionKey}:${item.id}`} onClick={() => openRecord(item.id)} aria-label={`Open ${item.name} ${module.singular.toLowerCase()} record`}><span className={`${presentation.indexClass} archive-list-index`.trim()} aria-hidden="true">{presentation.indexPrefix(category)}-{String(listNumber).padStart(3, "0")}</span><span className={`${presentation.nameClass} archive-list-name`.trim()}><HighlightedName name={item.name} query={deferredQuery}/></span>{listMeta(module.id, item, presentation)}</button>;
+            return <button className={`${presentation.itemClass} archive-list-item`.trim()} data-category={module.id === "qualities" || module.id === "lifestyles" || module.id === "attributes" ? slug(item.category) : undefined} data-subcategory={module.id === "lifestyles" ? slug(item.subcategory || "") : undefined} style={motionStyle} type="button" key={`${filterMotionKey}:${item.id}`} onClick={() => openRecord(item.id)} aria-label={`Open ${item.name} ${module.singular.toLowerCase()} record`}><span className={`${presentation.indexClass} archive-list-index`.trim()} aria-hidden="true">{presentation.indexPrefix(category)}-{String(listNumber).padStart(3, "0")}</span><span className={`${presentation.nameClass} archive-list-name`.trim()}><HighlightedName name={item.name} query={deferredQuery}/></span>{listMeta(module.id, item, presentation)}</button>;
           })}{!records.length ? categoryRecords.length ? <ArchiveEmpty module={module} reset={clearFilters}/> : <ArchiveSourceEmpty module={module} hiddenCount={allCategoryRecords.length} includeAll={enableAllSources}/> : null}</div>
-        </section>) : <section className={presentation.recordViewClass} data-category={module.id === "vehicles" || module.id === "qualities" || module.id === "lifestyles" ? slug(selected.category) : undefined} data-subcategory={module.id === "lifestyles" ? slug(selected.subcategory || "") : undefined}>
+        </section>) : <section className={presentation.recordViewClass} data-category={module.id === "vehicles" || module.id === "qualities" || module.id === "lifestyles" || module.id === "attributes" ? slug(selected.category) : undefined} data-subcategory={module.id === "lifestyles" ? slug(selected.subcategory || "") : undefined}>
           <header className={`${presentation.headerClass} ${presentation.recordHeaderClass} archive-record-header`.trim()}><button className="back-button" type="button" onClick={showList}>{presentation.backLabel || "Back to list"}</button>{canCompare ? <button className="compare-launch-button compare-record-button" type="button" onClick={() => setComparisonOpen(true)}>Compare</button> : null}<p className="eyebrow">{presentation.recordEyebrow(selected)}</p><ArchiveTitle id={titleIds[module.id]?.[1]} title={selected.name}/><RecordHeaderExtra moduleId={module.id} record={selected}/>{tags.length ? <div className="tag-row" aria-label={`${module.singular} classifications`}>{tags.map((tag) => <button type="button" className={presentation.tagButtonClass} aria-pressed={selectedTag === tag.key} key={tag.key} onClick={() => setSelectedTag(selectedTag === tag.key ? "" : tag.key)}>{tag.label}</button>)}</div> : null}</header>
           {activeTag ? <section className={presentation.tagDetailClass} aria-live="polite"><strong className={presentation.tagDetailTitleClass}>{activeTag.label}</strong><div className={presentation.tagDetailCopyClass} dangerouslySetInnerHTML={{ __html: activeTag.html }}/></section> : null}
           <RecordDetail moduleId={module.id} record={selected} data={data} recordNumber={detailNumber}/>

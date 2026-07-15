@@ -4,6 +4,8 @@ This version is a single React and TypeScript application built with Vite. It pr
 
 Each archive retains its subject-specific filters. Search covers record names, descriptions, tags, statistics, tests, sources and nested field values rather than being limited to title text.
 
+The **Attributes** archive appears under **Core Rules** and contains all twelve supplied Physical, Mental and Special Attributes. Its category views, linked-skill filter and full-record search lead into dedicated capability dossiers containing uses, derived statistics, linked skills, importance guidance and the complete supplied rating benchmarks. The benchmark screen also keeps the supplied player-facing-analysis notice visible so it cannot be mistaken for an official rating table.
+
 The **Qualities** archive appears under **Core Rules** and contains all supplied Positive and Negative Qualities. The home page opens Core Rules by default so its Skills, Metatypes, Qualities and Lifestyles buttons are visible immediately. The archive presents Karma costs or bonuses, rating limits, selectable options, levels, variants, degrees and side effects in a dedicated character-quality ledger while retaining the complete authored descriptions. Supplied General, Metagenic, Infected and Lifestyle types are searchable and filterable; a type button beneath each typed record title opens the corresponding authored definition.
 
 The **Lifestyles** archive also appears under **Core Rules**. It combines every supplied Entertainment extra and Lifestyle Option into one routeable catalogue, with All, Entertainment and Lifestyle Options views. Full-record search covers nested configurations and restrictions; filters cover lifestyle type and minimum lifestyle. Dedicated dossiers preserve point costs, monthly adjustments, thresholds, restrictions, operational notes and every selectable variant from `lifestyle_extras.json`.
@@ -14,7 +16,7 @@ The interface adds brief archive-specific activation sequences, smooth record an
 
 Weapons, cyberdecks, vehicles and drones can be compared from their list or record page. The comparison dossier supports two or three records, marks changed rows, identifies directly comparable numeric advantages and links back to each full record. At 700px and below it becomes a full-screen, single-scroll analysis view: specifications are readable cards, record controls collapse after selection, a searchable archive picker replaces long native menus, and an optional differences-only mode reduces the result set. Comparison remains temporary browser state and does not require an account or storage service.
 
-The **Sources** control in every masthead includes or excludes source books across all archives. The selection is stored in the browser, survives route changes and reloads, and is applied to lists, category counts, direct record links and comparison candidates. Dataset source codes are registered automatically when their archive loads; full source-book names are maintained once in `src/data.ts`.
+The **Sources** control in every masthead includes or excludes source books across all archives. The selection is stored in the browser, survives route changes and reloads, and is applied to lists, category counts, direct record links and comparison candidates. Core Rulebook records in **Skills**, **Attributes** and **Priority Array** are intentionally pinned visible because they are foundational creation references; records from any other source in those modules still follow the selected source books. Dataset source codes are registered automatically when their archive loads; full source-book names are maintained once in `src/data.ts`.
 
 At phone widths, category tabs become a full-width archive picker, record cards move metadata beneath the name, and headings scale according to their longest word. Human-readable labels wrap only at natural boundaries. These rules are isolated to viewports of 650px or narrower; the settled desktop rendering remains pixel-identical to the original archive presentation.
 
@@ -56,6 +58,7 @@ GitHub Pages-compatible hash routes are used for reliable direct links:
 /#/
 /#/spells/combat
 /#/spells/combat/acid-stream
+/#/attributes/all/body
 /#/qualities/negative-qualities/addiction
 /#/lifestyles/entertainment/garage
 /#/priorityarray
@@ -77,7 +80,7 @@ src/presentation.ts Page-specific class names, labels and archive copy
 src/record-tags.ts  Page-specific tag and rule presentation
 src/styles/         Shared CSS and generated scoped original page CSS
 assets/css/pages/   Original page stylesheets retained as source files
-*.json              Original reference datasets, including lifestyle_extras.json and priority_array.json
+*.json              Original reference datasets, including attributes.json, lifestyle_extras.json and priority_array.json
 scripts/            Build-time validation and compatibility generation
 ```
 

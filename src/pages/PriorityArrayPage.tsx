@@ -6,7 +6,7 @@ import { Masthead } from "../components/Masthead";
 import { ModuleFooter, ModuleSidebar } from "../components/ModuleChrome";
 import { loadData, sourceBooks } from "../data";
 import { modulesById } from "../registry";
-import { useSourceSelection } from "../source-selection";
+import { sourceRecordIsVisible, useSourceSelection } from "../source-selection";
 import type { RawRecord, ReferenceData, ReferenceRecord } from "../types";
 
 type PlayLevelId = "street_level" | "regular" | "prime_runner";
@@ -144,7 +144,7 @@ export function PriorityArrayPage() {
     registerSources([...data.records.map((record) => record.source), ...levels]);
   }, [data, registerSources]);
 
-  const visibleRecords = useMemo(() => data?.records.filter((record) => isSourceEnabled(record.source)) || [], [data, isSourceEnabled]);
+  const visibleRecords = useMemo(() => data?.records.filter((record) => sourceRecordIsVisible(module.id, record.source, isSourceEnabled)) || [], [data, isSourceEnabled, module.id]);
 
   const frame = (content: ReactNode, key: string) => <ArchivePageFrame className="page-priorityarray archive-page" moduleId={module.id} motionKey={key} key={key}>
     <ArchiveAtmosphere module={module} motionKey={key}/><div className="sheet"><Masthead module={module}/>{content}<ModuleFooter moduleId={module.id}/></div>
@@ -157,7 +157,7 @@ export function PriorityArrayPage() {
   const playLevels = asRecord(data.payload.play_levels);
   const selectedLevel = asRecord(playLevels[level]);
   const selectedSource = display(selectedLevel.source, "CRB");
-  const sourcesAvailable = visibleRecords.length > 0 && isSourceEnabled(selectedSource);
+  const sourcesAvailable = visibleRecords.length > 0 && sourceRecordIsVisible(module.id, selectedSource, isSourceEnabled);
 
   return <ArchivePageFrame className="page-priorityarray archive-page" moduleId={module.id} motionKey="priorityarray" key="priorityarray">
     <ArchiveAtmosphere module={module} motionKey="priorityarray"/>

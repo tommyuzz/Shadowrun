@@ -28,7 +28,9 @@ function TextList({ values, className }: { values: unknown; className?: string }
 }
 
 export function RecordHeaderExtra({ moduleId, record }: { moduleId: string; record: ReferenceRecord }) {
-  return moduleId === "metatypes" ? <p className="scientific-name">{valueText(record.raw.scientific_name, "")}</p> : null;
+  if (moduleId === "metatypes") return <p className="scientific-name">{valueText(record.raw.scientific_name, "")}</p>;
+  if (moduleId === "attributes") return <p className="attribute-header-code"><strong>{valueText(record.raw.abbreviation)}</strong><span>{record.category} attribute</span></p>;
+  return null;
 }
 
 function SkillDetail({ record }: { record: ReferenceRecord }) {
@@ -36,6 +38,32 @@ function SkillDetail({ record }: { record: ReferenceRecord }) {
     <section className="section"><h2 className="section-title" data-index="01">Skill description</h2><Html className="description" value={record.raw.description}/></section>
     <section className="section"><h2 className="section-title" data-index="02">Using this skill</h2><Html className="use-copy" value={record.raw.use}/></section>
     <Source/>
+  </>;
+}
+
+function AttributeDetail({ record, data, recordNumber }: { record: ReferenceRecord; data: ReferenceData; recordNumber: number }) {
+  const raw = record.raw;
+  const derivedStatistics = Object.entries(asObject(raw.derived_statistics));
+  const linkedSkills = asStrings(raw.common_linked_skills);
+  const benchmarks = Object.entries(asObject(raw.benchmarks));
+  const benchmarkScale = asObject(data.payload.benchmark_scale);
+  const abbreviation = valueText(raw.abbreviation);
+  return <>
+    <article className="attribute-dossier" aria-labelledby="attribute-dossier-title">
+      <header className="attribute-dossier-banner"><div><span>Character capability record</span><h2 id="attribute-dossier-title">Attribute dossier</h2></div><strong>{code("AT", recordNumber)}</strong></header>
+      <div className="attribute-dossier-grid">
+        <section className="attribute-identity"><span>Attribute code</span><strong>{abbreviation}</strong><p>{record.category} classification</p></section>
+        <section className="attribute-definition"><span>Core function</span><p>{valueText(raw.description, "No attribute description is available.")}</p></section>
+      </div>
+      <div className="attribute-dossier-rule"><span>{abbreviation}</span><strong>{valueText(raw.why_important, "This attribute supports a runner's core capabilities.")}</strong></div>
+    </article>
+    <section className="section attribute-uses"><h2 className="section-title">Used for</h2><TextList values={raw.used_for} className="attribute-use-list"/></section>
+    {derivedStatistics.length ? <section className="section attribute-derived"><h2 className="section-title">Derived statistics and tests</h2><dl className="attribute-formula-grid">{derivedStatistics.map(([name, formula]) => <div key={name}><dt>{titleCase(name)}</dt><dd><code>{valueText(formula)}</code></dd></div>)}</dl></section> : null}
+    <section className="section attribute-skills"><h2 className="section-title">Common linked skills</h2>{linkedSkills.length ? <ul className="attribute-skill-list">{linkedSkills.map((skill) => <li key={skill}>{skill}</li>)}</ul> : <p className="attribute-empty-note">No active skills link directly to this Special Attribute.</p>}</section>
+    <section className="section attribute-benchmarks"><div className="attribute-benchmark-heading"><div><span>PLAYER-FACING SCALE // {abbreviation}</span><h2 className="section-title">Rating benchmarks</h2></div><p>{valueText(benchmarkScale.basis)}</p></div><div className="attribute-benchmark-grid">{benchmarks.map(([rating, value]) => { const benchmark = asObject(value); return <article className="attribute-benchmark" key={rating}><span>Rating {rating}</span><strong>{valueText(benchmark.label)}</strong><p>{valueText(benchmark.narrative)}</p></article>; })}</div>
+      <aside className="attribute-benchmark-note"><strong>Benchmark note //</strong><p>{valueText(benchmarkScale.scope)}</p>{record.category === "Special" ? <p>{valueText(benchmarkScale.special_attribute_note)}</p> : null}</aside>
+    </section>
+    <Source value={raw.source}/>
   </>;
 }
 
@@ -359,6 +387,7 @@ function EquipmentDetail({ record, recordNumber }: { record: ReferenceRecord; re
 export function RecordDetail({ moduleId, record, data, recordNumber }: DetailProps) {
   switch (moduleId) {
     case "skills": return <SkillDetail record={record}/>;
+    case "attributes": return <AttributeDetail record={record} data={data} recordNumber={recordNumber}/>;
     case "metatypes": return <MetatypeDetail record={record} recordNumber={recordNumber}/>;
     case "qualities": return <QualityDetail record={record} recordNumber={recordNumber}/>;
     case "lifestyles": return <LifestyleDetail record={record} recordNumber={recordNumber}/>;

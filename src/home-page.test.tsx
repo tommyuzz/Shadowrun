@@ -18,10 +18,11 @@ describe("home page module navigation", () => {
   it("opens Core Rules by default and renders every Core Rules archive button", () => {
     const html = renderHome("/");
     expect(html).toContain("<h2 class=\"content-title\">Core Rules</h2>");
+    expect(html).toMatch(/href="\/attributes"[^>]*>[\s\S]*?<span class="module-name">Attributes<\/span>/);
     expect(html).toMatch(/href="\/qualities"[^>]*>[\s\S]*?<span class="module-name">Qualities<\/span>/);
     expect(html).toMatch(/href="\/lifestyles"[^>]*>[\s\S]*?<span class="module-name">Lifestyles<\/span>/);
     expect(html).toMatch(/href="\/priorityarray"[^>]*>[\s\S]*?<span class="module-name">Priority Array<\/span>/);
-    expect(html.match(/class="module-button archive-module-button"/g)).toHaveLength(5);
+    expect(html.match(/class="module-button archive-module-button"/g)).toHaveLength(6);
   });
 
   it("still honours an explicitly selected home sector", () => {

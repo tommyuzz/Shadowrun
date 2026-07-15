@@ -25,6 +25,8 @@ The Qualities adapter combines the supplied `positive_qualities` and `negative_q
 
 The Lifestyles adapter applies the same pattern to `lifestyle_extras` and `lifestyle_options`. It retains each record's original category, subtype, source, cost fields, restrictions, notes and nested variants. Variant minimum-lifestyle values are included in the shared filter index, and all nested keys and values remain available to full-record search.
 
+The Attributes adapter exposes the supplied Physical, Mental and Special collections as category routes while preserving every nested use, formula, linked skill and rating benchmark. `categories` supplies the authored sidebar definitions, and the shared filter index reads `common_linked_skills` directly rather than maintaining a duplicate skill list.
+
 The Priority Array adapter exposes A through E as source-aware reference records while preserving the full `play_levels` object in the shared payload. `PriorityArrayPage` consumes that one payload directly: the selected Street-Level, Regular or Prime Runner key controls both the Resources column and the corresponding creation-limit dossier. No values or play-level rules are duplicated in components.
 
 Home-page links prefetch their dataset on hover or focus. Vite emits every dataset with a content hash, allowing normal long-lived browser caching without query-string versions.
@@ -33,7 +35,7 @@ Home-page links prefetch their dataset on hover or focus. Vite emits every datas
 
 `HomePage`, `ModulePage` and the matrix-oriented `PriorityArrayPage` own page composition. Shared controls and framing live in `src/components`. Common list, record, filter, tag, source and responsive rules are loaded once.
 
-`RecordDetail` contains the specialised archive views used by the original site: skill sections, metatype profiles, character-quality ledgers, lifestyle dossiers, cyberdeck consoles, Matrix protocols, sprite and spirit profiles, spell and adept grids, ritual procedures, weapon specifications, vehicle dashboards, drone control stacks and equipment market listings. `ModuleChrome` supplies the matching sidebars, legends and footer treatments.
+`RecordDetail` contains the specialised archive views used by the original site: skill sections, attribute capability dossiers and benchmark ladders, metatype profiles, character-quality ledgers, lifestyle dossiers, cyberdeck consoles, Matrix protocols, sprite and spirit profiles, spell and adept grids, ritual procedures, weapon specifications, vehicle dashboards, drone control stacks and equipment market listings. `ModuleChrome` supplies the matching sidebars, legends and footer treatments.
 
 The original page stylesheets are retained in `assets/css/pages/`. `scripts/scope-page-styles.mjs` uses PostCSS to generate one scoped stylesheet at build time, so every unique visual rule remains intact without leaking into another module. Shared React state and routing can therefore evolve independently of the original visual language.
 
@@ -56,6 +58,8 @@ Search input is deferred from list calculation so typing remains responsive. Mat
 ## Source selection
 
 `SourceSelectionProvider` owns one shared exclusion set for the entire application. It persists that set in `localStorage`, synchronises changes between browser tabs and defaults newly encountered source codes to included. `ModulePage` applies the selection before category counts, search filters and comparison candidates are calculated. A direct link to an excluded record resolves to an explicit recovery state rather than silently showing the wrong list.
+
+`sourceRecordIsVisible` centralises the one creation-reference exception: CRB records in Skills, Attributes and Priority Array remain visible even when CRB is excluded globally. The exception is record-level, so future non-CRB records in those modules continue to respect their own source toggles.
 
 The source catalog begins with the friendly names in `src/data.ts`. Additional codes found in a dynamically loaded dataset are registered automatically, so adding records from another book does not require page-specific code.
 

@@ -42,6 +42,13 @@ export function sourceIsEnabled(source: string, excludedSources: readonly string
   return !excludedSources.some((excluded) => normaliseSourceCode(excluded) === sourceCode);
 }
 
+export const CORE_RULES_ALWAYS_VISIBLE_MODULES = new Set(["skills", "attributes", "priorityarray"]);
+
+export function sourceRecordIsVisible(moduleId: string, source: string, isSourceEnabled: (source: string) => boolean): boolean {
+  const sourceCode = normaliseSourceCode(source);
+  return (sourceCode === "CRB" && CORE_RULES_ALWAYS_VISIBLE_MODULES.has(moduleId)) || isSourceEnabled(sourceCode);
+}
+
 function initialSourceCodes(): string[] {
   return Object.keys(sourceBooks).map(normaliseSourceCode);
 }

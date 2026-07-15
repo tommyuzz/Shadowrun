@@ -61,7 +61,7 @@ export function SourceSelector() {
       <header>
         <span>Global archive filter</span>
         <strong>Reference sources</strong>
-        <p>Choose which books contribute records across every archive.</p>
+        <p>Choose which books contribute records across the archive. Core Skills, Attributes and Priority Array records remain available.</p>
       </header>
       <div className="source-selector-options">
         {availableSources.map((source) => <label className="source-selector-option" key={source.code}>

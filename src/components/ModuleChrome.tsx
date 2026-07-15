@@ -16,6 +16,7 @@ const skillDescriptions: Record<string, string> = {
 };
 
 const legends: Record<string, [string, string][]> = {
+  attributes: [["BOD / AGI", "Physical resilience and coordination"], ["REA / STR", "Reflexes and muscular power"], ["WIL / LOG", "Resolve and analytical reasoning"], ["INT / CHA", "Instinct and force of personality"], ["EDG / ESS", "Luck and augmentation capacity"], ["MAG / RES", "Awakened or technomancer capability"]],
   metatypes: [["MIN", "Racial minimum"], ["MAX", "Natural maximum"], ["EDG", "Edge range"], ["ESS", "Base Essence"], ["WALK", "Walking rate"], ["RUN", "Running rate"]],
   qualities: [["TYPE", "General, Metagenic, Infected, or Lifestyle classification"], ["KARMA", "Listed purchase cost or awarded bonus"], ["RTG", "Rated quality with a maximum level"], ["OPTION", "Selectable variant, degree, or level"], ["×2", "Normal post-creation purchase or buy-off multiplier"]],
   lifestyles: [["PT", "Lifestyle points spent or adjusted"], ["¥ / MO", "Monthly nuyen cost or adjustment"], ["MIN", "Minimum lifestyle for a waived monthly cost"], ["+/−", "Positive or negative lifestyle option"], ["VAR", "Entry contains selectable configurations"]],
@@ -61,6 +62,7 @@ export function ModuleSidebar({ module, category, data }: { module: ModuleDefini
   let glitch = "";
 
   switch (module.id) {
+    case "attributes": title = category.id === "all" ? "Attribute protocol" : `${category.label} attributes`; copy = category.id === "all" ? "Physical, Mental and Special Attributes define a runner's core capabilities, derived values, linked tests, and exceptional potential. Choose a category or filter by a commonly linked skill." : category.description || copy; legendTitle = "Attribute key"; break;
     case "metatypes": title = "Metatype protocol"; copy = String(categories.Metatypes || copy); legendTitle = "Attribute key"; break;
     case "qualities": title = category.id === "all" ? "Quality protocol" : category.label; copy = category.id === "all" ? "Positive and Negative Qualities define character advantages, complications, Karma values, requirements, ratings, selectable variants, and General, Metagenic, Infected, or Lifestyle classifications. Choose a category above, then use Quality Type to narrow the archive." : String(categories[category.label] || copy); legendTitle = "Quality key"; break;
     case "lifestyles": title = category.id === "all" ? "Lifestyle protocol" : category.label; copy = category.id === "all" ? "Configure lifestyle resources and lifestyle-wide options. Entertainment records cover assets, services, and outings; Lifestyle Options cover positive and negative modifiers, monthly adjustments, and restrictions." : String(categories[category.label] || copy); legendTitle = "Lifestyle key"; break;
@@ -87,6 +89,7 @@ export function ModuleSidebar({ module, category, data }: { module: ModuleDefini
 
 const footers: Record<string, [string, string, string]> = {
   skills: [">> LEARN. ADAPT. SURVIVE.\nKNOW THE RULES. CONTROL THE FIELD.", "The corporations own everything.\nInformation is power. Stay sharp.", "✦"],
+  attributes: [">> MEASURE. TEST. ENDURE.\nKNOW THE RUNNER'S LIMITS.", "Ratings shape every dice pool.\nDerived values connect the system.", "Σ"],
   metatypes: [">> ORIGIN. APTITUDE. IDENTITY.\nDEFINE THE RUNNER.", "Natural limits shape potential.\nThey do not define the individual.", "⌁"],
   qualities: [">> CHOOSE. DEFINE. COMPLICATE.\nMAKE THE RUNNER DISTINCT.", "Every advantage has a cost.\nEvery complication creates a story.", "±"],
   lifestyles: [">> CONFIGURE. SECURE. MAINTAIN.\nMAKE THE SAFEHOUSE YOUR OWN.", "Comfort costs nuyen.\nEvery compromise leaves a trace.", "⌂"],

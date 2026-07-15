@@ -1,0 +1,735 @@
+{
+  "attributes": {
+    "Body": {
+      "abbreviation": "BOD",
+      "category": "Physical",
+      "description": "Measures physical health, resilience, toughness, and the ability to endure injury, poison, disease, fatigue, and other bodily stress.",
+      "used_for": [
+        "Resisting physical damage as part of damage resistance tests.",
+        "Resisting toxins, diseases, fatigue, environmental hazards, and many forms of bodily trauma.",
+        "Determining the size of the Physical Condition Monitor.",
+        "Contributing to the Physical Limit.",
+        "Lifting and carrying tests together with Strength."
+      ],
+      "derived_statistics": {
+        "physical_condition_monitor": "8 + ceil(Body / 2)",
+        "physical_limit_contribution": "Physical Limit = ceil(((Strength × 2) + Body + Reaction) / 3)",
+        "lifting_and_carrying_test": "Body + Strength"
+      },
+      "common_linked_skills": [
+        "Diving",
+        "Free-Fall"
+      ],
+      "why_important": "Body is the character's basic survival attribute. A high combat skill does not help if the runner cannot survive bullets, toxins, falls, fatigue, or hostile environments long enough to use it.",
+      "benchmarks": {
+        "1": {
+          "label": "Fragile",
+          "narrative": "Physically delicate or chronically vulnerable; injuries and environmental stress become serious quickly."
+        },
+        "2": {
+          "label": "Below-average resilience",
+          "narrative": "Can handle ordinary life but is noticeably less robust than a typical healthy adult."
+        },
+        "3": {
+          "label": "Average resilience",
+          "narrative": "Typical healthy adult toughness and resistance to injury or illness."
+        },
+        "4": {
+          "label": "Tough",
+          "narrative": "Clearly hardy; shrugs off punishment and physical stress better than most people."
+        },
+        "5": {
+          "label": "Exceptional endurance",
+          "narrative": "The sort of resilience associated with elite athletes, hardened operatives, or unusually durable metahumans."
+        },
+        "6": {
+          "label": "Human natural peak",
+          "narrative": "At the normal unaugmented human maximum for sheer toughness and bodily resilience."
+        },
+        "7+": {
+          "label": "Metahuman or superhuman resilience",
+          "narrative": "Beyond normal human capability; severe punishment that would disable an ordinary person may be survivable."
+        }
+      },
+      "source": "CRB"
+    },
+    "Agility": {
+      "abbreviation": "AGI",
+      "category": "Physical",
+      "description": "Measures hand-eye coordination, flexibility, nimbleness, balance, bodily precision, and fine physical control.",
+      "used_for": [
+        "Most ranged weapon attacks.",
+        "Most melee weapon attacks and unarmed combat.",
+        "Sneaking, palming, gymnastics, escape artistry, and other coordination-heavy physical actions.",
+        "Standard walking and running movement rates."
+      ],
+      "derived_statistics": {
+        "walking_rate": "Agility × metatype walking multiplier",
+        "running_rate": "Agility × metatype running multiplier"
+      },
+      "common_linked_skills": [
+        "Archery",
+        "Automatics",
+        "Blades",
+        "Clubs",
+        "Escape Artist",
+        "Exotic Ranged Weapon",
+        "Gymnastics",
+        "Heavy Weapons",
+        "Longarms",
+        "Palming",
+        "Pistols",
+        "Sneaking",
+        "Throwing Weapons",
+        "Unarmed Combat"
+      ],
+      "why_important": "Agility is one of the broadest offensive and infiltration attributes in the game. It directly supports most weapon attacks and many stealth-oriented actions, making it especially important to street samurai, infiltrators, physical adepts, and other runners who rely on precise movement.",
+      "benchmarks": {
+        "1": {
+          "label": "Clumsy",
+          "narrative": "Poor coordination and balance; delicate physical tasks are awkward and combat accuracy is limited."
+        },
+        "2": {
+          "label": "Below average",
+          "narrative": "Functional but visibly less coordinated than most people."
+        },
+        "3": {
+          "label": "Average coordination",
+          "narrative": "Typical adult dexterity, balance, and hand-eye coordination."
+        },
+        "4": {
+          "label": "Athletic precision",
+          "narrative": "Quick, coordinated, and clearly trained; movement looks controlled even under pressure."
+        },
+        "5": {
+          "label": "Elite dexterity",
+          "narrative": "Exceptional bodily precision associated with top athletes, shooters, acrobats, or infiltrators."
+        },
+        "6": {
+          "label": "Human natural peak",
+          "narrative": "The normal human limit for coordination and bodily precision."
+        },
+        "7+": {
+          "label": "Superhuman agility",
+          "narrative": "Movement and precision exceed normal human potential, often through metatype advantages, magic, or augmentation."
+        }
+      },
+      "source": "CRB"
+    },
+    "Reaction": {
+      "abbreviation": "REA",
+      "category": "Physical",
+      "description": "Measures reflexes, awareness of immediate events, and the ability to respond quickly to sudden changes.",
+      "used_for": [
+        "Physical Initiative together with Intuition.",
+        "Defending against most physical attacks together with Intuition.",
+        "Piloting vehicles and making rapid handling corrections.",
+        "Contributing to the Physical Limit.",
+        "Breaking Initiative ties after Edge."
+      ],
+      "derived_statistics": {
+        "physical_initiative": "Reaction + Intuition",
+        "standard_defense_test": "Reaction + Intuition",
+        "physical_limit_contribution": "Physical Limit = ceil(((Strength × 2) + Body + Reaction) / 3)"
+      },
+      "common_linked_skills": [
+        "Pilot Aerospace",
+        "Pilot Aircraft",
+        "Pilot Exotic Vehicle",
+        "Pilot Ground Craft",
+        "Pilot Walker",
+        "Pilot Watercraft"
+      ],
+      "why_important": "Reaction keeps a runner alive when events become sudden and violent. It affects how quickly the character acts, how well they avoid attacks, and how effectively they control vehicles in dangerous situations.",
+      "benchmarks": {
+        "1": {
+          "label": "Slow to respond",
+          "narrative": "Noticeably delayed reactions; surprises and rapidly changing situations are difficult to manage."
+        },
+        "2": {
+          "label": "Below-average reflexes",
+          "narrative": "Capable of routine responses but often a fraction of a second behind faster people."
+        },
+        "3": {
+          "label": "Average reflexes",
+          "narrative": "Typical adult response speed and immediate situational awareness."
+        },
+        "4": {
+          "label": "Fast",
+          "narrative": "Quick to respond and hard to catch flat-footed."
+        },
+        "5": {
+          "label": "Elite reflexes",
+          "narrative": "Exceptional response speed characteristic of top drivers, combatants, or athletes."
+        },
+        "6": {
+          "label": "Human natural peak",
+          "narrative": "At the normal unaugmented human maximum for reflexive response."
+        },
+        "7+": {
+          "label": "Superhuman reactions",
+          "narrative": "Responses occur with speed beyond normal human performance, commonly through augmentation, magic, or metatype advantages."
+        }
+      },
+      "source": "CRB"
+    },
+    "Strength": {
+      "abbreviation": "STR",
+      "category": "Physical",
+      "description": "Measures raw muscular power: how hard the character can hit, how much they can lift or carry, and how strongly they can propel their body.",
+      "used_for": [
+        "Determining the base Damage Value of many melee and thrown weapons.",
+        "Lifting and carrying.",
+        "Running and swimming.",
+        "Climbing and other tests where raw physical power matters.",
+        "Contributing twice its value to the Physical Limit."
+      ],
+      "derived_statistics": {
+        "physical_limit_contribution": "Physical Limit = ceil(((Strength × 2) + Body + Reaction) / 3)",
+        "lifting_and_carrying_test": "Body + Strength"
+      },
+      "common_linked_skills": [
+        "Running",
+        "Swimming"
+      ],
+      "why_important": "Strength matters most to melee specialists, athletes, heavy lifters, and characters who need to move themselves or equipment through difficult terrain. Its double weighting in the Physical Limit also makes it broadly relevant to demanding physical tasks.",
+      "benchmarks": {
+        "1": {
+          "label": "Very weak",
+          "narrative": "Has difficulty with demanding physical effort and possesses little striking or lifting power."
+        },
+        "2": {
+          "label": "Below average",
+          "narrative": "Can manage ordinary loads but lacks power for strenuous work or combat."
+        },
+        "3": {
+          "label": "Average strength",
+          "narrative": "Typical adult lifting, carrying, and striking power."
+        },
+        "4": {
+          "label": "Strong",
+          "narrative": "Obviously powerful and capable of sustained heavy physical work."
+        },
+        "5": {
+          "label": "Exceptional power",
+          "narrative": "Elite human strength, comparable to serious strength athletes or exceptionally powerful combatants."
+        },
+        "6": {
+          "label": "Human natural peak",
+          "narrative": "The normal unaugmented human maximum for raw muscular strength."
+        },
+        "7+": {
+          "label": "Metahuman or superhuman strength",
+          "narrative": "Beyond normal human power; common among stronger metatypes and achievable through augmentation or magic."
+        }
+      },
+      "source": "CRB"
+    },
+    "Willpower": {
+      "abbreviation": "WIL",
+      "category": "Mental",
+      "description": "Measures determination, mental endurance, discipline, and the ability to keep functioning through pain, fear, exhaustion, magical strain, and adversity.",
+      "used_for": [
+        "Determining the size of the Stun Condition Monitor.",
+        "Resisting many spells, mental effects, toxins, fear effects, and other forms of coercion or stress.",
+        "Resisting Drain for several magical traditions.",
+        "Composure tests together with Charisma.",
+        "Memory tests together with Logic.",
+        "Contributing to both the Mental and Social Limits."
+      ],
+      "derived_statistics": {
+        "stun_condition_monitor": "8 + ceil(Willpower / 2)",
+        "composure_test": "Charisma + Willpower",
+        "memory_test": "Logic + Willpower",
+        "mental_limit_contribution": "Mental Limit = ceil(((Logic × 2) + Intuition + Willpower) / 3)",
+        "social_limit_contribution": "Social Limit = ceil(((Charisma × 2) + Willpower + Essence) / 3)"
+      },
+      "common_linked_skills": [
+        "Astral Combat",
+        "Survival"
+      ],
+      "why_important": "Willpower is a broad defensive attribute. It protects against mental pressure, magical effects, Stun damage, fear, and exhaustion, making it valuable even to characters whose main role is not magical or social.",
+      "benchmarks": {
+        "1": {
+          "label": "Easily overwhelmed",
+          "narrative": "Stress, pain, fear, and coercion can quickly break concentration or resolve."
+        },
+        "2": {
+          "label": "Below-average resolve",
+          "narrative": "Can cope with ordinary pressure but struggles under sustained hardship."
+        },
+        "3": {
+          "label": "Average resolve",
+          "narrative": "Typical adult resilience to stress, discomfort, and emotional pressure."
+        },
+        "4": {
+          "label": "Strong-willed",
+          "narrative": "Reliable under pressure and difficult to intimidate, exhaust, or mentally dominate."
+        },
+        "5": {
+          "label": "Exceptional discipline",
+          "narrative": "Remarkable self-control and endurance even under severe pain, fear, or magical strain."
+        },
+        "6": {
+          "label": "Human natural peak",
+          "narrative": "At the normal unaugmented human maximum for discipline and mental endurance."
+        },
+        "7+": {
+          "label": "Extraordinary resolve",
+          "narrative": "A degree of mental endurance beyond normal human capability."
+        }
+      },
+      "source": "CRB"
+    },
+    "Logic": {
+      "abbreviation": "LOG",
+      "category": "Mental",
+      "description": "Measures rational thought, analysis, calculation, technical understanding, and the ability to apply learned knowledge accurately.",
+      "used_for": [
+        "Engineering, medicine, chemistry, computers, electronics, hacking, repair, and many other technical tasks.",
+        "Memory tests together with Willpower.",
+        "Contributing twice its value to the Mental Limit.",
+        "Resisting Drain for hermetic magicians.",
+        "Many Matrix actions performed by deckers."
+      ],
+      "derived_statistics": {
+        "memory_test": "Logic + Willpower",
+        "mental_limit_contribution": "Mental Limit = ceil(((Logic × 2) + Intuition + Willpower) / 3)"
+      },
+      "common_linked_skills": [
+        "Aeronautics Mechanic",
+        "Arcana",
+        "Armorer",
+        "Automotive Mechanic",
+        "Biotechnology",
+        "Chemistry",
+        "Computer",
+        "Cybercombat",
+        "Cybertechnology",
+        "Demolitions",
+        "Electronic Warfare",
+        "First Aid",
+        "Forgery",
+        "Hacking",
+        "Hardware",
+        "Industrial Mechanic",
+        "Locksmith",
+        "Medicine",
+        "Nautical Mechanic",
+        "Software"
+      ],
+      "why_important": "Logic is the foundation of technical competence. It is crucial to deckers, medics, engineers, demolitions experts, mechanics, and hermetic magicians, and it strongly affects the Mental Limit.",
+      "benchmarks": {
+        "1": {
+          "label": "Poor analytical ability",
+          "narrative": "Struggles with abstraction, complex reasoning, and technical problem-solving."
+        },
+        "2": {
+          "label": "Below average",
+          "narrative": "Can follow straightforward procedures but has difficulty with complex analysis."
+        },
+        "3": {
+          "label": "Average reasoning",
+          "narrative": "Typical adult analytical and problem-solving ability."
+        },
+        "4": {
+          "label": "Highly capable thinker",
+          "narrative": "Comfortable with difficult technical concepts and systematic problem-solving."
+        },
+        "5": {
+          "label": "Exceptional intellect",
+          "narrative": "Elite analytical ability associated with top engineers, surgeons, programmers, or researchers."
+        },
+        "6": {
+          "label": "Human natural peak",
+          "narrative": "At the normal unaugmented human maximum for rational analysis."
+        },
+        "7+": {
+          "label": "Superhuman intellect",
+          "narrative": "Reasoning ability beyond normal human potential."
+        }
+      },
+      "source": "CRB"
+    },
+    "Intuition": {
+      "abbreviation": "INT",
+      "category": "Mental",
+      "description": "Measures instinct, gut feeling, immediate awareness, pattern recognition, and the ability to notice what is wrong before conscious analysis catches up.",
+      "used_for": [
+        "Physical Initiative together with Reaction.",
+        "Defending against most physical attacks together with Reaction.",
+        "Perception, tracking, assensing, and noticing ambushes or anomalies.",
+        "Surprise tests and many immediate-awareness tests.",
+        "Judge Intentions tests together with Charisma.",
+        "Contributing to the Mental Limit."
+      ],
+      "derived_statistics": {
+        "physical_initiative": "Reaction + Intuition",
+        "standard_defense_test": "Reaction + Intuition",
+        "judge_intentions_test": "Charisma + Intuition",
+        "mental_limit_contribution": "Mental Limit = ceil(((Logic × 2) + Intuition + Willpower) / 3)"
+      },
+      "common_linked_skills": [
+        "Assensing",
+        "Artisan",
+        "Disguise",
+        "Navigation",
+        "Perception",
+        "Tracking"
+      ],
+      "why_important": "Intuition is the runner's danger sense. It supports initiative, defense, perception, tracking, and rapid judgment, so neglecting it makes a character slower to act, easier to hit, and easier to surprise.",
+      "benchmarks": {
+        "1": {
+          "label": "Oblivious",
+          "narrative": "Frequently misses warning signs, subtle patterns, and emerging danger."
+        },
+        "2": {
+          "label": "Below-average instincts",
+          "narrative": "Noticing trouble usually takes deliberate attention."
+        },
+        "3": {
+          "label": "Average instincts",
+          "narrative": "Typical situational awareness and gut judgment."
+        },
+        "4": {
+          "label": "Sharp",
+          "narrative": "Quickly spots inconsistencies, danger, and subtle environmental clues."
+        },
+        "5": {
+          "label": "Exceptional instincts",
+          "narrative": "Often reacts correctly before conscious reasoning catches up."
+        },
+        "6": {
+          "label": "Human natural peak",
+          "narrative": "At the normal human maximum for instinctive awareness and pattern recognition."
+        },
+        "7+": {
+          "label": "Preternatural intuition",
+          "narrative": "An almost uncanny ability to sense danger, intent, or patterns before others can."
+        }
+      },
+      "source": "CRB"
+    },
+    "Charisma": {
+      "abbreviation": "CHA",
+      "category": "Mental",
+      "description": "Measures force of personality, persuasiveness, charm, presence, intimidation, and the ability to influence others through voice, expression, behaviour, and appearance.",
+      "used_for": [
+        "Most social skills, including negotiation, leadership, intimidation, etiquette, performance, and deception.",
+        "Composure tests together with Willpower.",
+        "Judge Intentions tests together with Intuition.",
+        "Contributing twice its value to the Social Limit.",
+        "Resisting Drain for shamanic magicians.",
+        "Determining the number of free Contact Karma points during standard character creation."
+      ],
+      "derived_statistics": {
+        "composure_test": "Charisma + Willpower",
+        "judge_intentions_test": "Charisma + Intuition",
+        "social_limit_contribution": "Social Limit = ceil(((Charisma × 2) + Willpower + Essence) / 3)",
+        "standard_free_contact_karma": "Charisma × 3"
+      },
+      "common_linked_skills": [
+        "Animal Handling",
+        "Con",
+        "Etiquette",
+        "Impersonation",
+        "Instruction",
+        "Intimidation",
+        "Leadership",
+        "Negotiation",
+        "Performance"
+      ],
+      "why_important": "Charisma determines how effectively a character influences people. It is central to faces and social infiltrators, but also matters to any runner who negotiates payment, deals with contacts, lies to security, or needs to remain composed under pressure.",
+      "benchmarks": {
+        "1": {
+          "label": "Off-putting or ineffectual",
+          "narrative": "Struggles to project confidence, charm, authority, or credibility."
+        },
+        "2": {
+          "label": "Below average presence",
+          "narrative": "Can interact normally but rarely controls the tone of a social situation."
+        },
+        "3": {
+          "label": "Average presence",
+          "narrative": "Typical ability to persuade, relate to others, and express personality."
+        },
+        "4": {
+          "label": "Charismatic",
+          "narrative": "Noticeably persuasive, confident, or compelling in conversation."
+        },
+        "5": {
+          "label": "Exceptional presence",
+          "narrative": "Commands attention and can strongly influence people even in difficult circumstances."
+        },
+        "6": {
+          "label": "Human natural peak",
+          "narrative": "At the normal human maximum for personal magnetism and social influence."
+        },
+        "7+": {
+          "label": "Extraordinary charisma",
+          "narrative": "Presence beyond normal human capability; some metatypes can naturally reach this level."
+        }
+      },
+      "source": "CRB"
+    },
+    "Edge": {
+      "abbreviation": "EDG",
+      "category": "Special",
+      "description": "Represents luck, timing, fortune, and the intangible ability to pull through when the situation should have gone badly.",
+      "used_for": [
+        "Adding Edge dice to tests.",
+        "Using the Rule of Six when Edge is applied before a test.",
+        "Rerolling failed dice when Edge is spent after a test.",
+        "Blitzing Initiative, seizing the Initiative, taking extra actions, or invoking other Edge effects.",
+        "Burning Edge for permanent, extreme interventions such as surviving certain death."
+      ],
+      "derived_statistics": {
+        "initiative_tiebreaker": "Edge is the first attribute compared when Initiative Scores are tied."
+      },
+      "common_linked_skills": [],
+      "why_important": "Edge is valuable to every archetype because it can rescue crucial tests, create bursts of exceptional performance, and provide emergency protection when plans collapse.",
+      "benchmarks": {
+        "1": {
+          "label": "Little luck to spare",
+          "narrative": "Has only a narrow reserve for emergencies and must ration it carefully."
+        },
+        "2": {
+          "label": "Modest luck",
+          "narrative": "Can occasionally force a crucial advantage but cannot rely on doing so repeatedly."
+        },
+        "3": {
+          "label": "Reliable reserve",
+          "narrative": "Has enough Edge to influence several important moments before needing to recover it."
+        },
+        "4": {
+          "label": "Fortunate",
+          "narrative": "Frequently has a meaningful emergency resource available."
+        },
+        "5": {
+          "label": "Exceptionally lucky",
+          "narrative": "Can repeatedly bend critical situations in the character's favour."
+        },
+        "6": {
+          "label": "Peak standard luck",
+          "narrative": "At the normal maximum for most metatypes."
+        },
+        "7": {
+          "label": "Exceptional human potential",
+          "narrative": "The normal human maximum, representing extraordinary fortune or narrative resilience."
+        },
+        "8+": {
+          "label": "Beyond normal starting limits",
+          "narrative": "Requires exceptional circumstances, qualities, or other special rules."
+        }
+      },
+      "source": "CRB"
+    },
+    "Essence": {
+      "abbreviation": "ESS",
+      "category": "Special",
+      "description": "Represents the character's metahuman wholeness and sets the capacity for cyberware and other Essence-consuming alterations.",
+      "used_for": [
+        "Every standard metahuman character begins with Essence 6.",
+        "Cyberware and some other augmentations reduce Essence.",
+        "Essence loss can reduce Magic or Resonance.",
+        "Essence contributes to the Social Limit.",
+        "A character whose Essence reaches 0 is no longer viable as a normal living metahuman character."
+      ],
+      "derived_statistics": {
+        "social_limit_contribution": "Social Limit = ceil(((Charisma × 2) + Willpower + Essence) / 3)"
+      },
+      "common_linked_skills": [],
+      "why_important": "Essence is the limiting budget for augmentation. Mundane characters may deliberately trade Essence for cyberware performance, while Awakened and technomancer characters must be cautious because Essence loss can reduce their key special attribute.",
+      "benchmarks": {
+        "6": {
+          "label": "Unaltered metahuman baseline",
+          "narrative": "No Essence has been lost to augmentations or similar effects."
+        },
+        "5": {
+          "label": "Lightly augmented",
+          "narrative": "Subtle augmentation; the character remains close to the normal metahuman baseline."
+        },
+        "4": {
+          "label": "Noticeably augmented",
+          "narrative": "A meaningful portion of the body or nervous system has been replaced or altered."
+        },
+        "3": {
+          "label": "Heavily augmented",
+          "narrative": "Technology is a major part of the character's physical existence."
+        },
+        "2": {
+          "label": "Extremely augmented",
+          "narrative": "Most ordinary people would regard the character as profoundly altered."
+        },
+        "1": {
+          "label": "Barely metahuman by Essence measure",
+          "narrative": "Very little Essence remains; further augmentation carries severe consequences."
+        },
+        "0": {
+          "label": "No viable Essence remaining",
+          "narrative": "For ordinary player characters, reaching zero means the character cannot continue as a living metahuman."
+        }
+      },
+      "source": "CRB"
+    },
+    "Magic": {
+      "abbreviation": "MAG",
+      "category": "Special",
+      "description": "Measures an Awakened character's connection to mana, capability in the arcane arts, and the amount of magical power they can draw upon.",
+      "used_for": [
+        "Spellcasting, summoning, binding, banishing, counterspelling, ritual magic, alchemy, artificing, and other magical skills.",
+        "Determining important magical limits and maximum Force choices.",
+        "Determining starting Power Points for adepts and mystic adepts under the relevant character-creation rules.",
+        "Interacting with initiation and magical advancement.",
+        "A character without magical capability normally has Magic 0."
+      ],
+      "derived_statistics": {
+        "common_spell_force_ceiling": "A spell may normally be cast at Force up to twice the caster's Magic.",
+        "starting_adept_power_points": "Adepts normally receive Power Points equal to Magic at character creation, subject to archetype rules."
+      },
+      "common_linked_skills": [
+        "Alchemy",
+        "Artificing",
+        "Banishing",
+        "Binding",
+        "Counterspelling",
+        "Disenchanting",
+        "Ritual Spellcasting",
+        "Spellcasting",
+        "Summoning"
+      ],
+      "why_important": "Magic is the defining power attribute for Awakened characters. It determines the scale of their supernatural capability and supports nearly every major magical subsystem.",
+      "benchmarks": {
+        "0": {
+          "label": "Mundane",
+          "narrative": "No active magical capability."
+        },
+        "1": {
+          "label": "Barely Awakened",
+          "narrative": "A weak but genuine connection to mana."
+        },
+        "2": {
+          "label": "Novice Awakened",
+          "narrative": "Limited magical power, suitable for a developing adept or magician."
+        },
+        "3": {
+          "label": "Competent magician",
+          "narrative": "A meaningful professional-level connection to magic."
+        },
+        "4": {
+          "label": "Powerful Awakened",
+          "narrative": "Clearly formidable and capable of significant supernatural feats."
+        },
+        "5": {
+          "label": "Exceptional magician",
+          "narrative": "Elite magical talent even among the Awakened."
+        },
+        "6": {
+          "label": "Normal starting peak",
+          "narrative": "The standard maximum for most starting characters before initiation or exceptional qualities."
+        },
+        "7+": {
+          "label": "Initiated or exceptional power",
+          "narrative": "Beyond normal starting limits, usually requiring initiation, exceptional qualities, or other special advancement."
+        }
+      },
+      "source": "CRB"
+    },
+    "Resonance": {
+      "abbreviation": "RES",
+      "category": "Special",
+      "description": "Measures a technomancer's connection to the Resonance and the strength of their ability to interact with and shape the Matrix through thought.",
+      "used_for": [
+        "Compiling, registering, and decompiling sprites.",
+        "Threading and using complex forms.",
+        "Technomancer-only Resonance actions and abilities.",
+        "Interacting with submersion and technomancer advancement.",
+        "Non-technomancers normally have Resonance 0."
+      ],
+      "derived_statistics": {
+        "technomancer_role": "Functions as the defining special attribute for technomancers in much the same way Magic does for Awakened characters."
+      },
+      "common_linked_skills": [
+        "Compiling",
+        "Decompiling",
+        "Registering"
+      ],
+      "why_important": "Resonance is the foundation of the technomancer archetype. It determines how strongly the character can manipulate the Matrix without conventional hacking tools and supports sprites and complex forms.",
+      "benchmarks": {
+        "0": {
+          "label": "Non-technomancer",
+          "narrative": "No active connection to the Resonance."
+        },
+        "1": {
+          "label": "Barely emergent",
+          "narrative": "A weak but genuine technomantic connection."
+        },
+        "2": {
+          "label": "Novice technomancer",
+          "narrative": "Limited Resonance power and developing control."
+        },
+        "3": {
+          "label": "Competent technomancer",
+          "narrative": "A meaningful professional level of technomantic capability."
+        },
+        "4": {
+          "label": "Powerful technomancer",
+          "narrative": "Clearly formidable in Resonance-based Matrix activity."
+        },
+        "5": {
+          "label": "Exceptional technomancer",
+          "narrative": "Elite capability even among technomancers."
+        },
+        "6": {
+          "label": "Normal starting peak",
+          "narrative": "The standard maximum for most starting characters before submersion or exceptional qualities."
+        },
+        "7+": {
+          "label": "Submerged or exceptional power",
+          "narrative": "Beyond normal starting limits, usually requiring submersion, exceptional qualities, or other special advancement."
+        }
+      },
+      "source": "CRB"
+    }
+  },
+  "categories": {
+    "Physical": "<strong>Physical Attributes</strong><br>Body, Agility, Reaction, and Strength describe the character's physical resilience, coordination, reflexes, and muscular power.",
+    "Mental": "<strong>Mental Attributes</strong><br>Willpower, Logic, Intuition, and Charisma describe mental endurance, reasoning, instinct, awareness, and force of personality.",
+    "Special": "<strong>Special Attributes</strong><br>Edge, Essence, Magic, and Resonance use special rules. Every character has Edge and Essence; only eligible Awakened characters have Magic above 0, and only technomancers have Resonance above 0."
+  },
+  "benchmark_scale": {
+    "scope": "The narrative benchmark descriptions are player-facing analysis, not an official Core Rulebook rating table.",
+    "basis": "They are anchored to the Core Rulebook's standard human attribute range of 1-6, where 6 is the normal unaugmented human maximum, while recognising that metatypes and special rules can exceed that range.",
+    "general_scale": {
+      "1": {
+        "label": "Very weak",
+        "narrative": "Noticeably deficient for the character's metatype; everyday tasks involving this attribute can be difficult or unreliable."
+      },
+      "2": {
+        "label": "Below average",
+        "narrative": "Functional in normal life, but clearly less capable than a typical adult in situations where this attribute matters."
+      },
+      "3": {
+        "label": "Average",
+        "narrative": "A broadly typical adult level for a human-scale comparison; competent enough for normal life without specialist distinction."
+      },
+      "4": {
+        "label": "Above average",
+        "narrative": "Clearly capable and noticeably better than most ordinary people; appropriate for someone who trains or relies on this trait regularly."
+      },
+      "5": {
+        "label": "Exceptional",
+        "narrative": "Elite natural ability. The character stands out even among trained professionals."
+      },
+      "6": {
+        "label": "Human natural peak",
+        "narrative": "The normal unaugmented human maximum in the Core Rulebook; an extraordinary individual at the edge of natural human capability."
+      },
+      "7+": {
+        "label": "Beyond normal human limits",
+        "narrative": "Possible through metatype advantages, qualities, magic, augmentation, or advancement. This is superhuman by ordinary human standards."
+      }
+    },
+    "special_attribute_note": "Edge, Essence, Magic, and Resonance use dedicated benchmarks because their meanings do not map cleanly onto ordinary physical or mental ability."
+  }
+}

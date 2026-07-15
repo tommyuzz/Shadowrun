@@ -1,7 +1,7 @@
 import type { RawRecord, ReferenceCategory, ReferenceData, ReferenceRecord } from "./types";
 
 const jsonLoaders = import.meta.glob<Record<string, unknown>>([
-  "../adeptpowers.json", "../cyberdecks.json", "../drones.json", "../equipment.json",
+  "../adeptpowers.json", "../attributes.json", "../cyberdecks.json", "../drones.json", "../equipment.json",
   "../matrixinteraction.json", "../metatypes.json", "../rituals.json", "../skills.json",
   "../qualities.json", "../lifestyle_extras.json", "../priority_array.json", "../spells.json", "../spirits.json", "../sprites.json", "../vehicles.json", "../weapons.json"
 ], { import: "default" });
@@ -127,6 +127,22 @@ function skillData(payload: Record<string, unknown>): ReferenceData {
   return { records, categories, definitions: {}, payload };
 }
 
+function attributeData(payload: Record<string, unknown>): ReferenceData {
+  const records = objectEntries(payload.attributes).map(([name, raw]) => record(
+    name,
+    raw,
+    text(raw.category) || "Attributes",
+    raw.abbreviation ? [text(raw.abbreviation)] : []
+  ));
+  const definitions = lookupDefinitions(payload.categories);
+  return {
+    records,
+    categories: categoriesFrom(records, definitions, true),
+    definitions,
+    payload
+  };
+}
+
 function adeptData(payload: Record<string, unknown>): ReferenceData {
   const records = objectEntries(payload.powers).map(([name, raw]) => record(name, raw, "Adept Powers", strings(raw.activation)));
   return {
@@ -209,6 +225,7 @@ async function loadUncached(moduleId: string): Promise<ReferenceData> {
   switch (moduleId) {
     case "spells": return spellData(payload);
     case "skills": return skillData(payload);
+    case "attributes": return attributeData(payload);
     case "adeptpowers": return adeptData(payload);
     case "cyberdecks": return cyberdeckData(payload);
     case "matrixinteraction": return matrixData(payload);

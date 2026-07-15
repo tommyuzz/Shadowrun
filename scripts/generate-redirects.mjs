@@ -1,7 +1,7 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 
-const modules = ["adeptpowers", "cyberdecks", "drones", "equipment", "lifestyles", "matrixinteraction", "metatypes", "priorityarray", "qualities", "rituals", "skills", "spells", "spirits", "sprites", "vehicles", "weapons"];
+const modules = ["adeptpowers", "attributes", "cyberdecks", "drones", "equipment", "lifestyles", "matrixinteraction", "metatypes", "priorityarray", "qualities", "rituals", "skills", "spells", "spirits", "sprites", "vehicles", "weapons"];
 const singleCategory = { adeptpowers: "adept-powers", metatypes: "metatypes", rituals: "rituals", spirits: "spirits", sprites: "sprites" };
 
 const slugger = `function slug(value){return String(value||'').normalize('NFKD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/&/g,'and').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}`;

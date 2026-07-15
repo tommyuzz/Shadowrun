@@ -1,5 +1,23 @@
 # Release notes
 
+## 1.9.0 — Attributes archive
+
+### Added
+
+- Added **Attributes** beneath **Core Rules** on the generated home page.
+- Added all twelve supplied Physical, Mental and Special Attributes from `attributes.json`, with stable category and record routes.
+- Added full-record search across uses, formulas, linked skills, importance guidance and nested benchmarks, plus a dedicated Linked Skill filter.
+- Added responsive attribute dossiers, formula cards, skill chips, rating benchmark ladders, archive guidance, iconography, footer treatment and legacy URL generation.
+
+### Changed
+
+- Core Rulebook records in **Skills**, **Attributes** and **Priority Array** now remain visible regardless of the global source-book selection. Future records from other books in those modules still obey their own source toggles.
+
+### Validation
+
+- 17 datasets and 1,310 reference records validated.
+- 45 unit tests and the production TypeScript and Vite build passed.
+
 ## 1.8.1 — Priority Array readability
 
 ### Improved
