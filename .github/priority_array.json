@@ -1,0 +1,182 @@
+{
+  "priority_array": {
+    "A": {
+      "metatype": {
+        "Human": 9,
+        "Elf": 8,
+        "Dwarf": 7,
+        "Ork": 7,
+        "Troll": 5
+      },
+      "attributes": 24,
+      "magic_or_resonance": {
+        "Magician": {
+          "magic": 6,
+          "magical_skills": { "count": 2, "rating": 5 },
+          "spells": 10
+        },
+        "Mystic Adept": {
+          "magic": 6,
+          "magical_skills": { "count": 2, "rating": 5 },
+          "spells": 10
+        },
+        "Technomancer": {
+          "resonance": 6,
+          "resonance_skills": { "count": 2, "rating": 5 },
+          "complex_forms": 5
+        }
+      },
+      "skills": { "skill_points": 46, "skill_group_points": 10 },
+      "resources": {
+        "regular": "450,000¥",
+        "street_level": "75,000¥",
+        "prime_runner": "500,000¥"
+      },
+      "source": "CRB"
+    },
+    "B": {
+      "metatype": {
+        "Human": 7,
+        "Elf": 6,
+        "Dwarf": 4,
+        "Ork": 4,
+        "Troll": 0
+      },
+      "attributes": 20,
+      "magic_or_resonance": {
+        "Magician": {
+          "magic": 4,
+          "magical_skills": { "count": 2, "rating": 4 },
+          "spells": 7
+        },
+        "Mystic Adept": {
+          "magic": 4,
+          "magical_skills": { "count": 2, "rating": 4 },
+          "spells": 7
+        },
+        "Technomancer": {
+          "resonance": 4,
+          "resonance_skills": { "count": 2, "rating": 4 },
+          "complex_forms": 2
+        },
+        "Adept": {
+          "magic": 6,
+          "active_skill": { "count": 1, "rating": 4 }
+        },
+        "Aspected Magician": {
+          "magic": 5,
+          "magical_skill_group": { "count": 1, "rating": 4 }
+        }
+      },
+      "skills": { "skill_points": 36, "skill_group_points": 5 },
+      "resources": {
+        "regular": "275,000¥",
+        "street_level": "50,000¥",
+        "prime_runner": "325,000¥"
+      },
+      "source": "CRB"
+    },
+    "C": {
+      "metatype": {
+        "Human": 5,
+        "Elf": 3,
+        "Dwarf": 1,
+        "Ork": 0
+      },
+      "attributes": 16,
+      "magic_or_resonance": {
+        "Magician": { "magic": 3, "spells": 5 },
+        "Mystic Adept": { "magic": 3, "spells": 5 },
+        "Technomancer": { "resonance": 3, "complex_forms": 1 },
+        "Adept": {
+          "magic": 4,
+          "active_skill": { "count": 1, "rating": 2 }
+        },
+        "Aspected Magician": {
+          "magic": 3,
+          "magical_skill_group": { "count": 1, "rating": 2 }
+        }
+      },
+      "skills": { "skill_points": 28, "skill_group_points": 2 },
+      "resources": {
+        "regular": "140,000¥",
+        "street_level": "25,000¥",
+        "prime_runner": "210,000¥"
+      },
+      "source": "CRB"
+    },
+    "D": {
+      "metatype": { "Human": 3, "Elf": 0 },
+      "attributes": 14,
+      "magic_or_resonance": {
+        "Adept": { "magic": 2 },
+        "Aspected Magician": { "magic": 2 }
+      },
+      "skills": { "skill_points": 22, "skill_group_points": 0 },
+      "resources": {
+        "regular": "50,000¥",
+        "street_level": "15,000¥",
+        "prime_runner": "150,000¥"
+      },
+      "source": "CRB"
+    },
+    "E": {
+      "metatype": { "Human": 1 },
+      "attributes": 12,
+      "magic_or_resonance": {},
+      "skills": { "skill_points": 18, "skill_group_points": 0 },
+      "resources": {
+        "regular": "6,000¥",
+        "street_level": "6,000¥",
+        "prime_runner": "100,000¥"
+      },
+      "source": "CRB"
+    }
+  },
+  "play_levels": {
+    "regular": {
+      "name": "Experienced Runner",
+      "starting_karma": 25,
+      "maximum_karma": 50,
+      "maximum_karma_note": "25 starting Karma plus up to 25 additional Karma from Negative Qualities.",
+      "maximum_device_rating": 6,
+      "maximum_availability": 12,
+      "maximum_karma_to_nuyen": 10,
+      "maximum_nuyen_from_karma": "20,000¥",
+      "free_contact_karma": "Charisma × 3",
+      "maximum_karma_carryover": 7,
+      "description": "The default character-creation level for experienced shadowrunners.",
+      "source": "CRB"
+    },
+    "street_level": {
+      "name": "Street-Level Play",
+      "starting_karma": 13,
+      "maximum_karma": 26,
+      "maximum_device_rating": 4,
+      "maximum_availability": 10,
+      "maximum_karma_to_nuyen": 5,
+      "maximum_nuyen_from_karma": "10,000¥",
+      "free_contact_karma": "Charisma × 3",
+      "maximum_karma_carryover": 7,
+      "description": "A lower-powered option for runners who are still establishing themselves and have fewer resources and less access to advanced gear.",
+      "source": "CRB"
+    },
+    "prime_runner": {
+      "name": "Prime Runner Play",
+      "starting_karma": 35,
+      "maximum_karma": 70,
+      "maximum_device_rating": 6,
+      "maximum_availability": 15,
+      "maximum_karma_to_nuyen": 25,
+      "maximum_nuyen_from_karma": "50,000¥",
+      "free_contact_karma": "Charisma × 6",
+      "maximum_karma_carryover": 7,
+      "description": "A higher-powered option for established professional runners with stronger reputations, better resources, and broader access to gear.",
+      "source": "CRB"
+    }
+  },
+  "category": {
+    "Priority Array": "<strong>Priority Array</strong><br>Character creation uses five priorities: <strong>Metatype, Attributes, Magic or Resonance, Skills, and Resources</strong>. Assign exactly one Priority Level from <strong>A to E</strong> to each category, with no duplicate Priority Levels.",
+    "Play Levels": "<strong>Play Levels</strong><br>The Core Rulebook supports three starting power levels: <strong>Experienced Runner</strong>, <strong>Street-Level Play</strong>, and <strong>Prime Runner Play</strong>. Street-level and prime-runner play modify Resources, Karma, gear restrictions, and Karma-to-nuyen conversion limits."
+  }
+}

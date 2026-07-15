@@ -1,0 +1,229 @@
+{
+  "drones": {
+    "Shiawase Kanmushi": {
+      "category": "Drones",
+      "subcategory": "Microdrones",
+      "skill": "Pilot Walker",
+      "handling": "4",
+      "speed": "2",
+      "acceleration": "1",
+      "body": "0",
+      "armor": "0",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "8",
+      "cost": "1,000¥",
+      "description": "This four-legged bug crawler is difficult to distinguish from a natural insect at a glance. It is ideal for penetrating confined spaces, and its gecko-tipped extremities and light weight allow it to crawl on walls and ceilings. It is extremely fragile and can be destroyed by something as simple as being stepped on or hit by a tag eraser.",
+      "features": [
+        "Can crawl on walls and ceilings using gecko-tipped extremities."
+      ],
+      "source": "CRB"
+    },
+    "Sikorsky-Bell Microskimmer": {
+      "category": "Drones",
+      "subcategory": "Microdrones",
+      "skill": "Pilot Ground Craft",
+      "handling": "3",
+      "speed": "3",
+      "acceleration": "1",
+      "body": "0",
+      "armor": "0",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "6",
+      "cost": "1,000¥",
+      "description": "Quiet and durable, this disc-shaped skimmer is smaller than a frisbee and can even skim over water. It moves using small, relatively weak hoverjets. It is easier to spot than the Kanmushi, though it remains extremely small.",
+      "features": [
+        "Can skim over water.",
+        "The Hovercraft specialization applies when piloting it."
+      ],
+      "source": "CRB"
+    },
+    "MCT Fly-Spy": {
+      "category": "Drones",
+      "subcategory": "Minidrones",
+      "skill": "Pilot Aircraft",
+      "handling": "4",
+      "speed": "3",
+      "acceleration": "2",
+      "body": "1",
+      "armor": "0",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "8",
+      "cost": "2,000¥",
+      "description": "This Mitsuhama drone is the size and shape of a large insect but can reach substantially greater altitudes. It works well as an eye in the sky and is useful for discreetly shadowing targets because it is relatively difficult to notice.",
+      "source": "CRB"
+    },
+    "Horizon Flying Eye": {
+      "category": "Drones",
+      "subcategory": "Minidrones",
+      "skill": "Pilot Aircraft",
+      "handling": "4",
+      "speed": "3",
+      "acceleration": "2",
+      "body": "1",
+      "armor": "0",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "8",
+      "cost": "2,000¥",
+      "description": "This spherical flying drone uses omnidirectional thrust nozzles to remain airborne. Roughly the size of an eyeball, it can roll along the ground but must fly to overcome obstacles such as stairs and curbs.",
+      "features": [
+        "A version with a built-in flash-pak and smoke grenade costs 500¥ extra.",
+        "Detonating the optional flash-pak and smoke grenade destroys the drone."
+      ],
+      "source": "CRB"
+    },
+    "Aztechnology Crawler": {
+      "category": "Drones",
+      "subcategory": "Small Drones",
+      "skill": "Pilot Walker",
+      "handling": "4",
+      "speed": "3",
+      "acceleration": "1",
+      "body": "3",
+      "armor": "3",
+      "pilot": "4",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "4",
+      "cost": "4,000¥",
+      "description": "This small crawler handles stairs and other obstacles with ease. Designed as a remote snooper for rough rural or urban terrain, it is both efficient and robust. Its Pilot program is notably better than those fitted to most drones in its class.",
+      "source": "CRB"
+    },
+    "Lockheed Optic-X2": {
+      "category": "Drones",
+      "subcategory": "Small Drones",
+      "skill": "Pilot Aircraft",
+      "handling": "4",
+      "speed": "4",
+      "acceleration": "3",
+      "body": "2",
+      "armor": "2",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "10",
+      "cost": "21,000¥",
+      "description": "This VSTOL stealth craft is only about the size of a cyberdeck with its wings folded for transport. Deployed, it is roughly the size of a large hawk or other bird of prey. Its signature-limiting technology makes it a favorite of intelligence agencies and shadowrunners.",
+      "features": [
+        "Radar systems and visual and audio Perception Tests suffer a −3 dice pool modifier to spot the Optic-X2."
+      ],
+      "source": "CRB"
+    },
+    "Ares Duelist": {
+      "category": "Drones",
+      "subcategory": "Medium Drones",
+      "skill": "Pilot Walker",
+      "handling": "3",
+      "speed": "3",
+      "acceleration": "1",
+      "body": "4",
+      "armor": "4",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "5R",
+      "cost": "4,500¥",
+      "description": "This medium-sized anthropomorphic walker drone is designed to patrol on two feet like a metahuman security guard. Its chassis is styled after traditional oyoroi samurai armor, and its humanoid silhouette can be mistaken for a more versatile metahuman guard at a distance. It is armed with a pair of blade-arms rather than conventional firearms.",
+      "features": [
+        "Includes a unique Rating 3 Targeting (Swords) autosoft.",
+        "Mounts two standard swords in special weapon mounts.",
+        "The built-in swords cannot be replaced with other weapons, though additional weapon mounts may be installed normally."
+      ],
+      "source": "CRB"
+    },
+    "GM-Nissan Doberman": {
+      "category": "Drones",
+      "subcategory": "Medium Drones",
+      "skill": "Pilot Ground Craft",
+      "handling": "5",
+      "speed": "3",
+      "acceleration": "1",
+      "body": "4",
+      "armor": "4",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "4R",
+      "cost": "5,000¥",
+      "description": "This tracked perimeter-patrol drone is designed to secure a designated area effectively in both day and night conditions.",
+      "features": [
+        "Includes one standard weapon mount."
+      ],
+      "source": "CRB"
+    },
+    "MCT-Nissan Roto-Drone": {
+      "category": "Drones",
+      "subcategory": "Medium Drones",
+      "skill": "Pilot Aircraft",
+      "handling": "4",
+      "speed": "4",
+      "acceleration": "2",
+      "body": "4",
+      "armor": "4",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "6",
+      "cost": "5,000¥",
+      "description": "The Roto-Drone is a straightforward rotor-wing drone built around a highly modular and customizable design.",
+      "features": [
+        "Treat its Body as 3 higher than its actual Rating when determining how many weapon mounts or customizations it can integrate."
+      ],
+      "source": "CRB"
+    },
+    "Cyberspace Designs Dalmatian": {
+      "category": "Drones",
+      "subcategory": "Large Drones",
+      "skill": "Pilot Aircraft",
+      "handling": "5",
+      "speed": "5",
+      "acceleration": "3",
+      "body": "5",
+      "armor": "5",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "6R",
+      "cost": "10,000¥",
+      "description": "This large and robust VTOL reconnaissance drone can hover and has a sturdy frame for its relatively light weight. It is about the size of a lawn mower when stored and expands to roughly the size of a large hang glider when deployed. Lone Star and Knight Errant have both licensed the design for urban surveillance and patrol duties.",
+      "source": "CRB"
+    },
+    "Steel Lynx Combat Drone": {
+      "category": "Drones",
+      "subcategory": "Large Drones",
+      "skill": "Pilot Ground Craft",
+      "handling": "5",
+      "speed": "4",
+      "acceleration": "2",
+      "body": "6",
+      "armor": "12",
+      "pilot": "3",
+      "sensor": "3",
+      "seats": "—",
+      "availability": "10R",
+      "cost": "25,000¥",
+      "description": "A hardened ground-combat machine, the Steel Lynx moves on four wheeled legs and is built to carry heavy weaponry into hostile environments.",
+      "features": [
+        "Includes one heavy weapon mount."
+      ],
+      "source": "CRB"
+    }
+  },
+  "category": {
+    "Drones": "<strong>Unmanned Vehicles</strong><br>Drones are unmanned vehicles intended to be operated remotely by riggers or to act autonomously through their onboard Pilot program. The normal drone rules also apply to other remotely controlled or rigged devices.<br><br><strong>Pilot and Device Rating</strong><br>A drone's <strong>Device Rating equals its Pilot Rating</strong>. When acting autonomously, Pilot substitutes for Mental attributes needed for tests. Complicated, novel, or unexpected commands can require the Pilot to make a <strong>Device Rating × 2 Test</strong> against a threshold set by the gamemaster.<br><br><strong>Autosofts</strong><br>Autosofts function as skills for drones. Important examples include <strong>Clearsight</strong> for Perception, <strong>[Model] Maneuvering</strong> for piloting, <strong>[Model] Stealth</strong> for infiltration, and <strong>[Weapon] Targeting</strong> for Gunnery.<br><br><strong>Perception and Initiative</strong><br>An autonomous drone observes its surroundings with <strong>Pilot + Clearsight [Sensor]</strong>. Autonomous drones have Initiative equal to <strong>Pilot × 2 + 4D6</strong>. When a rigger is jumped in, use the rigger's VR Initiative instead.<br><br><strong>Damage</strong><br>Drones have both Physical and Matrix damage tracks. Filling either track disables or destroys the drone as appropriate."
+  },
+  "subcategories": {
+    "Microdrones": "<strong>Size Class</strong><br>Microdrones are the smallest drones in the Core Rulebook and are intended for covert surveillance, infiltration, and access to spaces larger drones cannot reach.<br><br><strong>Piloting</strong><br>The Core Rulebook explicitly notes that the skill used to pilot a microdrone <strong>varies from drone to drone</strong>. Use the skill listed on the individual drone entry.<br><br><strong>Core Models</strong><br>The Core Rulebook includes the <strong>Shiawase Kanmushi</strong> and <strong>Sikorsky-Bell Microskimmer</strong> in this size class.",
+    "Minidrones": "<strong>Size Class</strong><br>Minidrones remain extremely small and are well suited to discreet aerial surveillance and tracking.<br><br><strong>Piloting</strong><br>Both Core Rulebook minidrones are operated with <strong>Pilot Aircraft</strong>. Use the drone's Handling or Speed as the appropriate limit for vehicle tests.<br><br><strong>Core Models</strong><br>The Core Rulebook includes the <strong>MCT Fly-Spy</strong> and <strong>Horizon Flying Eye</strong> in this size class.",
+    "Small Drones": "<strong>Size Class</strong><br>Small drones cover compact but more robust platforms, ranging from rough-terrain crawlers to stealth VSTOL reconnaissance craft.<br><br><strong>Piloting</strong><br>The required skill depends on the platform. The <strong>Aztechnology Crawler</strong> uses Pilot Walker, while the <strong>Lockheed Optic-X2</strong> uses Pilot Aircraft.<br><br><strong>Core Models</strong><br>The Core Rulebook includes the <strong>Aztechnology Crawler</strong> and <strong>Lockheed Optic-X2</strong> in this size class.",
+    "Medium Drones": "<strong>Size Class</strong><br>Medium drones are large enough to serve as serious security, patrol, and combat platforms. Core models include walker, tracked, and rotor-wing designs.<br><br><strong>Piloting</strong><br>Use the skill listed on the individual drone: Pilot Walker, Pilot Ground Craft, or Pilot Aircraft as appropriate.<br><br><strong>Weapon Systems</strong><br>Several medium drones include built-in or standard weapon mounts. Individual entries specify any included armament, mount, autosoft, or customization rule.<br><br><strong>Core Models</strong><br>The Core Rulebook includes the <strong>Ares Duelist</strong>, <strong>GM-Nissan Doberman</strong>, and <strong>MCT-Nissan Roto-Drone</strong> in this size class.",
+    "Large Drones": "<strong>Size Class</strong><br>Large drones are substantial unmanned platforms used for reconnaissance, patrol, and heavy combat duties.<br><br><strong>Piloting</strong><br>Use the skill listed on the individual drone. The <strong>Cyberspace Designs Dalmatian</strong> uses Pilot Aircraft, while the <strong>Steel Lynx Combat Drone</strong> uses Pilot Ground Craft.<br><br><strong>Core Models</strong><br>The Core Rulebook includes the <strong>Cyberspace Designs Dalmatian</strong> and <strong>Steel Lynx Combat Drone</strong> in this size class."
+  }
+}

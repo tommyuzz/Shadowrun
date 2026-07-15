@@ -1,0 +1,470 @@
+{
+  "lifestyle_extras": {
+    "Armory": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "1,000¥",
+      "minimum_lifestyle": "High",
+      "description": "A room dedicated to firearms and ammunition. It includes ammunition and one stock firearm duplicating a firearm the character already purchased at character creation. If the character has an appropriate toolkit, the armory can repair 1 point of Accuracy or AP per week at no additional cost, or 1 point of Reach over two weeks.",
+      "source": "SRF"
+    },
+    "Cleaning Service": {
+      "category": "Entertainment",
+      "subcategory": "Service",
+      "point_cost": "1",
+      "monthly_cost": "Special",
+      "minimum_lifestyle": "High",
+      "description": "Provides regular cleaning, clothes mending, and similar household services with a reasonable privacy guarantee. It may also cover related services such as landscaping, grooming, or basic vehicle cleaning and maintenance.",
+      "source": "SRF",
+      "variants": {
+        "Standard": {
+          "monthly_cost": "100¥",
+          "effect": "Basic cleaning and maintenance service."
+        },
+        "Mage Sensitive": {
+          "monthly_cost": "200¥",
+          "effect": "Destroys or contaminates biomaterial and other material links left on clothing, vehicles, or premises so they cannot be used for ritual purposes."
+        },
+        "Pollution Sensitive": {
+          "monthly_cost": "400¥",
+          "effect": "Uses less harsh chemicals and natural materials, reducing environmental-allergy Fatigue damage tied to Comforts & Necessities by 1."
+        }
+      }
+    },
+    "Discreet Cleaning Service": {
+      "category": "Entertainment",
+      "subcategory": "Service",
+      "point_cost": "4",
+      "monthly_cost": "10,000¥",
+      "minimum_lifestyle": "None",
+      "description": "A no-questions-asked cleanup organization that can patch bullet holes, remove bloodstains, cleanse astral traces, and handle one body disposal per month within twenty-four hours, provided the location is not public or corporate.",
+      "source": "SRF",
+      "notes": [
+        "This service is tied to the character rather than a single lifestyle, provided the monthly cost continues to be paid."
+      ]
+    },
+    "Discreet Deliveryman/Candyman": {
+      "category": "Entertainment",
+      "subcategory": "Service",
+      "point_cost": "3",
+      "monthly_cost": "100¥ / 1,000¥",
+      "minimum_lifestyle": "None",
+      "description": "A subtle courier service for delivering purchases to the character's domicile. The deliveryman handles legal takeout and legal items with Availability 8 or lower; the candyman handles items up to Availability 16, including restricted and illegal items.",
+      "source": "SRF",
+      "notes": [
+        "The service covers delivery only; the item itself must still be purchased normally.",
+        "The courier has Sneaking dice pool 14 and Edge 4."
+      ]
+    },
+    "Garage": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "*",
+      "monthly_cost": "*",
+      "minimum_lifestyle": "*",
+      "description": "A covered space large enough to park and maintain one vehicle. With an appropriate vehicle Shop, it repairs 1 box of vehicle damage per week at no extra financial cost; with a Facility, it repairs 2 boxes per week.",
+      "source": "SRF",
+      "notes": [
+        "May be purchased multiple times for multiple vehicles."
+      ],
+      "variants": {
+        "Airplane": {
+          "point_cost": "4",
+          "monthly_cost": "20,000¥",
+          "minimum_lifestyle": "Luxury"
+        },
+        "Boat": {
+          "point_cost": "3",
+          "monthly_cost": "5,000¥",
+          "minimum_lifestyle": "High",
+          "notes": "Includes dock space and launch access. Smaller personal watercraft may use car storage instead."
+        },
+        "Car (Body 4 or less)": {
+          "point_cost": "1",
+          "monthly_cost": "50¥",
+          "minimum_lifestyle": "Medium"
+        },
+        "Car (Body 5 or greater)": {
+          "point_cost": "2",
+          "monthly_cost": "100¥",
+          "minimum_lifestyle": "Medium"
+        },
+        "Helicopter": {
+          "point_cost": "4",
+          "monthly_cost": "10,000¥",
+          "minimum_lifestyle": "Luxury",
+          "notes": "Includes helicopter pad access."
+        }
+      }
+    },
+    "Greenhouse": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "500¥",
+      "minimum_lifestyle": "High",
+      "description": "A small growing space for vegetables, herbs, or similar plants that supplement daily meals. Reduces environmental damage from food allergies by 1.",
+      "source": "SRF"
+    },
+    "Grid Subscription": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "1",
+      "monthly_cost": "50¥",
+      "minimum_lifestyle": "Middle",
+      "description": "A subscription that lets the character's commlink and home entertainment systems access current Matrix-stored media and corporate entertainment lines, rather than relying on stale public-grid content.",
+      "source": "SRF"
+    },
+    "Gym": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "300¥",
+      "minimum_lifestyle": "Medium",
+      "description": "Home exercise equipment such as weights, treadmills, and similar training devices. Reduces training time for improving Physical attributes by 20 percent.",
+      "source": "SRF"
+    },
+    "Indoor Arboretum": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "500¥",
+      "minimum_lifestyle": "High",
+      "description": "A room dedicated to living vegetation. It is a bright astral spot for the Awakened and a cleaner-air room for mundanes. Reduces Comforts & Necessities environmental damage from pollution allergies by 1.",
+      "source": "SRF"
+    },
+    "Local Bar Patron": {
+      "category": "Entertainment",
+      "subcategory": "Outing",
+      "point_cost": "1",
+      "monthly_cost": "25¥",
+      "minimum_lifestyle": "Low",
+      "description": "A specific bar, restaurant, fast-food joint, or similar location where the character is a regular. Food and drinks from the spot are covered, and the character may occasionally receive small friendly perks.",
+      "source": "SRF",
+      "notes": [
+        "Choose one specific location when purchased.",
+        "May be purchased more than once for different locations."
+      ]
+    },
+    "Merchandise: Goods (Specific Item)": {
+      "category": "Entertainment",
+      "subcategory": "Service",
+      "point_cost": "1+",
+      "monthly_cost": "10,000¥",
+      "minimum_lifestyle": "Commercial",
+      "description": "A business location that sells one chosen legal item. The base item may have Availability 3 for gear or low quality for miscellaneous goods. Additional points improve quality or Availability, to a maximum of 4 points for luxury-quality goods.",
+      "source": "SRF",
+      "notes": [
+        "Each point adds 2 to the Availability of the item that can be sold.",
+        "The character may buy the chosen item at a 10 percent discount and reduces the interval to locate it by one category."
+      ]
+    },
+    "Merchandise: Pawn Shop/Thrift Store": {
+      "category": "Entertainment",
+      "subcategory": "Service",
+      "point_cost": "2",
+      "monthly_cost": "10,000¥",
+      "minimum_lifestyle": "Commercial",
+      "description": "A storefront that can fence used legal goods. Items can normally be sold within a week if the character accepts 15 percent of the normal purchase price.",
+      "source": "SRF"
+    },
+    "Merchandise: Used Goods (Specific Item)": {
+      "category": "Entertainment",
+      "subcategory": "Service",
+      "point_cost": "2",
+      "monthly_cost": "10,000¥",
+      "minimum_lifestyle": "Commercial",
+      "description": "A storefront for fencing one specific chosen item type. When fencing that item, halve the threshold to find a buyer; alternatively, sell immediately for 25 percent of purchase price.",
+      "source": "SRF"
+    },
+    "Panic Room": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "1,000¥",
+      "minimum_lifestyle": "High",
+      "description": "A reinforced three-meter-by-three-meter room built beyond ordinary material standards, fitted with structural material and a Rating 5 locking mechanism.",
+      "source": "SRF"
+    },
+    "Patron of the Arts": {
+      "category": "Entertainment",
+      "subcategory": "Outing",
+      "point_cost": "*",
+      "monthly_cost": "*",
+      "minimum_lifestyle": "*",
+      "description": "Membership or privileged access to a specific entertainment venue or event type, such as concerts, sports events, museums, theme parks, or private clubs. The lifestyle covers the outing's ordinary expense, including food and drink.",
+      "source": "SRF",
+      "notes": [
+        "Choose one specific venue or event type when purchased.",
+        "May be purchased more than once for different locations, artists, teams, or venues."
+      ],
+      "variants": {
+        "Rock concerts / sport events": {
+          "point_cost": "1",
+          "monthly_cost": "100¥",
+          "minimum_lifestyle": "Medium"
+        },
+        "Private club memberships": {
+          "point_cost": "1",
+          "monthly_cost": "200¥",
+          "minimum_lifestyle": "High"
+        },
+        "Public entertainment": {
+          "point_cost": "1",
+          "monthly_cost": "75¥",
+          "minimum_lifestyle": "Low"
+        },
+        "Theme parks": {
+          "point_cost": "1",
+          "monthly_cost": "100¥",
+          "minimum_lifestyle": "Medium"
+        }
+      }
+    },
+    "Private Room": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "1",
+      "monthly_cost": "20¥",
+      "minimum_lifestyle": "Squatter",
+      "description": "A concealed two-meter-by-two-meter space hidden from passersby. It provides concealment with a -4 dice pool penalty to Perception Tests from outside and provides full cover.",
+      "source": "SRF"
+    },
+    "Public Transportation": {
+      "category": "Entertainment",
+      "subcategory": "Service",
+      "point_cost": "1",
+      "monthly_cost": "50¥",
+      "minimum_lifestyle": "Low",
+      "description": "A monthly pass for buses, trolleys, subways, ferries, or similar local public transportation within one city or region.",
+      "source": "SRF"
+    },
+    "Railway Pass": {
+      "category": "Entertainment",
+      "subcategory": "Service",
+      "point_cost": "1",
+      "monthly_cost": "75¥",
+      "minimum_lifestyle": "Medium",
+      "description": "A monthly rail or maglev pass for travel between two relatively close sprawls, including border-crossing fees where relevant. Purchased for two linked city locations that have a rail connection.",
+      "source": "SRF"
+    },
+    "Shooting Range": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "500¥",
+      "minimum_lifestyle": "High",
+      "description": "Access to a place where the character can shoot firearms without disturbing neighbors. Reduces training time with firearm skills by 10 percent.",
+      "source": "SRF"
+    },
+    "Soy Processing Unit": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "1",
+      "monthly_cost": "20¥",
+      "minimum_lifestyle": "Medium",
+      "description": "A set of kitchen devices that turns soy, krill, and mycoprotein into food resembling the real thing. Reduces potential environmental damage tied to Comforts & Necessities from food allergies by 1.",
+      "source": "SRF"
+    },
+    "Sports Court (Small) [Sport]": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "300¥",
+      "minimum_lifestyle": "High",
+      "description": "A small home sports facility such as a tennis court, basketball court, driving range, or bowling lane. Reduces training time with an Athletics skill by 10 percent.",
+      "source": "SRF"
+    },
+    "Swimming Pool": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "1",
+      "monthly_cost": "100¥",
+      "minimum_lifestyle": "Medium",
+      "description": "A clean personal swimming pool suitable for relaxation and exercise.",
+      "source": "SRF"
+    },
+    "Walk-In Freezer": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "1",
+      "monthly_cost": "1,000¥",
+      "minimum_lifestyle": "Commercial",
+      "description": "A chilled storage room, mainly for food storage, that can also preserve objects or bodies that need to remain cold.",
+      "source": "SRF"
+    },
+    "Workshop/Facility": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "2,500¥",
+      "minimum_lifestyle": "Medium; must include Commercial",
+      "description": "A dedicated work area with power, ventilation, shelving, and similar support for gear-related build-and-repair work. Combined with a Shop, it repairs associated gear or weapons at 1 box per week with no extra cost; with a Facility, it repairs 2 boxes per week.",
+      "source": "SRF"
+    },
+    "Yard": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "50¥",
+      "minimum_lifestyle": "Low",
+      "description": "A private outdoor lot of roughly fifty to two hundred square meters, depending on lifestyle. It can serve as a backyard, empty lot, abandoned parking lot, vehicle space, small pool area, or ritual-circle space.",
+      "source": "SRF",
+      "notes": [
+        "May be purchased more than once to increase the yard's size."
+      ]
+    },
+    "Zen Den/Bat Cave": {
+      "category": "Entertainment",
+      "subcategory": "Asset",
+      "point_cost": "2",
+      "monthly_cost": "100¥",
+      "minimum_lifestyle": "Medium",
+      "description": "A dedicated hobby or legwork room. A zen den gives +1 dice on relevant Interest Knowledge Skill tests made at home. A bat cave can hold up to three Academic Skill kits; each relevant kit gives +1 dice on matching Academic Knowledge Skill tests made at home.",
+      "source": "SRF"
+    }
+  },
+  "lifestyle_options": {
+    "Angry Drunk Reputation": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "+1 lifestyle point",
+      "monthly_cost": "—",
+      "restriction": "—",
+      "description": "The character has a bad local reputation for causing or joining fights. They cannot attach Local Bar Patron or Patron of the Arts private-club entertainment options to any lifestyle, and the reputation may complicate meetings in the local area.",
+      "source": "SRF"
+    },
+    "Corporate Owned": {
+      "category": "Lifestyle Options",
+      "subcategory": "Positive",
+      "point_adjustment": "-3 lifestyle points",
+      "monthly_cost": "—",
+      "restriction": "Requires a corporate or limited corporate SIN; unavailable if the base lifestyle does not have at least 3 points.",
+      "description": "The domicile sits within corporate jurisdiction, such as a wageslave housing complex or arcology. Increase both the Comforts & Necessities value and limit by 1, and increase both the Security value and limit by 1.",
+      "source": "SRF"
+    },
+    "Cramped": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "—",
+      "monthly_cost": "—",
+      "restriction": "May be purchased once for each applicable asset.",
+      "description": "Applied to a single Garage or Workshop asset. Reduces that asset's monthly cost by 10 percent, but tests performed in the cramped space have their Limit reduced by 2.",
+      "source": "SRF"
+    },
+    "Extra Secure": {
+      "category": "Lifestyle Options",
+      "subcategory": "Positive",
+      "point_adjustment": "—",
+      "monthly_cost": "—",
+      "restriction": "—",
+      "description": "Applies the existing Extra Secure lifestyle quality to all assets purchased for the lifestyle without additional asset-by-asset cost.",
+      "source": "SRF"
+    },
+    "Hotel California": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "+1 lifestyle point",
+      "monthly_cost": "—",
+      "restriction": "—",
+      "description": "The premises can only be entered or exited during a limited window. Outside that window, the character is effectively locked in and limited to the location's resources.",
+      "source": "SRF",
+      "notes": [
+        "The player and gamemaster should agree on the lockdown period."
+      ]
+    },
+    "Maid Is Out": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "+1 lifestyle point",
+      "monthly_cost": "—",
+      "restriction": "—",
+      "description": "The location is filthy and neglected. Reduce the Comforts & Necessities limit by 1, prevent purchase of the Cleaning Service option, and increase environmental-allergy Fatigue DV by 1.",
+      "source": "SRF"
+    },
+    "Not a Home": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "+1 lifestyle point",
+      "monthly_cost": "—",
+      "restriction": "—",
+      "description": "The location was not designed for habitation and may lack plumbing, privacy, or normal interior features. Reduce the Comforts & Necessities limit by 1.",
+      "source": "SRF"
+    },
+    "Obscure/Difficult to Find": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "+1 lifestyle point",
+      "monthly_cost": "—",
+      "restriction": "—",
+      "description": "The location is hard to find and cannot have Discreet Deliveryman or Candyman entertainment options attached to it.",
+      "source": "SRF"
+    },
+    "One Good Thing About This Place": {
+      "category": "Lifestyle Options",
+      "subcategory": "Positive",
+      "point_adjustment": "—",
+      "monthly_cost": "—",
+      "restriction": "Traveler lifestyle only.",
+      "description": "The character always has one chosen Entertainment asset worth 1 or 2 points available at the domicile as long as the monthly cost is paid.",
+      "source": "SRF"
+    },
+    "Safehouse": {
+      "category": "Lifestyle Options",
+      "subcategory": "Positive",
+      "point_adjustment": "—",
+      "monthly_cost": "+500¥",
+      "restriction": "The character cannot purchase Entertainment assets for the safehouse, though other assets may be added.",
+      "description": "The premise is designated as a safehouse. Entertainment assets cannot be personally selected, but subtract 4 dice from anyone trying to track the subject while they reside there. The safehouse's controller may impose house rules.",
+      "source": "SRF"
+    },
+    "Safety Third": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "+1 lifestyle point",
+      "monthly_cost": "—",
+      "restriction": "Requires a Shop or Facility with the Garage or Workshop asset; applies to one asset and may be taken more than once per asset.",
+      "description": "An unsafe Garage or Workshop asset imposes a greater glitch risk: reduce the number of 1s needed for a glitch by one when working there.",
+      "source": "SRF"
+    },
+    "Special Work Area": {
+      "category": "Lifestyle Options",
+      "subcategory": "Positive",
+      "point_adjustment": "—",
+      "monthly_cost": "+1,000¥",
+      "restriction": "May be purchased more than once per lifestyle; each purchase applies separately.",
+      "description": "Applied to a single Garage or Workshop asset. Adds +2 to the Limit for relevant skill tests performed in that area.",
+      "source": "SRF"
+    },
+    "Thrifty": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "-2 lifestyle points",
+      "monthly_cost": "-1,000¥",
+      "restriction": "Traveler lifestyle only.",
+      "description": "The character has secured an unusually cheap but unpleasant version of the Traveler lifestyle.",
+      "source": "SRF"
+    },
+    "W Zone": {
+      "category": "Lifestyle Options",
+      "subcategory": "Negative",
+      "point_adjustment": "+1 lifestyle point",
+      "monthly_cost": "—",
+      "restriction": "—",
+      "description": "The location is deep wilderness rather than urban sprawl: the grid is unreliable, public power is unavailable, and public transportation is at least two hours away. Reduce Neighborhood by 1 and increase security response time by 1D6 hours.",
+      "source": "SRF"
+    }
+  },
+  "category": {
+    "Entertainment": "<strong>Entertainment</strong><br>Entertainment covers lifestyle add-ons that make life easier, provide recreation, or give the character specific home or neighborhood resources. Each entry has a point cost, monthly cost, minimum lifestyle, and type. Points are always spent; the listed monthly nuyen cost is waived only when the base lifestyle meets or exceeds the entry's minimum lifestyle, unless the entry's minimum lifestyle is <strong>None</strong>.",
+    "Lifestyle Options": "<strong>Lifestyle Options</strong><br>Lifestyle options modify the lifestyle as a whole. Positive options usually improve a category or special benefit, often by reducing available lifestyle points or increasing monthly cost. Negative options usually grant points or reduce cost, but impose restrictions or lower category limits. Negative options cannot reduce a category below 0."
+  },
+  "subcategories": {
+    "Asset": "<strong>Asset</strong><br>A physical feature of the domicile or a facility available as part of the lifestyle, such as a garage, armory, pool, or workshop.",
+    "Service": "<strong>Service</strong><br>A recurring service delivered to the character, their home, or their neighborhood, such as cleaning, transportation, or discreet deliveries.",
+    "Outing": "<strong>Outing</strong><br>A regular external place or event the character can access through the lifestyle, such as a bar, club, museum, sporting event, or performance venue.",
+    "Positive": "<strong>Positive Lifestyle Option</strong><br>A beneficial lifestyle-wide modifier that usually improves limits, provides protection, guarantees an option, or creates a special use case.",
+    "Negative": "<strong>Negative Lifestyle Option</strong><br>A disadvantageous lifestyle-wide modifier that usually grants extra points or reduces cost in exchange for practical restrictions or reduced limits."
+  }
+}

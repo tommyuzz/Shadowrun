@@ -1,0 +1,4483 @@
+{
+  "equipment": {
+    "CS/Tear Gas": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Contact, Inhalation",
+      "speed": "1 Combat Turn",
+      "penetration": "0",
+      "power": "8",
+      "effect": "Disorientation, Nausea, Stun Damage",
+      "availability": "4R",
+      "cost": "20¥ per dose",
+      "description": "A common riot-control irritant delivered by contact or inhalation. It causes intense irritation, disorientation, nausea, and Stun damage.",
+      "source": "CRB"
+    },
+    "Gamma-Scopolamine": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Injection",
+      "speed": "Immediate",
+      "penetration": "0",
+      "power": "12",
+      "effect": "Paralysis, Truth Serum",
+      "availability": "14F",
+      "cost": "200¥ per dose",
+      "description": "A powerful injected narcotic used to paralyze and interrogate victims. After the primary effects subside, it continues to weaken Willpower for an additional hour.",
+      "source": "CRB"
+    },
+    "Narcoject": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Injection",
+      "speed": "Immediate",
+      "penetration": "0",
+      "power": "15",
+      "effect": "Stun Damage",
+      "availability": "8R",
+      "cost": "50¥ per dose",
+      "description": "A fast-acting injected tranquilizer designed to incapacitate a target through severe Stun damage.",
+      "source": "CRB"
+    },
+    "Nausea Gas": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Inhalation",
+      "speed": "3 Combat Turns",
+      "penetration": "0",
+      "power": "9",
+      "effect": "Disorientation, Nausea",
+      "availability": "6R",
+      "cost": "25¥ per dose",
+      "description": "An inhaled chemical agent intended to incapacitate rather than kill. Victims who fail to resist suffer violent nausea and impaired action.",
+      "source": "CRB"
+    },
+    "Neuro-Stun VIII": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Contact, Inhalation",
+      "speed": "1 Combat Turn",
+      "penetration": "0",
+      "power": "15",
+      "effect": "Disorientation, Stun Damage",
+      "availability": "12R",
+      "cost": "60¥ per dose",
+      "description": "An inhaled neurotoxin used by security forces. It attacks the nervous system and causes Stun damage.",
+      "source": "CRB"
+    },
+    "Neuro-Stun IX": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Contact, Inhalation",
+      "speed": "1 Combat Turn",
+      "penetration": "0",
+      "power": "15",
+      "effect": "Disorientation, Stun Damage",
+      "availability": "13R",
+      "cost": "60¥ per dose",
+      "description": "A stronger inhaled neurotoxin than Neuro-Stun VIII, designed to disable exposed targets through Stun damage.",
+      "source": "CRB"
+    },
+    "Neuro-Stun X": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Contact, Inhalation",
+      "speed": "1 Combat Turn",
+      "penetration": "-2",
+      "power": "15",
+      "effect": "Disorientation, Stun Damage",
+      "availability": "14R",
+      "cost": "100¥ per dose",
+      "description": "A potent inhaled neurotoxin that rapidly attacks the nervous system and inflicts heavy Stun damage.",
+      "source": "CRB"
+    },
+    "Pepper Punch": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Contact, Inhalation",
+      "speed": "1 Combat Turn",
+      "penetration": "0",
+      "power": "11",
+      "effect": "Nausea, Stun Damage",
+      "availability": "—",
+      "cost": "5¥ per dose",
+      "description": "A personal-defense irritant delivered by contact or inhalation. It causes intense burning, breathing difficulty, nausea, and Stun damage.",
+      "source": "CRB"
+    },
+    "Seven-7": {
+      "category": "Consumables",
+      "subcategory": "Toxins",
+      "vector": "Contact, Inhalation",
+      "speed": "1 Combat Turn",
+      "penetration": "-2",
+      "power": "12",
+      "effect": "Physical Damage, Disorientation, Nausea",
+      "availability": "20F",
+      "cost": "1,000¥ per dose",
+      "description": "A colorless, odorless chemical agent engineered to defeat protection. It causes Physical damage, cramping, nausea, disorientation, and double vision before oxidizing into an inert state.",
+      "source": "CRB"
+    },
+    "Bliss": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Inhalation, Injection",
+      "speed": "1 Combat Turn",
+      "duration": "(6 - Body) hours, minimum 1 hour",
+      "addiction_type": "Both",
+      "addiction_rating": "5",
+      "addiction_threshold": "3",
+      "availability": "3F",
+      "cost": "15¥",
+      "description": "A euphoric narcotic that dulls reactions and awareness while providing strong resistance to pain.",
+      "source": "CRB",
+      "effect": "-1 Reaction, +1 to all thresholds, -1 to all Limits, High Pain Tolerance 3"
+    },
+    "Cram": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Ingestion, Inhalation",
+      "speed": "10 minutes",
+      "duration": "(12 - Body) hours, minimum 1 hour",
+      "addiction_type": "Psychological",
+      "addiction_rating": "4",
+      "addiction_threshold": "3",
+      "availability": "2R",
+      "cost": "10¥",
+      "description": "A stimulant that makes the user faster and more alert, increasing Reaction and initiative performance while active.",
+      "source": "CRB",
+      "effect": "+1 Reaction, +1D6 Initiative Dice"
+    },
+    "Deepweed": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Ingestion, Inhalation",
+      "speed": "Immediate",
+      "duration": "(6 - Body) hours, minimum 1 hour",
+      "addiction_type": "Physiological",
+      "availability": "8F",
+      "cost": "400¥",
+      "description": "An Awakened drug that forces astral perception and heightens magical sensitivity, while reducing mental clarity and physical coordination.",
+      "source": "CRB",
+      "effect": "+1 Willpower, +1 Mental limit, -1 Physical limit; forces Awakened characters to astrally perceive"
+    },
+    "Jazz": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Inhalation",
+      "speed": "Immediate",
+      "duration": "10 x 1D6 minutes",
+      "addiction_type": "Both",
+      "addiction_rating": "8",
+      "addiction_threshold": "3",
+      "availability": "2R",
+      "cost": "75¥",
+      "description": "A combat stimulant that boosts Reaction and initiative dice for a short period, followed by a crash.",
+      "source": "CRB",
+      "effect": "+1 Reaction, +1 Physical limit, +2D6 Initiative Dice"
+    },
+    "Kamikaze": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Inhalation",
+      "speed": "Immediate",
+      "duration": "10 x 1D6 minutes",
+      "addiction_type": "Physiological",
+      "addiction_rating": "9",
+      "addiction_threshold": "3",
+      "availability": "4R",
+      "cost": "100¥",
+      "description": "An extreme combat drug that greatly increases physical power, Reaction, pain tolerance, and initiative at the cost of severe after-effects and addiction risk.",
+      "source": "CRB",
+      "effect": "+1 Body, +1 Agility, +2 Strength, +1 Willpower, +2 Physical limit, +2D6 Initiative Dice, High Pain Tolerance 3"
+    },
+    "Long Haul": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Injection",
+      "speed": "10 minutes",
+      "duration": "4 days",
+      "addiction_type": "Psychological",
+      "addiction_rating": "2",
+      "addiction_threshold": "1",
+      "availability": "—",
+      "cost": "50¥",
+      "description": "A wakefulness drug that suppresses the need for sleep for four days. When it wears off, the user must sleep heavily to recover.",
+      "source": "CRB",
+      "effect": "Alleviates need for sleep"
+    },
+    "Nitro": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Inhalation",
+      "speed": "1 Combat Turn",
+      "duration": "10 x 1D6 minutes",
+      "addiction_type": "Both",
+      "addiction_rating": "9",
+      "addiction_threshold": "3",
+      "availability": "2R",
+      "cost": "50¥",
+      "description": "A powerful stimulant that increases Strength, Willpower, Perception, Physical limit, and pain tolerance.",
+      "source": "CRB",
+      "effect": "+2 Strength, +2 Willpower, +2 Perception, +2 Physical limit, High Pain Tolerance 6"
+    },
+    "Novacoke": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Inhalation, Injection",
+      "speed": "1 Combat Turn",
+      "duration": "(10 - Body) hours, minimum 1 hour",
+      "addiction_type": "Both",
+      "addiction_rating": "7",
+      "addiction_threshold": "2",
+      "availability": "2R",
+      "cost": "10¥",
+      "description": "A fashionable stimulant that increases social confidence and physical speed while active, with addictive side effects.",
+      "source": "CRB",
+      "effect": "+1 Reaction, +1 Charisma, +1 Perception, +1 Social Limit, High Pain Tolerance 1"
+    },
+    "Psyche": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Ingestion",
+      "speed": "10 minutes",
+      "duration": "(12 - Body) hours, minimum 1 hour",
+      "addiction_type": "Psychological",
+      "addiction_rating": "6",
+      "addiction_threshold": "2",
+      "availability": "—",
+      "cost": "200¥",
+      "description": "A cognition-enhancing drug that improves Intuition, Logic, and the Mental limit. Awakened users also sustain spells with a reduced dice-pool penalty.",
+      "source": "CRB",
+      "effect": "+1 Intuition, +1 Logic, +1 Mental limit; Awakened users sustain each spell at -1 rather than -2 dice"
+    },
+    "Zen": {
+      "category": "Consumables",
+      "subcategory": "Drugs",
+      "vector": "Inhalation",
+      "speed": "5 minutes",
+      "duration": "10 x 1D6 minutes",
+      "addiction_type": "Psychological",
+      "addiction_rating": "3",
+      "addiction_threshold": "1",
+      "availability": "4R",
+      "cost": "5¥",
+      "description": "A calming hallucinogen that increases Willpower but slows Reaction and penalizes physical actions.",
+      "source": "CRB",
+      "effect": "-2 Reaction, +1 Willpower, -1 dice pool modifier to physical actions"
+    },
+    "Dreamchip": {
+      "category": "Consumables",
+      "subcategory": "BTLs",
+      "speed": "Immediate",
+      "duration": "Typically 10 x 1D6 minutes",
+      "addiction_type": "Psychological",
+      "addiction_rating": "6",
+      "addiction_threshold": "1",
+      "availability": "4F",
+      "cost": "20¥",
+      "description": "A prerecorded BTL fantasy that lets the user experience someone else's dreamlike sensory and emotional experience.",
+      "source": "CRB"
+    },
+    "Moodchip": {
+      "category": "Consumables",
+      "subcategory": "BTLs",
+      "speed": "Immediate",
+      "duration": "Typically 10 x 1D6 minutes",
+      "addiction_type": "Psychological",
+      "addiction_rating": "6",
+      "addiction_threshold": "2",
+      "availability": "4F",
+      "cost": "50¥",
+      "description": "A BTL that directly imposes a selected emotional state on the user.",
+      "source": "CRB"
+    },
+    "Personafix": {
+      "category": "Consumables",
+      "subcategory": "BTLs",
+      "speed": "Immediate",
+      "duration": "Typically 10 x 1D6 minutes",
+      "addiction_type": "Psychological",
+      "addiction_rating": "7",
+      "addiction_threshold": "2",
+      "availability": "4F",
+      "cost": "200¥",
+      "description": "A BTL that overlays an artificial personality onto the user, potentially replacing normal behavior while active.",
+      "source": "CRB"
+    },
+    "Tripchip": {
+      "category": "Consumables",
+      "subcategory": "BTLs",
+      "speed": "Immediate",
+      "duration": "Typically 10 x 1D6 minutes",
+      "addiction_type": "Psychological",
+      "addiction_rating": "8",
+      "addiction_threshold": "3",
+      "availability": "4F",
+      "cost": "100¥",
+      "description": "A high-intensity BTL designed to deliver an extreme sensory and emotional experience.",
+      "source": "CRB"
+    },
+    "Airburst Link": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "—",
+      "availability": "6R",
+      "cost": "600¥",
+      "description": "Connects a grenade launcher to a smartgun system so airburst timing can be calculated to reduce scatter and improve detonation placement.",
+      "source": "CRB"
+    },
+    "Bipod": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Under",
+      "availability": "2",
+      "cost": "200¥",
+      "description": "A folding support used from a stable firing position to provide recoil compensation.",
+      "source": "CRB"
+    },
+    "Concealable Holster": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "—",
+      "availability": "2",
+      "cost": "150¥",
+      "description": "A holster designed to hide a pistol more effectively beneath clothing.",
+      "source": "CRB"
+    },
+    "Gas-Vent System": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Barrel",
+      "rating": "1-3",
+      "availability": "Rating x 3R",
+      "cost": "Rating x 200¥",
+      "description": "A barrel-mounted gas-vent system that provides recoil compensation equal to its Rating.",
+      "source": "CRB"
+    },
+    "Gyro Mount": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Under",
+      "availability": "7",
+      "cost": "1,400¥",
+      "description": "A wearable stabilization harness that provides substantial recoil compensation for heavy or automatic weapons.",
+      "source": "CRB"
+    },
+    "Hidden Arm Slide": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "—",
+      "availability": "4R",
+      "cost": "350¥",
+      "description": "A spring-loaded forearm slide that conceals a small pistol and can rapidly place it in the user's hand.",
+      "source": "CRB"
+    },
+    "Imaging Scope (Firearm Accessory)": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Top",
+      "availability": "2",
+      "cost": "300¥",
+      "description": "A top-mounted imaging device that can accept vision enhancements and can be used to aim without exposing the user's head.",
+      "source": "CRB"
+    },
+    "Laser Sight": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Top or Under",
+      "availability": "2",
+      "cost": "125¥",
+      "description": "Projects an aiming point onto the target and improves Accuracy when the dot is visible and the sight is used properly.",
+      "source": "CRB"
+    },
+    "Periscope (Firearm Accessory)": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Top",
+      "availability": "3",
+      "cost": "70¥",
+      "description": "A simple weapon-mounted periscope that allows observation and firing from behind cover with reduced exposure.",
+      "source": "CRB"
+    },
+    "Quick-Draw Holster": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "—",
+      "availability": "4",
+      "cost": "175¥",
+      "description": "A holster optimized for fast access, making it easier to quick-draw the weapon.",
+      "source": "CRB"
+    },
+    "Shock Pad": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "—",
+      "availability": "2",
+      "cost": "50¥",
+      "description": "A stock-mounted recoil pad that provides recoil compensation for shoulder-fired weapons.",
+      "source": "CRB"
+    },
+    "Silencer/Suppressor": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Barrel",
+      "availability": "9F",
+      "cost": "500¥",
+      "description": "A barrel attachment that reduces the sound and muzzle flash of gunfire, making shots harder to detect.",
+      "source": "CRB"
+    },
+    "Smart Firing Platform": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Under",
+      "availability": "12F",
+      "cost": "2,500¥",
+      "description": "An autonomous stabilized weapon platform that can mount and operate a firearm using its own sensor and targeting systems.",
+      "source": "CRB"
+    },
+    "Smartgun System (Internal)": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Internal",
+      "availability": "(+2)R",
+      "cost": "Weapon cost x 2¥",
+      "description": "An integrated smartgun system that links the weapon to compatible smartlink gear for enhanced targeting and weapon management.",
+      "source": "CRB"
+    },
+    "Smartgun System (External)": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Top or Under",
+      "availability": "4R",
+      "cost": "200¥",
+      "description": "An external smartgun attachment that provides smartlink functionality to a compatible weapon.",
+      "source": "CRB"
+    },
+    "Spare Clip": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "—",
+      "availability": "4",
+      "cost": "5¥",
+      "description": "An empty spare ammunition clip sized for a compatible firearm.",
+      "source": "CRB"
+    },
+    "Speed Loader": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "—",
+      "availability": "2",
+      "cost": "25¥",
+      "description": "A device that quickly reloads a revolver or similar cylinder-fed weapon.",
+      "source": "CRB"
+    },
+    "Tripod": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Accessories",
+      "mount": "Under",
+      "availability": "4",
+      "cost": "500¥",
+      "description": "A heavy three-legged support that provides strong recoil compensation when deployed on a stable surface.",
+      "source": "CRB"
+    },
+    "Arrow": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "rating": "Rating 1-10",
+      "availability": "Rating",
+      "cost": "Rating x 2¥",
+      "description": "Standard ammunition for a bow. Its effective performance is limited by the arrow Rating as well as the bow and user.",
+      "source": "CRB"
+    },
+    "Injection Arrow": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "rating": "Rating 1-10",
+      "availability": "(Rating + 2)R",
+      "cost": "Rating x 20¥",
+      "description": "A hollow arrow designed to inject a loaded drug or toxin into a target on a successful penetrating hit.",
+      "source": "CRB"
+    },
+    "Bolt": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "availability": "2",
+      "cost": "5¥",
+      "description": "Standard ammunition for crossbows.",
+      "source": "CRB"
+    },
+    "Injection Bolt": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "availability": "8R",
+      "cost": "50¥",
+      "description": "A hollow crossbow bolt that carries and injects a drug or toxin payload.",
+      "source": "CRB"
+    },
+    "APDS": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "—",
+      "ap_modifier": "-4",
+      "availability": "12F",
+      "cost": "120¥ per 10 rounds",
+      "description": "Armor-piercing discarding-sabot rounds designed to defeat armor; they reduce the target's effective protection substantially.",
+      "source": "CRB"
+    },
+    "Assault Cannon Ammunition": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "—",
+      "ap_modifier": "—",
+      "availability": "12F",
+      "cost": "400¥ per 10 rounds",
+      "description": "Large-caliber ammunition used by assault cannons.",
+      "source": "CRB"
+    },
+    "Explosive Rounds": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "+1",
+      "ap_modifier": "-1",
+      "availability": "9F",
+      "cost": "80¥ per 10 rounds",
+      "description": "Explosive ammunition that increases Damage Value and improves armor penetration.",
+      "source": "CRB"
+    },
+    "Flechette Rounds": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "+2",
+      "ap_modifier": "+5",
+      "availability": "6R",
+      "cost": "65¥ per 10 rounds",
+      "description": "A cloud of small darts that increases base damage against unarmored targets but performs poorly against armor.",
+      "source": "CRB"
+    },
+    "Gel Rounds": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "+0S",
+      "ap_modifier": "+1",
+      "availability": "2R",
+      "cost": "25¥ per 10 rounds",
+      "description": "Non-lethal impact rounds that convert damage to Stun and can knock targets down.",
+      "source": "CRB"
+    },
+    "Hollow Points": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "+1",
+      "ap_modifier": "+2",
+      "availability": "4F",
+      "cost": "70¥ per 10 rounds",
+      "description": "Expanding ammunition that increases damage against soft targets but is less effective against armor.",
+      "source": "CRB"
+    },
+    "Injection Darts": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "As drug/toxin",
+      "ap_modifier": "—",
+      "availability": "4R",
+      "cost": "75¥ per 10 darts",
+      "description": "Darts intended for compatible dart weapons; the effect is determined by the loaded drug or toxin.",
+      "source": "CRB"
+    },
+    "Regular Ammunition": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "—",
+      "ap_modifier": "—",
+      "availability": "2R",
+      "cost": "20¥ per 10 rounds",
+      "description": "Standard firearm ammunition with no special damage or armor-piercing modifier.",
+      "source": "CRB"
+    },
+    "Stick-n-Shock": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-2S(e)",
+      "ap_modifier": "-5",
+      "availability": "6R",
+      "cost": "80¥ per 10 rounds",
+      "description": "Electrified ammunition that converts the attack to Electricity Stun damage with strong armor penetration.",
+      "source": "CRB"
+    },
+    "Tracer Rounds": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "—",
+      "ap_modifier": "—",
+      "availability": "6R",
+      "cost": "60¥ per 10 rounds",
+      "description": "Visible tracer ammunition that helps track sustained automatic fire and can improve certain long bursts.",
+      "source": "CRB"
+    },
+    "Taser Dart": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "Weapon",
+      "ap_modifier": "Weapon",
+      "availability": "3",
+      "cost": "50¥ per 10 darts",
+      "description": "Replacement dart ammunition for tasers.",
+      "source": "CRB"
+    },
+    "Commercial Explosives": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "5",
+      "availability": "8R",
+      "cost": "100¥ per kg",
+      "description": "A standardized industrial explosive used for demolition and blasting. Its Rating determines explosive power.",
+      "source": "CRB"
+    },
+    "Foam Explosives": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "6-25",
+      "availability": "12F",
+      "cost": "Rating x 100¥ per kg",
+      "description": "A malleable explosive foam that can be shaped around a target for efficient demolition.",
+      "source": "CRB"
+    },
+    "Plastic Explosives": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "6-25",
+      "availability": "16F",
+      "cost": "Rating x 100¥ per kg",
+      "description": "High-grade moldable explosive used for controlled demolition and powerful shaped charges.",
+      "source": "CRB"
+    },
+    "Detonator Cap": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "8R",
+      "cost": "75¥",
+      "description": "A blasting cap used to trigger an explosive charge. It can be wired to timers, remote triggers, or other control systems.",
+      "source": "CRB"
+    },
+    "Clothing": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "0",
+      "availability": "—",
+      "cost": "20¥ to 100,000¥",
+      "description": "Ordinary clothing ranges from cheap streetwear to luxury fashion. Standard clothing provides no Armor Rating.",
+      "source": "CRB"
+    },
+    "Electrochromic Clothing Modification": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "—",
+      "availability": "+2",
+      "cost": "+500¥",
+      "description": "Adds electrochromic material that can change colors, patterns, logos, and other visual styling electronically.",
+      "source": "CRB"
+    },
+    "Feedback Clothing": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "—",
+      "availability": "8",
+      "cost": "+500¥",
+      "description": "Haptic clothing that reproduces touch sensations from AR, VR, or simsense experiences.",
+      "source": "CRB"
+    },
+    "Synthleather": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "4",
+      "availability": "—",
+      "cost": "+200¥",
+      "description": "Synthetic leather clothing that provides light protection while retaining the appearance of ordinary leather apparel.",
+      "source": "CRB"
+    },
+    "Actioneer Business Clothes": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "availability": "8",
+      "cost": "1,500¥",
+      "description": "Professional-looking armored clothing designed for corporate or social environments where obvious tactical armor would be inappropriate.",
+      "source": "CRB"
+    },
+    "Armor Clothing": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "availability": "2",
+      "cost": "450¥",
+      "description": "Everyday clothing reinforced with discreet ballistic protection.",
+      "source": "CRB"
+    },
+    "Armor Jacket": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "12",
+      "availability": "2",
+      "cost": "1,000¥",
+      "description": "A common runner choice that offers substantial protection in a relatively ordinary jacket form.",
+      "source": "CRB"
+    },
+    "Armor Vest": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "9",
+      "availability": "4",
+      "cost": "500¥",
+      "description": "A concealable armored vest offering solid torso protection.",
+      "source": "CRB"
+    },
+    "Chameleon Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "9",
+      "availability": "10R",
+      "cost": "1,700¥",
+      "description": "A full-body suit with ruthenium polymer coating that adapts to the surroundings to improve concealment.",
+      "source": "CRB"
+    },
+    "Full Body Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "availability": "14R",
+      "cost": "2,000¥",
+      "description": "Heavy full-body protection designed for military and security use. It can accept specialized helmet, chemical-seal, and environment options.",
+      "source": "CRB"
+    },
+    "Full Helmet (Full Body Armor Add-On)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+3",
+      "availability": "—",
+      "cost": "+500¥",
+      "description": "A helmet specifically used with full body armor, increasing its protection when worn as part of the set.",
+      "source": "CRB"
+    },
+    "Chemical Seal (Full Body Armor Add-On)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "—",
+      "availability": "+6",
+      "cost": "+6,000¥",
+      "description": "A full-body armor upgrade that creates a sealed environment against chemical threats when the suit is properly closed.",
+      "source": "CRB"
+    },
+    "Environment Adaptation (Full Body Armor Add-On)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "—",
+      "availability": "+3",
+      "cost": "+1,000¥",
+      "description": "Adapts full body armor for a hostile environmental condition such as extreme heat, cold, or another specialized environment.",
+      "source": "CRB"
+    },
+    "Lined Coat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "9",
+      "availability": "4",
+      "cost": "900¥",
+      "description": "A long coat with integrated armor that combines protection with the ability to conceal gear underneath.",
+      "source": "CRB"
+    },
+    "Urban Explorer Jumpsuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "9",
+      "availability": "8",
+      "cost": "650¥",
+      "description": "Armored urban clothing designed for mobility and daily use, with an optional matching helmet.",
+      "source": "CRB"
+    },
+    "Urban Explorer Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+2",
+      "availability": "—",
+      "cost": "+100¥",
+      "description": "A helmet designed to complement the Urban Explorer Jumpsuit and add protection when worn with it.",
+      "source": "CRB"
+    },
+    "Chemical Protection": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[Rating]",
+      "rating": "1-6",
+      "availability": "6",
+      "cost": "Rating x 250¥",
+      "description": "Adds dice equal to its Rating when resisting chemical attacks that the armor can protect against.",
+      "source": "CRB"
+    },
+    "Chemical Seal": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[6]",
+      "availability": "12R",
+      "cost": "3,000¥",
+      "description": "Creates a sealed protective environment when installed in compatible full-body armor.",
+      "source": "CRB"
+    },
+    "Fire Resistance": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[Rating]",
+      "rating": "1-6",
+      "availability": "6",
+      "cost": "Rating x 250¥",
+      "description": "Adds protection against fire and heat effects.",
+      "source": "CRB"
+    },
+    "Insulation": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[Rating]",
+      "rating": "1-6",
+      "availability": "6",
+      "cost": "Rating x 250¥",
+      "description": "Adds protection against cold damage and extreme cold exposure.",
+      "source": "CRB"
+    },
+    "Nonconductivity": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[Rating]",
+      "rating": "1-6",
+      "availability": "6",
+      "cost": "Rating x 250¥",
+      "description": "Adds dice equal to its Rating to resist Electricity damage.",
+      "source": "CRB"
+    },
+    "Shock Frills": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[2]",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Electrified decorative strips that can deliver a shock in close combat when activated.",
+      "source": "CRB"
+    },
+    "Thermal Damping": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[Rating]",
+      "rating": "1-6",
+      "availability": "10R",
+      "cost": "Rating x 500¥",
+      "description": "Reduces the wearer's heat signature and helps defeat thermographic observation.",
+      "source": "CRB"
+    },
+    "Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "availability": "2",
+      "cost": "100¥",
+      "description": "A protective helmet that adds to worn armor when compatible with the armor rules.",
+      "source": "CRB"
+    },
+    "Ballistic Shield": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+6",
+      "availability": "12R",
+      "cost": "1,200¥",
+      "description": "A large ballistic shield that adds armor while carried and can also be used as an improvised melee weapon.",
+      "source": "CRB"
+    },
+    "Riot Shield": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+6",
+      "availability": "10R",
+      "cost": "1,500¥",
+      "description": "A heavy transparent riot shield that adds armor and can be used in close combat.",
+      "source": "CRB"
+    },
+    "Meta Link": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "device_rating": "1",
+      "availability": "2",
+      "cost": "100¥",
+      "description": "A bare-bones entry-level commlink for basic Matrix access and communications.",
+      "source": "CRB"
+    },
+    "Sony Emperor": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "device_rating": "2",
+      "availability": "4",
+      "cost": "700¥",
+      "description": "A low-end consumer commlink with modest Matrix protection.",
+      "source": "CRB"
+    },
+    "Renraku Sensei": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "device_rating": "3",
+      "availability": "6",
+      "cost": "1,000¥",
+      "description": "A mid-range commlink offering balanced everyday Matrix capability.",
+      "source": "CRB"
+    },
+    "Erika Elite": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "device_rating": "4",
+      "availability": "8",
+      "cost": "2,500¥",
+      "description": "A quality commlink with stronger defenses and processing power.",
+      "source": "CRB"
+    },
+    "Hermes Ikon": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "device_rating": "5",
+      "availability": "10",
+      "cost": "3,000¥",
+      "description": "A high-end commlink suitable for users who need robust Matrix security.",
+      "source": "CRB"
+    },
+    "Transys Avalon": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "device_rating": "6",
+      "availability": "12",
+      "cost": "5,000¥",
+      "description": "A premium commlink with strong device defenses.",
+      "source": "CRB"
+    },
+    "Fairlight Caliban": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "device_rating": "7",
+      "availability": "14",
+      "cost": "8,000¥",
+      "description": "A top-tier commlink offering exceptional consumer-grade Matrix protection.",
+      "source": "CRB"
+    },
+    "Sim Module": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "availability": "—",
+      "cost": "+100¥",
+      "description": "Adds simsense capability to a commlink or cyberdeck, allowing cold-sim VR and simsense playback.",
+      "source": "CRB"
+    },
+    "Hot-Sim Modification": {
+      "category": "Electronics",
+      "subcategory": "Commlinks",
+      "availability": "+4F",
+      "cost": "+250¥",
+      "description": "Illegal modification that enables hot-sim VR for faster Matrix performance at greater biofeedback risk.",
+      "source": "CRB"
+    },
+    "AR Gloves": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "3",
+      "availability": "—",
+      "cost": "150¥",
+      "description": "Gloves that detect hand movement and provide tactile interaction with augmented-reality objects.",
+      "source": "CRB"
+    },
+    "Biometric Reader (Electronics Accessory)": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "3",
+      "availability": "4",
+      "cost": "200¥",
+      "description": "A device used to read biometric traits such as fingerprints, retinal patterns, or other identifying features.",
+      "source": "CRB"
+    },
+    "Electronic Paper": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "1",
+      "availability": "—",
+      "cost": "5¥",
+      "description": "A thin reusable display surface that can show digital text and images.",
+      "source": "CRB"
+    },
+    "Printer": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "3",
+      "availability": "—",
+      "cost": "25¥",
+      "description": "A general-purpose printer for producing physical documents and similar output.",
+      "source": "CRB"
+    },
+    "Satellite Link": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "4",
+      "availability": "6",
+      "cost": "500¥",
+      "description": "Provides Matrix connectivity through satellite communications in areas without ordinary grid coverage, subject to Noise.",
+      "source": "CRB"
+    },
+    "Simrig (Electronics Accessory)": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "3",
+      "availability": "12",
+      "cost": "1,000¥",
+      "description": "A wearable recording system that captures a full simsense experience for later playback.",
+      "source": "CRB"
+    },
+    "Subvocal Mic": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "3",
+      "availability": "4",
+      "cost": "50¥",
+      "description": "A throat microphone that picks up subvocalized speech for discreet communication.",
+      "source": "CRB"
+    },
+    "Trid Projector": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "3",
+      "availability": "—",
+      "cost": "200¥",
+      "description": "Projects three-dimensional holographic images and video.",
+      "source": "CRB"
+    },
+    "Trodes": {
+      "category": "Electronics",
+      "subcategory": "Electronics Accessories",
+      "device_rating": "3",
+      "availability": "—",
+      "cost": "70¥",
+      "description": "A non-invasive neural interface that allows DNI access without an implanted datajack.",
+      "source": "CRB"
+    },
+    "Standard RFID Tags": {
+      "category": "Electronics",
+      "subcategory": "RFID Tags",
+      "device_rating": "1",
+      "availability": "—",
+      "cost": "1¥ per 10",
+      "description": "Tiny wireless identification tags used for inventory, tracking, and object identification.",
+      "source": "CRB"
+    },
+    "Datachips": {
+      "category": "Electronics",
+      "subcategory": "RFID Tags",
+      "device_rating": "1",
+      "availability": "—",
+      "cost": "5¥ per 10",
+      "description": "RFID-sized storage chips used to carry data files.",
+      "source": "CRB"
+    },
+    "Security RFID Tags": {
+      "category": "Electronics",
+      "subcategory": "RFID Tags",
+      "device_rating": "3",
+      "availability": "3",
+      "cost": "5¥ per 10",
+      "description": "More robust RFID tags designed for security and tamper detection.",
+      "source": "CRB"
+    },
+    "Sensor RFID Tags": {
+      "category": "Electronics",
+      "subcategory": "RFID Tags",
+      "device_rating": "2",
+      "availability": "5",
+      "cost": "40¥ per 10",
+      "description": "RFID tags containing a tiny sensor function for monitoring local conditions.",
+      "source": "CRB"
+    },
+    "Stealth RFID Tags": {
+      "category": "Electronics",
+      "subcategory": "RFID Tags",
+      "device_rating": "3",
+      "availability": "7R",
+      "cost": "10¥ per 10",
+      "description": "Covert RFID tags designed to hide from normal scans and remain difficult to locate.",
+      "source": "CRB"
+    },
+    "Bug Scanner": {
+      "category": "Electronics",
+      "subcategory": "Communications & Countermeasures",
+      "rating": "1-6",
+      "availability": "Rating R",
+      "cost": "Rating x 100¥",
+      "description": "Scans for hidden wireless transmitters and surveillance devices; higher Ratings improve detection capability.",
+      "source": "CRB"
+    },
+    "Data Tap": {
+      "category": "Electronics",
+      "subcategory": "Communications & Countermeasures",
+      "availability": "6R",
+      "cost": "300¥",
+      "description": "A physical tap attached to a wired connection to intercept or access data traffic.",
+      "source": "CRB"
+    },
+    "Headjammer": {
+      "category": "Electronics",
+      "subcategory": "Communications & Countermeasures",
+      "rating": "1-6",
+      "availability": "Rating R",
+      "cost": "Rating x 150¥",
+      "description": "A short-range jammer fitted around a target's head to interfere with wireless and DNI communication.",
+      "source": "CRB"
+    },
+    "Area Jammer": {
+      "category": "Electronics",
+      "subcategory": "Communications & Countermeasures",
+      "rating": "1-6",
+      "availability": "(Rating x 3)F",
+      "cost": "Rating x 200¥",
+      "description": "Broadcasts interference in all directions, creating Noise within its effective area.",
+      "source": "CRB"
+    },
+    "Directional Jammer": {
+      "category": "Electronics",
+      "subcategory": "Communications & Countermeasures",
+      "rating": "1-6",
+      "availability": "(Rating x 2)F",
+      "cost": "Rating x 200¥",
+      "description": "Projects wireless interference in a focused direction, creating Noise against selected targets or areas.",
+      "source": "CRB"
+    },
+    "Micro-Transceiver": {
+      "category": "Electronics",
+      "subcategory": "Communications & Countermeasures",
+      "availability": "2",
+      "cost": "100¥",
+      "description": "A compact short-range secure radio transceiver for team communication.",
+      "source": "CRB"
+    },
+    "Tag Eraser": {
+      "category": "Electronics",
+      "subcategory": "Communications & Countermeasures",
+      "availability": "6R",
+      "cost": "450¥",
+      "description": "Generates an electromagnetic pulse strong enough to destroy ordinary RFID tags at close range.",
+      "source": "CRB"
+    },
+    "White Noise Generator": {
+      "category": "Electronics",
+      "subcategory": "Communications & Countermeasures",
+      "rating": "1-6",
+      "availability": "Rating",
+      "cost": "Rating x 50¥",
+      "description": "Generates sound masking that hinders audio surveillance and eavesdropping.",
+      "source": "CRB"
+    },
+    "Activesoft": {
+      "category": "Electronics",
+      "subcategory": "Skillsofts",
+      "rating": "1-6",
+      "availability": "8",
+      "cost": "Rating x 5,000¥",
+      "description": "A recorded Active Skill that can be used through compatible skillwire cyberware.",
+      "source": "CRB"
+    },
+    "Knowsoft": {
+      "category": "Electronics",
+      "subcategory": "Skillsofts",
+      "rating": "1-6",
+      "availability": "4",
+      "cost": "Rating x 2,000¥",
+      "description": "A recorded Knowledge Skill that can be accessed through a compatible skilljack.",
+      "source": "CRB"
+    },
+    "Linguasoft": {
+      "category": "Electronics",
+      "subcategory": "Skillsofts",
+      "rating": "1-6",
+      "availability": "2",
+      "cost": "Rating x 1,000¥",
+      "description": "A recorded Language Skill that can be accessed through a compatible skilljack.",
+      "source": "CRB"
+    },
+    "Standard Certified Credstick": {
+      "category": "Electronics",
+      "subcategory": "Certified Credsticks",
+      "maximum_value": "5,000¥",
+      "availability": "—",
+      "cost": "5¥",
+      "description": "An anonymous physical credstick used to store and transfer certified nuyen up to its maximum value.",
+      "source": "CRB"
+    },
+    "Silver Certified Credstick": {
+      "category": "Electronics",
+      "subcategory": "Certified Credsticks",
+      "maximum_value": "20,000¥",
+      "availability": "—",
+      "cost": "20¥",
+      "description": "An anonymous physical credstick used to store and transfer certified nuyen up to its maximum value.",
+      "source": "CRB"
+    },
+    "Gold Certified Credstick": {
+      "category": "Electronics",
+      "subcategory": "Certified Credsticks",
+      "maximum_value": "100,000¥",
+      "availability": "5",
+      "cost": "100¥",
+      "description": "An anonymous physical credstick used to store and transfer certified nuyen up to its maximum value.",
+      "source": "CRB"
+    },
+    "Platinum Certified Credstick": {
+      "category": "Electronics",
+      "subcategory": "Certified Credsticks",
+      "maximum_value": "500,000¥",
+      "availability": "10",
+      "cost": "500¥",
+      "description": "An anonymous physical credstick used to store and transfer certified nuyen up to its maximum value.",
+      "source": "CRB"
+    },
+    "Ebony Certified Credstick": {
+      "category": "Electronics",
+      "subcategory": "Certified Credsticks",
+      "maximum_value": "1,000,000¥",
+      "availability": "20",
+      "cost": "1,000¥",
+      "description": "An anonymous physical credstick used to store and transfer certified nuyen up to its maximum value.",
+      "source": "CRB"
+    },
+    "Fake SIN": {
+      "category": "Electronics",
+      "subcategory": "Identification",
+      "rating": "1-6",
+      "availability": "(Rating x 3)F",
+      "cost": "Rating x 2,500¥",
+      "description": "A forged System Identification Number used to create a false legal identity. Its Rating determines how well it withstands verification.",
+      "source": "CRB"
+    },
+    "Fake License": {
+      "category": "Electronics",
+      "subcategory": "Identification",
+      "rating": "1-6",
+      "availability": "(Rating x 3)F",
+      "cost": "Rating x 200¥",
+      "description": "A forged license attached to a SIN, used to make restricted gear, occupations, or activities appear legally authorized.",
+      "source": "CRB"
+    },
+    "Tool Kit": {
+      "category": "Electronics",
+      "subcategory": "Tools",
+      "availability": "—",
+      "cost": "500¥",
+      "description": "A portable set of tools for one specific Technical or related skill, sufficient for routine field work.",
+      "source": "CRB"
+    },
+    "Tool Shop": {
+      "category": "Electronics",
+      "subcategory": "Tools",
+      "availability": "8",
+      "cost": "5,000¥",
+      "description": "A fixed workshop for one specific skill, allowing more extensive work than a portable kit.",
+      "source": "CRB"
+    },
+    "Tool Facility": {
+      "category": "Electronics",
+      "subcategory": "Tools",
+      "availability": "12",
+      "cost": "50,000¥",
+      "description": "A full professional facility for one specific skill, suitable for major fabrication, repair, or advanced work.",
+      "source": "CRB"
+    },
+    "Binoculars": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "capacity": "1-3",
+      "availability": "—",
+      "cost": "Capacity x 50¥",
+      "description": "Electronic binoculars that can hold vision enhancements up to their Capacity.",
+      "source": "CRB"
+    },
+    "Optical Binoculars": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "availability": "—",
+      "cost": "50¥",
+      "description": "Purely optical binoculars that provide magnification without electronic components.",
+      "source": "CRB"
+    },
+    "Camera": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "capacity": "1-6",
+      "availability": "—",
+      "cost": "Capacity x 100¥",
+      "description": "An imaging device that records still images and video and can hold vision enhancements.",
+      "source": "CRB"
+    },
+    "Micro-Camera": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "capacity": "1",
+      "availability": "—",
+      "cost": "100¥",
+      "description": "A tiny concealable camera with Capacity 1.",
+      "source": "CRB"
+    },
+    "Contact Lenses": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "capacity": "1-3",
+      "availability": "6",
+      "cost": "Capacity x 200¥",
+      "description": "Electronic contact lenses that can hold vision enhancements.",
+      "source": "CRB"
+    },
+    "Glasses": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "capacity": "1-4",
+      "availability": "—",
+      "cost": "Capacity x 100¥",
+      "description": "Electronic glasses that can hold vision enhancements.",
+      "source": "CRB"
+    },
+    "Goggles": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "capacity": "1-6",
+      "availability": "—",
+      "cost": "Capacity x 50¥",
+      "description": "Protective electronic goggles that can carry multiple vision enhancements.",
+      "source": "CRB"
+    },
+    "Endoscope": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "availability": "8",
+      "cost": "250¥",
+      "description": "A flexible optical probe used to look through small openings or around obstructions.",
+      "source": "CRB"
+    },
+    "Imaging Scope": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "capacity": "3",
+      "availability": "2",
+      "cost": "300¥",
+      "description": "An electronic scope with Capacity 3 that can hold vision enhancements.",
+      "source": "CRB"
+    },
+    "Periscope (Optical Device)": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "availability": "3",
+      "cost": "50¥",
+      "description": "A simple optical device for viewing over or around obstacles without direct exposure.",
+      "source": "CRB"
+    },
+    "Mage Sight Goggles": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "availability": "12R",
+      "cost": "3,000¥",
+      "description": "Fiber-optic goggles that let a magician draw line of sight around corners without using electronic imaging.",
+      "source": "CRB"
+    },
+    "Monocle": {
+      "category": "Electronics",
+      "subcategory": "Optical & Imaging Devices",
+      "capacity": "1-4",
+      "availability": "—",
+      "cost": "Rating x 120¥",
+      "description": "A single-eye electronic display that can carry vision enhancements.",
+      "source": "CRB"
+    },
+    "Low-Light Vision (Vision Enhancement)": {
+      "category": "Electronics",
+      "subcategory": "Vision Enhancements",
+      "capacity": "[1]",
+      "availability": "+4",
+      "cost": "+500¥",
+      "description": "Amplifies available light, allowing effective vision in dim conditions.",
+      "source": "CRB"
+    },
+    "Flare Compensation (Vision Enhancement)": {
+      "category": "Electronics",
+      "subcategory": "Vision Enhancements",
+      "capacity": "[1]",
+      "availability": "+1",
+      "cost": "+250¥",
+      "description": "Automatically protects against glare and sudden bright flashes.",
+      "source": "CRB"
+    },
+    "Image Link (Vision Enhancement)": {
+      "category": "Electronics",
+      "subcategory": "Vision Enhancements",
+      "capacity": "[1]",
+      "availability": "—",
+      "cost": "+25¥",
+      "description": "Displays visual information, AR objects, video, and device output directly in the user's field of view.",
+      "source": "CRB"
+    },
+    "Smartlink (Vision Enhancement)": {
+      "category": "Electronics",
+      "subcategory": "Vision Enhancements",
+      "capacity": "[1]",
+      "availability": "+4R",
+      "cost": "+2,000¥",
+      "description": "Provides the visual interface required to receive full smartgun benefits.",
+      "source": "CRB"
+    },
+    "Thermographic Vision (Vision Enhancement)": {
+      "category": "Electronics",
+      "subcategory": "Vision Enhancements",
+      "capacity": "[1]",
+      "availability": "+6",
+      "cost": "+500¥",
+      "description": "Displays heat patterns and allows vision based on infrared radiation.",
+      "source": "CRB"
+    },
+    "Vision Enhancement": {
+      "category": "Electronics",
+      "subcategory": "Vision Enhancements",
+      "capacity": "[Rating]",
+      "rating": "1-3",
+      "availability": "+(Rating x 2)",
+      "cost": "+(Rating x 500)¥",
+      "description": "Improves visual acuity and adds its Rating as a dice-pool bonus to visual Perception Tests.",
+      "source": "CRB"
+    },
+    "Vision Magnification": {
+      "category": "Electronics",
+      "subcategory": "Vision Enhancements",
+      "capacity": "[1]",
+      "availability": "+2",
+      "cost": "+250¥",
+      "description": "Provides optical or electronic zoom for distant targets and can help offset range penalties when aiming.",
+      "source": "CRB"
+    },
+    "Directional Microphone": {
+      "category": "Electronics",
+      "subcategory": "Audio Devices",
+      "capacity": "1-6",
+      "availability": "4",
+      "cost": "Capacity x 50¥",
+      "description": "A focused microphone used to isolate sounds from a chosen direction; it can hold audio enhancements.",
+      "source": "CRB"
+    },
+    "Ear Buds": {
+      "category": "Electronics",
+      "subcategory": "Audio Devices",
+      "capacity": "1-3",
+      "availability": "—",
+      "cost": "Capacity x 50¥",
+      "description": "Compact earphones that can hold audio enhancements.",
+      "source": "CRB"
+    },
+    "Headphones": {
+      "category": "Electronics",
+      "subcategory": "Audio Devices",
+      "capacity": "1-6",
+      "availability": "—",
+      "cost": "Capacity x 50¥",
+      "description": "Full-size audio gear that can carry multiple audio enhancements.",
+      "source": "CRB"
+    },
+    "Laser Microphone": {
+      "category": "Electronics",
+      "subcategory": "Audio Devices",
+      "capacity": "1-6",
+      "availability": "6R",
+      "cost": "Capacity x 100¥",
+      "description": "Reads tiny surface vibrations with a laser to eavesdrop through windows or other reflective surfaces.",
+      "source": "CRB"
+    },
+    "Omni-Directional Microphone": {
+      "category": "Electronics",
+      "subcategory": "Audio Devices",
+      "capacity": "1-6",
+      "availability": "—",
+      "cost": "Capacity x 50¥",
+      "description": "Records sound from all directions and can hold audio enhancements.",
+      "source": "CRB"
+    },
+    "Audio Enhancement (Audio Device)": {
+      "category": "Electronics",
+      "subcategory": "Audio Enhancements",
+      "capacity": "[Rating]",
+      "rating": "1-3",
+      "availability": "+(Rating x 2)",
+      "cost": "+(Rating x 500)¥",
+      "description": "Improves audio clarity and adds its Rating to audio-based Perception Tests.",
+      "source": "CRB"
+    },
+    "Select Sound Filter (Audio Device)": {
+      "category": "Electronics",
+      "subcategory": "Audio Enhancements",
+      "capacity": "[Rating]",
+      "rating": "1-3",
+      "availability": "+(Rating x 3)",
+      "cost": "+(Rating x 250)¥",
+      "description": "Filters chosen sounds or frequency bands, helping isolate useful audio and ignore distractions.",
+      "source": "CRB"
+    },
+    "Spatial Recognizer (Audio Device)": {
+      "category": "Electronics",
+      "subcategory": "Audio Enhancements",
+      "capacity": "[2]",
+      "availability": "+4",
+      "cost": "+1,000¥",
+      "description": "Analyzes incoming sound to determine its direction and spatial position.",
+      "source": "CRB"
+    },
+    "Handheld Sensor Housing": {
+      "category": "Electronics",
+      "subcategory": "Sensor Housings",
+      "capacity": "1-3",
+      "availability": "—",
+      "cost": "Capacity x 100¥",
+      "description": "A portable housing that can carry one or more sensor functions up to its Capacity.",
+      "source": "CRB"
+    },
+    "Wall-Mounted Sensor Housing": {
+      "category": "Electronics",
+      "subcategory": "Sensor Housings",
+      "capacity": "1-6",
+      "availability": "—",
+      "cost": "Capacity x 250¥",
+      "description": "A fixed sensor housing installed on a wall or similar surface.",
+      "source": "CRB"
+    },
+    "Sensor Array": {
+      "category": "Electronics",
+      "subcategory": "Sensor Housings",
+      "capacity": "[6]",
+      "rating": "2-8",
+      "availability": "7",
+      "cost": "Rating x 1,000¥",
+      "description": "A multi-function sensor package that can run up to six sensor functions at the array Rating.",
+      "source": "CRB"
+    },
+    "Single Sensor": {
+      "category": "Electronics",
+      "subcategory": "Sensor Housings",
+      "capacity": "[1]",
+      "rating": "2-8",
+      "availability": "5",
+      "cost": "Rating x 100¥",
+      "description": "A dedicated sensor device containing one sensor function at the selected Rating.",
+      "source": "CRB"
+    },
+    "Atmosphere Sensor": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Detects and analyzes atmospheric composition and environmental gases.",
+      "source": "CRB"
+    },
+    "Camera Sensor Function": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Provides visual imaging as a sensor function.",
+      "source": "CRB"
+    },
+    "Cyberware Scanner": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Scans a target for implanted cyberware at short range.",
+      "source": "CRB"
+    },
+    "Directional Microphone Sensor Function": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Captures sound from a selected direction.",
+      "source": "CRB"
+    },
+    "Geiger Counter": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Detects ionizing radiation.",
+      "source": "CRB"
+    },
+    "Laser Microphone Sensor Function": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Uses reflected laser light to detect vibrations and recover audio at range.",
+      "source": "CRB"
+    },
+    "Laser Range Finder": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Measures precise distance to a target at long range.",
+      "source": "CRB"
+    },
+    "MAD Scanner": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Uses magnetic anomaly detection to locate metal objects and cyberware.",
+      "source": "CRB"
+    },
+    "Motion Sensor": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Detects movement within its effective area.",
+      "source": "CRB"
+    },
+    "Olfactory Sensor": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Analyzes airborne chemicals and scents.",
+      "source": "CRB"
+    },
+    "Omni-Directional Microphone Sensor Function": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Captures sound from all directions.",
+      "source": "CRB"
+    },
+    "Radio Signal Scanner": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Detects and analyzes radio-frequency transmissions.",
+      "source": "CRB"
+    },
+    "Ultrasound Sensor Function": {
+      "category": "Electronics",
+      "subcategory": "Sensor Functions",
+      "availability": "—",
+      "cost": "Included in sensor housing/array cost",
+      "description": "Maps nearby surroundings using ultrasonic pulses.",
+      "source": "CRB"
+    },
+    "Key/Combination Lock": {
+      "category": "Security & Infiltration",
+      "subcategory": "Security Devices",
+      "rating": "1-6",
+      "availability": "Rating",
+      "cost": "Rating x 10¥",
+      "description": "A conventional keyed or combination lock. Higher Ratings represent stronger and more difficult mechanisms.",
+      "source": "CRB"
+    },
+    "Maglock": {
+      "category": "Security & Infiltration",
+      "subcategory": "Security Devices",
+      "rating": "1-6",
+      "availability": "Rating",
+      "cost": "Rating x 100¥",
+      "description": "An electronic lock that can use keypads, cards, biometrics, and anti-tamper options.",
+      "source": "CRB"
+    },
+    "Keypad or Card Reader": {
+      "category": "Security & Infiltration",
+      "subcategory": "Security Devices",
+      "availability": "—",
+      "cost": "+50¥",
+      "description": "Adds keypad or access-card authentication to a compatible maglock.",
+      "source": "CRB"
+    },
+    "Anti-Tamper Circuits": {
+      "category": "Security & Infiltration",
+      "subcategory": "Security Devices",
+      "rating": "1-4",
+      "availability": "+Rating",
+      "cost": "+(Rating x 250)¥",
+      "description": "Adds anti-tamper protection to a security device, making bypass attempts more difficult and potentially triggering alarms.",
+      "source": "CRB"
+    },
+    "Biometric Reader (Security Device)": {
+      "category": "Security & Infiltration",
+      "subcategory": "Security Devices",
+      "availability": "+4",
+      "cost": "+200¥",
+      "description": "Adds biometric authentication to a compatible maglock.",
+      "source": "CRB"
+    },
+    "Metal Restraints": {
+      "category": "Security & Infiltration",
+      "subcategory": "Restraints",
+      "armor": "16",
+      "structure": "2",
+      "availability": "—",
+      "cost": "20¥",
+      "description": "Standard metal restraints with a mechanical or wireless-controlled lock.",
+      "source": "CRB"
+    },
+    "Plasteel Restraints": {
+      "category": "Security & Infiltration",
+      "subcategory": "Restraints",
+      "armor": "20",
+      "structure": "2",
+      "availability": "6R",
+      "cost": "50¥",
+      "description": "Flash-fused high-strength restraints that remain in place until cut free.",
+      "source": "CRB"
+    },
+    "Plastic Restraints": {
+      "category": "Security & Infiltration",
+      "subcategory": "Restraints",
+      "armor": "6",
+      "structure": "1",
+      "availability": "—",
+      "cost": "5¥ per 10",
+      "description": "Lightweight disposable plastic restraint straps.",
+      "source": "CRB"
+    },
+    "Containment Manacles": {
+      "category": "Security & Infiltration",
+      "subcategory": "Restraints",
+      "armor": "16",
+      "structure": "2",
+      "availability": "6R",
+      "cost": "250¥",
+      "description": "Heavy restraints for wrists or ankles that restrict movement and can prevent extension of some cyber-implant weapons.",
+      "source": "CRB"
+    },
+    "Autopicker": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "rating": "1-6",
+      "availability": "8R",
+      "cost": "Rating x 500¥",
+      "description": "A lockpick gun for defeating mechanical locks. Its Rating improves the relevant limit, and wireless access can provide a dice-pool bonus.",
+      "source": "CRB"
+    },
+    "Cellular Glove Molder": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "rating": "1-4",
+      "availability": "12F",
+      "cost": "Rating x 500¥",
+      "description": "Copies a finger or palm print and creates a wearable sleeve for spoofing some biometric readers.",
+      "source": "CRB"
+    },
+    "Chisel/Crowbar": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "availability": "—",
+      "cost": "20¥",
+      "description": "A leverage tool that doubles effective Strength when forcing a door or container.",
+      "source": "CRB"
+    },
+    "Keycard Copier": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "rating": "1-6",
+      "availability": "8F",
+      "cost": "Rating x 600¥",
+      "description": "Copies an access card so a duplicate can be manufactured with appropriate tools and Hardware skill.",
+      "source": "CRB"
+    },
+    "Lockpick Set": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "availability": "4R",
+      "cost": "250¥",
+      "description": "A set of mechanical lockpicking tools required for conventional lockpicking.",
+      "source": "CRB"
+    },
+    "Maglock Passkey": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "rating": "1-4",
+      "availability": "(Rating x 3)F",
+      "cost": "Rating x 2,000¥",
+      "description": "An electronic skeleton key used against cardreader maglocks; wireless functionality improves its Rating.",
+      "source": "CRB"
+    },
+    "Miniwelder": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "availability": "2",
+      "cost": "250¥",
+      "description": "A portable electric arc tool for cutting or welding metal.",
+      "source": "CRB"
+    },
+    "Miniwelder Fuel Canister": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "availability": "2",
+      "cost": "80¥",
+      "description": "Replacement fuel/power supply for a miniwelder.",
+      "source": "CRB"
+    },
+    "Monofilament Chainsaw": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "availability": "8",
+      "cost": "500¥",
+      "description": "A cutting tool using a monofilament chain, effective against barriers and suitable for brutal improvised use.",
+      "source": "CRB"
+    },
+    "Sequencer": {
+      "category": "Security & Infiltration",
+      "subcategory": "Breaking & Entering Gear",
+      "rating": "1-6",
+      "availability": "(Rating x 3)F",
+      "cost": "Rating x 250¥",
+      "description": "An electronic device used to defeat keypad locks by automatically trying access sequences.",
+      "source": "CRB"
+    },
+    "Glue Solvent": {
+      "category": "Security & Infiltration",
+      "subcategory": "Industrial Chemicals",
+      "availability": "2",
+      "cost": "90¥",
+      "description": "A chemical solvent formulated to dissolve industrial adhesive.",
+      "source": "CRB"
+    },
+    "Glue Sprayer": {
+      "category": "Security & Infiltration",
+      "subcategory": "Industrial Chemicals",
+      "availability": "2",
+      "cost": "150¥",
+      "description": "A sprayer that rapidly applies strong industrial adhesive to a surface or target.",
+      "source": "CRB"
+    },
+    "Thermite Burning Bar": {
+      "category": "Security & Infiltration",
+      "subcategory": "Industrial Chemicals",
+      "availability": "16R",
+      "cost": "500¥",
+      "description": "An intensely hot thermite cutting bar used to burn through resistant material.",
+      "source": "CRB"
+    },
+    "Chemsuit": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "rating": "1-6",
+      "availability": "Rating x 2",
+      "cost": "Rating x 150¥",
+      "description": "A disposable or reusable protective suit that adds its Rating to tests against contact-vector chemical threats.",
+      "source": "CRB"
+    },
+    "Climbing Gear": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "—",
+      "cost": "200¥",
+      "description": "A basic set of ropes, harnesses, pitons, carabiners, and other climbing equipment.",
+      "source": "CRB"
+    },
+    "Diving Gear": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "6",
+      "cost": "2,000¥",
+      "description": "A complete underwater breathing and diving equipment package.",
+      "source": "CRB"
+    },
+    "Flashlight": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "—",
+      "cost": "25¥",
+      "description": "A portable light source.",
+      "source": "CRB"
+    },
+    "Gas Mask": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "—",
+      "cost": "200¥",
+      "description": "Protects the wearer against many inhalation-vector toxins and gases.",
+      "source": "CRB"
+    },
+    "Gecko Tape Gloves": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "12",
+      "cost": "250¥",
+      "description": "Gloves with gecko-adhesive surfaces that improve climbing on suitable surfaces.",
+      "source": "CRB"
+    },
+    "Hazmat Suit": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "8",
+      "cost": "3,000¥",
+      "description": "A sealed protective suit designed for hazardous chemical, biological, and environmental exposure.",
+      "source": "CRB"
+    },
+    "Light Stick": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "—",
+      "cost": "25¥",
+      "description": "A disposable chemical light source.",
+      "source": "CRB"
+    },
+    "Magnesium Torch": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "—",
+      "cost": "5¥",
+      "description": "A compact, intensely bright burning torch useful for illumination and emergency signaling.",
+      "source": "CRB"
+    },
+    "Micro Flare Launcher": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "—",
+      "cost": "175¥",
+      "description": "A small launcher for signal flares.",
+      "source": "CRB"
+    },
+    "Micro Flares": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "—",
+      "cost": "25¥",
+      "description": "Replacement signal flares for a micro flare launcher.",
+      "source": "CRB"
+    },
+    "Rappelling Gloves": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "—",
+      "cost": "50¥",
+      "description": "Protective gloves designed for rapid rope descent and controlled rappelling.",
+      "source": "CRB"
+    },
+    "Respirator": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "rating": "1-6",
+      "availability": "—",
+      "cost": "Rating x 50¥",
+      "description": "A filter respirator that adds its Rating when resisting inhalation-vector toxins.",
+      "source": "CRB"
+    },
+    "Survival Kit": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Survival Gear",
+      "availability": "4",
+      "cost": "200¥",
+      "description": "A compact bundle of essential survival supplies and tools for wilderness or emergency situations.",
+      "source": "CRB"
+    },
+    "Grapple Gun": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Grapple & Rope Gear",
+      "availability": "8R",
+      "cost": "500¥",
+      "description": "Launches a grappling projectile and line for climbing, traversal, or access to elevated positions.",
+      "source": "CRB"
+    },
+    "Catalyst Stick": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Grapple & Rope Gear",
+      "availability": "8F",
+      "cost": "120¥",
+      "description": "A specialized grapple projectile that chemically bonds to a surface to create an anchor point.",
+      "source": "CRB"
+    },
+    "Microwire": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Grapple & Rope Gear",
+      "availability": "4",
+      "cost": "50¥ per 100 m",
+      "description": "Extremely thin, strong line used for climbing and other covert applications.",
+      "source": "CRB"
+    },
+    "Myomeric Rope": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Grapple & Rope Gear",
+      "availability": "10",
+      "cost": "200¥ per 10 m",
+      "description": "Advanced rope made from artificial muscle fibers that can change tension and assist climbing.",
+      "source": "CRB"
+    },
+    "Standard Rope": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Grapple & Rope Gear",
+      "availability": "—",
+      "cost": "50¥ per 100 m",
+      "description": "Conventional rope suitable for general climbing, hauling, and field use.",
+      "source": "CRB"
+    },
+    "Stealth Rope": {
+      "category": "Survival & Field Gear",
+      "subcategory": "Grapple & Rope Gear",
+      "availability": "8F",
+      "cost": "85¥ per 100 m",
+      "description": "Low-signature rope intended for covert operations and difficult detection.",
+      "source": "CRB"
+    },
+    "Biomonitor": {
+      "category": "Medical & Emergency",
+      "subcategory": "Biotech",
+      "availability": "3",
+      "cost": "300¥",
+      "description": "Continuously monitors vital signs and can transmit medical status to linked devices or services.",
+      "source": "CRB"
+    },
+    "Disposable Syringe": {
+      "category": "Medical & Emergency",
+      "subcategory": "Biotech",
+      "availability": "3",
+      "cost": "10¥",
+      "description": "A sterile single-use syringe for injecting drugs, medicine, or toxins.",
+      "source": "CRB"
+    },
+    "Medkit": {
+      "category": "Medical & Emergency",
+      "subcategory": "Biotech",
+      "rating": "1-6",
+      "availability": "Rating",
+      "cost": "Rating x 250¥",
+      "description": "A portable medical kit whose Rating provides supplies and diagnostic support for First Aid and medical treatment.",
+      "source": "CRB"
+    },
+    "Medkit Supplies": {
+      "category": "Medical & Emergency",
+      "subcategory": "Biotech",
+      "availability": "—",
+      "cost": "100¥",
+      "description": "Replacement consumables for a medkit.",
+      "source": "CRB"
+    },
+    "DocWagon Basic Contract": {
+      "category": "Medical & Emergency",
+      "subcategory": "DocWagon Contracts",
+      "availability": "—",
+      "cost": "5,000¥ per year",
+      "description": "Entry-level emergency medical response subscription.",
+      "source": "CRB"
+    },
+    "DocWagon Gold Contract": {
+      "category": "Medical & Emergency",
+      "subcategory": "DocWagon Contracts",
+      "availability": "—",
+      "cost": "25,000¥ per year",
+      "description": "Enhanced DocWagon emergency response contract with better service priority and benefits than Basic.",
+      "source": "CRB"
+    },
+    "DocWagon Platinum Contract": {
+      "category": "Medical & Emergency",
+      "subcategory": "DocWagon Contracts",
+      "availability": "—",
+      "cost": "50,000¥ per year",
+      "description": "Premium emergency medical response contract with high-priority service.",
+      "source": "CRB"
+    },
+    "DocWagon Super-Platinum Contract": {
+      "category": "Medical & Emergency",
+      "subcategory": "DocWagon Contracts",
+      "availability": "—",
+      "cost": "100,000¥ per year",
+      "description": "The highest standard DocWagon service tier listed in the Core Rulebook, offering exceptional emergency response priority.",
+      "source": "CRB"
+    },
+    "Antidote Patch": {
+      "category": "Medical & Emergency",
+      "subcategory": "Slap Patches",
+      "rating": "1-6",
+      "availability": "Rating",
+      "cost": "Rating x 50¥",
+      "description": "A slap patch that provides an immediate bonus equal to its Rating against a toxin already affecting the patient.",
+      "source": "CRB"
+    },
+    "Chem Patch": {
+      "category": "Medical & Emergency",
+      "subcategory": "Slap Patches",
+      "availability": "6",
+      "cost": "200¥",
+      "description": "A slap patch used to deliver one dose of a drug or chemical through the skin.",
+      "source": "CRB"
+    },
+    "Stim Patch": {
+      "category": "Medical & Emergency",
+      "subcategory": "Slap Patches",
+      "rating": "1-6",
+      "availability": "Rating x 2",
+      "cost": "Rating x 25¥",
+      "description": "Temporarily removes Stun damage equal to its Rating; the suppressed damage returns when the patch wears off.",
+      "source": "CRB"
+    },
+    "Tranq Patch": {
+      "category": "Medical & Emergency",
+      "subcategory": "Slap Patches",
+      "rating": "1-10",
+      "availability": "Rating x 2",
+      "cost": "Rating x 20¥",
+      "description": "A slap patch that delivers a tranquilizing compound with Power based on its Rating.",
+      "source": "CRB"
+    },
+    "Trauma Patch": {
+      "category": "Medical & Emergency",
+      "subcategory": "Slap Patches",
+      "availability": "6",
+      "cost": "500¥",
+      "description": "An emergency patch used to stabilize a critically injured character and improve survival until treatment arrives.",
+      "source": "CRB"
+    },
+    "Commlink (Headware)": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.2",
+      "capacity": "[2]",
+      "availability": "—",
+      "cost": "2,000¥ + commlink cost",
+      "description": "Implants a commlink directly in the user's head for DNI access.",
+      "source": "CRB"
+    },
+    "Control Rig Rating 1": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "1",
+      "availability": "5R",
+      "cost": "43,000¥",
+      "description": "A neural interface for riggers that allows jumping into vehicles and drones; Rating 1.",
+      "source": "CRB"
+    },
+    "Control Rig Rating 2": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "2",
+      "availability": "10R",
+      "cost": "97,000¥",
+      "description": "A more advanced neural control rig that improves vehicle and drone control; Rating 2.",
+      "source": "CRB"
+    },
+    "Control Rig Rating 3": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "3",
+      "availability": "15R",
+      "cost": "208,000¥",
+      "description": "The most advanced standard control rig listed in the Core Rulebook; Rating 3.",
+      "source": "CRB"
+    },
+    "Cortex Bomb - Kink Bomb": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0",
+      "capacity": "[1]",
+      "availability": "12F",
+      "cost": "10,000¥",
+      "description": "A tiny implanted explosive designed to incapacitate or punish a target rather than create a large blast.",
+      "source": "CRB"
+    },
+    "Cortex Bomb - Microbomb": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0",
+      "capacity": "[2]",
+      "availability": "16F",
+      "cost": "25,000¥",
+      "description": "A lethal implanted explosive triggered remotely or by programmed condition.",
+      "source": "CRB"
+    },
+    "Cortex Bomb - Area Bomb": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0",
+      "capacity": "[3]",
+      "availability": "20F",
+      "cost": "40,000¥",
+      "description": "A larger implanted bomb capable of harming people around the host as well as the host.",
+      "source": "CRB"
+    },
+    "Cyberdeck (Headware)": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.4",
+      "capacity": "[4]",
+      "availability": "5R",
+      "cost": "5,000¥ + cyberdeck cost",
+      "description": "Implants a cyberdeck internally for direct neural access and concealment.",
+      "source": "CRB"
+    },
+    "Datajack": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.1",
+      "availability": "2",
+      "cost": "1,000¥",
+      "description": "A standard direct neural interface port for wired DNI, data transfer, and device control.",
+      "source": "CRB"
+    },
+    "Data Lock": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.1",
+      "rating": "1-12",
+      "availability": "Rating x 2",
+      "cost": "Rating x 1,000¥",
+      "description": "Protected internal data storage that can be locked against unauthorized access.",
+      "source": "CRB"
+    },
+    "Olfactory Booster": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.2",
+      "rating": "1-6",
+      "availability": "Rating x 3",
+      "cost": "Rating x 4,000¥",
+      "description": "Enhances smell and adds its Rating to relevant olfactory Perception Tests.",
+      "source": "CRB"
+    },
+    "Simrig (Headware)": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.2",
+      "availability": "12R",
+      "cost": "4,000¥",
+      "description": "Implanted system that records the user's full sensory and emotional experience as simsense.",
+      "source": "CRB"
+    },
+    "Skilljack": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "Rating x 0.1",
+      "rating": "1-6",
+      "availability": "Rating x 2",
+      "cost": "Rating x 20,000¥",
+      "description": "Neural interface that allows the use of knowsofts and linguasofts up to the installed Rating.",
+      "source": "CRB"
+    },
+    "Taste Booster": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.2",
+      "rating": "1-6",
+      "availability": "Rating x 3",
+      "cost": "Rating x 3,000¥",
+      "description": "Enhances taste perception and adds its Rating to relevant taste-based Perception Tests.",
+      "source": "CRB"
+    },
+    "Tooth Compartment": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "—",
+      "availability": "8",
+      "cost": "800¥",
+      "description": "A hollow cybertooth used to conceal a tiny object or dose.",
+      "source": "CRB"
+    },
+    "Ultrasound Sensor (Headware)": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.25",
+      "capacity": "[2]",
+      "rating": "1-6",
+      "availability": "10",
+      "cost": "Rating x 12,000¥",
+      "description": "Implanted ultrasound sensor that maps surroundings using reflected sound.",
+      "source": "CRB"
+    },
+    "Voice Modulator": {
+      "category": "Augmentations",
+      "subcategory": "Headware",
+      "essence": "0.2",
+      "rating": "1-6",
+      "availability": "(Rating x 3)F",
+      "cost": "Rating x 5,000¥",
+      "description": "Alters the user's voice and can imitate or disguise vocal characteristics.",
+      "source": "CRB"
+    },
+    "Cybereyes Basic System": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "rating": "1-4",
+      "essence": "0.2 / 0.3 / 0.4 / 0.5",
+      "capacity": "4 / 8 / 12 / 16",
+      "availability": "Rating 1: 3; Rating 2: 6; Rating 3: 9; Rating 4: 12",
+      "cost": "Rating 1: 4,000¥; Rating 2: 6,000¥; Rating 3: 10,000¥; Rating 4: 14,000¥",
+      "description": "Replacement cybernetic eyes with built-in image link and capacity for additional vision enhancements. Higher Ratings provide more Capacity.",
+      "source": "CRB"
+    },
+    "Flare Compensation (Cybereye Enhancement)": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "0.1",
+      "capacity": "[1]",
+      "availability": "4",
+      "cost": "1,000¥",
+      "description": "Protects against glare and sudden flashes.",
+      "source": "CRB"
+    },
+    "Image Link (Cybereye Enhancement)": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "0.1",
+      "capacity": "Included",
+      "availability": "4",
+      "cost": "1,000¥",
+      "description": "Displays visual and AR information directly in the user's vision; included in the basic cybereye system.",
+      "source": "CRB"
+    },
+    "Low-Light Vision (Cybereye Enhancement)": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "0.1",
+      "capacity": "[2]",
+      "availability": "4",
+      "cost": "1,500¥",
+      "description": "Allows effective vision in dim light.",
+      "source": "CRB"
+    },
+    "Ocular Drone": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "—",
+      "capacity": "[6]",
+      "availability": "6",
+      "cost": "6,000¥",
+      "description": "A removable cybereye that can operate as a tiny drone when detached from the socket.",
+      "source": "CRB"
+    },
+    "Retinal Duplication": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "0.1",
+      "capacity": "[1]",
+      "rating": "1-6",
+      "availability": "16F",
+      "cost": "Rating x 20,000¥",
+      "description": "Replicates another person's retinal pattern to defeat retinal scanners, subject to Rating and security opposition.",
+      "source": "CRB"
+    },
+    "Smartlink (Cybereye Enhancement)": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "0.2",
+      "capacity": "[3]",
+      "availability": "8R",
+      "cost": "4,000¥",
+      "description": "Implanted smartgun visual interface providing full smartlink targeting benefits.",
+      "source": "CRB"
+    },
+    "Thermographic Vision (Cybereye Enhancement)": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "0.1",
+      "capacity": "[2]",
+      "availability": "4",
+      "cost": "1,500¥",
+      "description": "Displays heat patterns as vision.",
+      "source": "CRB"
+    },
+    "Vision Enhancement (Cybereye Enhancement)": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "0.1",
+      "capacity": "[Rating]",
+      "rating": "1-3",
+      "availability": "Rating x 3",
+      "cost": "Rating x 4,000¥",
+      "description": "Improves visual acuity and adds its Rating to visual Perception Tests.",
+      "source": "CRB"
+    },
+    "Vision Magnification (Cybereye Enhancement)": {
+      "category": "Augmentations",
+      "subcategory": "Eyeware",
+      "essence": "0.1",
+      "capacity": "[2]",
+      "availability": "4",
+      "cost": "2,000¥",
+      "description": "Provides zoom magnification for distant observation and aiming.",
+      "source": "CRB"
+    },
+    "Cyberears Basic System": {
+      "category": "Augmentations",
+      "subcategory": "Earware",
+      "rating": "1-4",
+      "essence": "0.2 / 0.3 / 0.4 / 0.5",
+      "capacity": "4 / 8 / 12 / 16",
+      "availability": "Rating 1: 3; Rating 2: 6; Rating 3: 9; Rating 4: 12",
+      "cost": "Rating 1: 3,000¥; Rating 2: 4,500¥; Rating 3: 7,500¥; Rating 4: 11,000¥",
+      "description": "Replacement cybernetic ears with capacity for audio enhancements. Higher Ratings provide more Capacity.",
+      "source": "CRB"
+    },
+    "Audio Enhancement (Earware)": {
+      "category": "Augmentations",
+      "subcategory": "Earware",
+      "essence": "0.1",
+      "capacity": "[Rating]",
+      "rating": "1-3",
+      "availability": "Rating x 3",
+      "cost": "Rating x 4,000¥",
+      "description": "Enhances hearing and adds its Rating to audio-based Perception Tests.",
+      "source": "CRB"
+    },
+    "Balance Augmenter": {
+      "category": "Augmentations",
+      "subcategory": "Earware",
+      "essence": "0.1",
+      "capacity": "[4]",
+      "availability": "8",
+      "cost": "8,000¥",
+      "description": "Improves balance and coordination, aiding tests where equilibrium matters.",
+      "source": "CRB"
+    },
+    "Damper": {
+      "category": "Augmentations",
+      "subcategory": "Earware",
+      "essence": "0.1",
+      "capacity": "[1]",
+      "availability": "6",
+      "cost": "2,250¥",
+      "description": "Protects hearing from damaging loud sounds while allowing normal hearing.",
+      "source": "CRB"
+    },
+    "Select Sound Filter (Earware)": {
+      "category": "Augmentations",
+      "subcategory": "Earware",
+      "essence": "0.1",
+      "capacity": "[Rating]",
+      "rating": "1-6",
+      "availability": "Rating x 3",
+      "cost": "Rating x 3,500¥",
+      "description": "Filters selected sounds and frequency bands to isolate useful audio.",
+      "source": "CRB"
+    },
+    "Sound Link": {
+      "category": "Augmentations",
+      "subcategory": "Earware",
+      "essence": "0.1",
+      "capacity": "Included",
+      "availability": "4",
+      "cost": "1,000¥",
+      "description": "Feeds audio and AR sound directly into the user's hearing; included in the basic cyberear system.",
+      "source": "CRB"
+    },
+    "Spatial Recognizer (Earware)": {
+      "category": "Augmentations",
+      "subcategory": "Earware",
+      "essence": "0.1",
+      "capacity": "[2]",
+      "availability": "8",
+      "cost": "4,000¥",
+      "description": "Determines the direction and position of sound sources.",
+      "source": "CRB"
+    },
+    "Bone Lacing - Plastic": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "0.5",
+      "availability": "8R",
+      "cost": "8,000¥",
+      "description": "Reinforces the skeleton with plastic material, increasing resilience and improving unarmed damage.",
+      "source": "CRB"
+    },
+    "Bone Lacing - Aluminum": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "1",
+      "availability": "12R",
+      "cost": "18,000¥",
+      "description": "Reinforces the skeleton with aluminum, providing stronger protection and harder unarmed strikes.",
+      "source": "CRB"
+    },
+    "Bone Lacing - Titanium": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "1.5",
+      "availability": "16R",
+      "cost": "30,000¥",
+      "description": "Heavy titanium reinforcement of the skeleton, providing the strongest Core Rulebook bone-lacing protection and unarmed impact.",
+      "source": "CRB"
+    },
+    "Dermal Plating": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "Rating x 0.5",
+      "rating": "1-6",
+      "availability": "(Rating x 4)R",
+      "cost": "Rating x 3,000¥",
+      "description": "Subdermal armor plates that add their Rating to the character's Armor.",
+      "source": "CRB"
+    },
+    "Fingertip Compartment": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "0.1",
+      "availability": "4",
+      "cost": "3,000¥",
+      "description": "A tiny concealed storage compartment in a fingertip.",
+      "source": "CRB"
+    },
+    "Grapple Gun (Bodyware)": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "0.5",
+      "availability": "8",
+      "cost": "5,000¥",
+      "description": "An implanted grapple gun, usually mounted in a cyberarm, for launching a line and climbing.",
+      "source": "CRB"
+    },
+    "Internal Air Tank": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "0.25",
+      "rating": "1-3",
+      "availability": "Rating",
+      "cost": "Rating x 4,500¥",
+      "description": "An implanted compressed-air reserve that extends the time the user can go without breathing external air.",
+      "source": "CRB"
+    },
+    "Muscle Replacement": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "Rating x 1",
+      "rating": "1-4",
+      "availability": "(Rating x 5)R",
+      "cost": "Rating x 25,000¥",
+      "description": "Cybernetic muscle replacement that increases both Agility and Strength by its Rating.",
+      "source": "CRB"
+    },
+    "Reaction Enhancers": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "Rating x 0.3",
+      "rating": "1-3",
+      "availability": "(Rating x 5)R",
+      "cost": "Rating x 13,000¥",
+      "description": "Neural and muscular augmentation that increases Reaction by its Rating.",
+      "source": "CRB"
+    },
+    "Skillwires": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "Rating x 0.1",
+      "rating": "1-6",
+      "availability": "Rating x 4",
+      "cost": "Rating x 20,000¥",
+      "description": "Allows the user to run activesofts up to the installed Rating.",
+      "source": "CRB"
+    },
+    "Smuggling Compartment": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "0.2",
+      "availability": "6",
+      "cost": "7,500¥",
+      "description": "A concealed internal compartment used to hide contraband or small equipment.",
+      "source": "CRB"
+    },
+    "Wired Reflexes": {
+      "category": "Augmentations",
+      "subcategory": "Bodyware",
+      "essence": "2 / 3 / 5",
+      "rating": "1-3",
+      "availability": "8R / 12R / 20R",
+      "cost": "39,000¥ / 149,000¥ / 217,000¥",
+      "description": "Cybernetic reflex enhancement that increases Reaction and Initiative Dice according to Rating.",
+      "source": "CRB"
+    },
+    "Obvious Cyberarm - Full": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "1",
+      "capacity": "15",
+      "availability": "4",
+      "cost": "15,000¥",
+      "description": "A full obvious mechanical replacement arm with substantial modification Capacity.",
+      "source": "CRB"
+    },
+    "Obvious Cyberleg - Full": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "1",
+      "capacity": "20",
+      "availability": "4",
+      "cost": "15,000¥",
+      "description": "A full obvious mechanical replacement leg with substantial modification Capacity.",
+      "source": "CRB"
+    },
+    "Obvious Cyberhand/Cyberfoot": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "0.25",
+      "capacity": "4",
+      "availability": "2",
+      "cost": "5,000¥",
+      "description": "An obvious mechanical replacement hand or foot.",
+      "source": "CRB"
+    },
+    "Obvious Lower Cyberarm": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "0.45",
+      "capacity": "10",
+      "availability": "4",
+      "cost": "10,000¥",
+      "description": "An obvious replacement from elbow to hand.",
+      "source": "CRB"
+    },
+    "Obvious Lower Cyberleg": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "0.45",
+      "capacity": "12",
+      "availability": "4",
+      "cost": "10,000¥",
+      "description": "An obvious replacement from knee to foot.",
+      "source": "CRB"
+    },
+    "Obvious Cybertorso": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "1.5",
+      "capacity": "10",
+      "availability": "12",
+      "cost": "20,000¥",
+      "description": "An obvious cybernetic replacement or reinforcement of the torso.",
+      "source": "CRB"
+    },
+    "Obvious Cyberskull": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "0.75",
+      "capacity": "4",
+      "availability": "16",
+      "cost": "10,000¥",
+      "description": "An obvious cybernetic skull replacement.",
+      "source": "CRB"
+    },
+    "Synthetic Cyberarm - Full": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "1",
+      "capacity": "8",
+      "availability": "4",
+      "cost": "20,000¥",
+      "description": "A full cyberarm designed to resemble natural flesh, with lower Capacity than an obvious limb.",
+      "source": "CRB"
+    },
+    "Synthetic Cyberleg - Full": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "1",
+      "capacity": "10",
+      "availability": "4",
+      "cost": "20,000¥",
+      "description": "A full cyberleg designed to resemble natural flesh.",
+      "source": "CRB"
+    },
+    "Synthetic Cyberhand/Cyberfoot": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "0.25",
+      "capacity": "2",
+      "availability": "2",
+      "cost": "6,000¥",
+      "description": "A natural-looking cybernetic replacement hand or foot.",
+      "source": "CRB"
+    },
+    "Synthetic Lower Cyberarm": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "0.45",
+      "capacity": "5",
+      "availability": "4",
+      "cost": "12,000¥",
+      "description": "A natural-looking replacement from elbow to hand.",
+      "source": "CRB"
+    },
+    "Synthetic Lower Cyberleg": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "0.45",
+      "capacity": "6",
+      "availability": "4",
+      "cost": "12,000¥",
+      "description": "A natural-looking replacement from knee to foot.",
+      "source": "CRB"
+    },
+    "Synthetic Cybertorso": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "1.5",
+      "capacity": "5",
+      "availability": "12",
+      "cost": "25,000¥",
+      "description": "A cybertorso designed to appear natural.",
+      "source": "CRB"
+    },
+    "Synthetic Cyberskull": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "essence": "0.75",
+      "capacity": "2",
+      "availability": "16",
+      "cost": "15,000¥",
+      "description": "A cybernetic skull designed to resemble a natural head.",
+      "source": "CRB"
+    },
+    "Cyberlimb Customization": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimbs",
+      "availability": "Cyberlimb Availability +1 per point",
+      "cost": "+5,000¥ per point",
+      "description": "Raises a cyberlimb's base Agility or Strength above 3, subject to the user's natural maximum and cyberlimb rules.",
+      "source": "CRB"
+    },
+    "Cyberlimb Agility Enhancement": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimb Enhancements",
+      "rating": "1-3",
+      "capacity": "[Rating]",
+      "availability": "(Rating x 3)R",
+      "cost": "Rating x 6,500¥",
+      "description": "Increases a cyberlimb's Agility by its Rating, subject to augmented maximums.",
+      "source": "CRB"
+    },
+    "Cyberlimb Armor": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimb Enhancements",
+      "rating": "1-3",
+      "capacity": "[Rating]",
+      "availability": "Rating x 5",
+      "cost": "Rating x 3,000¥",
+      "description": "Adds armor to a cyberlimb; armor from installed cyberlimbs contributes according to the cyberlimb armor rules.",
+      "source": "CRB"
+    },
+    "Cyberlimb Strength Enhancement": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimb Enhancements",
+      "rating": "1-3",
+      "capacity": "[Rating]",
+      "availability": "(Rating x 3)R",
+      "cost": "Rating x 6,500¥",
+      "description": "Increases a cyberlimb's Strength by its Rating, subject to augmented maximums.",
+      "source": "CRB"
+    },
+    "Cyberarm Gyromount": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimb Accessories",
+      "capacity": "[8]",
+      "availability": "12F",
+      "cost": "6,000¥",
+      "description": "An internal cyberarm stabilization system that provides recoil compensation when deployed.",
+      "source": "CRB"
+    },
+    "Cyberarm Slide": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimb Accessories",
+      "capacity": "[3]",
+      "availability": "12R",
+      "cost": "3,000¥",
+      "description": "An internal arm slide that can rapidly present a held weapon or object.",
+      "source": "CRB"
+    },
+    "Cyber Holster": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimb Accessories",
+      "capacity": "[5]",
+      "availability": "8R",
+      "cost": "2,000¥",
+      "description": "A concealed cyberlimb compartment designed to hold a firearm.",
+      "source": "CRB"
+    },
+    "Hydraulic Jacks": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimb Accessories",
+      "capacity": "[Rating]",
+      "rating": "1-6",
+      "availability": "9",
+      "cost": "Rating x 2,500¥",
+      "description": "Hydraulic leg enhancements that assist jumping and landing when installed in cyberlegs.",
+      "source": "CRB"
+    },
+    "Large Smuggling Compartment": {
+      "category": "Augmentations",
+      "subcategory": "Cyberlimb Accessories",
+      "capacity": "[5]",
+      "availability": "6",
+      "cost": "8,000¥",
+      "description": "A larger concealed compartment installed in a cyberlimb.",
+      "source": "CRB"
+    },
+    "Adrenaline Pump": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.75",
+      "rating": "1-3",
+      "availability": "(Rating x 6)F",
+      "cost": "Rating x 55,000¥",
+      "description": "An implanted gland that floods the body with performance-enhancing hormones, temporarily boosting physical capability at significant risk.",
+      "source": "CRB"
+    },
+    "Bone Density Augmentation": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.3",
+      "rating": "1-4",
+      "availability": "Rating x 4",
+      "cost": "Rating x 5,000¥",
+      "description": "Biological reinforcement of the skeleton that improves resilience and unarmed striking power.",
+      "source": "CRB"
+    },
+    "Cat's Eye": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "0.1",
+      "availability": "4",
+      "cost": "4,000¥",
+      "description": "Biological eye alteration that grants low-light vision.",
+      "source": "CRB"
+    },
+    "Enhanced Articulation": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "0.3",
+      "availability": "12",
+      "cost": "24,000¥",
+      "description": "Improves joints and connective tissue, enhancing physical coordination for a broad range of physical skills.",
+      "source": "CRB"
+    },
+    "Muscle Augmentation": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.2",
+      "rating": "1-4",
+      "availability": "(Rating x 5)R",
+      "cost": "Rating x 31,000¥",
+      "description": "Grown muscle tissue that increases Strength by its Rating.",
+      "source": "CRB"
+    },
+    "Muscle Toner": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.2",
+      "rating": "1-4",
+      "availability": "(Rating x 5)R",
+      "cost": "Rating x 32,000¥",
+      "description": "Biological muscle refinement that increases Agility by its Rating.",
+      "source": "CRB"
+    },
+    "Orthoskin": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.25",
+      "rating": "1-4",
+      "availability": "(Rating x 4)R",
+      "cost": "Rating x 6,000¥",
+      "description": "Toughened skin layers that add Armor equal to Rating.",
+      "source": "CRB"
+    },
+    "Pathogenic Defense": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.1",
+      "rating": "1-6",
+      "availability": "Rating x 2",
+      "cost": "Rating x 4,500¥",
+      "description": "Enhances the immune system and adds its Rating to tests against disease.",
+      "source": "CRB"
+    },
+    "Platelet Factories": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "0.2",
+      "availability": "12",
+      "cost": "17,000¥",
+      "description": "Modified blood-clotting organs that reduce damage from severe bleeding injuries.",
+      "source": "CRB"
+    },
+    "Skin Pocket": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "0.1",
+      "availability": "4",
+      "cost": "12,000¥",
+      "description": "A concealed biological pocket beneath the skin for hiding a small object.",
+      "source": "CRB"
+    },
+    "Suprathyroid Gland": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "0.7",
+      "availability": "20R",
+      "cost": "140,000¥",
+      "description": "A metabolic gland that broadly increases physical attributes but greatly increases nutritional needs.",
+      "source": "CRB"
+    },
+    "Symbiotes": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.2",
+      "rating": "1-4",
+      "availability": "Rating x 5",
+      "cost": "Rating x 3,500¥",
+      "description": "Symbiotic organisms that accelerate natural healing and recovery.",
+      "source": "CRB"
+    },
+    "Synthacardium": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.1",
+      "rating": "1-3",
+      "availability": "Rating x 4",
+      "cost": "Rating x 30,000¥",
+      "description": "An enhanced heart that adds its Rating to Athletics skill-group tests.",
+      "source": "CRB"
+    },
+    "Tailored Pheromones": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.2",
+      "rating": "1-3",
+      "availability": "(Rating x 4)R",
+      "cost": "Rating x 31,000¥",
+      "description": "Engineered pheromones that improve social tests when scent can influence the target.",
+      "source": "CRB"
+    },
+    "Toxin Extractor": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.2",
+      "rating": "1-6",
+      "availability": "Rating x 3",
+      "cost": "Rating x 4,800¥",
+      "description": "Biological filters that add their Rating to resistance against toxins.",
+      "source": "CRB"
+    },
+    "Tracheal Filter": {
+      "category": "Augmentations",
+      "subcategory": "Basic Bioware",
+      "essence": "Rating x 0.1",
+      "rating": "1-6",
+      "availability": "Rating x 3",
+      "cost": "Rating x 4,500¥",
+      "description": "Filters inhaled contaminants and adds its Rating against inhalation-vector toxins.",
+      "source": "CRB"
+    },
+    "Cerebral Booster": {
+      "category": "Augmentations",
+      "subcategory": "Cultured Bioware",
+      "essence": "Rating x 0.2",
+      "rating": "1-3",
+      "availability": "Rating x 6",
+      "cost": "Rating x 31,500¥",
+      "description": "Cultured neural tissue that increases Logic by its Rating.",
+      "source": "CRB"
+    },
+    "Damage Compensators": {
+      "category": "Augmentations",
+      "subcategory": "Cultured Bioware",
+      "essence": "Rating x 0.1",
+      "rating": "1-12",
+      "availability": "(Rating x 3)F",
+      "cost": "Rating x 2,000¥",
+      "description": "Suppresses wound penalties for a number of damage boxes equal to Rating.",
+      "source": "CRB"
+    },
+    "Mnemonic Enhancer": {
+      "category": "Augmentations",
+      "subcategory": "Cultured Bioware",
+      "essence": "Rating x 0.1",
+      "rating": "1-3",
+      "availability": "Rating x 5",
+      "cost": "Rating x 9,000¥",
+      "description": "Improves memory and learning, aiding Knowledge, Language, and skill advancement.",
+      "source": "CRB"
+    },
+    "Pain Editor": {
+      "category": "Augmentations",
+      "subcategory": "Cultured Bioware",
+      "essence": "0.3",
+      "availability": "18F",
+      "cost": "48,000¥",
+      "description": "Allows the user to suppress pain signals and ignore Stun-related impairment while active, at the cost of reduced awareness of injury.",
+      "source": "CRB"
+    },
+    "Reflex Recorder": {
+      "category": "Augmentations",
+      "subcategory": "Cultured Bioware",
+      "essence": "0.1",
+      "availability": "10",
+      "cost": "14,000¥",
+      "description": "Cultured neural tissue specialized for one Physical or Combat skill, improving that skill.",
+      "source": "CRB"
+    },
+    "Sleep Regulator": {
+      "category": "Augmentations",
+      "subcategory": "Cultured Bioware",
+      "essence": "0.1",
+      "availability": "6",
+      "cost": "12,000¥",
+      "description": "Reduces the amount of sleep required for full rest and recovery.",
+      "source": "CRB"
+    },
+    "Synaptic Booster": {
+      "category": "Augmentations",
+      "subcategory": "Cultured Bioware",
+      "essence": "Rating x 0.5",
+      "rating": "1-3",
+      "availability": "(Rating x 6)R",
+      "cost": "Rating x 95,000¥",
+      "description": "Cultured neural enhancement that increases Reaction and Initiative Dice according to Rating.",
+      "source": "CRB"
+    },
+    "Enchanting Focus": {
+      "category": "Magical Equipment",
+      "subcategory": "Foci",
+      "force": "Variable",
+      "availability": "(Force x 3)R",
+      "cost": "Force x 5,000¥",
+      "description": "A focus that assists a specific enchanting-related magical activity as defined when created.",
+      "source": "CRB"
+    },
+    "Metamagic Focus": {
+      "category": "Magical Equipment",
+      "subcategory": "Foci",
+      "force": "Variable",
+      "availability": "(Force x 3)R",
+      "cost": "Force x 9,000¥",
+      "description": "A focus tied to a specific metamagic technique and used according to that technique's rules.",
+      "source": "CRB"
+    },
+    "Power Focus": {
+      "category": "Magical Equipment",
+      "subcategory": "Foci",
+      "force": "Variable",
+      "availability": "(Force x 4)R",
+      "cost": "Force x 18,000¥",
+      "description": "A versatile focus that adds its Force to many tests involving the user's Magic attribute.",
+      "source": "CRB"
+    },
+    "Qi Focus": {
+      "category": "Magical Equipment",
+      "subcategory": "Foci",
+      "force": "Variable",
+      "availability": "(Force x 3)R",
+      "cost": "Force x 3,000¥",
+      "description": "A focus that provides a specific adept power while active, with Force determining the power points supplied.",
+      "source": "CRB"
+    },
+    "Spell Focus": {
+      "category": "Magical Equipment",
+      "subcategory": "Foci",
+      "force": "Variable",
+      "availability": "(Force x 3)R",
+      "cost": "Force x 4,000¥",
+      "description": "A focus tied to a spell category or spellcasting purpose, adding its Force to the appropriate tests.",
+      "source": "CRB"
+    },
+    "Spirit Focus": {
+      "category": "Magical Equipment",
+      "subcategory": "Foci",
+      "force": "Variable",
+      "availability": "(Force x 3)R",
+      "cost": "Force x 4,000¥",
+      "description": "A focus that assists summoning, binding, or banishing spirits of a specified type, as defined when created.",
+      "source": "CRB"
+    },
+    "Weapon Focus": {
+      "category": "Magical Equipment",
+      "subcategory": "Foci",
+      "force": "Variable",
+      "availability": "(Force x 4)R",
+      "cost": "Force x 7,000¥",
+      "description": "A bonded melee weapon focus that adds its Force to appropriate melee attacks and can affect astral forms.",
+      "source": "CRB"
+    },
+    "Focus Formula": {
+      "category": "Magical Equipment",
+      "subcategory": "Magical Formulae",
+      "availability": "Same as focus",
+      "cost": "25% of corresponding focus cost",
+      "description": "The magical design required to create a specific focus.",
+      "source": "CRB"
+    },
+    "Combat Spell Formula": {
+      "category": "Magical Equipment",
+      "subcategory": "Magical Formulae",
+      "availability": "8R",
+      "cost": "2,000¥",
+      "description": "A formula used to learn or create a specific Combat spell.",
+      "source": "CRB"
+    },
+    "Detection Spell Formula": {
+      "category": "Magical Equipment",
+      "subcategory": "Magical Formulae",
+      "availability": "4R",
+      "cost": "500¥",
+      "description": "A formula used to learn or create a specific Detection spell.",
+      "source": "CRB"
+    },
+    "Health Spell Formula": {
+      "category": "Magical Equipment",
+      "subcategory": "Magical Formulae",
+      "availability": "4R",
+      "cost": "500¥",
+      "description": "A formula used to learn or create a specific Health spell.",
+      "source": "CRB"
+    },
+    "Illusion Spell Formula": {
+      "category": "Magical Equipment",
+      "subcategory": "Magical Formulae",
+      "availability": "8R",
+      "cost": "1,000¥",
+      "description": "A formula used to learn or create a specific Illusion spell.",
+      "source": "CRB"
+    },
+    "Manipulation Spell Formula": {
+      "category": "Magical Equipment",
+      "subcategory": "Magical Formulae",
+      "availability": "8R",
+      "cost": "1,500¥",
+      "description": "A formula used to learn or create a specific Manipulation spell.",
+      "source": "CRB"
+    },
+    "Magical Lodge Materials": {
+      "category": "Magical Equipment",
+      "subcategory": "Magical Supplies",
+      "force": "Variable",
+      "availability": "Force x 2",
+      "cost": "Force x 500¥",
+      "description": "Materials used to establish a magical lodge of a chosen Force. The lodge supports ritual work, learning, and other magical activities.",
+      "source": "CRB"
+    },
+    "Reagents": {
+      "category": "Magical Equipment",
+      "subcategory": "Magical Supplies",
+      "availability": "—",
+      "cost": "20¥ per dram",
+      "description": "Raw magical materials used in spellcasting, ritual magic, alchemy, enchanting, and other magical procedures.",
+      "source": "CRB"
+    },
+    "EX-Explosive Rounds": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "+2",
+      "ap_modifier": "-1",
+      "availability": "14F",
+      "cost": "120¥ per 10 rounds",
+      "description": "Enhanced explosive ammunition with a larger charge than standard explosive rounds, increasing Damage Value by 2 and improving Armor Penetration by 1.",
+      "source": "SRG"
+    },
+    "Frangible": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-1",
+      "ap_modifier": "+4",
+      "availability": "2R",
+      "cost": "10¥ per 10 rounds",
+      "description": "Rounds designed to break apart on hard surfaces. They are less effective against armor and barriers; barriers count double their normal Armor against frangible ammunition.",
+      "source": "SRG"
+    },
+    "Flare": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-2 / +2",
+      "ap_modifier": "+2 / -3",
+      "availability": "6R",
+      "cost": "20¥ per 10 rounds",
+      "description": "Signal ammunition that ignites when fired and bursts into burning sparks at 60 meters. The first modifiers apply below 60 meters; the second apply from 60 to 62 meters. The round is ineffective beyond 62 meters and may set a struck target on fire.",
+      "source": "SRG"
+    },
+    "Tracker": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-2",
+      "ap_modifier": "-2",
+      "availability": "8R",
+      "cost": "150¥ per 10 rounds",
+      "description": "A bullet containing an RFID tag. If the attack damages the target, the tag remains lodged in the body; if all damage is resisted, it lodges in the armor. Tracker rounds use either security or stealth RFID tags.",
+      "source": "SRG"
+    },
+    "Capsule": {
+      "category": "Weapon Support",
+      "subcategory": "Firearm Ammunition",
+      "damage_modifier": "-4",
+      "ap_modifier": "+4",
+      "availability": "2",
+      "cost": "5¥ per 10 rounds",
+      "description": "Light rounds carrying a liquid payload. A successful hit, including a grazing hit, ruptures the capsule and exposes the target to the chemical inside. One chemical dose fills five rounds; filling each round requires a Logic + Armorer [Mental] (12, 1 minute) Extended Test. Capsule rounds always use Light Pistol ranges.",
+      "source": "SRG"
+    },
+    "Ammonium Nitrate": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "4",
+      "availability": "5",
+      "cost": "80¥ per kg",
+      "description": "A granular fertilizer compound that can be used as an explosive or oxidizer. It requires a container before a detonator can be fitted, will not detonate when wet, and burns rather than explodes unless suitably enclosed.",
+      "source": "SRG"
+    },
+    "ANFO": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "6",
+      "availability": "7",
+      "cost": "100¥ per kg",
+      "description": "Ammonium nitrate mixed with fuel oil. It is a common commercial blasting explosive and is insensitive to ordinary blasting caps, so it requires a primer such as dynamite or TNT.",
+      "source": "SRG"
+    },
+    "Dynamite": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "6",
+      "cost": "80¥ per kg",
+      "description": "A powerful traditional explosive commonly supplied in 0.25-kilogram sticks. Multiple sticks can be combined into larger charges, and dynamite can also serve as a primer for other explosives such as ANFO.",
+      "source": "SRG"
+    },
+    "Gunpowder": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "3",
+      "cost": "25¥ per kg",
+      "description": "A catch-all category for modern smokeless propellants, black powder, and similar firearm propellants. It must be enclosed before it can explode and neither burns nor detonates when wet.",
+      "source": "SRG"
+    },
+    "Nitroglycerin": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "6",
+      "availability": "10",
+      "cost": "150¥ per liter",
+      "description": "An exceptionally powerful but dangerously unstable liquid explosive. Handling it calls for an Agility + Reaction Test; a glitch causes accidental detonation. One liter is treated as one kilogram of Rating 6 explosive.",
+      "source": "SRG"
+    },
+    "TNT": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "10R",
+      "cost": "100¥ per kg",
+      "description": "Trinitrotoluene, the traditional standard against which explosive power is measured. It is sold in blocks of varying weight and can be cut or combined into larger charges.",
+      "source": "SRG"
+    },
+    "Detonating Cord (Low Yield)": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "3",
+      "availability": "10R",
+      "cost": "100¥ per meter",
+      "description": "A thin explosive-filled cord that can act as a charge, cutting line, breaching charge, or high-speed fuse. Low-yield cord has a base Damage Value of 3P per meter, adjusted by 1P for each one-third of a meter added or removed.",
+      "source": "SRG"
+    },
+    "Detonating Cord (High Yield)": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "6",
+      "availability": "14R",
+      "cost": "150¥ per meter",
+      "description": "A more powerful form of detonating cord for heavier materials. High-yield cord has a base Damage Value of 6P per meter, adjusted by 1P for each one-third of a meter added or removed.",
+      "source": "SRG"
+    },
+    "Binary Explosive": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-20",
+      "availability": "18F",
+      "cost": "Rating x 125¥ per kg",
+      "description": "An explosive created from components that are comparatively inert while separate and become dangerous when combined. It is available in Ratings 1 through 20.",
+      "source": "SRG"
+    },
+    "Linear Cutting Charge": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-25",
+      "availability": "16R",
+      "cost": "Rating x 250¥ per meter",
+      "description": "A V-shaped explosive sheath designed to focus a blast along a precise cutting line. It automatically tamps the explosive for a x4 multiplier when detonated, and one meter contains one kilogram of explosive at the charge's Rating.",
+      "source": "SRG"
+    },
+    "Liquid Explosive": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-25",
+      "availability": "16F",
+      "cost": "Rating x 150¥ per liter",
+      "description": "Liquid plastique that functions like plastic explosive but can be poured in precise quantities. One liter is approximately equivalent to one kilogram of plastic explosive and can be dispersed by an atomizer.",
+      "source": "SRG"
+    },
+    "Atomizer": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-10",
+      "availability": "(Rating x 2)R",
+      "cost": "Rating x 300¥",
+      "description": "A sprayer that holds liters of liquid explosive equal to its Rating and disperses one liter per Complex Action into a one-cubic-meter cloud. Damage Value remains constant throughout the cloud; normal blast reduction begins outside it.",
+      "source": "SRG"
+    },
+    "Electrical Exploder": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-6",
+      "availability": "8R",
+      "cost": "Rating x 150¥",
+      "description": "A handheld device that sends the electrical pulse needed to activate compatible electrical detonators. It can control circuits equal to its Rating and simultaneously trigger up to Rating x 4 detonators.",
+      "source": "SRG"
+    },
+    "Optical Exploder": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-6",
+      "availability": "14R",
+      "cost": "Rating x 250¥",
+      "description": "A handheld device that activates compatible optical detonators. Like an electrical exploder, it can control circuits equal to its Rating and trigger up to Rating x 4 detonators at once.",
+      "source": "SRG"
+    },
+    "Hard-Shell Briefcase (Hermetically Sealed)": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-12",
+      "availability": "10R",
+      "cost": "Rating x 100¥",
+      "description": "A sealed transport case that suppresses chemical traces. Its Rating applies as a negative dice-pool modifier to chemsniffers and olfactory sensors attempting to detect explosives inside.",
+      "source": "SRG"
+    },
+    "Safety Fuse": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "6R",
+      "cost": "5¥ per meter",
+      "description": "Waterproof fuse cord that burns at approximately one centimeter per second, or three centimeters per Combat Turn, providing a simple timed delay for a blasting cap.",
+      "source": "SRG"
+    },
+    "Redundant Power Supply": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "6R",
+      "cost": "50-500¥",
+      "description": "A backup power supply for a detonator. It reduces the risk that a failed primary supply prevents detonation, though adding redundancy makes the device more complex to build.",
+      "source": "SRG"
+    },
+    "Nanoprint Scanner": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-6",
+      "availability": "16F",
+      "cost": "Rating x 500¥",
+      "description": "A forensic scanner used in demolitions work to detect or analyze microscopic traces and signatures associated with explosive devices.",
+      "source": "SRG"
+    },
+    "Blasting Cap": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "8R",
+      "cost": "20¥",
+      "description": "A common construction and demolitions detonator available in electric, non-electric, and fuse forms. It provides the primary explosive impulse needed to set off a secondary charge.",
+      "source": "SRG"
+    },
+    "Electrical Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "(Rating x 4)R",
+      "cost": "Rating x 30¥",
+      "description": "A detonator activated by a strong electrical pulse. It can be wired into switches, vehicle ignitions, or other triggers and requires a suitable power source or electrical exploder.",
+      "source": "SRG"
+    },
+    "Optical Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-6",
+      "availability": "(Rating x 7)F",
+      "cost": "Rating x 200¥",
+      "description": "A smart detonator able to process external sensor data such as facial recognition or biometric scans. It uses its Device Rating as Data Processing when identifying a designated target.",
+      "source": "SRG"
+    },
+    "Pull Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "9F",
+      "cost": "80¥",
+      "description": "A mechanical detonator triggered when a ring is pulled. It can be connected to a tripwire or configured as a pull-release trap that also detonates if tension is removed.",
+      "source": "SRG"
+    },
+    "Push Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "availability": "9F",
+      "cost": "80¥",
+      "description": "A pressure-triggered detonator that can be set for a chosen minimum, maximum, or pressure-release condition.",
+      "source": "SRG"
+    },
+    "Radio Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-3",
+      "availability": "10R",
+      "cost": "75¥",
+      "description": "A wireless detonator triggered by a specific radio signal. Rating 1 adds 2 Noise, Rating 2 adds 1 Noise, and Rating 3 reduces Noise by 1.",
+      "source": "SRG"
+    },
+    "Timer Detonator": {
+      "category": "Explosives",
+      "subcategory": "Explosives",
+      "rating": "1-3",
+      "availability": "(Rating x 6)F",
+      "cost": "Rating x 50¥",
+      "description": "A mechanical or electronic timed detonator. Rating 1 may gain or lose up to two minutes, Rating 2 may vary by up to one minute, and Rating 3 keeps exact time.",
+      "source": "SRG"
+    },
+    "Armanté Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "4",
+      "availability": "10",
+      "cost": "2,500¥",
+      "description": "Neo-Aztec high-fashion armored suit. Wearing it increases Social Limit by 2; its wireless bonus gives +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Armanté Dress": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "4",
+      "availability": "10",
+      "cost": "2,500¥",
+      "description": "Neo-Aztec high-fashion armored dress. Wearing it increases Social Limit by 2; its wireless bonus gives +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Berwick Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "5",
+      "availability": "9",
+      "cost": "2,600¥",
+      "description": "Classic Mortimer of London tailored armor. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier; wireless use grants +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Berwick Dress": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "4",
+      "availability": "8",
+      "cost": "2,300¥",
+      "description": "Classic Mortimer of London tailored armored dress. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier; wireless use grants +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Crimson Sky Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "5",
+      "availability": "6",
+      "cost": "2,400¥",
+      "description": "An older Mortimer of London armored suit that remains suitable for high-society use. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier.",
+      "source": "SRG"
+    },
+    "Summit Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "6",
+      "availability": "7",
+      "cost": "2,500¥",
+      "description": "A classic Mortimer of London armored suit. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier.",
+      "source": "SRG"
+    },
+    "Summit Dress": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "5",
+      "availability": "7",
+      "cost": "2,200¥",
+      "description": "A classic Mortimer of London armored dress. It is Custom Fit, increases Social Limit by 1, and gives a -2 Concealability modifier.",
+      "source": "SRG"
+    },
+    "Greatcoat Coat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "10 / +3",
+      "capacity": "10",
+      "availability": "8",
+      "cost": "3,000¥",
+      "description": "A Mortimer of London armored greatcoat using Custom Fit (Stack). It increases Social Limit by 1, gives a -3 Concealability modifier, and can add +3 armor when stacked with a compatible custom-fitted set.",
+      "source": "SRG"
+    },
+    "Ulysses Coat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "10 / +3",
+      "capacity": "12",
+      "availability": "8",
+      "cost": "3,100¥",
+      "description": "A Mortimer of London Custom Fit (Stack) armored coat with high Capacity. It increases Social Limit by 1, gives a -3 Concealability modifier, and can add +3 armor when stacked with a compatible set.",
+      "source": "SRG"
+    },
+    "Argentum Coat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "12 / +4",
+      "capacity": "14",
+      "availability": "10",
+      "cost": "3,600¥",
+      "description": "A heavily armored Mortimer of London Custom Fit (Stack) coat. It increases Social Limit by 1, gives a -3 Concealability modifier, and can add +4 armor when stacked with a compatible set.",
+      "source": "SRG"
+    },
+    "Ace of Cups": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "1,600¥",
+      "description": "A Vashon Island Aces High armored coat in a high-collar, floor-length style. It increases Social Limit by 1 and gains +1 die to Social Tests wirelessly.",
+      "source": "SRG"
+    },
+    "Ace of Swords": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "1,300¥",
+      "description": "A Vashon Island armored pilot-style outfit with an integrated scabbard holster. Wireless use grants +1 die to Social Tests.",
+      "source": "SRG"
+    },
+    "Ace of Wands": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "6",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "1,200¥",
+      "description": "A Vashon Island new-age wizard-styled armored outfit with Gear Access, reducing the action cost to retrieve prepared items.",
+      "source": "SRG"
+    },
+    "Ace of Coins": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "10",
+      "availability": "4",
+      "cost": "2,100¥",
+      "description": "A luxurious Vashon Island armored outfit decorated with premium materials. It increases Social Limit by 3 and gains +1 die to Social Tests wirelessly.",
+      "source": "SRG"
+    },
+    "Ace of Spades": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,000¥",
+      "description": "A Vashon Island armored outfit styled after a WWII US fighter pilot uniform and fitted with an integrated holster.",
+      "source": "SRG"
+    },
+    "Ace of Clubs": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,000¥",
+      "description": "A Vashon Island armored outfit styled after a WWII British bomber pilot uniform and fitted with an integrated holster.",
+      "source": "SRG"
+    },
+    "Aces of Hearts": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,000¥",
+      "description": "A Vashon Island armored outfit based on modern military pilot styling and fitted with an integrated holster.",
+      "source": "SRG"
+    },
+    "Ace of Diamonds": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "8",
+      "capacity": "6",
+      "availability": "8",
+      "cost": "1,400¥",
+      "description": "A futuristic Vashon Island armored outfit inspired by the Spitfire Resurrection trid series. Its design provides a +2 Concealability modifier.",
+      "source": "SRG"
+    },
+    "Steampunk": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "10",
+      "capacity": "14",
+      "availability": "7",
+      "cost": "2,250¥",
+      "description": "A Vashon Island armored fashion line built around ornate steampunk styling and plentiful room for concealed gadgets. It is Custom Fit and wirelessly increases Social Limit by 1.",
+      "source": "SRG"
+    },
+    "Synergist Business Line": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "5",
+      "availability": "8",
+      "cost": "1,500¥",
+      "description": "A Vashon Island corporate suit with Custom Fit tailoring and a concealed holster. Its wireless bonus increases Social Limit by 1.",
+      "source": "SRG"
+    },
+    "Synergist Business Line Longcoat": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "10 / +3",
+      "capacity": "6",
+      "availability": "8",
+      "cost": "2,300¥",
+      "description": "A Custom Fit (Stack) longcoat for the Synergist Business Line with an integrated holster. It can add +3 armor when stacked with the matching custom-fitted outfit.",
+      "source": "SRG"
+    },
+    "Sleeping Tiger": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "13",
+      "capacity": "10",
+      "availability": "10",
+      "cost": "13,500¥",
+      "description": "A premium Custom Fit Vashon Island armor line with a holster, Newest Model feature, and Rating 3 ruthenium polymer coating.",
+      "source": "SRG"
+    },
+    "Executive Suite": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "12",
+      "capacity": "4",
+      "availability": "12",
+      "cost": "2,000¥",
+      "description": "Zoé corporate high-fashion armor intended for megacorporate executive environments. It is Custom Fit, counts as the Newest Model, increases Social Limit by 1, and wirelessly increases it by 2.",
+      "source": "SRG"
+    },
+    "Heritage": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "4 / 6 / 8 / 10 / 12",
+      "capacity": "Armor ÷ 2",
+      "availability": "16",
+      "cost": "2,000¥ + (Armor Rating x 500¥)",
+      "description": "A prestige Zoé fashion line sold in multiple armor ratings. It is Custom Fit, counts as the Newest Model, and increases Social Limit by 2.",
+      "source": "SRG"
+    },
+    "Nightshade/Moonsilver": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "2",
+      "availability": "10",
+      "cost": "8,500¥",
+      "description": "Glowing high-society armor clothing with Custom Fit tailoring and a +1 Social Limit bonus. Its wireless lighting system can be upgraded for infrared and contact-lens use.",
+      "source": "SRG"
+    },
+    "Second Skin": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "6 / +2",
+      "capacity": "2",
+      "availability": "14",
+      "cost": "12,000¥",
+      "description": "An almost invisible full-body Custom Fit (Stack) unitard with Newest Model status and integrated Rating 4 ruthenium polymer coating. It may provide +2 armor when stacked with compatible custom-fitted gear.",
+      "source": "SRG"
+    },
+    "Globetrotter Jacket": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "12",
+      "capacity": "10",
+      "availability": "10",
+      "cost": "1,300¥",
+      "description": "Ares Victory outdoor armor with Custom Protection 4 and an integrated holster. Wireless use gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Globetrotter Vest": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "10",
+      "availability": "7",
+      "cost": "900¥",
+      "description": "Ares Victory outdoor armor with Custom Protection 3. Wireless use gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Globetrotter Clothing": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "7",
+      "capacity": "10",
+      "availability": "6",
+      "cost": "600¥",
+      "description": "Ares Victory outdoor armored clothing with Custom Protection 2 and Gear Access. Wireless use gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Wild Hunt": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "12",
+      "capacity": "10",
+      "availability": "12",
+      "cost": "3,000¥",
+      "description": "Ares Victory heavy outdoor armor with Custom Protection 6, an integrated holster, and Gear Access. Wireless use gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Industrious": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,100¥",
+      "description": "Ares Victory corporate-workwear armor with Gear Access. It increases Social Limit by 1 when worn in an appropriate corporate environment and gives +1 die to matching Social Tests wirelessly.",
+      "source": "SRG"
+    },
+    "Big Game Hunter": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "14",
+      "capacity": "12",
+      "availability": "12",
+      "cost": "5,000¥",
+      "description": "Heavy Ares Victory wilderness armor with Custom Fit, Custom Protection 6, an integrated holster, and Gear Access. Wireless use gives +1 die to Survival Tests in the selected terrain.",
+      "source": "SRG"
+    },
+    "Rapid Transit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Clothing",
+      "armor": "9",
+      "capacity": "6",
+      "availability": "10",
+      "cost": "400¥+",
+      "description": "Ares Victory everyday armor clothing. The base version can be upgraded to Elite (+1 Social Limit, +600¥), Platinum (+2 Social Limit, +1,100¥), or Diamond (+3 Social Limit, +2,400¥).",
+      "source": "SRG"
+    },
+    "Full-Suit Body Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "3",
+      "availability": "8",
+      "cost": "1,300¥",
+      "description": "Tailor-made form-fitting body armor covering the torso and limbs while leaving hands, feet, and head exposed. It is Custom Fit and imposes a -6 modifier on tests to notice it under other clothing.",
+      "source": "SRG"
+    },
+    "Hardened Mil-Spec Battle Armor (Light)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "15",
+      "availability": "16F",
+      "cost": "15,000¥",
+      "description": "Fully enclosed light military-grade battle armor. It is Custom Fit, has Holster and Gear Access features, increases Social Limit by 2 for Intimidation Tests, is Restrictive, and is treated as having the Hardened Armor critter power.",
+      "source": "SRG"
+    },
+    "Hardened Mil-Spec Battle Armor (Medium)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "18",
+      "capacity": "18",
+      "availability": "18F",
+      "cost": "20,000¥",
+      "description": "Fully enclosed medium military-grade battle armor. It is Custom Fit, has Holster and Gear Access features, increases Social Limit by 2 for Intimidation Tests, is Restrictive, and is treated as having the Hardened Armor critter power.",
+      "source": "SRG"
+    },
+    "Hardened Mil-Spec Battle Armor (Heavy)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "20",
+      "capacity": "20",
+      "availability": "22F",
+      "cost": "25,000¥",
+      "description": "Fully enclosed heavy military-grade battle armor. It is Custom Fit, has Holster and Gear Access features, increases Social Limit by 2 for Intimidation Tests, is Restrictive, and is treated as having the Hardened Armor critter power.",
+      "source": "SRG"
+    },
+    "Security Armor (Light)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "12",
+      "availability": "14R",
+      "cost": "8,000¥",
+      "description": "Light corporate security armor with Custom Fit, Holster, Gear Access, Restrictive construction, and +1 Social Limit for Intimidation Tests.",
+      "source": "SRG"
+    },
+    "Security Armor (Medium)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "18",
+      "capacity": "14",
+      "availability": "16R",
+      "cost": "14,000¥",
+      "description": "Medium corporate security armor with Custom Fit, Holster, Gear Access, Restrictive construction, and +1 Social Limit for Intimidation Tests.",
+      "source": "SRG"
+    },
+    "Security Armor (Heavy)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "20",
+      "capacity": "16",
+      "availability": "18R",
+      "cost": "20,000¥",
+      "description": "Heavy corporate security armor with Custom Fit, Holster, Gear Access, Restrictive construction, and +1 Social Limit for Intimidation Tests.",
+      "source": "SRG"
+    },
+    "Bike Racing Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "500¥",
+      "description": "Protective racing armor associated with motorcycles, go-gangs, combat biking, and Urban Brawl. It is conspicuous but socially normal in the right context.",
+      "source": "SRG"
+    },
+    "Bunker Gear": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "3,000¥",
+      "description": "Firefighter protective equipment with Fire Resistance 8 and Restrictive construction. It increases Social Limit by 2 in emergency situations; its wireless bonus gives +1 die on Social Tests to calm or pacify people at an emergency site.",
+      "source": "SRG"
+    },
+    "Riot Control Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "14",
+      "capacity": "8",
+      "availability": "10R",
+      "cost": "5,000¥",
+      "description": "Heavy padded riot gear designed for protection and intimidation. It is Restrictive and increases Social Limit by 1 for Intimidation Tests, or by 2 with its wireless bonus.",
+      "source": "SRG"
+    },
+    "SWAT Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "15",
+      "availability": "16R",
+      "cost": "8,000¥",
+      "description": "Tactical quick-response armor with Gear Access. It increases Social Limit by 2 for Intimidation Tests, reduces Social Limit by 1 for other Social Tests with the general public, and wirelessly increases the Intimidation bonus to +3.",
+      "source": "SRG"
+    },
+    "SecureTech PPP Arms Kit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+1",
+      "capacity": "1",
+      "availability": "6",
+      "cost": "250¥",
+      "description": "An armor augmentation kit for the arms that takes four Complex Actions to don. It decreases Social Limit by 1 and cannot be combined with full-body armor.",
+      "source": "SRG"
+    },
+    "SecureTech PPP Legs Kit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+1",
+      "capacity": "1",
+      "availability": "6",
+      "cost": "300¥",
+      "description": "An armor augmentation kit for the legs that takes four Complex Actions to don. It decreases Social Limit by 1 and cannot be combined with full-body armor.",
+      "source": "SRG"
+    },
+    "SecureTech PPP Vitals Kit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+1",
+      "capacity": "1",
+      "availability": "6",
+      "cost": "350¥",
+      "description": "An armor augmentation kit for vital areas that takes eight Complex Actions to don. It decreases Social Limit by 1 and cannot be combined with full-body armor, an armor vest, or an armor jacket.",
+      "source": "SRG"
+    },
+    "Body Armor Bag": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "4",
+      "availability": "8",
+      "cost": "750¥",
+      "description": "A multipurpose gear bag that can be emptied and worn as emergency armor. When worn it decreases Social Limit by 1, has -6 Concealability, and is Restrictive.",
+      "source": "SRG"
+    },
+    "Chain Mail": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "2",
+      "availability": "8",
+      "cost": "900¥",
+      "description": "Custom-fitted chain armor. It increases Social Limit by 1 with gang members and reduces Social Limit by 1 with the general public.",
+      "source": "SRG"
+    },
+    "Padded Leather": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "7",
+      "capacity": "2",
+      "availability": "8",
+      "cost": "600¥",
+      "description": "Custom-fitted padded leather armor common among gangs. It has the Padded feature, increases Social Limit by 1 with gang members, and reduces Social Limit by 1 with the general public.",
+      "source": "SRG"
+    },
+    "Murder Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "13",
+      "capacity": "4",
+      "availability": "12R",
+      "cost": "5,000¥",
+      "description": "Custom-fitted armor with a biomonitor, holster, and cinematic gore system. After being shot, the wearer may spend 5 Initiative to play dead using Charisma + Performance opposed by Intuition + Perception; observers suffer a -4 dice-pool modifier.",
+      "source": "SRG"
+    },
+    "Forearm Guards": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+1",
+      "capacity": "3",
+      "availability": "6",
+      "cost": "300¥",
+      "description": "Dermaplast or metallic bracers designed to turn aside melee blows and provide additional arm protection.",
+      "source": "SRG"
+    },
+    "Ghillie Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "4",
+      "capacity": "4",
+      "availability": "6",
+      "cost": "600¥",
+      "description": "Environment-specific camouflage armor. While immobile in its intended terrain, observers suffer -6 dice to Perception Tests to spot the wearer; while the wearer moves, the modifier is -2. The suit is Restrictive.",
+      "source": "SRG"
+    },
+    "Ares Armored Survivalist": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "6",
+      "availability": "10",
+      "cost": "1,500¥",
+      "description": "Armored hunting and field gear with Custom Protection 4. It reduces Social Limit by 1 and wirelessly gives +1 die to Survival Tests in the selected protected terrain.",
+      "source": "SRG"
+    },
+    "Desert Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "3",
+      "capacity": "2",
+      "availability": "8",
+      "cost": "1,000¥",
+      "description": "A sealed heat-dissipating suit with Custom Fit and Flare Compensation. It cannot be worn with armor or restrictive clothing, grants +2 dice to desert Survival Tests, and wirelessly gives +1 die on Survival Tests in hot terrain.",
+      "source": "SRG"
+    },
+    "Snake Mesh Socks": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "+2",
+      "capacity": "—",
+      "availability": "6",
+      "cost": "50¥",
+      "description": "Protective knee-length mesh socks that provide +2 Armor against attacks directed at the feet and lower legs, especially snake bites.",
+      "source": "SRG"
+    },
+    "Coldsuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "—",
+      "capacity": "4",
+      "availability": "4",
+      "cost": "800¥",
+      "description": "A layered cold-weather suit with Custom Protection (Insulation 4) and Flare Compensation. External armor can be layered over it at the cost of increased Cold Fatigue risk and a -2 dice-pool penalty; wireless use grants +1 die to Survival Tests in cold terrain.",
+      "source": "SRG"
+    },
+    "Polar Survival Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "capacity": "6",
+      "availability": "8",
+      "cost": "2,000¥",
+      "description": "A heavy cold-weather survival suit with Insulation 6, Thermal Damping 4, and Flare Compensation. Retractable climbing claws give +1 die to Climbing Tests and can attack for (STR + 1)P; no other armor may be worn with the suit.",
+      "source": "SRG"
+    },
+    "Ares Arctic Forces Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "14",
+      "availability": "16R",
+      "cost": "11,000¥",
+      "description": "Cold-weather special-operations armor with Custom Fit, Insulation 5, Thermal Damping 3, Flare Compensation, Gas Mask, and Gear Access. Retractable climbing claws give +1 die to Climbing Tests; wirelessly, Climbing Tests gain +1 Physical Limit.",
+      "source": "SRG"
+    },
+    "Ares Armored Coldsuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "9",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "1,200¥",
+      "description": "Armored cold-weather gear with Custom Fit, Insulation 4, Flare Compensation, and Restrictive construction. It imposes -2 dice on Fatigue Tests, reduced to -1 while wireless is active.",
+      "source": "SRG"
+    },
+    "Ares Polar Sneak Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "capacity": "4",
+      "availability": "16F",
+      "cost": "10,000¥",
+      "description": "A polar survival suit incorporating Custom Fit, Flare Compensation, and Rating 3 ruthenium polymer coating. Modifications are limited where they would interfere with the coating.",
+      "source": "SRG"
+    },
+    "Drysuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "—",
+      "capacity": "4",
+      "availability": "6",
+      "cost": "2,500¥",
+      "description": "A diving suit that encloses the wearer in a dry insulating air layer. With its hood up and face mask attached it has Chemical Seal and Custom Protection (Insulation 4); wirelessly it transmits environmental information.",
+      "source": "SRG"
+    },
+    "Diving Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "7",
+      "capacity": "4",
+      "availability": "6",
+      "cost": "1,750¥",
+      "description": "Armored diving gear with Chemical Protection 4. It normally imposes -2 dice on Swimming Tests, reduced to -1 while wireless is active.",
+      "source": "SRG"
+    },
+    "Arctic Diving Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "1",
+      "capacity": "4",
+      "availability": "8",
+      "cost": "3,000¥",
+      "description": "A heated suit with Insulation 8 while in water. It keeps the diver warm for 45 minutes before cold tests are required, extending to one hour with wireless active; recharging between dives takes two hours.",
+      "source": "SRG"
+    },
+    "Evo HEL Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "8",
+      "capacity": "5",
+      "availability": "10",
+      "cost": "3,000¥",
+      "description": "A Hostile Environment Living suit with Custom Fit, Gas Mask, Insulation 4, Fire Resistance 2, Radiation Shielding 3, and Chemical Protection 2. Wirelessly it records and transmits environmental information.",
+      "source": "SRG"
+    },
+    "Spacesuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "12",
+      "capacity": "6",
+      "availability": "16",
+      "cost": "12,000¥",
+      "description": "A full spacesuit with biomonitor, Device Rating 3 commlink, Custom Fit, Chemical Seal, Insulation 6, Thermal Damping 4, and Flare Compensation. It carries twelve hours of oxygen and twenty-four hours of power and requires regular maintenance.",
+      "source": "SRG"
+    },
+    "Security Spacesuit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "15",
+      "capacity": "10",
+      "availability": "24",
+      "cost": "25,000¥",
+      "description": "A combat-capable security version of the standard spacesuit with the same core life-support features and greater protection.",
+      "source": "SRG"
+    },
+    "Evo Armadillo Armored Space Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "16",
+      "capacity": "10",
+      "availability": "24R",
+      "cost": "35,000¥",
+      "description": "A heavily armored spacesuit with Custom Fit, Chemical Seal, Fire Resistance 4, Insulation 6, Thermal Damping 4, and enhanced strength for climbing and lifting. Its self-sealing system automatically repairs one breach.",
+      "source": "SRG"
+    },
+    "Magnetic Boots": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "—",
+      "capacity": "4",
+      "availability": "12",
+      "cost": "2,500¥",
+      "description": "Custom-fitted boots using electromagnets and suction to adhere to surfaces. Movement is limited to one-quarter normal speed with no Sprint Tests, while Climbing Tests gain +3 dice but proceed at half normal pace.",
+      "source": "SRG"
+    },
+    "Survival Bubble": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "4",
+      "capacity": "4",
+      "rating": "1-6",
+      "availability": "Rating x 3",
+      "cost": "2,000¥",
+      "description": "A self-inflating emergency sphere for decompression survival. Its Rating, up to 6, determines occupancy; it carries an airlock, oxygen, emergency food and water, a 100-kilometer homing beacon, and a Rating 4 medkit.",
+      "source": "SRG"
+    },
+    "MCT EE Suit": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor",
+      "armor": "6",
+      "capacity": "5",
+      "availability": "10",
+      "cost": "2,500¥",
+      "description": "A Mitsuhama extreme-environment suit with Chemical Seal, Fire Resistance 4, and Radiation Shielding 6. Wirelessly it records and transmits environmental information.",
+      "source": "SRG"
+    },
+    "Gorepak": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "—",
+      "availability": "8R",
+      "cost": "200¥",
+      "description": "Replacement practical-effects reservoir for Murder Armor. Installing a new gorepak requires a Logic + Armorer [Mental] (4, 1 hour) Extended Test.",
+      "source": "SRG"
+    },
+    "Hardened Mil-Spec Battle Armor Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+3",
+      "capacity": "8",
+      "availability": "8F",
+      "cost": "10,000¥",
+      "description": "Helmet designed specifically for hardened mil-spec battle armor. It is the only additional worn armor permitted with that battle armor.",
+      "source": "SRG"
+    },
+    "Security Armor Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+3",
+      "capacity": "5",
+      "availability": "8R",
+      "cost": "5,000¥",
+      "description": "Helmet designed for light, medium, or heavy Security Armor, adding protection and Capacity for enhancements.",
+      "source": "SRG"
+    },
+    "Bike Racing Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "capacity": "6",
+      "availability": "6",
+      "cost": "200¥",
+      "description": "Protective helmet designed to accompany Bike Racing Armor.",
+      "source": "SRG"
+    },
+    "Bunker Gear Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "capacity": "3",
+      "availability": "6",
+      "cost": "750¥",
+      "description": "Firefighter helmet designed to accompany Bunker Gear and protect the head during emergency operations.",
+      "source": "SRG"
+    },
+    "Riot Control Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "capacity": "6",
+      "availability": "6R",
+      "cost": "1,000¥",
+      "description": "Protective riot helmet designed to accompany Riot Control Armor.",
+      "source": "SRG"
+    },
+    "SWAT Armor Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+3",
+      "capacity": "8",
+      "availability": "10R",
+      "cost": "1,500¥",
+      "description": "Tactical helmet designed to accompany SWAT Armor and provide substantial Capacity for mission equipment.",
+      "source": "SRG"
+    },
+    "Ares FlaShield": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+6",
+      "capacity": "4",
+      "availability": "12R",
+      "cost": "4,000¥",
+      "description": "A riot shield with an integrated ten-charge flash-pak. The flash-pak normally takes a Complex Action to activate, reduced to a Simple Action with wireless functionality; it recharges one charge every ten seconds when connected to power.",
+      "source": "SRG"
+    },
+    "Ballistic Mask": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "+2",
+      "capacity": "8",
+      "availability": "6",
+      "cost": "150¥",
+      "description": "A protective mask that can accept vision enhancements and helmet-compatible modifications. It increases Social Limit by 1 for Intimidation Tests; customized versions increase the total bonus to 2 for an additional 150¥.",
+      "source": "SRG"
+    },
+    "Enclosed Breathing Helmet": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "—",
+      "capacity": "6",
+      "availability": "8",
+      "cost": "900¥",
+      "description": "A commercial diving helmet with halogen headlamp, external speakers, dataport, and low-light vision. It connects to an external air or mixed-gas supply and wirelessly transmits environmental information.",
+      "source": "SRG"
+    },
+    "Full Face Mask": {
+      "category": "Clothing & Armor",
+      "subcategory": "Helmets & Shields",
+      "armor": "—",
+      "capacity": "4",
+      "availability": "8",
+      "cost": "300¥",
+      "description": "A shallow-diving full-face breathing mask with accessory connections and integral gas-mask protection. Wirelessly it transmits environmental information.",
+      "source": "SRG"
+    },
+    "Auto-Injector": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[2]",
+      "availability": "4",
+      "cost": "1,500¥ + chemical costs",
+      "description": "An armor-mounted injector holding five doses in any combination. It can inject automatically when programmed conditions are met or on command from the wearer; refilling takes one minute per dose. Wireless activation is a Free Action.",
+      "source": "SRG"
+    },
+    "Fresnel Fabric": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[2]",
+      "rating": "Variable",
+      "availability": "14R",
+      "cost": "Rating x 1,000¥",
+      "description": "Directional signal-focusing fabric that reduces Noise by its Rating when the wearer aligns toward the device they are communicating with. Wireless use reduces Noise by 1 additional point.",
+      "source": "SRG"
+    },
+    "Pulse Weave": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[3]",
+      "rating": "Variable",
+      "availability": "+8R",
+      "cost": "3,000¥",
+      "description": "Turns a suit into a rechargeable flash effect. Anyone facing the wearer suffers -4 dice on direct physical attacks, reduced to -2 by flare compensation. The weave has charges equal to its Rating and needs fifteen minutes to recharge; wireless use increases the attack penalty by 1.",
+      "source": "SRG"
+    },
+    "Shock Weave": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[3]",
+      "availability": "8",
+      "cost": "1,000¥",
+      "description": "Electrified armor plates that inflict 8S(e) on anyone entering a Grapple or Clinch with the wearer. A successful Block can also expose an attacker to the shock; the normal Block requires 2 hits, reduced to 1 hit while wireless is active.",
+      "source": "SRG"
+    },
+    "Universal Mirror Material": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[3]",
+      "rating": "Variable",
+      "availability": "8F",
+      "cost": "Rating x 250¥ per square meter",
+      "description": "Signal-jamming material that imposes Noise equal to twice its Rating against anything enclosed by it.",
+      "source": "SRG"
+    },
+    "YNT SoftWeave Armor": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "—",
+      "availability": "+4",
+      "cost": "Armor cost x 2",
+      "description": "A flexible armor-construction technique that increases the armor item's available Capacity by half.",
+      "source": "SRG"
+    },
+    "Ruthenium Polymer Coating": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[4]",
+      "rating": "1-4",
+      "availability": "16F",
+      "cost": "Rating x 5,000¥",
+      "description": "Adaptive camouflage for armor or clothing. The base Perception modifier to spot the wearer is -Rating, adjusted by coverage: full-body +2, almost full +1, half-body +0.",
+      "source": "SRG"
+    },
+    "Radiation Shielding": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[Rating]",
+      "rating": "Variable",
+      "availability": "Rating x 2",
+      "cost": "Rating x 200¥",
+      "description": "Adds one die per Rating to tests made to resist radiation damage.",
+      "source": "SRG"
+    },
+    "Gel Packs": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "—",
+      "availability": "6",
+      "cost": "1,500¥",
+      "description": "Externally mounted impact-absorbing gel packs that require no Capacity and increase the armor item's Armor Rating by 2. For knockdown comparisons, lower the wearer's Physical Limit by 2.",
+      "source": "SRG"
+    },
+    "Responsive Interface Gear (RIG)": {
+      "category": "Clothing & Armor",
+      "subcategory": "Armor Modifications",
+      "capacity": "[2] armor + [1] helmet",
+      "availability": "8",
+      "cost": "2,500¥",
+      "description": "An integrated trode net, sim module, and simrig connected to the wearer's PAN. It must be installed in both armor and helmet and only works while the full set is worn. Wireless use adds +1 Mental Limit on Perception Tests.",
+      "source": "SRG"
+    },
+    "Barbed Head": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "—",
+      "damage_modifier": "+1",
+      "ap_modifier": "—",
+      "availability": "5R",
+      "cost": "10¥",
+      "description": "A barbed arrowhead designed to cause additional injury when removed. Removing a barbed arrow without causing further damage requires a First Aid + Logic [Mental] (3) Test. On failure, the target suffers unresisted Physical damage equal to 3 minus the hits scored.",
+      "source": "SRG"
+    },
+    "Explosive Head": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-1",
+      "damage_modifier": "+2",
+      "ap_modifier": "-1",
+      "availability": "9F",
+      "cost": "15¥",
+      "description": "A shaped explosive charge mounted on an arrowhead. It applies -1 Accuracy, +2 Damage Value, and -1 Armor Penetration to the arrow.",
+      "source": "SRG"
+    },
+    "Hammerhead Arrowhead": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-1",
+      "damage_modifier": "+1S",
+      "ap_modifier": "+2",
+      "availability": "5",
+      "cost": "5¥",
+      "description": "A blunt arrowhead intended to incapacitate rather than puncture. It applies -1 Accuracy, changes the attack to Stun damage with a +1 DV modifier, and worsens Armor Penetration by 2.",
+      "source": "SRG"
+    },
+    "Incendiary Head": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-1",
+      "damage_modifier": "Special",
+      "ap_modifier": "—",
+      "availability": "12F",
+      "cost": "100¥",
+      "description": "A white-phosphorus arrowhead. On any successful hit, including a Grazing Hit, it erupts in fire for 8P damage with AP -6. The phosphorus then burns for 3 additional Combat Turns, causing 6P fire damage with AP -4 each turn and potentially igniting or damaging carried items. Wireless bonus: the head can detonate before impact and split between two targets within 1 meter of each other; each target defends separately, neither takes the initial 8P hit, and each instead suffers 6P with AP -4 for 4 Combat Turns including the current turn.",
+      "source": "SRG"
+    },
+    "Screamer Head": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-2",
+      "damage_modifier": "-2S",
+      "ap_modifier": "+6",
+      "availability": "2",
+      "cost": "5¥",
+      "description": "A hollow signaling arrowhead designed to produce a chosen audible sound in flight. Resetting the sound requires a Simple Action and a Logic + Intuition (1) Test. Wireless bonus: changing the sound becomes a Free Action and can be done while the arrow is in flight.",
+      "source": "SRG"
+    },
+    "Stick 'n' Shock Arrowhead": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "-1",
+      "damage_modifier": "8S(e)",
+      "ap_modifier": "-5",
+      "availability": "6R",
+      "cost": "25¥",
+      "description": "An electrical arrowhead that replaces the arrow's normal damage with 8S(e), AP -5, and applies -1 Accuracy. For its full electrical potential, it can be combined with a Static Shaft.",
+      "source": "SRG"
+    },
+    "Static Shaft": {
+      "category": "Weapon Support",
+      "subcategory": "Projectile Ammunition",
+      "accuracy_modifier": "—",
+      "damage_modifier": "+4S(e)",
+      "ap_modifier": "—",
+      "availability": "6R",
+      "cost": "Rating x 25¥",
+      "description": "An Ares arrow shaft filled with a powder that builds electrical charge during flight. It is designed to be combined with a Stick 'n' Shock arrowhead and adds +4S(e) to the attack's damage.",
+      "source": "SRG"
+    }
+  },
+  "category": {
+    "Consumables": "<strong>Consumables</strong><br>Single-use substances and experiential products whose effects are governed by the toxin, drug, and addiction rules. This category includes toxins, performance or recreational drugs, and BTL recordings.",
+    "Weapon Support": "<strong>Weapon Support</strong><br>Accessories and ammunition that modify, feed, or support weapons without being weapons themselves. Accessory mount restrictions, ammunition compatibility, and special ammunition rules still apply.",
+    "Explosives": "<strong>Explosives</strong><br>Demolition materials and detonators. Explosive Rating determines power, while placement, shaping, barriers, and Demolitions tests determine how effectively a charge destroys a target.",
+    "Clothing & Armor": "<strong>Clothing & Armor</strong><br>Wearable protection and modifications. Armor adds to damage resistance, while armor modifications provide specialized protection or utility. Armor encumbrance and compatibility rules continue to apply.",
+    "Electronics": "<strong>Electronics</strong><br>Matrix devices, communications gear, sensors, identity systems, and technical tools. Device Rating, wireless status, Noise, Matrix attributes, and capacity matter where relevant.",
+    "Security & Infiltration": "<strong>Security & Infiltration</strong><br>Locks, restraints, burglary tools, and industrial chemicals used to secure locations or defeat physical security. Many devices oppose Locksmith, Hardware, or other technical tests with their Rating.",
+    "Survival & Field Gear": "<strong>Survival & Field Gear</strong><br>Equipment for harsh environments, climbing, diving, respiration, travel, and emergency field use. Ratings generally add dice or protection where the individual item says so.",
+    "Medical & Emergency": "<strong>Medical & Emergency</strong><br>Biotech, medkits, emergency patches, and subscription rescue services. Medical gear interacts with First Aid, Medicine, stabilization, toxins, Stun damage, and emergency response rules.",
+    "Augmentations": "<strong>Augmentations</strong><br>Cyberware and bioware installed in the body. Most augmentations consume Essence. Grades modify the base item as follows:<ul><li><strong>Standard:</strong> Essence ×1.0, cost ×1.0.</li><li><strong>Alphaware:</strong> Essence ×0.8, Availability +2, cost ×1.2.</li><li><strong>Betaware:</strong> Essence ×0.7, Availability +4, cost ×1.5.</li><li><strong>Deltaware:</strong> Essence ×0.5, Availability +8, cost ×2.5.</li><li><strong>Used:</strong> Essence ×1.25, Availability −4, cost ×0.75.</li></ul>Cyber implant weapons are excluded from this equipment file because they belong with weapons.",
+    "Magical Equipment": "<strong>Magical Equipment</strong><br>Foci, magical formulae, lodge materials, and reagents. Foci must normally be bonded with Karma before use, and many magical items are rated by Force."
+  },
+  "subcategories": {
+    "Toxins": "<strong>Toxins</strong><br>Toxins are defined by Vector, Speed, Penetration, Power, and Effect. Targets resist with <strong>Body + appropriate protection</strong>; remaining Power determines whether and how strongly the effect applies.",
+    "Drugs": "<strong>Drugs</strong><br>Drugs intentionally apply temporary effects and may create physiological or psychological addiction. Duration, Addiction Rating, and Addiction Threshold determine how long benefits last and how risky repeated use becomes.",
+    "BTLs": "<strong>Better Than Life</strong><br>BTLs feed artificial sensory and emotional experiences directly to the user. They are psychologically addictive and come in dreamchip, moodchip, personafix, and tripchip forms.",
+    "Firearm Accessories": "<strong>Firearm Accessories</strong><br>Accessories use specific mounts where listed. A weapon normally has <strong>Top, Barrel, and Under</strong> mount locations, and accessories must be compatible with the weapon and available mounting space.",
+    "Projectile Ammunition": "<strong>Projectile Ammunition</strong><br>Arrows and bolts are purchased separately from bows and crossbows. Bow performance may be limited by bow Rating, arrow Rating, and the user's Strength.",
+    "Firearm Ammunition": "<strong>Firearm Ammunition</strong><br>Ammunition can modify Damage Value, damage type, Armor Penetration, or other attack effects. Prices in this file are normally for ten rounds unless the entry says otherwise.",
+    "Explosives": "<strong>Explosives</strong><br>Demolition explosives use a Rating and are generally bought by weight. Correct placement and shaping can greatly improve performance against structures and barriers.",
+    "Clothing": "<strong>Clothing</strong><br>Ordinary and specialized clothing may provide armor, haptic feedback, or electronic visual changes. Clothing can also serve as a platform for concealed or wearable technology.",
+    "Armor": "<strong>Armor</strong><br>Armor adds its rating to damage resistance after Armor Penetration is applied. If modified Armor is lower than the attack's modified Damage Value, Physical damage remains Physical; otherwise it may be converted to Stun where the damage rules permit.",
+    "Armor Modifications": "<strong>Armor Modifications</strong><br>Armor modifications consume Capacity where listed and provide specialized protection or utility. A modification's Rating cannot exceed the limits allowed by the armor rules.",
+    "Helmets & Shields": "<strong>Helmets & Shields</strong><br>Helmets and shields add protection while properly worn or carried. Shields can also be used in close combat and may hinder movement or concealment.",
+    "Commlinks": "<strong>Commlinks</strong><br>Commlinks are everyday Matrix devices. Their Device Rating determines core Matrix defense values when not slaved to another device, and they can run personas but cannot perform Attack or Sleaze actions without special capability.",
+    "Electronics Accessories": "<strong>Electronics Accessories</strong><br>General-purpose electronic gear used for AR, VR, recording, communications, printing, and satellite connectivity.",
+    "RFID Tags": "<strong>RFID Tags</strong><br>Tiny wireless tags used for identification, tracking, data storage, security, sensing, or covert surveillance. Specialized tags can be harder to detect or erase.",
+    "Communications & Countermeasures": "<strong>Communications & Countermeasures</strong><br>Equipment for finding bugs, tapping wired connections, jamming wireless traffic, erasing RFID tags, and preventing audio surveillance.",
+    "Skillsofts": "<strong>Skillsofts</strong><br>Recorded skill programs require compatible augmentation. Activesofts use skillwires; knowsofts and linguasofts use a skilljack.",
+    "Certified Credsticks": "<strong>Certified Credsticks</strong><br>Anonymous physical money-storage devices. Anyone possessing the stick can normally spend its certified balance, making it useful for discreet transactions.",
+    "Identification": "<strong>Identification</strong><br>Fake SINs and licenses create a false legal identity and apparent authorization. Verification systems oppose their Rating and may expose a forgery on failure.",
+    "Tools": "<strong>Tools</strong><br>Kits, shops, and facilities are purchased for a specific skill. More demanding repair, fabrication, or technical work may require a larger tool level.",
+    "Optical & Imaging Devices": "<strong>Optical & Imaging Devices</strong><br>Cameras, binoculars, lenses, goggles, and similar devices can carry vision enhancements up to their Capacity. Purely optical devices can be important for magical line of sight.",
+    "Vision Enhancements": "<strong>Vision Enhancements</strong><br>Vision options provide low-light, thermographic, magnification, smartlink, flare protection, image display, or improved visual acuity.",
+    "Audio Devices": "<strong>Audio Devices</strong><br>Microphones, ear buds, headphones, and other listening devices can carry audio enhancements up to their Capacity.",
+    "Audio Enhancements": "<strong>Audio Enhancements</strong><br>Enhancements improve hearing, filter selected sounds, or locate sound sources spatially.",
+    "Sensor Housings": "<strong>Sensor Housings</strong><br>Single sensors and arrays contain one or more sensor functions. A function normally uses the Rating of the housing or array containing it.",
+    "Sensor Functions": "<strong>Sensor Functions</strong><br>Individual functions installed in sensor housings or arrays. The function usually has no separate price; cost is based on the sensor housing and its Rating.",
+    "Security Devices": "<strong>Security Devices</strong><br>Locks and access-control upgrades. Device Rating determines resistance to bypass, while options such as biometrics and anti-tamper circuits increase security.",
+    "Restraints": "<strong>Restraints</strong><br>Physical restraints have Armor and Structure ratings and must be unlocked, cut, broken, or otherwise defeated to escape.",
+    "Breaking & Entering Gear": "<strong>Breaking & Entering Gear</strong><br>Tools for defeating mechanical locks, maglocks, keycards, biometrics, barriers, and access systems. Ratings modify limits, dice pools, or opposed tests as specified by each item.",
+    "Industrial Chemicals": "<strong>Industrial Chemicals</strong><br>Specialized adhesives, solvents, and high-temperature cutting materials used for engineering, sabotage, or forced entry.",
+    "Survival Gear": "<strong>Survival Gear</strong><br>Protective suits, breathing gear, climbing equipment, lights, signaling tools, and emergency supplies for hostile environments.",
+    "Grapple & Rope Gear": "<strong>Grapple & Rope Gear</strong><br>Launchers, anchors, and specialized lines for climbing and traversal. Different rope types trade cost, concealability, strength, and special behavior.",
+    "Biotech": "<strong>Biotech</strong><br>Portable medical devices and supplies. Medkits provide diagnostic support and can assist First Aid according to Rating.",
+    "DocWagon Contracts": "<strong>DocWagon Contracts</strong><br>Annual emergency-response subscriptions. Higher service tiers provide improved response priority and benefits according to the DocWagon rules.",
+    "Slap Patches": "<strong>Slap Patches</strong><br>Single-use transdermal patches that deliver antidotes, chemicals, stimulants, tranquilizers, or trauma stabilization effects.",
+    "Headware": "<strong>Headware</strong><br>Cyberware implanted in the brain, skull, or neural pathways. It includes DNI devices, control rigs, internal computers, sensory boosters, skill interfaces, and covert implants.",
+    "Eyeware": "<strong>Eyeware</strong><br>Cybernetic eyes and enhancements. Basic cybereyes have Capacity, and additional vision options consume Capacity unless included by default.",
+    "Earware": "<strong>Earware</strong><br>Cybernetic hearing systems and enhancements. Basic cyberears provide Capacity for audio upgrades.",
+    "Bodyware": "<strong>Bodyware</strong><br>Cyberware installed throughout the body to improve armor, attributes, reflexes, skills, storage, and physical capability.",
+    "Cyberlimbs": "<strong>Cyberlimbs</strong><br>Obvious and synthetic replacement limbs have their own Strength and Agility and can contain enhancements and accessories up to Capacity.",
+    "Cyberlimb Enhancements": "<strong>Cyberlimb Enhancements</strong><br>Upgrades that increase cyberlimb Agility, Strength, or Armor, consuming Capacity and observing augmented maximums.",
+    "Cyberlimb Accessories": "<strong>Cyberlimb Accessories</strong><br>Specialized devices installed inside cyberlimbs, including gyromounts, slides, holsters, hydraulic jacks, and concealed storage.",
+    "Basic Bioware": "<strong>Basic Bioware</strong><br>Laboratory-grown biological augmentations that improve attributes, armor, healing, immunity, senses, and other bodily functions, usually with less Essence loss than comparable cyberware.",
+    "Cultured Bioware": "<strong>Cultured Bioware</strong><br>Custom-grown neural and biological augmentations tailored to the recipient, including cognitive, reflex, pain, sleep, and memory enhancements.",
+    "Foci": "<strong>Foci</strong><br>Magical items rated by Force. A focus normally must be bonded with Karma before it can be activated, and focus addiction can become a risk for heavy users.",
+    "Magical Formulae": "<strong>Magical Formulae</strong><br>Written or otherwise encoded magical designs used to learn spells or create foci.",
+    "Magical Supplies": "<strong>Magical Supplies</strong><br>Lodge materials establish magical workspaces, while reagents are consumed or used in many magical procedures."
+  }
+}

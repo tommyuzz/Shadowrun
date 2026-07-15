@@ -1,5 +1,33 @@
 # Release notes
 
+## 1.8.1 — Priority Array readability
+
+### Improved
+
+- Rebalanced the desktop matrix to give Metatype and Magic or Resonance substantially more space, with larger text, stronger contrast and more generous row spacing.
+- Changed the responsive breakpoint so the readable card layout replaces the matrix before desktop columns become cramped.
+- Restyled all selected Resources values as compact, high-contrast monospaced amounts instead of oversized red display text.
+
+### Validation
+
+- 16 datasets and 1,298 reference records validated.
+- 39 unit tests and the production TypeScript and Vite build passed.
+
+## 1.8.0 — Priority Array creation page
+
+### Added
+
+- Added **Priority Array** beneath **Core Rules** on the generated home page.
+- Added all five supplied Priority levels and all three supplied play-level rule sets from `priority_array.json`.
+- Added a native Creation Level selector for Street-Level, Regular and Prime Runner play; it updates Resources, Karma, gear, contact and conversion limits in place without navigation or duplicated values.
+- Added a dedicated desktop assignment matrix and responsive A–E creation dossiers for smaller screens.
+- Added Priority-specific protocol guidance, notation, iconography, source-book behavior, loading states, footer treatment and legacy URL generation.
+
+### Validation
+
+- 16 datasets and 1,298 reference records validated, including A–E and every play-level resource key.
+- Added regression coverage for Core Rules registration, record preservation and all three selectable creation rule sets.
+
 ## 1.7.1 — Quality type filtering and definitions
 
 ### Added
