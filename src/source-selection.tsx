@@ -26,6 +26,14 @@ export function normaliseSourceCode(source: string): string {
   return String(source || "CRB").trim().toLocaleUpperCase("en-GB") || "CRB";
 }
 
+export function recordSourceCodes(source: string): string[] {
+  const codes = String(source || "CRB")
+    .split(/\s*(?:\/|,|;|\+)\s*/)
+    .map(normaliseSourceCode)
+    .filter(Boolean);
+  return Array.from(new Set(codes.length ? codes : ["CRB"]));
+}
+
 export function parseSourceExclusions(value: string | null): string[] {
   if (!value) return [];
   try {
@@ -45,8 +53,9 @@ export function sourceIsEnabled(source: string, excludedSources: readonly string
 export const CORE_RULES_ALWAYS_VISIBLE_MODULES = new Set(["skills", "attributes", "priorityarray"]);
 
 export function sourceRecordIsVisible(moduleId: string, source: string, isSourceEnabled: (source: string) => boolean): boolean {
-  const sourceCode = normaliseSourceCode(source);
-  return (sourceCode === "CRB" && CORE_RULES_ALWAYS_VISIBLE_MODULES.has(moduleId)) || isSourceEnabled(sourceCode);
+  return recordSourceCodes(source).some((sourceCode) =>
+    (sourceCode === "CRB" && CORE_RULES_ALWAYS_VISIBLE_MODULES.has(moduleId)) || isSourceEnabled(sourceCode)
+  );
 }
 
 function initialSourceCodes(): string[] {

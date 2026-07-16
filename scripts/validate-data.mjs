@@ -6,6 +6,7 @@ const collections = {
   cyberdecks: ["cyberdecks", "software"],
   drones: ["drones"],
   equipment: ["equipment"],
+  lifestyles: ["lifestyles"],
   lifestyle_extras: ["lifestyle_extras", "lifestyle_options"],
   matrixinteraction: ["matrix_actions", "complex_forms"],
   metatypes: ["metatypes"],
@@ -50,6 +51,25 @@ for (const [name, attribute] of Object.entries(attributePayload.attributes)) {
   if (!attributeCategories.includes(attribute.category)) throw new Error(`attributes.json: '${name}' has invalid category '${attribute.category}'`);
   for (const field of ["used_for", "common_linked_skills"]) if (!Array.isArray(attribute[field])) throw new Error(`attributes.json: '${name}' has no '${field}' array`);
   for (const field of ["derived_statistics", "benchmarks"]) if (!attribute[field] || typeof attribute[field] !== "object" || Array.isArray(attribute[field])) throw new Error(`attributes.json: '${name}' has no '${field}' object`);
+}
+
+const lifestylePayload = JSON.parse(await readFile("lifestyles.json", "utf8"));
+const lifestyleRatingKeys = ["comforts_and_necessities", "security", "neighborhood"];
+for (const key of ["rules", "lifestyle_categories"]) {
+  if (!lifestylePayload[key] || typeof lifestylePayload[key] !== "object" || Array.isArray(lifestylePayload[key])) throw new Error(`lifestyles.json: missing object '${key}'`);
+}
+for (const [name, lifestyle] of Object.entries(lifestylePayload.lifestyles)) {
+  for (const field of ["category", "lifestyle_type", "monthly_cost", "starting_nuyen", "lifestyle_points", "description", "source"]) {
+    if (lifestyle[field] == null || lifestyle[field] === "") throw new Error(`lifestyles.json: '${name}' is missing '${field}'`);
+  }
+  for (const field of ["built_in_options", "special_rules"]) {
+    if (!Array.isArray(lifestyle[field])) throw new Error(`lifestyles.json: '${name}' has no '${field}' array`);
+  }
+  for (const field of lifestyleRatingKeys) {
+    const rating = lifestyle[field];
+    if (!rating || typeof rating !== "object" || Array.isArray(rating)) throw new Error(`lifestyles.json: '${name}' has no '${field}' rating object`);
+    if (!Number.isFinite(rating.base) || !Number.isFinite(rating.limit) || rating.base > rating.limit) throw new Error(`lifestyles.json: '${name}' has invalid '${field}' base/limit values`);
+  }
 }
 
 const priorityPayload = JSON.parse(await readFile("priority_array.json", "utf8"));

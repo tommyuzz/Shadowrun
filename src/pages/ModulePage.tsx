@@ -12,7 +12,7 @@ import { runArchiveTransition } from "../motion";
 import { presentations, titleCase, valueText } from "../presentation";
 import { recordTags } from "../record-tags";
 import { modulesById } from "../registry";
-import { sourceRecordIsVisible, useSourceSelection } from "../source-selection";
+import { recordSourceCodes, sourceRecordIsVisible, useSourceSelection } from "../source-selection";
 import type { ComparisonModule } from "../comparison";
 import type { PagePresentation } from "../presentation";
 import type { ReferenceCategory, ReferenceData, ReferenceRecord } from "../types";
@@ -50,9 +50,11 @@ function listMeta(moduleId: string, record: ReferenceRecord, presentation: PageP
     case "cyberdecks": value = valueText(raw.cost); break;
     case "matrixinteraction": value = record.category === "Matrix Actions" ? valueText(raw.action_type).replace(/\s+Action$/, "") : valueText(raw.fading_value); break;
     case "qualities": value = `${valueText(record.category === "Positive Qualities" ? raw.karma_cost : raw.karma_bonus)} Karma ${record.category === "Positive Qualities" ? "cost" : "bonus"}`; break;
-    case "lifestyles": value = record.category === "Entertainment"
-      ? `${valueText(raw.point_cost)} PT · ${valueText(raw.monthly_cost)}`
-      : `${valueText(raw.point_adjustment)} · ${valueText(raw.monthly_cost)}`;
+    case "lifestyles": value = record.category === "Lifestyles"
+      ? valueText(raw.monthly_cost)
+      : record.category === "Entertainment"
+        ? `${valueText(raw.point_cost)} PT · ${valueText(raw.monthly_cost)}`
+        : `${valueText(raw.point_adjustment)} · ${valueText(raw.monthly_cost)}`;
       break;
     case "sprites": value = "Level"; break;
     case "spells": value = `Drain ${valueText(raw.drain ?? raw.Drain, "")}`.trim(); break;
@@ -144,7 +146,7 @@ export function ModulePage() {
   }, [module, loadAttempt]);
 
   useEffect(() => {
-    if (data) registerSources(data.records.map((record) => record.source));
+    if (data) registerSources(data.records.flatMap((record) => recordSourceCodes(record.source)));
   }, [data, registerSources]);
 
   useEffect(() => {
@@ -210,7 +212,7 @@ export function ModulePage() {
     <main className={presentation.workspaceClass}>
       <ModuleSidebar module={module} category={category} data={data}/>
       <article className={`panel ${presentation.panelClass}`} role="tabpanel" aria-live="polite"><div className="panel-inner archive-view" key={viewMotionKey}>
-        {!selected ? (excludedSelected ? <ArchiveSourceExcluded module={module} recordName={excludedSelected.name} source={excludedSelected.source} include={() => includeSource(excludedSelected.source)} back={showList}/> : <section className={presentation.listViewClass} aria-busy={isFiltering || undefined} data-filtering={isFiltering || undefined}>
+        {!selected ? (excludedSelected ? <ArchiveSourceExcluded module={module} recordName={excludedSelected.name} source={excludedSelected.source} include={() => recordSourceCodes(excludedSelected.source).forEach(includeSource)} back={showList}/> : <section className={presentation.listViewClass} aria-busy={isFiltering || undefined} data-filtering={isFiltering || undefined}>
           <header className={`${presentation.headerClass} ${presentation.listHeaderClass} archive-list-header`.trim()}><button className="filter-toggle-button" type="button" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(!filtersOpen)}>Filter</button><p className="eyebrow">{presentation.listEyebrow(category)}</p><ArchiveTitle id={titleIds[module.id]?.[0]} title={presentation.listTitle(category)}/></header>
           {filtersOpen ? <div className={`${presentation.filtersClass} archive-filter-panel`.trim()}>
             <div className={presentation.filterFieldClass}><label className="search-label" htmlFor={`${module.id}-record-search`}>{presentation.searchLabel}</label><div className="filter-control"><input className="search" id={`${module.id}-record-search`} type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder={presentation.searchPlaceholder} autoFocus/><button className="filter-clear-button" type="button" disabled={!query} onClick={() => setQuery("")} aria-label="Clear search">×</button></div></div>

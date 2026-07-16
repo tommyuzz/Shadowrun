@@ -1,5 +1,6 @@
 import { sourceBooks } from "../data";
 import { titleCase, valueText } from "../presentation";
+import { recordSourceCodes } from "../source-selection";
 import type { RawRecord, ReferenceData, ReferenceRecord } from "../types";
 
 interface DetailProps {
@@ -15,8 +16,8 @@ const code = (prefix: string, index: number) => `${prefix}-${String(index).padSt
 
 function Source({ value = "CRB" }: { value?: unknown }) {
   const source = valueText(value);
-  const sourceCode = source.match(/^[A-Za-z0-9]+/)?.[0]?.toUpperCase() || "—";
-  return <section className="section"><div className="source-book"><span className="source-code">{sourceCode}</span><strong className="source-title">{sourceBooks[sourceCode] || source}</strong></div></section>;
+  const codes = recordSourceCodes(source);
+  return <section className="section"><div className="source-book-list" aria-label={codes.length === 1 ? "Source book" : "Source books"}>{codes.map((sourceCode) => <div className="source-book" key={sourceCode}><span className="source-code">{sourceCode}</span><strong className="source-title">{sourceBooks[sourceCode] || sourceCode}</strong></div>)}</div></section>;
 }
 
 function Html({ className, value, fallback = "—" }: { className?: string; value: unknown; fallback?: string }) {
@@ -268,6 +269,63 @@ function QualityDetail({ record, recordNumber }: { record: ReferenceRecord; reco
   </>;
 }
 
+const lifestyleRatings: [string, string, string][] = [
+  ["comforts_and_necessities", "Comforts & Necessities", "C/N"],
+  ["security", "Security", "SEC"],
+  ["neighborhood", "Neighborhood", "NBR"]
+];
+
+function ratingNumber(value: unknown): number {
+  const number = Number(value);
+  return Number.isFinite(number) ? Math.max(0, Math.round(number)) : 0;
+}
+
+function LifestyleRating({ label, codeLabel, value }: { label: string; codeLabel: string; value: unknown }) {
+  const rating = asObject(value);
+  const base = ratingNumber(rating.base);
+  const limit = Math.max(base, ratingNumber(rating.limit));
+  const scale = Math.max(8, limit);
+  return <article className="lifestyle-rating-card">
+    <header><span>{codeLabel}</span><h3>{label}</h3></header>
+    <dl><div><dt>Base</dt><dd>{base}</dd></div><div><dt>Limit</dt><dd>{limit}</dd></div></dl>
+    <div className="lifestyle-rating-track" role="img" aria-label={`${label}: base ${base}, limit ${limit}`}>
+      {Array.from({ length: scale }, (_, index) => <span data-state={index < base ? "base" : index < limit ? "capacity" : "locked"} aria-hidden="true" key={index}/>) }
+    </div>
+    <p><span>Base rating</span><span>Available capacity</span></p>
+  </article>;
+}
+
+function LifestyleProfileDetail({ record, recordNumber }: { record: ReferenceRecord; recordNumber: number }) {
+  const raw = record.raw;
+  const lifestyleType = valueText(raw.lifestyle_type, "Residential");
+  const builtInOptions = asStrings(raw.built_in_options);
+  const specialRules = asStrings(raw.special_rules);
+  return <>
+    <article className="lifestyle-profile" aria-labelledby="lifestyle-profile-title">
+      <header className="lifestyle-profile-banner"><div><span>Residential status dossier</span><h2 id="lifestyle-profile-title">Lifestyle profile</h2></div><strong>{code("LS", recordNumber)}</strong></header>
+      <div className="lifestyle-profile-grid">
+        <section className="lifestyle-identity"><span>Lifestyle type</span><strong>{lifestyleType}</strong><p>{record.name} living standard</p></section>
+        <dl className="lifestyle-profile-metrics">
+          <div className="lifestyle-metric lifestyle-metric--cost"><dt>Monthly cost</dt><dd>{valueText(raw.monthly_cost)}</dd><small>Base residential expense</small></div>
+          <div className="lifestyle-metric"><dt>Starting nuyen</dt><dd>{valueText(raw.starting_nuyen)}</dd><small>Cash available after creation</small></div>
+          <div className="lifestyle-metric lifestyle-metric--points"><dt>Lifestyle points</dt><dd>{valueText(raw.lifestyle_points)}</dd><small>Advanced lifestyle allocation</small></div>
+        </dl>
+      </div>
+      <div className="lifestyle-profile-rule"><span>⌂</span><strong>Base ratings show the supplied starting values // Limits show the maximum advanced-lifestyle ratings</strong></div>
+    </article>
+
+    <section className="section lifestyle-ratings"><div className="lifestyle-section-heading"><div><span>ADVANCED LIFESTYLE PROFILE</span><h2 className="section-title">Category ratings</h2></div><p>Red blocks are included in the base lifestyle. Outlined blocks show capacity available up to the listed limit.</p></div><div className="lifestyle-rating-grid">{lifestyleRatings.map(([key, label, codeLabel]) => <LifestyleRating label={label} codeLabel={codeLabel} value={raw[key]} key={key}/>)}</div></section>
+
+    <section className="section lifestyle-description"><h2 className="section-title">Lifestyle description</h2><Html className="lifestyle-description-copy" value={raw.description} fallback="No lifestyle description is available."/></section>
+
+    <section className="section lifestyle-configuration"><h2 className="section-title">Configuration notes</h2><div className="lifestyle-configuration-grid">
+      <article><header><span>OPT</span><h3>Built-in options</h3></header>{builtInOptions.length ? <ul>{builtInOptions.map((option) => <li key={option}>{option}</li>)}</ul> : <p className="lifestyle-empty-note">No built-in options are listed.</p>}</article>
+      <article><header><span>RULE</span><h3>Special rules</h3></header>{specialRules.length ? <ul>{specialRules.map((rule, index) => <li key={`${rule.slice(0, 40)}-${index}`}>{rule}</li>)}</ul> : <p className="lifestyle-empty-note">No additional special rules are listed.</p>}</article>
+    </div></section>
+    <Source value={raw.source}/>
+  </>;
+}
+
 const lifestyleVariantOrder = ["point_cost", "monthly_cost", "minimum_lifestyle"];
 
 function textValues(value: unknown): string[] {
@@ -290,7 +348,7 @@ function LifestyleVariant({ name, value }: { name: string; value: unknown }) {
   </article>;
 }
 
-function LifestyleDetail({ record, recordNumber }: { record: ReferenceRecord; recordNumber: number }) {
+function LifestyleExtraDetail({ record, recordNumber }: { record: ReferenceRecord; recordNumber: number }) {
   const raw = record.raw;
   const entertainment = record.category === "Entertainment";
   const positive = record.subcategory === "Positive";
@@ -392,7 +450,9 @@ export function RecordDetail({ moduleId, record, data, recordNumber }: DetailPro
     case "attributes": return <AttributeDetail record={record} data={data} recordNumber={recordNumber}/>;
     case "metatypes": return <MetatypeDetail record={record} recordNumber={recordNumber}/>;
     case "qualities": return <QualityDetail record={record} recordNumber={recordNumber}/>;
-    case "lifestyles": return <LifestyleDetail record={record} recordNumber={recordNumber}/>;
+    case "lifestyles": return record.category === "Lifestyles"
+      ? <LifestyleProfileDetail record={record} recordNumber={recordNumber}/>
+      : <LifestyleExtraDetail record={record} recordNumber={recordNumber}/>;
     case "cyberdecks": return <CyberdeckDetail record={record} recordNumber={recordNumber}/>;
     case "matrixinteraction": return <MatrixDetail record={record} recordNumber={recordNumber}/>;
     case "sprites": return <SpriteDetail record={record} recordNumber={recordNumber}/>;

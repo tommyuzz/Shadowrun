@@ -8,7 +8,7 @@ const expectedFilters: Record<string, string[]> = {
   attributes: ["linked-skill"],
   metatypes: ["racial-trait"],
   qualities: ["quality-type", "structure"],
-  lifestyles: ["subcategory", "minimum-lifestyle"],
+  lifestyles: ["lifestyle-type", "subcategory", "minimum-lifestyle"],
   priorityarray: [],
   cyberdecks: ["subcategory"],
   matrixinteraction: ["function", "context"],
@@ -74,12 +74,18 @@ describe("full-record search", () => {
     expect(matchesSearch(addiction!, "social penalty -3")).toBe(true);
   });
 
-  it("matches nested lifestyle variants and restrictions", async () => {
+  it("matches nested lifestyle ratings and special rules", async () => {
     const data = await loadData("lifestyles");
+    const boltHole = data.records.find((record) => record.id === "bolt-hole");
+    const commercial = data.records.find((record) => record.id === "commercial");
     const garage = data.records.find((record) => record.id === "garage");
     const safehouse = data.records.find((record) => record.id === "safehouse");
+    expect(boltHole).toBeDefined();
+    expect(commercial).toBeDefined();
     expect(garage).toBeDefined();
     expect(safehouse).toBeDefined();
+    expect(matchesSearch(boltHole!, "security limit 4 track resident")).toBe(true);
+    expect(matchesSearch(commercial!, "charisma etiquette corporate net hit")).toBe(true);
     expect(matchesSearch(garage!, "helicopter pad access luxury")).toBe(true);
     expect(matchesSearch(safehouse!, "cannot purchase entertainment assets")).toBe(true);
   });
@@ -147,20 +153,42 @@ describe("qualities dataset", () => {
 });
 
 describe("lifestyles dataset", () => {
-  it("preserves both lifestyle collections and every supplied record", async () => {
+  it("preserves all three requested collections and their tab order", async () => {
     const data = await loadData("lifestyles");
-    expect(data.records).toHaveLength(40);
+    expect(data.records).toHaveLength(49);
+    expect(data.records.filter((record) => record.category === "Lifestyles")).toHaveLength(9);
     expect(data.records.filter((record) => record.category === "Entertainment")).toHaveLength(26);
     expect(data.records.filter((record) => record.category === "Lifestyle Options")).toHaveLength(14);
-    expect(data.categories.map((category) => category.id)).toEqual(["all", "entertainment", "lifestyle-options"]);
+    expect(data.categories.map((category) => category.id)).toEqual(["lifestyles", "entertainment", "lifestyle-options"]);
+    expect(data.records.slice(0, 9).map((record) => record.name)).toEqual(["Street", "Squatter", "Low", "Middle", "High", "Luxury", "Bolt Hole", "Traveler", "Commercial"]);
+    const street = data.records.find((record) => record.id === "street")!;
+    expect(street.raw.comforts_and_necessities).toEqual({ base: 0, limit: 1 });
+    expect(street.raw.built_in_options).toEqual([]);
   });
 
-  it("exposes minimum lifestyles declared by selectable variants", async () => {
+  it("exposes lifestyle types as a filter and category guidance as record tags", async () => {
+    const data = await loadData("lifestyles");
+    const typeFilter = modulesById.lifestyles.filters.find((filter) => filter.id === "lifestyle-type")!;
+    const types = Array.from(new Set(data.records.flatMap((record) => typeFilter.values(record)))).sort();
+    const boltHole = data.records.find((record) => record.id === "bolt-hole")!;
+    const tags = recordTags("lifestyles", boltHole, data);
+    expect(types).toEqual(["Business Premises", "Hideout", "Mobile Lodging", "Residential"]);
+    expect(tags.find((tag) => tag.key === "lifestyle-type")?.label).toBe("Hideout");
+    expect(tags.find((tag) => tag.key === "Security")?.html).toContain("locks, surveillance, guards");
+  });
+
+  it("keeps the restored subtype and minimum-lifestyle filters scoped to the original tabs", async () => {
     const data = await loadData("lifestyles");
     const garage = data.records.find((record) => record.id === "garage")!;
+    const safehouse = data.records.find((record) => record.id === "safehouse")!;
+    const street = data.records.find((record) => record.id === "street")!;
+    const subtypeFilter = modulesById.lifestyles.filters.find((filter) => filter.id === "subcategory")!;
     const minimumFilter = modulesById.lifestyles.filters.find((filter) => filter.id === "minimum-lifestyle")!;
+    expect(subtypeFilter.values(garage)).toEqual(["Asset"]);
+    expect(subtypeFilter.values(safehouse)).toEqual(["Positive"]);
+    expect(subtypeFilter.values(street)).toEqual([]);
     expect(minimumFilter.values(garage)).toEqual(expect.arrayContaining(["Medium", "High", "Luxury"]));
-    expect(minimumFilter.values(garage)).not.toContain("*");
+    expect(minimumFilter.values(street)).toEqual([]);
   });
 });
 

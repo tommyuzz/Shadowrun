@@ -1,10 +1,16 @@
 import { describe, expect, it } from "vitest";
-import { normaliseSourceCode, parseSourceExclusions, sourceIsEnabled, sourceRecordIsVisible } from "./source-selection";
+import { normaliseSourceCode, parseSourceExclusions, recordSourceCodes, sourceIsEnabled, sourceRecordIsVisible } from "./source-selection";
 
 describe("global source book selection", () => {
   it("normalises source codes consistently", () => {
     expect(normaliseSourceCode(" crb ")).toBe("CRB");
     expect(normaliseSourceCode("")).toBe("CRB");
+  });
+
+  it("splits records credited to more than one source book", () => {
+    expect(recordSourceCodes("CRB / SRF")).toEqual(["CRB", "SRF"]);
+    expect(sourceRecordIsVisible("lifestyles", "CRB / SRF", (source) => source === "CRB")).toBe(true);
+    expect(sourceRecordIsVisible("lifestyles", "CRB / SRF", () => false)).toBe(false);
   });
 
   it("recovers a unique exclusion list from persistent browser state", () => {

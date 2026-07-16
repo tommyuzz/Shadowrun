@@ -1,0 +1,239 @@
+{
+  "lifestyles": {
+    "Street": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Residential",
+      "monthly_cost": "Free",
+      "starting_nuyen": "1D6 × 20¥",
+      "comforts_and_necessities": {
+        "base": 0,
+        "limit": 1
+      },
+      "security": {
+        "base": 0,
+        "limit": 1
+      },
+      "neighborhood": {
+        "base": 0,
+        "limit": 1
+      },
+      "lifestyle_points": 2,
+      "built_in_options": [],
+      "special_rules": [
+        "Each increase to Comforts & Necessities, Security, or Neighborhood costs 50¥ per level per month.",
+        "Assets and services must be usable or accessible by the general public and require gamemaster approval."
+      ],
+      "description": "<p><strong>Street</strong> represents homelessness or an equally precarious existence. The character sleeps wherever shelter can be found, relies on scavenged or improvised necessities, and has almost no dependable privacy or protection.</p><p>Under the advanced lifestyle rules, Street begins with no ratings in Comforts &amp; Necessities, Security, or Neighborhood. Increasing one of these categories costs a flat <strong>50¥ per level per month</strong>. Assets and services must be publicly accessible and require gamemaster approval.</p>",
+      "source": "CRB / SRF"
+    },
+    "Squatter": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Residential",
+      "monthly_cost": "500¥ per month",
+      "starting_nuyen": "2D6 × 40¥",
+      "comforts_and_necessities": {
+        "base": 1,
+        "limit": 2
+      },
+      "security": {
+        "base": 1,
+        "limit": 2
+      },
+      "neighborhood": {
+        "base": 1,
+        "limit": 2
+      },
+      "lifestyle_points": 2,
+      "built_in_options": [],
+      "special_rules": [],
+      "description": "<p><strong>Squatter</strong> provides a barely habitable place such as an abandoned building, crowded barracks, coffin motel, makeshift shack, or subdivided room. Food and utilities are poor, sanitation is unreliable, and meaningful security is uncommon.</p>",
+      "source": "CRB / SRF"
+    },
+    "Low": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Residential",
+      "monthly_cost": "2,000¥ per month",
+      "starting_nuyen": "3D6 × 60¥",
+      "comforts_and_necessities": {
+        "base": 2,
+        "limit": 3
+      },
+      "security": {
+        "base": 2,
+        "limit": 3
+      },
+      "neighborhood": {
+        "base": 2,
+        "limit": 3
+      },
+      "lifestyle_points": 3,
+      "built_in_options": [],
+      "special_rules": [],
+      "description": "<p><strong>Low</strong> represents a basic apartment or similar modest residence. The character has regular meals, limited utilities, and a door that can usually be secured, though services may be rationed and local protection may depend on neighbourhood powers.</p>",
+      "source": "CRB / SRF"
+    },
+    "Middle": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Residential",
+      "monthly_cost": "5,000¥ per month",
+      "starting_nuyen": "4D6 × 100¥",
+      "comforts_and_necessities": {
+        "base": 3,
+        "limit": 4
+      },
+      "security": {
+        "base": 3,
+        "limit": 4
+      },
+      "neighborhood": {
+        "base": 4,
+        "limit": 5
+      },
+      "lifestyle_points": 4,
+      "built_in_options": [],
+      "special_rules": [],
+      "description": "<p><strong>Middle</strong> provides a comfortable house, apartment, or condominium with dependable utilities, reasonable security, useful household technology, and a mixture of inexpensive and higher-quality food.</p>",
+      "source": "CRB / SRF"
+    },
+    "High": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Residential",
+      "monthly_cost": "10,000¥ per month",
+      "starting_nuyen": "5D6 × 500¥",
+      "comforts_and_necessities": {
+        "base": 4,
+        "limit": 6
+      },
+      "security": {
+        "base": 4,
+        "limit": 6
+      },
+      "neighborhood": {
+        "base": 5,
+        "limit": 6
+      },
+      "lifestyle_points": 6,
+      "built_in_options": [],
+      "special_rules": [],
+      "description": "<p><strong>High</strong> provides a roomy home or condominium, good food, reliable domestic technology, housekeeping support, and strong neighbourhood security backed by respectable authorities, private security, or well-maintained local arrangements.</p>",
+      "source": "CRB / SRF"
+    },
+    "Luxury": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Residential",
+      "monthly_cost": "100,000¥ per month and upward",
+      "starting_nuyen": "6D6 × 1,000¥",
+      "comforts_and_necessities": {
+        "base": 5,
+        "limit": 7
+      },
+      "security": {
+        "base": 5,
+        "limit": 8
+      },
+      "neighborhood": {
+        "base": 5,
+        "limit": 7
+      },
+      "lifestyle_points": 12,
+      "built_in_options": [],
+      "special_rules": [],
+      "description": "<p><strong>Luxury</strong> offers premium residences, natural food and drink, extensive household staff or drones, sophisticated entertainment, elite social access, and top-level physical, Matrix, and astral security.</p>",
+      "source": "CRB / SRF"
+    },
+    "Bolt Hole": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Hideout",
+      "monthly_cost": "1,000¥ for each month in which it is used",
+      "starting_nuyen": "Not specified in Run Faster",
+      "comforts_and_necessities": {
+        "base": 1,
+        "limit": 2
+      },
+      "security": {
+        "base": 1,
+        "limit": 4
+      },
+      "neighborhood": {
+        "base": 1,
+        "limit": 4
+      },
+      "lifestyle_points": 4,
+      "built_in_options": [
+        "Not a Home"
+      ],
+      "special_rules": [
+        "Increase the threshold of tests made to track a resident by 4.",
+        "Entertainment may contain assets, but not services or outings.",
+        "The full monthly cost is paid whenever the bolt hole is used during that month."
+      ],
+      "description": "<p><strong>Bolt Hole</strong> is a concealed refuge intended for hiding rather than comfortable daily living. It is isolated from people, the grid, and ordinary entertainment.</p><p>A resident increases the threshold of tests made to track them by <strong>4</strong>. Only physical assets may be bought with Entertainment points; services and outings are unavailable. The full monthly cost is paid whenever the bolt hole is used during that month.</p>",
+      "source": "SRF"
+    },
+    "Traveler": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Mobile Lodging",
+      "monthly_cost": "3,000¥ per month",
+      "starting_nuyen": "Not specified in Run Faster",
+      "comforts_and_necessities": {
+        "base": 2,
+        "limit": 4
+      },
+      "security": {
+        "base": 2,
+        "limit": 4
+      },
+      "neighborhood": {
+        "base": 2,
+        "limit": 4
+      },
+      "lifestyle_points": "1D6 + 2 each month",
+      "built_in_options": [],
+      "special_rules": [
+        "Roll 1D6 + 2 each month to determine available lifestyle points.",
+        "The gamemaster determines the temporary premises and any available Entertainment.",
+        "Entertainment assets and services supplied by the establishment do not increase the lifestyle cost."
+      ],
+      "description": "<p><strong>Traveler</strong> represents a mobile existence in temporary accommodation. The character stays somewhere different each month, ranging from discounted high-quality lodging to extremely poor short-term rooms.</p><p>At the beginning of each month, roll <strong>1D6 + 2</strong> to determine the available lifestyle points. The player allocates points to Comforts &amp; Necessities, Security, or Neighborhood, while the gamemaster determines the premises and available Entertainment.</p>",
+      "source": "SRF"
+    },
+    "Commercial": {
+      "category": "Lifestyles",
+      "lifestyle_type": "Business Premises",
+      "monthly_cost": "8,000¥ per month before reductions",
+      "starting_nuyen": "Not specified in Run Faster",
+      "comforts_and_necessities": {
+        "base": 3,
+        "limit": 4
+      },
+      "security": {
+        "base": 3,
+        "limit": 7
+      },
+      "neighborhood": {
+        "base": 4,
+        "limit": 6
+      },
+      "lifestyle_points": 4,
+      "built_in_options": [],
+      "special_rules": [
+        "This is a business location rather than a proper residence.",
+        "The premises include permits to sell selected legal items.",
+        "At the start of each month, make Charisma + Etiquette (Corporate) [Social]; each net hit reduces that month's cost by 1,000¥."
+      ],
+      "description": "<p><strong>Commercial</strong> represents a storefront, workshop, or other business premises rather than a proper residence. It provides space to manufacture, repair, fence, or sell goods and includes permits for selected legal merchandise.</p><p>At the start of each month, a renting character makes a <strong>Charisma + Etiquette (Corporate) [Social]</strong> test. Each net hit reduces that month's cost by <strong>1,000¥</strong>.</p>",
+      "source": "SRF"
+    }
+  },
+  "rules": {
+    "Core Lifestyle Selection": "<strong>Core Lifestyle Selection</strong><br>Every character selects a primary lifestyle representing their normal living standard. Additional residences may be maintained, but the full cost of every lifestyle must be paid.",
+    "Advanced Lifestyle Categories": "<strong>Advanced Lifestyle Categories</strong><br>Run Faster divides a lifestyle into <strong>Comforts &amp; Necessities</strong>, <strong>Security</strong>, <strong>Neighborhood</strong>, and <strong>Entertainment</strong>. The first three use a base rating and maximum limit. Lifestyle points may raise these ratings or be spent on Entertainment; individual Entertainment extras are excluded from this file.",
+    "Advanced Lifestyle Cost": "<strong>Advanced Lifestyle Cost</strong><br>Except where a lifestyle states otherwise, each point spent to increase Comforts &amp; Necessities, Security, or Neighborhood raises the monthly cost by <strong>10% of the base lifestyle cost</strong>."
+  },
+  "lifestyle_categories": {
+    "Comforts & Necessities": "<strong>Comforts &amp; Necessities</strong><br>Represents shelter, rest, food, utilities, sanitation, and basic health needs. Under Run Faster, base lifestyle fatigue is 6S and each level reduces that Damage Value by 2.",
+    "Security": "<strong>Security</strong><br>Represents locks, surveillance, guards, privacy, local enforcement, and response to threats.",
+    "Neighborhood": "<strong>Neighborhood</strong><br>Represents the surrounding area's safety, legality, transport, environment, services, and social conditions.",
+    "Entertainment": "<strong>Entertainment</strong><br>Represents lifestyle-specific facilities, services, and outings. Individual extras are deliberately excluded."
+  }
+}

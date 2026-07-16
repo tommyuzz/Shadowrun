@@ -60,6 +60,17 @@ export function recordTags(moduleId: string, record: ReferenceRecord, data: Refe
       ];
     }
     case "lifestyles": {
+      if (record.category === "Lifestyles") {
+        const rules = recordMap(data, "rules");
+        const categories = recordMap(data, "lifestyle_categories");
+        const lifestyleType = valueText(raw.lifestyle_type, "Residential");
+        const categoryNames = ["Comforts & Necessities", "Security", "Neighborhood", "Entertainment"];
+        return [
+          { key: "lifestyle-type", label: lifestyleType, html: `<strong>${lifestyleType}</strong><br>This record is classified as a <strong>${lifestyleType}</strong> lifestyle.` },
+          { key: "core-lifestyle", label: "Core lifestyle", html: String(rules["Core Lifestyle Selection"] || "No core lifestyle rule is available.") },
+          ...categoryNames.map((name) => ({ key: name, label: name, html: String(categories[name] || `<strong>${name}</strong><br>No category guidance is available.`) }))
+        ];
+      }
       const categories = recordMap(data, "category");
       const subcategories = recordMap(data, "subcategories");
       const variantCount = raw.variants && typeof raw.variants === "object" && !Array.isArray(raw.variants) ? Object.keys(raw.variants).length : 0;

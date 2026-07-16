@@ -19,7 +19,7 @@ const legends: Record<string, [string, string][]> = {
   attributes: [["BOD / AGI", "Physical resilience and coordination"], ["REA / STR", "Reflexes and muscular power"], ["WIL / LOG", "Resolve and analytical reasoning"], ["INT / CHA", "Instinct and force of personality"], ["EDG / ESS", "Luck and augmentation capacity"], ["MAG / RES", "Awakened or technomancer capability"]],
   metatypes: [["MIN", "Racial minimum"], ["MAX", "Natural maximum"], ["EDG", "Edge range"], ["ESS", "Base Essence"], ["WALK", "Walking rate"], ["RUN", "Running rate"]],
   qualities: [["TYPE", "General, Metagenic, Infected, or Lifestyle classification"], ["KARMA", "Listed purchase cost or awarded bonus"], ["RTG", "Rated quality with a maximum level"], ["OPTION", "Selectable variant, degree, or level"], ["×2", "Normal post-creation purchase or buy-off multiplier"]],
-  lifestyles: [["PT", "Lifestyle points spent or adjusted"], ["¥ / MO", "Monthly nuyen cost or adjustment"], ["MIN", "Minimum lifestyle for a waived monthly cost"], ["+/−", "Positive or negative lifestyle option"], ["VAR", "Entry contains selectable configurations"]],
+  lifestyles: [["¥ / MO", "Base monthly residential cost"], ["START", "Starting nuyen remaining after character creation"], ["LP", "Lifestyle points available for advanced configuration"], ["BASE", "Rating included in the base lifestyle"], ["LIMIT", "Maximum advanced-lifestyle rating"], ["OPT", "Option automatically included with the lifestyle"]],
   priorityarray: [["A–E", "Each priority level is assigned exactly once"], ["SAP", "Special Attribute Points from Metatype"], ["ATTR", "Points assigned to the eight standard attributes"], ["MAG / RES", "Magic or Resonance rating and starting options"], ["SK / GRP", "Individual Skill Points and Skill Group Points"], ["¥", "Starting resources for the selected play level"]],
   cyberdecks: [["DR", "Device Rating"], ["ATT", "Attack"], ["SLZ", "Sleaze"], ["DP", "Data Processing"], ["FW", "Firewall"], ["PRG", "Running program capacity"]],
   sprites: [["L", "Sprite Level"], ["ATT", "Attack"], ["SLZ", "Sleaze"], ["DP", "Data Processing"], ["FW", "Firewall"], ["RES", "Resonance"], ["CM", "Matrix Condition Monitor"]],
@@ -30,6 +30,9 @@ const legends: Record<string, [string, string][]> = {
   drones: [["PIL", "Autonomous Pilot rating"], ["SNS", "Sensor array rating"], ["HDL", "Handling limit"], ["SPD", "Speed limit"], ["ACC", "Acceleration rating"], ["BDY / ARM", "Body and Armor ratings"]],
   equipment: [["¥", "Listed purchase cost"], ["R", "Restricted availability"], ["F", "Forbidden availability"], ["RTG", "Rating-dependent value"], ["CAP", "Accessory capacity"], ["ESS", "Essence cost"]]
 };
+
+const lifestyleProfileLegend: [string, string][] = [["¥ / MO", "Base monthly residential cost"], ["START", "Starting nuyen remaining after character creation"], ["LP", "Lifestyle points available for advanced configuration"], ["BASE", "Rating included in the base lifestyle"], ["LIMIT", "Maximum advanced-lifestyle rating"], ["OPT", "Option automatically included with the lifestyle"]];
+const lifestyleExtraLegend: [string, string][] = [["PT", "Lifestyle points spent or adjusted"], ["¥ / MO", "Monthly nuyen cost or adjustment"], ["MIN", "Minimum lifestyle for a waived monthly cost"], ["+/−", "Positive or negative lifestyle option"], ["VAR", "Entry contains selectable configurations"]];
 
 const matrixActionLegend: [string, string][] = [["ACT", "Matrix action type"], ["MRK", "Marks required"], ["ATT", "Attack"], ["SLZ", "Sleaze"], ["DP", "Data Processing"], ["FW", "Firewall"]];
 const complexFormLegend: [string, string][] = [["L", "Complex Form Level"], ["FAD", "Fading Value"], ["I", "Instant duration"], ["S", "Sustained duration"], ["P", "Permanent duration"], ["V", "Opposed test"]];
@@ -65,7 +68,21 @@ export function ModuleSidebar({ module, category, data }: { module: ModuleDefini
     case "attributes": title = category.id === "all" ? "Attribute protocol" : `${category.label} attributes`; copy = category.id === "all" ? "Physical, Mental and Special Attributes define a runner's core capabilities, derived values, linked tests, and exceptional potential. Choose a category or filter by a commonly linked skill." : category.description || copy; legendTitle = "Attribute key"; break;
     case "metatypes": title = "Metatype protocol"; copy = String(categories.Metatypes || copy); legendTitle = "Attribute key"; break;
     case "qualities": title = category.id === "all" ? "Quality protocol" : category.label; copy = category.id === "all" ? "Positive and Negative Qualities define character advantages, complications, Karma values, requirements, ratings, selectable variants, and General, Metagenic, Infected, or Lifestyle classifications. Choose a category above, then use Quality Type to narrow the archive." : String(categories[category.label] || copy); legendTitle = "Quality key"; break;
-    case "lifestyles": title = category.id === "all" ? "Lifestyle protocol" : category.label; copy = category.id === "all" ? "Configure lifestyle resources and lifestyle-wide options. Entertainment records cover assets, services, and outings; Lifestyle Options cover positive and negative modifiers, monthly adjustments, and restrictions." : String(categories[category.label] || copy); legendTitle = "Lifestyle key"; break;
+    case "lifestyles": {
+      if (category.id === "lifestyles") {
+        const rules = payloadObject(data, "rules");
+        title = "Lifestyle protocol";
+        copy = `${String(rules["Core Lifestyle Selection"] || copy)}<br><br>${String(rules["Advanced Lifestyle Categories"] || "")}`;
+        glitch = String(rules["Advanced Lifestyle Cost"] || "");
+        rows = lifestyleProfileLegend;
+      } else {
+        title = category.label;
+        copy = String(categories[category.label] || copy);
+        rows = lifestyleExtraLegend;
+      }
+      legendTitle = "Lifestyle key";
+      break;
+    }
     case "priorityarray": title = "Priority protocol"; copy = `${String(categories["Priority Array"] || copy)}<br><br>${String(categories["Play Levels"] || "")}`; legendTitle = "Creation key"; break;
     case "cyberdecks": title = category.label === "Cyberdecks" ? "Cyberdeck protocol" : "Software protocol"; copy = String(categories[category.label] || copy); legendTitle = "Matrix key"; break;
     case "matrixinteraction": title = category.label === "Matrix Actions" ? "Matrix action protocol" : "Complex form protocol"; copy = String(categories[category.label] || copy); legendTitle = category.label === "Matrix Actions" ? "Action key" : "Resonance key"; rows = category.label === "Matrix Actions" ? matrixActionLegend : complexFormLegend; break;

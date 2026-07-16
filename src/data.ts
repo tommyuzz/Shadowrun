@@ -3,7 +3,7 @@ import type { RawRecord, ReferenceCategory, ReferenceData, ReferenceRecord } fro
 const jsonLoaders = import.meta.glob<Record<string, unknown>>([
   "../adeptpowers.json", "../attributes.json", "../cyberdecks.json", "../drones.json", "../equipment.json",
   "../matrixinteraction.json", "../metatypes.json", "../rituals.json", "../skills.json",
-  "../qualities.json", "../lifestyle_extras.json", "../priority_array.json", "../spells.json", "../spirits.json", "../sprites.json", "../vehicles.json", "../weapons.json"
+  "../qualities.json", "../lifestyles.json", "../lifestyle_extras.json", "../priority_array.json", "../spells.json", "../spirits.json", "../sprites.json", "../vehicles.json", "../weapons.json"
 ], { import: "default" });
 const dataCache = new Map<string, Promise<ReferenceData>>();
 
@@ -57,9 +57,10 @@ function normaliseSearchText(values: unknown[]): string {
     .toLocaleLowerCase("en-GB");
 }
 
-function record(name: string, raw: RawRecord, category: string, extraTags: string[] = []): ReferenceRecord {
+function record(name: string, raw: RawRecord, category: string, extraTags: string[] = [], subcategoryOverride?: string): ReferenceRecord {
   const description = text(raw.description || raw.use || raw.effect);
   const displayName = titleCase(name);
+  const subcategory = subcategoryOverride ?? text(raw.subcategory);
   const tags = [
     ...extraTags,
     ...strings(raw.keywords),
@@ -70,11 +71,11 @@ function record(name: string, raw: RawRecord, category: string, extraTags: strin
     id: slug(name),
     name: displayName,
     category,
-    subcategory: text(raw.subcategory) || undefined,
+    subcategory: subcategory || undefined,
     source: text(raw.source) || "CRB",
     description,
     tags: Array.from(new Set(tags)),
-    searchText: normaliseSearchText([displayName, category, raw.subcategory, raw.source, tags, raw]),
+    searchText: normaliseSearchText([displayName, category, subcategory, raw.source, tags, raw]),
     raw
   };
 }
@@ -182,16 +183,26 @@ function qualityData(payload: Record<string, unknown>): ReferenceData {
   };
 }
 
-function lifestyleData(payload: Record<string, unknown>): ReferenceData {
-  const records = [
-    ...objectEntries(payload.lifestyle_extras).map(([name, raw]) => record(name, raw, text(raw.category) || "Entertainment", raw.subcategory ? [text(raw.subcategory)] : [])),
-    ...objectEntries(payload.lifestyle_options).map(([name, raw]) => record(name, raw, text(raw.category) || "Lifestyle Options", raw.subcategory ? [text(raw.subcategory)] : []))
-  ];
+function lifestyleData(payload: Record<string, unknown>, extrasPayload: Record<string, unknown>): ReferenceData {
+  const lifestyleRecords = objectEntries(payload.lifestyles).map(([name, raw]) => {
+    const lifestyleType = text(raw.lifestyle_type);
+    return record(name, raw, text(raw.category) || "Lifestyles", lifestyleType ? [lifestyleType] : [], lifestyleType);
+  });
+  const extraRecords = objectEntries(extrasPayload.lifestyle_extras).map(([name, raw]) => record(name, raw, text(raw.category) || "Entertainment", raw.subcategory ? [text(raw.subcategory)] : []));
+  const optionRecords = objectEntries(extrasPayload.lifestyle_options).map(([name, raw]) => record(name, raw, text(raw.category) || "Lifestyle Options", raw.subcategory ? [text(raw.subcategory)] : []));
+  const records = [...lifestyleRecords, ...extraRecords, ...optionRecords];
+  const rules = lookupDefinitions(payload.rules);
+  const categoryDescriptions = lookupDefinitions(extrasPayload.category);
+  const combinedPayload = { ...extrasPayload, ...payload };
   return {
     records,
-    categories: categoriesFrom(records, lookupDefinitions(payload.category) as Record<string, string>, true),
-    definitions: lookupDefinitions(payload.subcategories),
-    payload
+    categories: [
+      { id: "lifestyles", label: "Lifestyles", description: text(rules["Core Lifestyle Selection"]) },
+      { id: "entertainment", label: "Entertainment", description: text(categoryDescriptions.Entertainment) },
+      { id: "lifestyle-options", label: "Lifestyle Options", description: text(categoryDescriptions["Lifestyle Options"]) }
+    ],
+    definitions: lookupDefinitions(payload.lifestyle_categories, payload.rules, extrasPayload.subcategories),
+    payload: combinedPayload
   };
 }
 
@@ -216,9 +227,14 @@ export async function loadData(moduleId: string): Promise<ReferenceData> {
 }
 
 async function loadUncached(moduleId: string): Promise<ReferenceData> {
-  const path = moduleId === "lifestyles"
-    ? "../lifestyle_extras.json"
-    : moduleId === "priorityarray" ? "../priority_array.json" : `../${moduleId}.json`;
+  if (moduleId === "lifestyles") {
+    const lifestyleLoader = jsonLoaders["../lifestyles.json"];
+    const extrasLoader = jsonLoaders["../lifestyle_extras.json"];
+    if (!lifestyleLoader || !extrasLoader) throw new Error("The Lifestyle datasets are not registered.");
+    const [payload, extrasPayload] = await Promise.all([lifestyleLoader(), extrasLoader()]);
+    return lifestyleData(payload, extrasPayload);
+  }
+  const path = moduleId === "priorityarray" ? "../priority_array.json" : `../${moduleId}.json`;
   const loader = jsonLoaders[path];
   if (!loader) throw new Error(`No dataset is registered for '${moduleId}'.`);
   const payload = await loader();
@@ -230,7 +246,6 @@ async function loadUncached(moduleId: string): Promise<ReferenceData> {
     case "cyberdecks": return cyberdeckData(payload);
     case "matrixinteraction": return matrixData(payload);
     case "qualities": return qualityData(payload);
-    case "lifestyles": return lifestyleData(payload);
     case "priorityarray": return priorityData(payload);
     case "weapons": return simpleData(payload, "weapons", "category", true);
     case "vehicles": return simpleData(payload, "vehicles", "category", true);

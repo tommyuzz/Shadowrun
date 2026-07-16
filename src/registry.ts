@@ -29,6 +29,7 @@ const costTypes = ["fixed cost", "per level", "variable cost"];
 const qualityStructures = ["options", "levels", "variants", "rarity", "severity", "target_prevalence", "degree", "possible_side_effects"];
 
 const lifestyleMinimums = (record: ReferenceRecord): string[] => {
+  if (record.category !== "Entertainment") return [];
   const minimums = values(record, "minimum_lifestyle").filter((minimum) => minimum !== "*");
   const variants = record.raw.variants;
   if (variants && typeof variants === "object" && !Array.isArray(variants)) {
@@ -54,7 +55,13 @@ const filterDefinitions: Record<string, FilterDefinition[]> = {
     } }
   ],
   lifestyles: [
-    subcategoryFilter("Lifestyle type", "All lifestyle types"),
+    { ...fieldFilter("lifestyle-type", "Lifestyle type", "All lifestyle types", "lifestyle_type"), values: (record) => record.category === "Lifestyles" ? values(record, "lifestyle_type") : [] },
+    {
+      id: "subcategory",
+      label: (category) => category.id === "lifestyle-options" ? "Option type" : "Entertainment type",
+      allLabel: (category) => category.id === "lifestyle-options" ? "All option types" : "All entertainment types",
+      values: (record) => record.category === "Lifestyles" || !record.subcategory ? [] : [record.subcategory]
+    },
     { id: "minimum-lifestyle", label: "Minimum lifestyle", allLabel: "All minimum lifestyles", values: lifestyleMinimums }
   ],
   cyberdecks: [subcategoryFilter("Software type", "All software types", "Software")],
@@ -88,7 +95,7 @@ const moduleRows: Omit<ModuleDefinition, "filters">[] = [
   { id: "attributes", name: "Attributes", singular: "Attribute", sector: "corerules", kicker: "Character capability archive", subtitle: "Fifth edition attribute index", archiveCode: "ATTRIBUTES // 5E", moduleCode: "Capability // Attribute index", intro: "Physical, Mental and Special Attributes, linked tests, derived statistics and rating benchmarks.", listInstruction: "Select an attribute to open its complete capability record", listMeta: (r) => value(r, "abbreviation"), defaultCategoryId: "all" },
   { id: "metatypes", name: "Metatypes", singular: "Metatype", sector: "corerules", kicker: "Population records archive", subtitle: "Fifth edition metatype index", archiveCode: "DEMOGRAPHIC // 5E", moduleCode: "Demographic // Metatype index", intro: "Metatype attributes, movement, racial traits and priority options.", listInstruction: "Select a metatype to open its full profile", listMeta: (r) => { const a = r.raw.attributes as Record<string, Record<string, unknown>> | undefined; return a?.body ? `BOD ${a.body.minimum}–${a.body.maximum}` : "Profile"; } },
   { id: "qualities", name: "Qualities", singular: "Quality", sector: "corerules", kicker: "Character profile archive", subtitle: "Fifth edition quality index", archiveCode: "QUALITIES // 5E", moduleCode: "Character // Quality ledger", intro: "Positive and Negative Qualities, Karma values, requirements, ratings and variants.", listInstruction: "Select a quality to open its full character record", listMeta: (r) => value(r, r.category === "Positive Qualities" ? "karma_cost" : "karma_bonus"), defaultCategoryId: "all" },
-  { id: "lifestyles", name: "Lifestyles", singular: "Lifestyle", sector: "corerules", kicker: "Safehouse configuration archive", subtitle: "Fifth edition lifestyle extras index", archiveCode: "LIFESTYLE // 5E", moduleCode: "Lifestyle // Extras & options", intro: "Lifestyle assets, services, outings, positive options and negative options.", listInstruction: "Select a lifestyle entry to open its full configuration record", listMeta: (r) => value(r, r.category === "Entertainment" ? "monthly_cost" : "point_adjustment"), defaultCategoryId: "all" },
+  { id: "lifestyles", name: "Lifestyles", singular: "Lifestyle", sector: "corerules", kicker: "Residential status archive", subtitle: "Fifth edition lifestyle index", archiveCode: "LIFESTYLE // 5E", moduleCode: "Lifestyle // Profiles, extras & options", intro: "Residential profiles, Entertainment extras and positive or negative Lifestyle Options.", listInstruction: "Select an entry to open its complete lifestyle record", listMeta: (r) => value(r, "monthly_cost"), defaultCategoryId: "lifestyles" },
   { id: "priorityarray", name: "Priority Array", singular: "Priority", sector: "corerules", kicker: "Character creation archive", subtitle: "Fifth edition priority assignment matrix", archiveCode: "PRIORITY // 5E", moduleCode: "Creation // Priority array", intro: "Priority levels, metatype options, attributes, Magic or Resonance, skills, resources, Karma and gear limits.", listInstruction: "Assign one priority from A to E to each creation category", listMeta: (r) => value(r, "attributes") },
   { id: "cyberdecks", name: "Cyberdecks", singular: "Matrix Record", sector: "hacking", kicker: "Matrix operations archive", subtitle: "Fifth edition Matrix catalogue", archiveCode: "GRID-SCAN // 5E", moduleCode: "Grid-scan // Matrix catalogue", intro: "Cyberdeck hardware, Matrix attributes and executable software.", listInstruction: "Select a record to open its full specification", listMeta: (r) => value(r, "cost") },
   { id: "matrixinteraction", name: "Matrix Interaction", singular: "Interaction", sector: "hacking", kicker: "Matrix operations archive", subtitle: "Fifth edition interaction index", archiveCode: "PROTOCOL // 5E", moduleCode: "Protocol // Interaction index", intro: "Matrix actions and technomancer complex forms.", listInstruction: "Select an interaction to open its complete protocol", listMeta: (r) => value(r, r.category === "Complex Forms" ? "fading_value" : "action_type") },

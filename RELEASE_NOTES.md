@@ -1,5 +1,44 @@
 # Release notes
 
+## 1.10.1 — Three-tab Lifestyle archive
+
+### Corrected
+
+- Restored the original **Entertainment** and **Lifestyle Options** collections instead of replacing them.
+- The Lifestyle page now contains exactly three ordered tabs: **Lifestyles**, **Entertainment**, and **Lifestyle Options**.
+- The new `lifestyles.json` records and residential profile design apply only to the first tab.
+- The restored tabs again use their original safehouse dossier, restrictions, notes, selectable variants and category-specific presentation.
+
+### Improved
+
+- Filters now adapt to the active tab: Lifestyle Type for Lifestyles; Entertainment Type and Minimum Lifestyle for Entertainment; and Option Type for Lifestyle Options.
+- Full-field search, persistent source-book selection and stable deep links operate across all 49 Lifestyle-page records.
+
+### Validation
+
+- 18 datasets and 1,319 reference records validated.
+- 51 unit tests and the production TypeScript and Vite build passed.
+
+## 1.10.0 — Lifestyle profiles
+
+### Changed
+
+- Replaced the former Entertainment extras and Lifestyle Options catalogue with all nine supplied living standards from `lifestyles.json`.
+- Replaced the old category and minimum-lifestyle controls with one Lifestyle Type filter covering Residential, Hideout, Mobile Lodging and Business Premises records.
+- Updated archive labels, guidance, notation, search copy, list values and routes for the new Lifestyle-focused dataset.
+
+### Added
+
+- Added a dedicated Lifestyle profile design with readable monthly costs, starting nuyen and lifestyle-point fields.
+- Added base-versus-limit rating tracks for Comforts & Necessities, Security and Neighborhood.
+- Added responsive Built-in Options and Special Rules cards, authored HTML descriptions, shared-rule definition buttons and multi-book source cards.
+- Added correct global source filtering for composite credits such as `CRB / SRF`; these records remain visible while either credited book is included.
+
+### Validation
+
+- 17 datasets and 1,279 reference records validated.
+- 49 unit tests and the production TypeScript and Vite build passed.
+
 ## 1.9.1 — Quality description HTML
 
 ### Corrected

@@ -8,7 +8,7 @@ The **Attributes** archive appears under **Core Rules** and contains all twelve 
 
 The **Qualities** archive appears under **Core Rules** and contains all supplied Positive and Negative Qualities. The home page opens Core Rules by default so its Skills, Attributes, Metatypes, Qualities and Lifestyles buttons are visible immediately. The archive presents Karma costs or bonuses, rating limits, selectable options, levels, variants, degrees and side effects in a dedicated character-quality ledger while retaining the complete authored descriptions. HTML stored in a Quality description is rendered as authored, including emphasis, headings, lists, line breaks and tables; legacy plain-text bullet descriptions retain their established list treatment. Supplied General, Metagenic, Infected and Lifestyle types are searchable and filterable; a type button beneath each typed record title opens the corresponding authored definition.
 
-The **Lifestyles** archive also appears under **Core Rules**. It combines every supplied Entertainment extra and Lifestyle Option into one routeable catalogue, with All, Entertainment and Lifestyle Options views. Full-record search covers nested configurations and restrictions; filters cover lifestyle type and minimum lifestyle. Dedicated dossiers preserve point costs, monthly adjustments, thresholds, restrictions, operational notes and every selectable variant from `lifestyle_extras.json`.
+The **Lifestyles** archive also appears under **Core Rules** and contains three tabs backed by two independent datasets. **Lifestyles** is first and presents all nine supplied living standards from `lifestyles.json`, with a Lifestyle Type filter and dedicated profiles for monthly costs, starting nuyen, lifestyle points, authored HTML descriptions, category ratings, built-in options and special rules. **Entertainment** restores all 26 extras, while **Lifestyle Options** restores all 14 positive and negative modifiers from `lifestyle_extras.json`; both retain their original subtype and minimum-lifestyle filters, dossiers, restrictions, notes and selectable variants. Search covers every field and nested value within the active tab.
 
 The **Priority Array** is a dedicated Core Rules page built from `priority_array.json`. Its creation-level selector switches between Street-Level, Regular and Prime Runner play without a route change, updating every priority's Resources value and the accompanying Karma, gear, contact and conversion limits from the same dataset. A compact A–E matrix is used on wide screens and equivalent stacked dossiers are used on smaller screens, so the complete character-creation information remains readable without horizontal scrolling.
 
@@ -16,7 +16,7 @@ The interface adds brief archive-specific activation sequences, smooth record an
 
 Weapons, cyberdecks, vehicles and drones can be compared from their list or record page. The comparison dossier supports two or three records, marks changed rows, identifies directly comparable numeric advantages and links back to each full record. At 700px and below it becomes a full-screen, single-scroll analysis view: specifications are readable cards, record controls collapse after selection, a searchable archive picker replaces long native menus, and an optional differences-only mode reduces the result set. Comparison remains temporary browser state and does not require an account or storage service.
 
-The **Sources** control in every masthead includes or excludes source books across all archives. The selection is stored in the browser, survives route changes and reloads, and is applied to lists, category counts, direct record links and comparison candidates. Core Rulebook records in **Skills**, **Attributes** and **Priority Array** are intentionally pinned visible because they are foundational creation references; records from any other source in those modules still follow the selected source books. Dataset source codes are registered automatically when their archive loads; full source-book names are maintained once in `src/data.ts`.
+The **Sources** control in every masthead includes or excludes source books across all archives. The selection is stored in the browser, survives route changes and reloads, and is applied to lists, category counts, direct record links and comparison candidates. Core Rulebook records in **Skills**, **Attributes** and **Priority Array** are intentionally pinned visible because they are foundational creation references; records from any other source in those modules still follow the selected source books. Records credited to more than one book remain available while any credited source is included. Dataset source codes are registered automatically when their archive loads; full source-book names are maintained once in `src/data.ts`.
 
 At phone widths, category tabs become a full-width archive picker, record cards move metadata beneath the name, and headings scale according to their longest word. Human-readable labels wrap only at natural boundaries. These rules are isolated to viewports of 650px or narrower; the settled desktop rendering remains pixel-identical to the original archive presentation.
 
@@ -60,7 +60,9 @@ GitHub Pages-compatible hash routes are used for reliable direct links:
 /#/spells/combat/acid-stream
 /#/attributes/all/body
 /#/qualities/negative-qualities/addiction
+/#/lifestyles/lifestyles/street
 /#/lifestyles/entertainment/garage
+/#/lifestyles/lifestyle-options/safehouse
 /#/priorityarray
 ```
 
@@ -80,7 +82,7 @@ src/presentation.ts Page-specific class names, labels and archive copy
 src/record-tags.ts  Page-specific tag and rule presentation
 src/styles/         Shared CSS and generated scoped original page CSS
 assets/css/pages/   Original page stylesheets retained as source files
-*.json              Original reference datasets, including attributes.json, lifestyle_extras.json and priority_array.json
+*.json              Original reference datasets, including lifestyles.json, lifestyle_extras.json and priority_array.json
 scripts/            Build-time validation and compatibility generation
 ```
 
