@@ -1,5 +1,19 @@
 # Release notes
 
+## 1.9.1 — Quality description HTML
+
+### Corrected
+
+- Quality record descriptions now render their stored HTML instead of displaying tags as text.
+- Added page-specific presentation for authored headings, emphasis, lists, line breaks and tables, including contained horizontal table scrolling on narrow screens.
+- Preserved the established structured-list treatment for the three existing plain-text descriptions that use `•` separators.
+
+### Validation
+
+- Added regression coverage for unescaped HTML elements, tables and the legacy bullet fallback.
+- 17 datasets and 1,310 reference records validated.
+- 47 unit tests and the production TypeScript and Vite build passed.
+
 ## 1.9.0 — Attributes archive
 
 ### Added

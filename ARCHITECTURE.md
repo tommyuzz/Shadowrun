@@ -21,7 +21,7 @@ The original JSON datasets remain separate source files. `src/data.ts` dynamical
 
 Search text is generated once when a record is adapted. It includes the record name, category, tags, source and all nested field names and values, with authored HTML reduced to searchable text.
 
-The Qualities adapter combines the supplied `positive_qualities` and `negative_qualities` objects into one routeable archive while preserving their category rules, quality types and nested option structures. Category counts, full-record search and the shared source selector therefore work without maintaining a second page implementation. `quality_type` participates in the shared filter index; `quality_types` supplies the definition shown by the matching record-tag button.
+The Qualities adapter combines the supplied `positive_qualities` and `negative_qualities` objects into one routeable archive while preserving their category rules, quality types and nested option structures. Category counts, full-record search and the shared source selector therefore work without maintaining a second page implementation. `quality_type` participates in the shared filter index; `quality_types` supplies the definition shown by the matching record-tag button. Trusted HTML authored in a Quality description is rendered directly by the dedicated detail component, while plain-text descriptions keep the legacy bullet-list fallback.
 
 The Lifestyles adapter applies the same pattern to `lifestyle_extras` and `lifestyle_options`. It retains each record's original category, subtype, source, cost fields, restrictions, notes and nested variants. Variant minimum-lifestyle values are included in the shared filter index, and all nested keys and values remain available to full-record search.
 

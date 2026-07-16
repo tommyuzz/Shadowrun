@@ -232,8 +232,10 @@ const qualityStructureLabels: [string, string][] = [
   ["possible_side_effects", "Possible side effects"]
 ];
 
-function QualityDescription({ value }: { value: unknown }) {
-  const parts = valueText(value, "No quality description is available.").split(/\s*•\s*/).map((part) => part.trim()).filter(Boolean);
+export function QualityDescription({ value }: { value: unknown }) {
+  const description = valueText(value, "No quality description is available.");
+  if (/<\/?[a-z][^>]*>/i.test(description)) return <Html className="quality-description-copy" value={description}/>;
+  const parts = description.split(/\s*•\s*/).map((part) => part.trim()).filter(Boolean);
   return <div className="quality-description-copy"><p>{parts[0]}</p>{parts.length > 1 ? <ul>{parts.slice(1).map((part, index) => <li key={`${part.slice(0, 32)}-${index}`}>{part}</li>)}</ul> : null}</div>;
 }
 
