@@ -1,0 +1,221 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:shadowrun-reference:character-creation-rules:v1",
+  "title": "Shadowrun Fifth Edition character creation rules",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ruleset",
+    "schema_version",
+    "edition",
+    "scope",
+    "source",
+    "data_sources",
+    "workflow",
+    "priority_system",
+    "play_level_rules",
+    "attribute_rules",
+    "magic_paths",
+    "quality_rules",
+    "skill_rules",
+    "resource_rules",
+    "karma_purchase_rules",
+    "contact_rules",
+    "derived_statistics",
+    "source_conflicts",
+    "extension_points"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "ruleset": {
+      "const": "shadowrun5e.character-creation"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "edition": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "data_sources": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "workflow": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "order",
+          "mechanically_enforced",
+          "source_pages"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "mechanically_enforced": {
+            "type": "boolean"
+          },
+          "requires_gamemaster_approval": {
+            "type": "boolean"
+          },
+          "source_pages": {
+            "$ref": "#/$defs/pages"
+          }
+        }
+      }
+    },
+    "priority_system": {
+      "type": "object"
+    },
+    "play_level_rules": {
+      "type": "object"
+    },
+    "attribute_rules": {
+      "type": "object"
+    },
+    "magic_paths": {
+      "type": "object",
+      "minProperties": 6,
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "quality_rules": {
+      "type": "object"
+    },
+    "skill_rules": {
+      "type": "object"
+    },
+    "resource_rules": {
+      "type": "object"
+    },
+    "karma_purchase_rules": {
+      "type": "object"
+    },
+    "contact_rules": {
+      "type": "object"
+    },
+    "derived_statistics": {
+      "type": "object"
+    },
+    "source_conflicts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "topic",
+          "selected_value",
+          "selected_source_pages",
+          "conflicting_source_pages",
+          "resolution"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/id"
+          },
+          "topic": {
+            "type": "string"
+          },
+          "selected_value": {},
+          "selected_source_pages": {
+            "$ref": "#/$defs/pages"
+          },
+          "conflicting_value": {},
+          "conflicting_source_pages": {
+            "$ref": "#/$defs/pages"
+          },
+          "resolution": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "extension_points": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/id"
+      }
+    }
+  },
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "pages": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "book_code",
+        "book_title",
+        "chapter",
+        "printed_pages",
+        "pdf_page_offset",
+        "notes"
+      ],
+      "properties": {
+        "book_code": {
+          "const": "CRB"
+        },
+        "book_title": {
+          "type": "string"
+        },
+        "chapter": {
+          "type": "string"
+        },
+        "printed_pages": {
+          "type": "object",
+          "required": [
+            "from",
+            "to"
+          ],
+          "properties": {
+            "from": {
+              "type": "integer"
+            },
+            "to": {
+              "type": "integer"
+            }
+          }
+        },
+        "pdf_page_offset": {
+          "type": "integer"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

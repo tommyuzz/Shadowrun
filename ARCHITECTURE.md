@@ -4,7 +4,7 @@
 
 The archive is one statically hosted React application. `HashRouter` keeps direct links compatible with GitHub Pages, while route changes preserve the mounted document and shared visual shell.
 
-The home page is generated from `src/registry.ts`. Adding a module to the registry makes it available to home navigation without editing a separate set of links.
+The bare home route is a two-choice access gateway: **Enter the Shadows** opens guided creation and **Matrix Search** opens the reference archive. The archive itself is generated from `src/registry.ts`; adding a module to the registry makes it available to Matrix Search without editing a separate set of links. Legacy sector query links continue to open the requested archive directly.
 
 The same registry defines each module's specialised filters. Shared filter rendering therefore supports module-specific controls without duplicating filtering code. Search always indexes the complete record payload, including nested values, while each archive keeps its original filter choices.
 
@@ -31,15 +31,41 @@ The Priority Array adapter exposes A through E as source-aware reference records
 
 The Actions adapter combines `free_actions`, `simple_actions` and `complex_actions` into three ordered routes. The two Reload Weapon records are enriched in memory with only the matching entries from `reload_methods`, making those methods searchable without duplicating them in the source JSON. The complete payload remains available to the action detail view and sidebar rule definitions.
 
-Weapon support records live in `weapons.json` under `weapon_support`, while base weapons remain under `weapons`. The adapter combines both collections into one routeable archive and reserves **Weapon Support** as its final tab. `src/relations.ts` evaluates each support record's compact compatibility profile against weapon category, subcategory, ammunition feed and searchable weapon data, providing the same bidirectional relationship to both sides of the UI.
+Weapon support records live in `weapons.json` under `weapon_support`, while base weapons remain under `weapons`. The adapter combines both collections into one routeable archive and reserves **Weapon Support** as its final tab. Each support record selects a compact compatibility profile. The profile's label and predicate live once in `relationship_rules.json`; `src/rule-engine.ts` compiles it into a reusable function and `src/relations.ts` exposes the same bidirectional relationship to both sides of the UI.
 
-Equipment enhancements live in the top-level `enhancements` collection rather than the browseable `equipment` collection. Each enhancement carries a group plus compatible item names or subcategories. `src/relations.ts` resolves those declarations for the active base record; the detail component then applies the global source selection and renders one configuration planner. This keeps enhancement ownership, compatibility, effect and cost in one data location.
+Equipment enhancements live in the top-level `enhancements` collection rather than the browseable `equipment` collection. Each enhancement carries a group plus compatible item names or subcategories. The central rule file declares how those target fields are evaluated and owns global exclusions; `src/relations.ts` resolves them for the active base record. The detail component then applies the global source selection and renders one configuration planner. This keeps enhancement ownership, compatibility, effect and cost in one data location.
 
-Home-page links prefetch their dataset on hover or focus. Vite emits every dataset with a content hash, allowing normal long-lived browser caching without query-string versions.
+## Structured relationship rules
+
+`relationship_rules.json` is pure data with an explicit ruleset identifier and schema version. It supports `all`, `any`, `not` and reusable `ref` nodes, plus field-based equality, membership, presence, regular-expression and field-to-field containment conditions. `schemas/relationship_rules.schema.json` documents the contract for editors, while `scripts/validate-relationship-rules.mjs` checks operator requirements, field scope, references, cycles, regular expressions and every support record's selected profile during CI.
+
+The evaluator is presentation-agnostic. Existing descriptions, compatibility notes, component structure and CSS stay outside the predicate data. A full generated relationship-matrix snapshot guards every current match, and an exact server-rendered snapshot guards representative weapon, support and equipment panels. This lets the rules become more capable without changing the current page output accidentally.
+
+## Character creation 2.0
+
+`character_creation_rules.json` is a second, independent versioned contract for Core Rulebook priority creation. It references the existing priority, play-level, metatype, Attribute, skill, Quality, Matrix-action, spirit, gear and Lifestyle datasets instead of reproducing their values. It owns only cross-record constraints, numeric expression trees, skill classifications, workflow provenance and explicit precedence for two contradictory Core Rulebook passages.
+
+`src/character-creation-engine.ts` evaluates that contract without React, routing or page classes. Separate validators cover priority assignment, Attribute allocation, Quality legality and Karma, free and purchased skill grants, Magic/Resonance paths, resources, Essence, contacts, leftover Karma and final derived statistics. Stable violation IDs keep mechanics out of screen components.
+
+The runtime integration is split into five narrow layers:
+
+- `src/character-creation/workflow.ts` defines the ordered step identifiers shared by state, orchestration and routing;
+- `src/character-creation/draft.ts` defines the one versioned, exportable `CharacterDraft` and the deterministic rebasing rules used when a priority, metatype or path changes;
+- `src/character-creation/catalogues.ts` adapts the established Core datasets into stable choices and normalizes authored cost, Availability, Rating, Essence, grade and Lifestyle modifiers;
+- `src/character-creation/orchestrator.ts` derives the engine plans, Karma ledger, catalogue validation, completion state and final statistics from that draft;
+- `src/character-creation/steps.tsx` renders accessible editors and consumes evaluation results without owning mechanical constants.
+
+`CharacterCreationPage` is a workflow module in the registry rather than a reference dataset module. It is route-level lazy-loaded with its scoped stylesheet and stores the draft in browser `localStorage`; JSON export/import provides user-controlled portability. A blank draft has no preselected creation choices. Confirmation state lives in that draft, while the orchestrator derives the first incomplete step; page controls and direct routes both clamp to that boundary. Editing a confirmed step invalidates its own confirmation and every dependent later confirmation. Existing `ModulePage`, `PriorityArrayPage`, data adapters and page styles have no dependency on the builder integration.
+
+The priority editor presents the existing five categories and five ranks as one semantic table containing 25 buttons. It still calls the same deterministic `assignPriority` swap operation, so the table cannot create duplicate ranks. Attribute editors calculate their allowed next value from the selected priority budget, metatype range, Quality exceptions and current natural-maximum occupant. These hard constraints disable or clamp controls and provide inline reasons; the headless validator remains the independent final audit rather than the primary interaction mechanism.
+
+`scripts/validate-character-creation-rules.mjs` checks the rule file against every referenced dataset and validates all expression trees and Core Quality cost paths. Scenario tests cover both accepted and rejected builds, every directly addressable workflow step and catalogue normalization boundaries.
+
+Matrix Search links prefetch their dataset on hover or focus. The **Enter the Shadows** gateway action instead prefetches the workflow chunk. Vite emits every dataset and route chunk with a content hash, allowing normal long-lived browser caching without query-string versions. `scripts/validate-dist.mjs` enforces the lazy workflow split and an initial-entry size budget.
 
 ## Faithful page-specific presentation
 
-`HomePage`, `ModulePage` and the matrix-oriented `PriorityArrayPage` own page composition. Shared controls and framing live in `src/components`. Common list, record, filter, tag, source and responsive rules are loaded once.
+`HomePage`, `ModulePage`, the matrix-oriented `PriorityArrayPage` and the lazy `CharacterCreationPage` own page composition. Shared controls and framing live in `src/components`. Common list, record, filter, tag, source and responsive rules are loaded once.
 
 `RecordDetail` contains the specialised archive views used by the original site: skill sections, attribute capability dossiers and benchmark ladders, action-economy dossiers, metatype profiles, character-quality ledgers, lifestyle dossiers, cyberdeck consoles, Matrix protocols, sprite and spirit profiles, spell and adept grids, ritual procedures, weapon specifications and support relationships, vehicle dashboards, drone control stacks and equipment market configuration listings. `ModuleChrome` supplies the matching sidebars, legends and footer treatments.
 
@@ -52,6 +78,8 @@ List records expose shared structural classes for their index, name and metadata
 Desktop category tabs remain unchanged. The same category data also renders a native, fully labelled picker that is hidden on desktop and replaces the tab strip on phones. The home sectors use the same pattern. This avoids horizontal clipping without duplicating category state or navigation logic.
 
 The Priority Array uses one set of adapted records in both layouts: a six-column matrix on wide screens and stacked A–E dossiers below the matrix breakpoint. The native creation-level picker is shared by both representations and changes only the data key being displayed, avoiding navigation flicker and duplicate rule state.
+
+Character Creation keeps the desktop step rail and dossier layout above its breakpoint, then replaces the rail with a labelled native step picker and collapses editors to one column. Controls maintain touch targets, labels wrap only at natural boundaries and the workflow avoids nested horizontal scroll surfaces. Both layouts edit the same draft and use the same validation result.
 
 ## Motion and interaction
 
@@ -82,3 +110,7 @@ The prebuild script creates lightweight redirects for the former URLs such as `s
 ## Deployment
 
 GitHub Actions validates all datasets, compiles TypeScript, builds content-hashed assets and deploys `dist/` as a single Pages artifact. The deployment path is defined once in `vite.config.ts`.
+
+## Code-quality gates
+
+The release pipeline runs Oxlint across application source, build scripts and Vite configuration with TypeScript, React, import and Promise analysis enabled. TypeScript additionally rejects unused or unreachable code, unused labels, implicit return paths, switch fallthrough and unresolved side-effect imports. These checks run before dataset, mechanics, snapshot and production-build verification, so maintainability failures cannot be hidden by a successful bundle.

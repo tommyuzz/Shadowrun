@@ -5,6 +5,7 @@ export default defineConfig({
   base: "/Shadowrun/",
   plugins: [react()],
   build: {
+    emptyOutDir: true,
     sourcemap: false,
     cssCodeSplit: true
   }

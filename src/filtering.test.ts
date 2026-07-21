@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { loadData, matchesSearch } from "./data";
-import { modules, modulesById } from "./registry";
+import { modulesById, referenceModules } from "./registry";
 import { recordTags } from "./record-tags";
 import { equipmentEnhancementsFor, supportForWeapon, weaponsForSupport } from "./relations";
 
@@ -27,7 +27,7 @@ const expectedFilters: Record<string, string[]> = {
 
 describe("module-specific filters", () => {
   it("registers the complete expected filter set", () => {
-    expect(Object.fromEntries(modules.map((module) => [module.id, module.filters.map((filter) => filter.id)]))).toEqual(expectedFilters);
+    expect(Object.fromEntries(referenceModules.map((module) => [module.id, module.filters.map((filter) => filter.id)]))).toEqual(expectedFilters);
   });
 
   for (const [moduleId, filterIds] of Object.entries(expectedFilters)) {

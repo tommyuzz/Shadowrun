@@ -24,7 +24,7 @@ const traitKey = (input: string): string => {
   return input;
 };
 
-const legality = (availability: unknown): string => /F$/.test(String(availability || "")) ? "Forbidden" : /R$/.test(String(availability || "")) ? "Restricted" : "Legal";
+const legality = (availability: unknown): string => String(availability || "").endsWith("F") ? "Forbidden" : String(availability || "").endsWith("R") ? "Restricted" : "Legal";
 const actionRole = (record: ReferenceRecord): string => {
   const restriction = value(record, "attack_restriction").toLocaleLowerCase("en-GB");
   if (restriction.includes("modifies an attack")) return "Attack modifier";
@@ -106,6 +106,7 @@ const moduleRows: Omit<ModuleDefinition, "filters">[] = [
   { id: "qualities", name: "Qualities", singular: "Quality", sector: "corerules", kicker: "Character profile archive", subtitle: "Fifth edition quality index", archiveCode: "QUALITIES // 5E", moduleCode: "Character // Quality ledger", intro: "Positive and Negative Qualities, Karma values, requirements, ratings and variants.", listInstruction: "Select a quality to open its full character record", listMeta: (r) => value(r, r.category === "Positive Qualities" ? "karma_cost" : "karma_bonus"), defaultCategoryId: "all" },
   { id: "lifestyles", name: "Lifestyles", singular: "Lifestyle", sector: "corerules", kicker: "Residential status archive", subtitle: "Fifth edition lifestyle index", archiveCode: "LIFESTYLE // 5E", moduleCode: "Lifestyle // Profiles, extras & options", intro: "Residential profiles, Entertainment extras and positive or negative Lifestyle Options.", listInstruction: "Select an entry to open its complete lifestyle record", listMeta: (r) => value(r, "monthly_cost"), defaultCategoryId: "lifestyles" },
   { id: "priorityarray", name: "Priority Array", singular: "Priority", sector: "corerules", kicker: "Character creation archive", subtitle: "Fifth edition priority assignment matrix", archiveCode: "PRIORITY // 5E", moduleCode: "Creation // Priority array", intro: "Priority levels, metatype options, attributes, Magic or Resonance, skills, resources, Karma and gear limits.", listInstruction: "Assign one priority from A to E to each creation category", listMeta: (r) => value(r, "attributes") },
+  { id: "charactercreation", name: "Character Creation", singular: "Character Draft", sector: "corerules", mode: "workflow", kicker: "Runner assembly protocol", subtitle: "Fifth edition guided character creation", archiveCode: "BUILD // 5E", moduleCode: "Runner // Guided creation", intro: "A mechanically validated Core Rulebook priority-creation workflow backed by the centralized rules contract.", listInstruction: "Build and verify a complete runner", listMeta: () => "Core Rules" },
   { id: "cyberdecks", name: "Cyberdecks", singular: "Matrix Record", sector: "hacking", kicker: "Matrix operations archive", subtitle: "Fifth edition Matrix catalogue", archiveCode: "GRID-SCAN // 5E", moduleCode: "Grid-scan // Matrix catalogue", intro: "Cyberdeck hardware, Matrix attributes and executable software.", listInstruction: "Select a record to open its full specification", listMeta: (r) => value(r, "cost") },
   { id: "matrixinteraction", name: "Matrix Interaction", singular: "Interaction", sector: "hacking", kicker: "Matrix operations archive", subtitle: "Fifth edition interaction index", archiveCode: "PROTOCOL // 5E", moduleCode: "Protocol // Interaction index", intro: "Matrix actions and technomancer complex forms.", listInstruction: "Select an interaction to open its complete protocol", listMeta: (r) => value(r, r.category === "Complex Forms" ? "fading_value" : "action_type") },
   { id: "sprites", name: "Sprites", singular: "Sprite", sector: "hacking", kicker: "Resonance operations archive", subtitle: "Fifth edition sprite index", archiveCode: "RESONANCE // 5E", moduleCode: "Resonance // Sprite index", intro: "Sprite Matrix attributes, skills, powers and Resonance capabilities.", listInstruction: "Select a sprite to open its full Resonance profile", listMeta: () => "Level" },
@@ -120,6 +121,8 @@ const moduleRows: Omit<ModuleDefinition, "filters">[] = [
 ];
 
 export const modules: ModuleDefinition[] = moduleRows.map((module) => ({ ...module, filters: filterDefinitions[module.id] || [] }));
+
+export const referenceModules = modules.filter((module) => module.mode !== "workflow");
 
 export const modulesById = Object.fromEntries(modules.map((module) => [module.id, module]));
 

@@ -774,6 +774,29 @@
   cursor: default;
 }
 
+.source-selector-character-link {
+  display: block;
+  padding: 9px 10px;
+  color: #fff !important;
+  background: var(--ink);
+  border-left: 4px solid var(--red);
+  font-size: .62rem;
+  font-weight: 900;
+  letter-spacing: .06em;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.source-selector-character-link:visited { color: #fff !important; }
+
+.source-selector-character-link:hover,
+.source-selector-character-link:focus-visible {
+  color: #fff;
+  background: var(--red);
+  outline: none;
+}
+
 .archive-state-actions {
   display: flex;
   justify-content: center;

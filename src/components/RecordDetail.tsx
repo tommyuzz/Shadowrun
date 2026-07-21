@@ -491,7 +491,7 @@ function DroneDetail({ record, recordNumber }: { record: ReferenceRecord; record
 }
 
 const equipmentLabels: [string, string][] = [["vector", "Vector"], ["speed", "Speed"], ["penetration", "Penetration"], ["power", "Power"], ["effect", "Effect"], ["duration", "Duration"], ["addiction_type", "Addiction type"], ["addiction_rating", "Addiction rating"], ["addiction_threshold", "Addiction threshold"], ["mount", "Mount"], ["rating", "Rating"], ["damage_modifier", "Damage modifier"], ["ap_modifier", "AP modifier"], ["armor", "Armor"], ["capacity", "Capacity"], ["device_rating", "Device rating"], ["attribute_array", "Attribute array"], ["programs", "Programs"], ["structure", "Structure"], ["essence", "Essence"], ["maximum_value", "Maximum value"], ["force", "Force"]];
-const marketStatus = (value: unknown) => /F$/.test(String(value || "")) ? "Forbidden" : /R$/.test(String(value || "")) ? "Restricted" : "Open market";
+const marketStatus = (value: unknown) => String(value || "").endsWith("F") ? "Forbidden" : String(value || "").endsWith("R") ? "Restricted" : "Open market";
 
 function noAdditionalCost(enhancement: EquipmentEnhancement): boolean {
   return /included|no additional|^—$/i.test(valueText(enhancement.raw.cost, ""));

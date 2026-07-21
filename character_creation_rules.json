@@ -1,0 +1,1501 @@
+{
+  "$schema": "./schemas/character_creation_rules.schema.json",
+  "ruleset": "shadowrun5e.character-creation",
+  "schema_version": 1,
+  "edition": "Shadowrun Fifth Edition",
+  "scope": "Core Rulebook priority-based character creation",
+  "source": {
+    "book_code": "CRB",
+    "book_title": "Shadowrun, Fifth Edition Core Rulebook",
+    "chapter": "Creating a Shadowrunner",
+    "printed_pages": {
+      "from": 62,
+      "to": 107
+    },
+    "pdf_page_offset": 2,
+    "notes": "Rules are paraphrased into executable facts. Page numbers are provenance metadata and are not presentation content."
+  },
+  "data_sources": {
+    "priority_array": "priority_array.json#/priority_array",
+    "play_levels": "priority_array.json#/play_levels",
+    "metatypes": "metatypes.json#/metatypes",
+    "attributes": "attributes.json#/attributes",
+    "adept_powers": "adeptpowers.json#/powers",
+    "skills": "skills.json#/skills",
+    "qualities": "qualities.json",
+    "matrix_actions": "matrixinteraction.json#/matrix_actions",
+    "spirits": "spirits.json#/spirits",
+    "equipment": "equipment.json",
+    "weapons": "weapons.json",
+    "lifestyles": "lifestyles.json#/lifestyles"
+  },
+  "workflow": [
+    {
+      "id": "concept",
+      "order": 1,
+      "mechanically_enforced": false,
+      "source_pages": [
+        62,
+        63,
+        64
+      ]
+    },
+    {
+      "id": "metatype-and-attributes",
+      "order": 2,
+      "mechanically_enforced": true,
+      "source_pages": [
+        65,
+        66,
+        67
+      ]
+    },
+    {
+      "id": "magic-or-resonance",
+      "order": 3,
+      "mechanically_enforced": true,
+      "source_pages": [
+        68,
+        69,
+        70,
+        71
+      ]
+    },
+    {
+      "id": "qualities",
+      "order": 4,
+      "mechanically_enforced": true,
+      "source_pages": [
+        71,
+        87
+      ]
+    },
+    {
+      "id": "skills",
+      "order": 5,
+      "mechanically_enforced": true,
+      "source_pages": [
+        88,
+        92
+      ]
+    },
+    {
+      "id": "resources",
+      "order": 6,
+      "mechanically_enforced": true,
+      "source_pages": [
+        94,
+        97
+      ]
+    },
+    {
+      "id": "leftover-karma-and-contacts",
+      "order": 7,
+      "mechanically_enforced": true,
+      "source_pages": [
+        98,
+        99,
+        105,
+        106,
+        107
+      ]
+    },
+    {
+      "id": "final-calculations",
+      "order": 8,
+      "mechanically_enforced": true,
+      "source_pages": [
+        100,
+        101,
+        102
+      ]
+    },
+    {
+      "id": "final-touches",
+      "order": 9,
+      "mechanically_enforced": false,
+      "requires_gamemaster_approval": true,
+      "source_pages": [
+        103,
+        104
+      ]
+    }
+  ],
+  "priority_system": {
+    "ranks": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "categories": [
+      "metatype",
+      "attributes",
+      "magic_or_resonance",
+      "skills",
+      "resources"
+    ],
+    "assignment": "bijection",
+    "rules": [
+      {
+        "id": "priority.complete",
+        "assertion": "Every category has exactly one priority rank."
+      },
+      {
+        "id": "priority.unique",
+        "assertion": "Every rank A through E is used exactly once."
+      },
+      {
+        "id": "priority.option-exists",
+        "assertion": "The chosen metatype and Magic or Resonance path exist at their assigned ranks."
+      }
+    ],
+    "source_pages": [
+      65
+    ]
+  },
+  "play_level_rules": {
+    "level_ids": [
+      "regular",
+      "street_level",
+      "prime_runner"
+    ],
+    "values_source": "priority_array.json#/play_levels",
+    "resource_values_source": "priority_array.json#/priority_array/{rank}/resources/{play_level}",
+    "positive_quality_karma_cap": {
+      "op": "path",
+      "path": "play_level.starting_karma"
+    },
+    "negative_quality_karma_cap": {
+      "op": "subtract",
+      "args": [
+        {
+          "op": "path",
+          "path": "play_level.maximum_karma"
+        },
+        {
+          "op": "path",
+          "path": "play_level.starting_karma"
+        }
+      ]
+    },
+    "karma_to_nuyen_rate": 2000,
+    "source_pages": [
+      64,
+      71,
+      94,
+      98
+    ]
+  },
+  "attribute_rules": {
+    "physical_and_mental": [
+      "body",
+      "agility",
+      "reaction",
+      "strength",
+      "willpower",
+      "logic",
+      "intuition",
+      "charisma"
+    ],
+    "special": [
+      "edge",
+      "magic",
+      "resonance"
+    ],
+    "priority_point_cost_per_rating_increase": 1,
+    "priority_points_must_be_spent": true,
+    "priority_points_allowed_attributes": "physical_and_mental",
+    "special_points_allowed_attributes": [
+      "edge",
+      "magic",
+      "resonance"
+    ],
+    "special_points_may_be_unspent": true,
+    "unspent_special_points_are_lost": true,
+    "maximum_physical_or_mental_attributes_at_natural_limit": 1,
+    "natural_minimums_and_limits_source": "metatypes.json#/metatypes/{metatype}/attributes",
+    "magic_and_resonance_starting_rating": 0,
+    "special_attribute_default_maximum": 6,
+    "quality_limit_exceptions": {
+      "exceptional-attribute": {
+        "increase": 1,
+        "allowed_targets": [
+          "body",
+          "agility",
+          "reaction",
+          "strength",
+          "willpower",
+          "logic",
+          "intuition",
+          "charisma",
+          "magic",
+          "resonance"
+        ]
+      },
+      "lucky": {
+        "increase": 1,
+        "allowed_targets": [
+          "edge"
+        ]
+      }
+    },
+    "source_pages": [
+      65,
+      66,
+      67,
+      98,
+      101
+    ]
+  },
+  "magic_paths": {
+    "mundane": {
+      "source_option": null,
+      "required_priority": "E",
+      "uses_special_attribute": null,
+      "capabilities": {
+        "magic_user": false,
+        "technomancer": false,
+        "can_astral_perceive": false,
+        "can_astral_project": false,
+        "leaves_astral_signature": false,
+        "can_cast_spells": false
+      },
+      "allowed_magic_skill_groups": [],
+      "allowed_resonance_skill_groups": [],
+      "allowed_formula_categories": [],
+      "may_bind_spirits": false,
+      "may_register_sprites": false
+    },
+    "adept": {
+      "source_option": "Adept",
+      "uses_special_attribute": "magic",
+      "capabilities": {
+        "magic_user": true,
+        "technomancer": false,
+        "can_astral_perceive": false,
+        "can_astral_project": false,
+        "leaves_astral_signature": true,
+        "can_cast_spells": false
+      },
+      "allowed_magic_skill_groups": [],
+      "allowed_resonance_skill_groups": [],
+      "allowed_formula_categories": [],
+      "may_bind_spirits": false,
+      "may_register_sprites": false,
+      "free_power_points": {
+        "op": "path",
+        "path": "character.magic_rating"
+      }
+    },
+    "magician": {
+      "source_option": "Magician",
+      "uses_special_attribute": "magic",
+      "capabilities": {
+        "magic_user": true,
+        "technomancer": false,
+        "can_astral_perceive": true,
+        "can_astral_project": true,
+        "leaves_astral_signature": true,
+        "can_cast_spells": true
+      },
+      "allowed_magic_skill_groups": [
+        "sorcery",
+        "conjuring",
+        "enchanting"
+      ],
+      "allowed_resonance_skill_groups": [],
+      "allowed_formula_categories": [
+        "spells",
+        "rituals",
+        "preparations"
+      ],
+      "may_bind_spirits": true,
+      "may_register_sprites": false,
+      "formula_limit_per_category": {
+        "op": "multiply",
+        "args": [
+          {
+            "op": "path",
+            "path": "character.magic_rating"
+          },
+          2
+        ]
+      }
+    },
+    "aspected-magician": {
+      "source_option": "Aspected Magician",
+      "uses_special_attribute": "magic",
+      "capabilities": {
+        "magic_user": true,
+        "technomancer": false,
+        "can_astral_perceive": true,
+        "can_astral_project": false,
+        "leaves_astral_signature": true,
+        "can_cast_spells": "only_when_sorcery_is_selected"
+      },
+      "allowed_magic_skill_groups": "one_selected_from:sorcery,conjuring,enchanting",
+      "allowed_resonance_skill_groups": [],
+      "allowed_formula_categories_by_selected_group": {
+        "sorcery": [
+          "spells",
+          "rituals"
+        ],
+        "conjuring": [],
+        "enchanting": [
+          "preparations"
+        ]
+      },
+      "may_bind_spirits_when_selected_group": "conjuring",
+      "may_register_sprites": false,
+      "formula_limit_per_category": {
+        "op": "multiply",
+        "args": [
+          {
+            "op": "path",
+            "path": "character.magic_rating"
+          },
+          2
+        ]
+      }
+    },
+    "mystic-adept": {
+      "source_option": "Mystic Adept",
+      "uses_special_attribute": "magic",
+      "capabilities": {
+        "magic_user": true,
+        "technomancer": false,
+        "can_astral_perceive": "only_with_astral_perception_power",
+        "can_astral_project": false,
+        "leaves_astral_signature": true,
+        "can_cast_spells": true
+      },
+      "allowed_magic_skill_groups": [
+        "sorcery",
+        "conjuring",
+        "enchanting"
+      ],
+      "allowed_resonance_skill_groups": [],
+      "allowed_formula_categories": [
+        "spells",
+        "rituals",
+        "preparations"
+      ],
+      "may_bind_spirits": true,
+      "may_register_sprites": false,
+      "free_power_points": 0,
+      "purchased_power_point_cost": 5,
+      "maximum_purchased_power_points": {
+        "op": "path",
+        "path": "character.magic_rating"
+      },
+      "whole_power_points_only": true,
+      "formula_limit_per_category": {
+        "op": "multiply",
+        "args": [
+          {
+            "op": "path",
+            "path": "character.magic_rating"
+          },
+          2
+        ]
+      }
+    },
+    "technomancer": {
+      "source_option": "Technomancer",
+      "uses_special_attribute": "resonance",
+      "capabilities": {
+        "magic_user": false,
+        "technomancer": true,
+        "can_astral_perceive": false,
+        "can_astral_project": false,
+        "leaves_astral_signature": false,
+        "can_cast_spells": false
+      },
+      "allowed_magic_skill_groups": [],
+      "allowed_resonance_skill_groups": [
+        "tasking"
+      ],
+      "allowed_formula_categories": [
+        "complex_forms"
+      ],
+      "may_bind_spirits": false,
+      "may_register_sprites": true,
+      "maximum_complex_forms": {
+        "op": "path",
+        "path": "character.attributes.logic"
+      }
+    }
+  },
+  "quality_rules": {
+    "catalog_source": "qualities.json",
+    "catalog_filter": {
+      "source_includes": "CRB"
+    },
+    "positive_collection": "positive_qualities",
+    "negative_collection": "negative_qualities",
+    "default_max_selections": 1,
+    "cost_resolution": {
+      "positive_fixed_field": "karma_cost",
+      "negative_fixed_field": "karma_bonus",
+      "rated_pattern": "{amount} per rating|level",
+      "option_value_fields": [
+        "karma_cost",
+        "karma_bonus"
+      ],
+      "composite_qualities": {
+        "allergy": {
+          "sum_option_paths": [
+            "rarity",
+            "severity"
+          ],
+          "value_field": "karma_value"
+        },
+        "prejudiced": {
+          "sum_option_paths": [
+            "target_prevalence",
+            "degree"
+          ],
+          "value_field": "karma_value"
+        }
+      }
+    },
+    "constraints": {
+      "aptitude": {
+        "max_selections": 1,
+        "required_parameters": [
+          "skill_id"
+        ],
+        "parameter_rules": [
+          {
+            "kind": "known_active_skill",
+            "parameter": "skill_id"
+          }
+        ],
+        "effects": [
+          {
+            "kind": "skill_natural_limit",
+            "target_parameter": "skill_id",
+            "value": 7
+          }
+        ]
+      },
+      "astral-chameleon": {
+        "eligibility": {
+          "all": [
+            {
+              "field": "character.magic_rating",
+              "operator": "greater_than",
+              "value": 0
+            },
+            {
+              "field": "character.capabilities.leaves_astral_signature",
+              "operator": "equals",
+              "value": true
+            }
+          ]
+        }
+      },
+      "bilingual": {
+        "creation_only": true,
+        "effects": [
+          {
+            "kind": "native_language_count",
+            "add": 1
+          }
+        ]
+      },
+      "blandness": {
+        "incompatible_quality_ids": [
+          "distinctive-style"
+        ]
+      },
+      "codeslinger": {
+        "required_parameters": [
+          "tested_matrix_action_id"
+        ],
+        "parameter_rules": [
+          {
+            "kind": "tested_matrix_action",
+            "parameter": "tested_matrix_action_id"
+          }
+        ]
+      },
+      "exceptional-attribute": {
+        "max_selections": 1,
+        "requires_gamemaster_approval": true,
+        "required_parameters": [
+          "attribute_id"
+        ],
+        "allowed_parameter_values": {
+          "attribute_id": [
+            "body",
+            "agility",
+            "reaction",
+            "strength",
+            "willpower",
+            "logic",
+            "intuition",
+            "charisma",
+            "magic",
+            "resonance"
+          ]
+        },
+        "incompatible_quality_ids": [
+          "lucky"
+        ]
+      },
+      "focused-concentration": {
+        "rating": {
+          "minimum": 1,
+          "maximum": 6
+        },
+        "eligibility": {
+          "any": [
+            {
+              "field": "character.capabilities.can_cast_spells",
+              "operator": "equals",
+              "value": true
+            },
+            {
+              "field": "character.magic_path_id",
+              "operator": "equals",
+              "value": "technomancer"
+            }
+          ]
+        }
+      },
+      "high-pain-tolerance": {
+        "rating": {
+          "minimum": 1,
+          "maximum": 3
+        },
+        "incompatible_capability_ids": [
+          "pain-resistance-adept-power",
+          "pain-editor-bioware",
+          "damage-compensator-bioware"
+        ]
+      },
+      "home-ground": {
+        "repeatable": true,
+        "unique_by_parameters": [
+          "option",
+          "home_ground_id"
+        ],
+        "required_parameters": [
+          "option",
+          "home_ground_id"
+        ],
+        "option_source": "options"
+      },
+      "human-looking": {
+        "eligibility": {
+          "field": "character.metatype_id",
+          "operator": "in",
+          "value": [
+            "elf",
+            "dwarf",
+            "ork"
+          ]
+        }
+      },
+      "indomitable": {
+        "rating": {
+          "minimum": 1,
+          "maximum": 3
+        },
+        "required_parameters": [
+          "limit_allocations"
+        ],
+        "parameter_rules": [
+          {
+            "kind": "allocation_sum_equals_rating",
+            "parameter": "limit_allocations",
+            "allowed_keys": [
+              "mental",
+              "physical",
+              "social"
+            ]
+          }
+        ]
+      },
+      "lucky": {
+        "max_selections": 1,
+        "requires_gamemaster_approval": true,
+        "incompatible_quality_ids": [
+          "exceptional-attribute"
+        ]
+      },
+      "magic-resistance": {
+        "rating": {
+          "minimum": 1,
+          "maximum": 4
+        },
+        "eligibility": {
+          "field": "character.magic_rating",
+          "operator": "equals",
+          "value": 0
+        }
+      },
+      "mentor-spirit": {
+        "max_selections": 1,
+        "required_parameters": [
+          "mentor_id"
+        ],
+        "eligibility": {
+          "field": "character.magic_rating",
+          "operator": "greater_than",
+          "value": 0
+        }
+      },
+      "natural-immunity": {
+        "required_parameters": [
+          "option",
+          "subject"
+        ],
+        "option_source": "options",
+        "requires_gamemaster_approval": true,
+        "incompatible_quality_ids": [
+          "weak-immune-system"
+        ]
+      },
+      "resistance-to-pathogens-toxins": {
+        "required_parameters": [
+          "option"
+        ],
+        "option_source": "options",
+        "incompatible_quality_ids": [
+          "weak-immune-system"
+        ]
+      },
+      "spirit-affinity": {
+        "required_parameters": [
+          "spirit_type"
+        ],
+        "parameter_rules": [
+          {
+            "kind": "known_spirit_type",
+            "parameter": "spirit_type"
+          }
+        ],
+        "eligibility": {
+          "field": "character.capabilities.magic_user",
+          "operator": "equals",
+          "value": true
+        }
+      },
+      "will-to-live": {
+        "rating": {
+          "minimum": 1,
+          "maximum": 3
+        },
+        "effects": [
+          {
+            "kind": "overflow_boxes",
+            "add_per_rating": 1
+          }
+        ]
+      },
+      "addiction": {
+        "repeatable": true,
+        "unique_by_parameters": [
+          "subject"
+        ],
+        "required_parameters": [
+          "option",
+          "subject"
+        ],
+        "option_source": "levels"
+      },
+      "allergy": {
+        "repeatable": true,
+        "unique_by_parameters": [
+          "subject"
+        ],
+        "required_parameters": [
+          "rarity",
+          "severity",
+          "subject"
+        ]
+      },
+      "astral-beacon": {
+        "eligibility": {
+          "field": "character.magic_rating",
+          "operator": "greater_than",
+          "value": 0
+        }
+      },
+      "bad-rep": {
+        "effects": [
+          {
+            "kind": "starting_notoriety",
+            "add": 3
+          }
+        ]
+      },
+      "code-of-honor": {
+        "required_parameters": [
+          "protected_group"
+        ],
+        "requires_gamemaster_approval": true
+      },
+      "codeblock": {
+        "required_parameters": [
+          "tested_matrix_action_id"
+        ],
+        "parameter_rules": [
+          {
+            "kind": "tested_matrix_action",
+            "parameter": "tested_matrix_action_id"
+          }
+        ]
+      },
+      "dependent-s": {
+        "required_parameters": [
+          "option"
+        ],
+        "option_source": "levels"
+      },
+      "distinctive-style": {
+        "max_selections": 1,
+        "required_parameters": [
+          "style"
+        ],
+        "incompatible_quality_ids": [
+          "blandness"
+        ]
+      },
+      "elf-poser": {
+        "eligibility": {
+          "field": "character.metatype_id",
+          "operator": "equals",
+          "value": "human"
+        }
+      },
+      "gremlins": {
+        "rating": {
+          "minimum": 1,
+          "maximum": 4
+        }
+      },
+      "incompetent": {
+        "max_selections": 1,
+        "requires_gamemaster_approval": true,
+        "required_parameters": [
+          "skill_group_id"
+        ],
+        "parameter_rules": [
+          {
+            "kind": "eligible_unpurchased_skill_group",
+            "parameter": "skill_group_id"
+          }
+        ]
+      },
+      "insomnia": {
+        "required_parameters": [
+          "option"
+        ],
+        "option_source": "levels"
+      },
+      "loss-of-confidence": {
+        "required_parameters": [
+          "skill_id"
+        ],
+        "parameter_rules": [
+          {
+            "kind": "minimum_skill_rating",
+            "parameter": "skill_id",
+            "minimum": 4
+          }
+        ]
+      },
+      "ork-poser": {
+        "eligibility": {
+          "field": "character.metatype_id",
+          "operator": "in",
+          "value": [
+            "human",
+            "elf"
+          ]
+        }
+      },
+      "prejudiced": {
+        "repeatable": true,
+        "unique_by_parameters": [
+          "target_group"
+        ],
+        "required_parameters": [
+          "target_prevalence",
+          "degree",
+          "target_group"
+        ]
+      },
+      "scorched": {
+        "required_parameters": [
+          "source",
+          "side_effect"
+        ],
+        "allowed_parameter_values": {
+          "source": [
+            "btl",
+            "black-ic",
+            "psychotropic-ic"
+          ]
+        },
+        "option_source": "possible_side_effects",
+        "option_parameter": "side_effect",
+        "parameter_rules": [
+          {
+            "kind": "scorched_source_prerequisite"
+          }
+        ]
+      },
+      "sensitive-system": {
+        "effects": [
+          {
+            "kind": "cyberware_essence_multiplier",
+            "value": 2
+          },
+          {
+            "kind": "bioware_forbidden"
+          }
+        ]
+      },
+      "sinner-layered": {
+        "required_parameters": [
+          "option"
+        ],
+        "option_source": "variants"
+      },
+      "social-stress": {
+        "required_parameters": [
+          "cause",
+          "trigger"
+        ]
+      },
+      "spirit-bane": {
+        "required_parameters": [
+          "spirit_type"
+        ],
+        "parameter_rules": [
+          {
+            "kind": "known_spirit_type",
+            "parameter": "spirit_type"
+          }
+        ],
+        "eligibility": {
+          "field": "character.capabilities.magic_user",
+          "operator": "equals",
+          "value": true
+        }
+      },
+      "uncouth": {
+        "effects": [
+          {
+            "kind": "karma_skill_cost_multiplier",
+            "skill_category": "social",
+            "value": 2
+          },
+          {
+            "kind": "skill_groups_forbidden",
+            "skill_category": "social"
+          }
+        ]
+      },
+      "uneducated": {
+        "effects": [
+          {
+            "kind": "karma_skill_cost_multiplier",
+            "skill_categories": [
+              "technical",
+              "academic-knowledge",
+              "professional-knowledge"
+            ],
+            "value": 2
+          }
+        ]
+      },
+      "weak-immune-system": {
+        "incompatible_quality_ids": [
+          "natural-immunity",
+          "resistance-to-pathogens-toxins"
+        ]
+      }
+    },
+    "source_pages": [
+      71,
+      87
+    ]
+  },
+  "skill_rules": {
+    "catalog_source": "skills.json#/skills",
+    "priority_grants_source": "priority_array.json#/priority_array/{rank}/skills",
+    "individual_point_cost_per_rating": 1,
+    "group_point_cost_per_rating": 1,
+    "specialization_priority_point_cost": 1,
+    "maximum_rating_at_creation": 6,
+    "maximum_rating_with_aptitude": 7,
+    "maximum_specializations_per_skill_during_priority_step": 1,
+    "all_priority_points_must_be_spent": true,
+    "all_group_points_must_be_spent": true,
+    "group_points_may_not_buy_individual_skills": true,
+    "individual_points_may_not_buy_skill_groups": true,
+    "groups_may_not_be_split_during_priority_step": true,
+    "individual_skill_may_not_duplicate_purchased_group": true,
+    "free_knowledge_and_language_points": {
+      "op": "multiply",
+      "args": [
+        {
+          "op": "add",
+          "args": [
+            {
+              "op": "path",
+              "path": "character.attributes_natural.intuition"
+            },
+            {
+              "op": "path",
+              "path": "character.attributes_natural.logic"
+            }
+          ]
+        },
+        2
+      ]
+    },
+    "free_native_languages": 1,
+    "maximum_knowledge_or_language_rating": 6,
+    "restricted_skill_attributes": {
+      "magic": "character.magic_rating",
+      "resonance": "character.resonance_rating"
+    },
+    "magic_skill_groups": [
+      "sorcery",
+      "conjuring",
+      "enchanting"
+    ],
+    "resonance_skill_groups": [
+      "tasking"
+    ],
+    "social_skills": [
+      "con",
+      "etiquette",
+      "impersonation",
+      "instruction",
+      "intimidation",
+      "leadership",
+      "negotiation",
+      "performance"
+    ],
+    "social_skill_groups": [
+      "acting",
+      "influence"
+    ],
+    "technical_skills": [
+      "aeronautics-mechanic",
+      "animal-handling",
+      "armorer",
+      "automotive-mechanic",
+      "biotechnology",
+      "chemistry",
+      "computer",
+      "cybercombat",
+      "cybertechnology",
+      "demolitions",
+      "electronic-warfare",
+      "first-aid",
+      "forgery",
+      "hacking",
+      "hardware",
+      "industrial-mechanic",
+      "locksmith",
+      "medicine",
+      "nautical-mechanic",
+      "software"
+    ],
+    "source_pages": [
+      88,
+      89,
+      90,
+      91,
+      92
+    ]
+  },
+  "resource_rules": {
+    "budget_source": "priority_array.json#/priority_array/{rank}/resources/{play_level}",
+    "maximum_unspent_nuyen_carryover": 5000,
+    "unspent_nuyen_above_carryover_is_lost": true,
+    "nuyen_may_not_convert_to_karma": true,
+    "karma_to_nuyen_rate": 2000,
+    "karma_conversion_limit_source": "priority_array.json#/play_levels/{play_level}/maximum_karma_to_nuyen",
+    "availability_limit_source": "priority_array.json#/play_levels/{play_level}/maximum_availability",
+    "device_rating_limit_source": "priority_array.json#/play_levels/{play_level}/maximum_device_rating",
+    "maximum_augmentation_bonus_per_attribute": 4,
+    "allowed_augmentation_grades": [
+      "standard",
+      "alphaware"
+    ],
+    "starting_essence": 6,
+    "magic_or_resonance_loss_per_started_essence_point": 1,
+    "lifestyle_cost_multipliers": {
+      "human": 1,
+      "elf": 1,
+      "dwarf": 1.2,
+      "ork": 1,
+      "troll": 2
+    },
+    "lifestyle_starting_nuyen_source": "lifestyles.json#/lifestyles/{lifestyle}/starting_nuyen",
+    "source_pages": [
+      64,
+      94,
+      95,
+      97,
+      101
+    ]
+  },
+  "karma_purchase_rules": {
+    "maximum_carryover_source": "priority_array.json#/play_levels/{play_level}/maximum_karma_carryover",
+    "creation_restrictions_continue_to_apply": true,
+    "attribute": {
+      "cost": {
+        "op": "multiply",
+        "args": [
+          {
+            "op": "path",
+            "path": "purchase.new_rating"
+          },
+          5
+        ]
+      }
+    },
+    "active_skill": {
+      "cost": {
+        "op": "multiply",
+        "args": [
+          {
+            "op": "path",
+            "path": "purchase.new_rating"
+          },
+          2
+        ]
+      }
+    },
+    "skill_group": {
+      "cost": {
+        "op": "multiply",
+        "args": [
+          {
+            "op": "path",
+            "path": "purchase.new_rating"
+          },
+          5
+        ]
+      }
+    },
+    "knowledge_skill": {
+      "cost": {
+        "op": "path",
+        "path": "purchase.new_rating"
+      }
+    },
+    "language_skill": {
+      "cost": {
+        "op": "path",
+        "path": "purchase.new_rating"
+      }
+    },
+    "specialization": {
+      "cost": 7
+    },
+    "complex_form": {
+      "cost": 4
+    },
+    "spell_ritual_or_preparation": {
+      "cost": 5
+    },
+    "bound_spirit_service": {
+      "cost": 1,
+      "force": {
+        "op": "path",
+        "path": "character.magic_rating"
+      },
+      "maximum_entities": {
+        "op": "path",
+        "path": "character.attributes_natural.charisma"
+      }
+    },
+    "registered_sprite_task": {
+      "cost": 1,
+      "level": {
+        "op": "path",
+        "path": "character.resonance_rating"
+      },
+      "maximum_entities": {
+        "op": "path",
+        "path": "character.attributes_natural.charisma"
+      }
+    },
+    "bonded_foci_total_force_limit": {
+      "op": "multiply",
+      "args": [
+        {
+          "op": "path",
+          "path": "character.magic_rating"
+        },
+        2
+      ]
+    },
+    "source_pages": [
+      71,
+      98,
+      105,
+      106,
+      107
+    ]
+  },
+  "contact_rules": {
+    "budget": {
+      "op": "multiply",
+      "args": [
+        {
+          "op": "path",
+          "path": "character.attributes_natural.charisma"
+        },
+        {
+          "op": "path",
+          "path": "play_level.contact_karma_multiplier"
+        }
+      ]
+    },
+    "contact_karma_multipliers": {
+      "regular": 3,
+      "street_level": 3,
+      "prime_runner": 6
+    },
+    "minimum_connection": 1,
+    "minimum_loyalty": 1,
+    "maximum_karma_per_contact": 7,
+    "cost_per_connection_point": 1,
+    "cost_per_loyalty_point": 1,
+    "maximum_contact_count": null,
+    "unspent_free_contact_karma_is_lost": true,
+    "source_pages": [
+      64,
+      98,
+      99
+    ]
+  },
+  "derived_statistics": {
+    "initiative": {
+      "value": {
+        "op": "add",
+        "args": [
+          {
+            "op": "path",
+            "path": "character.attributes_augmented.intuition"
+          },
+          {
+            "op": "path",
+            "path": "character.attributes_augmented.reaction"
+          }
+        ]
+      },
+      "dice": 1
+    },
+    "astral_initiative": {
+      "value": {
+        "op": "multiply",
+        "args": [
+          {
+            "op": "path",
+            "path": "character.attributes_augmented.intuition"
+          },
+          2
+        ]
+      },
+      "dice": 2
+    },
+    "matrix_ar_initiative": {
+      "value": {
+        "op": "add",
+        "args": [
+          {
+            "op": "path",
+            "path": "character.attributes_augmented.intuition"
+          },
+          {
+            "op": "path",
+            "path": "character.attributes_augmented.reaction"
+          }
+        ]
+      },
+      "dice": 1
+    },
+    "matrix_cold_sim_initiative": {
+      "value": {
+        "op": "add",
+        "args": [
+          {
+            "op": "path",
+            "path": "character.matrix.data_processing"
+          },
+          {
+            "op": "path",
+            "path": "character.attributes_augmented.intuition"
+          }
+        ]
+      },
+      "dice": 3
+    },
+    "matrix_hot_sim_initiative": {
+      "value": {
+        "op": "add",
+        "args": [
+          {
+            "op": "path",
+            "path": "character.matrix.data_processing"
+          },
+          {
+            "op": "path",
+            "path": "character.attributes_augmented.intuition"
+          }
+        ]
+      },
+      "dice": 4
+    },
+    "mental_limit": {
+      "op": "ceil",
+      "args": [
+        {
+          "op": "divide",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                {
+                  "op": "multiply",
+                  "args": [
+                    {
+                      "op": "path",
+                      "path": "character.attributes_augmented.logic"
+                    },
+                    2
+                  ]
+                },
+                {
+                  "op": "path",
+                  "path": "character.attributes_augmented.intuition"
+                },
+                {
+                  "op": "path",
+                  "path": "character.attributes_augmented.willpower"
+                }
+              ]
+            },
+            3
+          ]
+        }
+      ]
+    },
+    "physical_limit": {
+      "op": "ceil",
+      "args": [
+        {
+          "op": "divide",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                {
+                  "op": "multiply",
+                  "args": [
+                    {
+                      "op": "path",
+                      "path": "character.attributes_augmented.strength"
+                    },
+                    2
+                  ]
+                },
+                {
+                  "op": "path",
+                  "path": "character.attributes_augmented.body"
+                },
+                {
+                  "op": "path",
+                  "path": "character.attributes_augmented.reaction"
+                }
+              ]
+            },
+            3
+          ]
+        }
+      ]
+    },
+    "social_limit": {
+      "op": "ceil",
+      "args": [
+        {
+          "op": "divide",
+          "args": [
+            {
+              "op": "add",
+              "args": [
+                {
+                  "op": "multiply",
+                  "args": [
+                    {
+                      "op": "path",
+                      "path": "character.attributes_augmented.charisma"
+                    },
+                    2
+                  ]
+                },
+                {
+                  "op": "path",
+                  "path": "character.attributes_augmented.willpower"
+                },
+                {
+                  "op": "ceil",
+                  "args": [
+                    {
+                      "op": "path",
+                      "path": "character.essence"
+                    }
+                  ]
+                }
+              ]
+            },
+            3
+          ]
+        }
+      ]
+    },
+    "physical_condition_monitor": {
+      "op": "add",
+      "args": [
+        {
+          "op": "ceil",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "op": "path",
+                  "path": "character.attributes_augmented.body"
+                },
+                2
+              ]
+            }
+          ]
+        },
+        8
+      ]
+    },
+    "stun_condition_monitor": {
+      "op": "add",
+      "args": [
+        {
+          "op": "ceil",
+          "args": [
+            {
+              "op": "divide",
+              "args": [
+                {
+                  "op": "path",
+                  "path": "character.attributes_augmented.willpower"
+                },
+                2
+              ]
+            }
+          ]
+        },
+        8
+      ]
+    },
+    "overflow_boxes": {
+      "op": "add",
+      "args": [
+        {
+          "op": "path",
+          "path": "character.attributes_augmented.body"
+        },
+        {
+          "op": "path",
+          "path": "character.quality_effects.overflow_boxes"
+        }
+      ]
+    },
+    "living_persona": {
+      "attack": {
+        "op": "path",
+        "path": "character.attributes_natural.charisma"
+      },
+      "data_processing": {
+        "op": "path",
+        "path": "character.attributes_natural.logic"
+      },
+      "device_rating": {
+        "op": "path",
+        "path": "character.resonance_rating"
+      },
+      "firewall": {
+        "op": "path",
+        "path": "character.attributes_natural.willpower"
+      },
+      "sleaze": {
+        "op": "path",
+        "path": "character.attributes_natural.intuition"
+      }
+    },
+    "source_pages": [
+      95,
+      100,
+      101,
+      102
+    ]
+  },
+  "source_conflicts": [
+    {
+      "id": "mystic-adept-power-point-cost",
+      "topic": "Mystic Adept Power Point cost at character creation",
+      "selected_value": 5,
+      "selected_source_pages": [
+        69,
+        70,
+        71
+      ],
+      "conflicting_value": 2,
+      "conflicting_source_pages": [
+        101
+      ],
+      "resolution": "Use 5 Karma because the detailed type rule, Step Three rule and worked example agree; the checklist value is an isolated stale statement."
+    },
+    {
+      "id": "troll-and-dwarf-purchase-modifiers",
+      "topic": "Dwarf and troll cost modifiers",
+      "selected_value": {
+        "dwarf_lifestyle_multiplier": 1.2,
+        "troll_lifestyle_multiplier": 2,
+        "general_gear_multiplier": 1
+      },
+      "selected_source_pages": [
+        65,
+        66,
+        95,
+        97
+      ],
+      "conflicting_source_pages": [
+        67,
+        101
+      ],
+      "resolution": "Use the Metatype Attribute Table, governing prose and worked resource example. Do not apply the stale example's 50 percent general gear modifier."
+    }
+  ],
+  "extension_points": [
+    "additional_play_levels",
+    "additional_metatypes",
+    "additional_magic_paths",
+    "quality_rule_packs_by_source",
+    "gear_availability_exceptions",
+    "alternative_character_creation_systems"
+  ]
+}

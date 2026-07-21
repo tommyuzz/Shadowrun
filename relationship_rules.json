@@ -1,0 +1,390 @@
+{
+  "$schema": "./schemas/relationship_rules.schema.json",
+  "ruleset": "shadowrun5e.relationships",
+  "schema_version": 1,
+  "weapon_support": {
+    "profile_field": "raw.compatibility_profile",
+    "fallback_label": "Compatible weapons",
+    "definitions": {
+      "firearm-or-heavy": {
+        "all": [
+          {
+            "field": "weapon.category",
+            "operator": "in",
+            "value": [
+              "Firearms",
+              "Heavy Weapons"
+            ]
+          },
+          {
+            "field": "weapon.raw.ammo",
+            "operator": "present"
+          },
+          {
+            "field": "weapon.raw.mode",
+            "operator": "present"
+          },
+          {
+            "field": "weapon.subcategory",
+            "operator": "not_in",
+            "value": [
+              "Laser Weapons",
+              "Flamethrowers"
+            ]
+          }
+        ]
+      },
+      "conventional-firearm": {
+        "all": [
+          {
+            "ref": "firearm-or-heavy"
+          },
+          {
+            "field": "weapon.subcategory",
+            "operator": "not_in",
+            "value": [
+              "Tasers",
+              "Special Weapons",
+              "Exotic Ranged Weapons",
+              "Laser Weapons",
+              "Flamethrowers",
+              "Cannons/Launchers"
+            ]
+          }
+        ]
+      },
+      "long-gun": {
+        "all": [
+          {
+            "ref": "firearm-or-heavy"
+          },
+          {
+            "field": "weapon.subcategory",
+            "operator": "in",
+            "value": [
+              "Submachine Guns",
+              "Assault Rifles",
+              "Sniper Rifles",
+              "Shotguns",
+              "Machine Guns",
+              "Cannons/Launchers"
+            ]
+          }
+        ]
+      },
+      "pistol": {
+        "all": [
+          {
+            "ref": "firearm-or-heavy"
+          },
+          {
+            "any": [
+              {
+                "field": "weapon.subcategory",
+                "operator": "in",
+                "value": [
+                  "Tasers",
+                  "Hold-Outs",
+                  "Light Pistols",
+                  "Heavy Pistols",
+                  "Machine Pistols"
+                ]
+              },
+              {
+                "field": "weapon.name",
+                "operator": "matches",
+                "value": "pistol",
+                "flags": "i"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "profiles": {
+      "grenade-launcher": {
+        "display_label": "Grenade launchers",
+        "rule": {
+          "all": [
+            {
+              "ref": "firearm-or-heavy"
+            },
+            {
+              "fields": [
+                "weapon.name",
+                "weapon.category",
+                "weapon.subcategory",
+                "weapon.raw.skill",
+                "weapon.raw.ammo",
+                "weapon.raw.description",
+                "weapon.raw.features"
+              ],
+              "operator": "matches",
+              "value": "grenade launcher|\\bmgl\\b|underbarrel grenade",
+              "flags": "i"
+            }
+          ]
+        }
+      },
+      "pistol": {
+        "display_label": "Pistol-sized weapons",
+        "rule": {
+          "ref": "pistol"
+        }
+      },
+      "small-pistol": {
+        "display_label": "Hold-outs and light pistols",
+        "rule": {
+          "all": [
+            {
+              "ref": "firearm-or-heavy"
+            },
+            {
+              "field": "weapon.subcategory",
+              "operator": "in",
+              "value": [
+                "Hold-Outs",
+                "Light Pistols"
+              ]
+            }
+          ]
+        }
+      },
+      "long-gun": {
+        "display_label": "Long guns",
+        "rule": {
+          "ref": "long-gun"
+        }
+      },
+      "shoulder-fired": {
+        "display_label": "Shoulder-fired weapons",
+        "rule": {
+          "ref": "long-gun"
+        }
+      },
+      "heavy-or-long-gun": {
+        "display_label": "Long guns and heavy weapons",
+        "rule": {
+          "any": [
+            {
+              "field": "weapon.category",
+              "operator": "equals",
+              "value": "Heavy Weapons"
+            },
+            {
+              "ref": "long-gun"
+            }
+          ]
+        }
+      },
+      "conventional-firearm": {
+        "display_label": "Conventional firearms",
+        "rule": {
+          "ref": "conventional-firearm"
+        }
+      },
+      "firearm-or-heavy": {
+        "display_label": "Firearms and heavy weapons",
+        "rule": {
+          "ref": "firearm-or-heavy"
+        }
+      },
+      "detachable-clip": {
+        "display_label": "Clip-fed weapons",
+        "rule": {
+          "all": [
+            {
+              "ref": "firearm-or-heavy"
+            },
+            {
+              "field": "weapon.raw.ammo",
+              "operator": "matches",
+              "value": "\\(c\\)|\\bclip\\b",
+              "flags": "i"
+            }
+          ]
+        }
+      },
+      "cylinder": {
+        "display_label": "Cylinder-fed weapons",
+        "rule": {
+          "all": [
+            {
+              "ref": "firearm-or-heavy"
+            },
+            {
+              "field": "weapon.raw.ammo",
+              "operator": "matches",
+              "value": "\\(cy\\)|cylinder",
+              "flags": "i"
+            }
+          ]
+        }
+      },
+      "bow": {
+        "display_label": "Bows",
+        "rule": {
+          "field": "weapon.subcategory",
+          "operator": "equals",
+          "value": "Bows"
+        }
+      },
+      "crossbow": {
+        "display_label": "Crossbows",
+        "rule": {
+          "any": [
+            {
+              "field": "weapon.subcategory",
+              "operator": "equals",
+              "value": "Crossbows"
+            },
+            {
+              "field": "weapon.name",
+              "operator": "matches",
+              "value": "crossbow",
+              "flags": "i"
+            }
+          ]
+        }
+      },
+      "projectile-weapon": {
+        "display_label": "Projectile weapons",
+        "rule": {
+          "all": [
+            {
+              "field": "weapon.category",
+              "operator": "equals",
+              "value": "Projectile"
+            },
+            {
+              "field": "weapon.subcategory",
+              "operator": "in",
+              "value": [
+                "Bows",
+                "Crossbows",
+                "Projectile Weapons"
+              ]
+            }
+          ]
+        }
+      },
+      "assault-cannon": {
+        "display_label": "Assault cannons",
+        "rule": {
+          "all": [
+            {
+              "field": "weapon.subcategory",
+              "operator": "equals",
+              "value": "Cannons/Launchers"
+            },
+            {
+              "fields": [
+                "weapon.name",
+                "weapon.category",
+                "weapon.subcategory",
+                "weapon.raw.skill",
+                "weapon.raw.ammo",
+                "weapon.raw.description",
+                "weapon.raw.features"
+              ],
+              "operator": "matches",
+              "value": "assault cannon|\\bcannon\\b",
+              "flags": "i"
+            }
+          ]
+        }
+      },
+      "dart-weapon": {
+        "display_label": "Dart weapons",
+        "rule": {
+          "all": [
+            {
+              "ref": "firearm-or-heavy"
+            },
+            {
+              "fields": [
+                "weapon.name",
+                "weapon.category",
+                "weapon.subcategory",
+                "weapon.raw.skill",
+                "weapon.raw.ammo",
+                "weapon.raw.description",
+                "weapon.raw.features"
+              ],
+              "operator": "matches",
+              "value": "dart",
+              "flags": "i"
+            }
+          ]
+        }
+      },
+      "taser": {
+        "display_label": "Tasers",
+        "rule": {
+          "field": "weapon.subcategory",
+          "operator": "equals",
+          "value": "Tasers"
+        }
+      },
+      "shotgun": {
+        "display_label": "Shotguns",
+        "rule": {
+          "field": "weapon.subcategory",
+          "operator": "equals",
+          "value": "Shotguns"
+        }
+      },
+      "ballistic-firearm": {
+        "display_label": "Ballistic firearms",
+        "rule": {
+          "ref": "conventional-firearm"
+        }
+      }
+    }
+  },
+  "equipment_enhancements": {
+    "match": {
+      "any": [
+        {
+          "field": "enhancement.compatible_items",
+          "operator": "contains",
+          "compare_field": "equipment.name"
+        },
+        {
+          "all": [
+            {
+              "field": "equipment.subcategory",
+              "operator": "present"
+            },
+            {
+              "field": "enhancement.compatible_subcategories",
+              "operator": "contains",
+              "compare_field": "equipment.subcategory"
+            }
+          ]
+        }
+      ]
+    },
+    "exclusions": [
+      {
+        "id": "armor-modifications-on-shields",
+        "reason": "Armor modifications are not listed against shield records unless an enhancement declares that shield by name.",
+        "when": {
+          "all": [
+            {
+              "field": "enhancement.enhancement_group",
+              "operator": "equals",
+              "value": "Armor modifications"
+            },
+            {
+              "field": "equipment.name",
+              "operator": "matches",
+              "value": "shield",
+              "flags": "i"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

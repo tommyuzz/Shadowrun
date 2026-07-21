@@ -1,22 +1,25 @@
 {
   "name": "shadowrun-reference-archive",
   "private": true,
-  "version": "1.11.0",
+  "version": "2.0.9",
   "type": "module",
   "scripts": {
     "styles:generate": "node scripts/scope-page-styles.mjs",
     "predev": "npm run styles:generate",
     "dev": "vite",
-    "prebuild": "npm run styles:generate && node scripts/generate-redirects.mjs",
+    "prebuild": "node scripts/clean-dist.mjs && npm run styles:generate && node scripts/generate-redirects.mjs",
     "build": "tsc -b && vite build",
     "postbuild": "node scripts/validate-dist.mjs",
     "preview": "vite preview",
     "validate:data": "node scripts/validate-data.mjs",
+    "validate:rules": "node scripts/validate-relationship-rules.mjs",
+    "validate:character-rules": "node scripts/validate-character-creation-rules.mjs",
+    "lint": "oxlint src scripts vite.config.ts --react-plugin --import-plugin --promise-plugin --deny-warnings",
     "test:unit": "vitest run",
     "test:filters": "vitest run src/filtering.test.ts",
     "test:comparison": "vitest run src/comparison.test.ts",
     "test:sources": "vitest run src/source-selection.test.ts",
-    "test": "npm run validate:data && npm run test:unit && npm run build"
+    "test": "npm run lint && npm run validate:data && npm run validate:rules && npm run validate:character-rules && npm run test:unit && npm run build"
   },
   "dependencies": {
     "react": "19.2.7",
@@ -27,6 +30,7 @@
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "6.0.3",
+    "oxlint": "1.74.0",
     "postcss": "8.5.17",
     "typescript": "7.0.2",
     "vite": "8.1.4",

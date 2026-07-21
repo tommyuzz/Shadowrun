@@ -50,7 +50,7 @@ export function sourceIsEnabled(source: string, excludedSources: readonly string
   return !excludedSources.some((excluded) => normaliseSourceCode(excluded) === sourceCode);
 }
 
-export const CORE_RULES_ALWAYS_VISIBLE_MODULES = new Set(["skills", "attributes", "priorityarray"]);
+export const CORE_RULES_ALWAYS_VISIBLE_MODULES = new Set(["skills", "attributes", "priorityarray", "charactercreation"]);
 
 export function sourceRecordIsVisible(moduleId: string, source: string, isSourceEnabled: (source: string) => boolean): boolean {
   return recordSourceCodes(source).some((sourceCode) =>

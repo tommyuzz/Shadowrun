@@ -1,7 +1,8 @@
 import { useEffect, useId, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { useSourceSelection } from "../source-selection";
 
-export function SourceSelector() {
+export function SourceSelector({ showCharacterReturn = false, showMatrixReturn = false }: { showCharacterReturn?: boolean; showMatrixReturn?: boolean }) {
   const {
     availableSources,
     enabledSourceCount,
@@ -56,6 +57,8 @@ export function SourceSelector() {
       <strong>{enabledSourceCount}/{total}</strong>
       <span className="source-selector-chevron" aria-hidden="true">⌄</span>
     </button>
+    {showCharacterReturn ? <Link className="source-selector-character-link" to="/charactercreation/review">← Return to character display</Link> : null}
+    {showMatrixReturn ? <Link className="source-selector-character-link" to="/?view=matrix&amp;sector=corerules">Open Matrix Search →</Link> : null}
 
     {open ? <section className="source-selector-panel" id={panelId} role="dialog" aria-label="Source book selection">
       <header>

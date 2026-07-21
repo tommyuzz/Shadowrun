@@ -49,5 +49,6 @@ export interface ModuleDefinition {
   listMeta: (record: ReferenceRecord) => string;
   filters: FilterDefinition[];
   defaultCategoryId?: string;
+  mode?: "reference" | "workflow";
   Detail?: ComponentType<{ record: ReferenceRecord; data: ReferenceData; recordNumber: number }>;
 }

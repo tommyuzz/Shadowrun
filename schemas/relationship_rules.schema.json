@@ -1,0 +1,271 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shadowrun-reference.example/schemas/relationship_rules.schema.json",
+  "title": "Shadowrun relationship rules",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "ruleset",
+    "schema_version",
+    "weapon_support",
+    "equipment_enhancements"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "ruleset": {
+      "const": "shadowrun5e.relationships"
+    },
+    "schema_version": {
+      "const": 1
+    },
+    "weapon_support": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "profile_field",
+        "fallback_label",
+        "definitions",
+        "profiles"
+      ],
+      "properties": {
+        "profile_field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fallback_label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definitions": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/$defs/rule"
+          }
+        },
+        "profiles": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "display_label",
+              "rule"
+            ],
+            "properties": {
+              "display_label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "rule": {
+                "$ref": "#/$defs/rule"
+              }
+            }
+          }
+        }
+      }
+    },
+    "equipment_enhancements": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "match",
+        "exclusions"
+      ],
+      "properties": {
+        "match": {
+          "$ref": "#/$defs/rule"
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "id",
+              "reason",
+              "when"
+            ],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              },
+              "reason": {
+                "type": "string",
+                "minLength": 1
+              },
+              "when": {
+                "$ref": "#/$defs/rule"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "rule": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/allRule"
+        },
+        {
+          "$ref": "#/$defs/anyRule"
+        },
+        {
+          "$ref": "#/$defs/notRule"
+        },
+        {
+          "$ref": "#/$defs/referenceRule"
+        },
+        {
+          "$ref": "#/$defs/conditionRule"
+        }
+      ]
+    },
+    "allRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "all"
+      ],
+      "properties": {
+        "all": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        }
+      }
+    },
+    "anyRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "any"
+      ],
+      "properties": {
+        "any": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/rule"
+          }
+        }
+      }
+    },
+    "notRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "not"
+      ],
+      "properties": {
+        "not": {
+          "$ref": "#/$defs/rule"
+        }
+      }
+    },
+    "referenceRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ref"
+      ],
+      "properties": {
+        "ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "conditionRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "operator"
+      ],
+      "properties": {
+        "field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "operator": {
+          "enum": [
+            "equals",
+            "in",
+            "not_in",
+            "present",
+            "matches",
+            "contains"
+          ]
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": [
+                  "string",
+                  "number",
+                  "boolean"
+                ]
+              }
+            }
+          ]
+        },
+        "compare_field": {
+          "type": "string",
+          "minLength": 1
+        },
+        "flags": {
+          "type": "string",
+          "pattern": "^[dgimsuvy]*$"
+        }
+      },
+      "oneOf": [
+        {
+          "required": [
+            "field"
+          ],
+          "not": {
+            "required": [
+              "fields"
+            ]
+          }
+        },
+        {
+          "required": [
+            "fields"
+          ],
+          "not": {
+            "required": [
+              "field"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

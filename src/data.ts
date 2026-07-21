@@ -82,7 +82,7 @@ function record(name: string, raw: RawRecord, category: string, extraTags: strin
 
 export function matchesSearch(record: ReferenceRecord, query: string): boolean {
   const terms = query.trim().toLocaleLowerCase("en-GB").split(/\s+/).filter(Boolean);
-  return terms.length === 0 || terms.every((term) => record.searchText.includes(term));
+  return terms.every((term) => record.searchText.includes(term));
 }
 
 function lookupDefinitions(...values: unknown[]): Record<string, string> {

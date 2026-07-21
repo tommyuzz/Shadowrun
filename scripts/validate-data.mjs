@@ -1,5 +1,12 @@
 import { readFile } from "node:fs/promises";
 
+const relationshipRules = JSON.parse(await readFile("relationship_rules.json", "utf8"));
+const supportProfilePath = relationshipRules.weapon_support.profile_field.replace(/^raw\./, "");
+
+function valueAtPath(root, path) {
+  return path.split(".").reduce((value, segment) => value && typeof value === "object" && !Array.isArray(value) ? value[segment] : undefined, root);
+}
+
 const collections = {
   adeptpowers: ["powers"],
   attributes: ["attributes"],
@@ -64,7 +71,9 @@ for (const [name, enhancement] of Object.entries(equipmentPayload.enhancements))
 const weaponPayload = JSON.parse(await readFile("weapons.json", "utf8"));
 for (const [name, support] of Object.entries(weaponPayload.weapon_support)) {
   if (support.category !== "Weapon Support") throw new Error(`weapons.json: support '${name}' has invalid category`);
-  if (typeof support.compatibility_profile !== "string" || !support.compatibility_profile.trim()) throw new Error(`weapons.json: support '${name}' has no compatibility profile`);
+  const profile = valueAtPath(support, supportProfilePath);
+  if (typeof profile !== "string" || !profile.trim()) throw new Error(`weapons.json: support '${name}' has no compatibility profile`);
+  if (!relationshipRules.weapon_support.profiles[profile]) throw new Error(`weapons.json: support '${name}' references unknown compatibility profile '${profile}'`);
 }
 
 const attributePayload = JSON.parse(await readFile("attributes.json", "utf8"));

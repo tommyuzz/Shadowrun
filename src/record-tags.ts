@@ -13,7 +13,7 @@ const recordMap = (data: ReferenceData, key: string): RawRecord => {
   const value = data.payload[key];
   return value && typeof value === "object" && !Array.isArray(value) ? value as RawRecord : {};
 };
-const legality = (availability: unknown, open = "Legal") => /F$/.test(String(availability || "")) ? "Forbidden" : /R$/.test(String(availability || "")) ? "Restricted" : open;
+const legality = (availability: unknown, open = "Legal") => String(availability || "").endsWith("F") ? "Forbidden" : String(availability || "").endsWith("R") ? "Restricted" : open;
 
 function traitKey(input: string): string {
   if (input === "Low-Light Vision" || input === "Thermographic Vision") return input;

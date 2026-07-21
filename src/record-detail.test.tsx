@@ -92,3 +92,21 @@ describe("Actions, weapon support and equipment configuration rendering", () => 
     expect(markup).toContain("Build Camera");
   });
 });
+
+describe("Rule-backed relationship presentation contract", () => {
+  it("keeps the weapon, support and equipment relationship markup unchanged", async () => {
+    const weaponData = await loadData("weapons");
+    const equipmentData = await loadData("equipment");
+    const predator = weaponData.records.find((record) => record.id === "ares-predator-v")!;
+    const laserSight = weaponData.records.find((record) => record.id === "laser-sight")!;
+    const camera = equipmentData.records.find((record) => record.name === "Camera")!;
+
+    const relationshipMarkup = {
+      weapon: renderToStaticMarkup(<RecordDetail moduleId="weapons" record={predator} data={weaponData} recordNumber={1} openRecord={() => undefined}/>),
+      support: renderToStaticMarkup(<RecordDetail moduleId="weapons" record={laserSight} data={weaponData} recordNumber={1} openRecord={() => undefined}/>),
+      equipment: renderToStaticMarkup(<RecordDetail moduleId="equipment" record={camera} data={equipmentData} recordNumber={1}/>)
+    };
+
+    expect(relationshipMarkup).toMatchSnapshot();
+  });
+});

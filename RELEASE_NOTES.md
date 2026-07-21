@@ -1,5 +1,199 @@
 # Release notes
 
+## 2.0.9 — Priority Array layout repair
+
+- Removed the one-pixel table-cell height rule that caused Priority rows and their contents to collapse and overlap.
+- Restored content-driven table row heights for all five priorities.
+- Moved desktop click handling and selected styling to the complete table-cell surface without forcing the inner button to stretch the table layout.
+- Kept keyboard-accessible buttons inside every cell and preserved the responsive card selector.
+
+## 2.0.8 — Direct full-cell Priority selection
+
+- Removed the redundant Select and Selected badges from the character-creation Priority Array.
+- Removed the visible instructions explaining click behavior.
+- Expanded every desktop Priority choice to fill its complete table cell.
+- Applied hover, keyboard-focus, and selected styling to the entire cell surface rather than only its inner content.
+- Preserved the same full-section behavior for responsive Priority cards.
+
+## 2.0.7 — Selectable reference Priority Array and restored navigation
+
+- Rebuilt the creation Priority selector with the same table, typography, data layout, and responsive cards used by the established Priority Array reference page.
+- Made every Metatype, Attributes, Magic or Resonance, Skills, and Resources section selectable while preserving toggle and unique-priority behavior.
+- Corrected Attribute highlighting so a rating blocked one point below its natural maximum is not styled as though it has reached that maximum.
+- Made the character-return and Matrix Search utility buttons readable in their normal, visited, hover, and focus states.
+- Added a matching Matrix Search shortcut beneath Sources during Character Creation.
+- Restored Shadowrun wordmark navigation from list and record pages to the appropriate Matrix Search sector.
+- Kept Character Creation and Matrix Search wordmarks linked to the front access page as previously specified.
+
+## 2.0.6 — Attribute controls and completed-runner navigation
+
+- Replaced all Physical, Mental, and Special Attribute number inputs with constrained plus and minus controls.
+- Redesigned Attribute values to show the current Total and actual Max as separate, prominent values.
+- Preserved budget, metatype, Exceptional Attribute, Lucky, and single-natural-maximum enforcement in the button states.
+- Added a final review action that completes the runner and enters Matrix Search only after the full mechanical audit passes.
+- Added a persistent “Return to character display” link beneath selected sources in Matrix Search.
+- Removed the separate Matrix Search gateway-return control.
+- Made the Shadowrun wordmark return to the front page only from Character Creation and Matrix Search; ordinary reference pages remain unaffected.
+
+## 2.0.5 — Skill grants and Native Language workflow
+
+- Moved Magic or Resonance before Skills so its automatic skill benefits are known when skill allocation begins.
+- Removed editable Granted Rating inputs from ordinary individual skills and skill groups.
+- Added a dedicated Granted Skills block that derives the required grant count, eligible skill type, and immutable baseline rating from the selected Magic or Resonance priority.
+- Allowed granted skills to be raised above their baseline using the appropriate Skills priority pool while preventing ratings below the grant.
+- Added an explicit Native Language type that creates a language without requesting or consuming numeric rating points.
+- Removed the redundant left-hand Category column from the priority matrix and replaced it with compact full-width category bands.
+- Clear obsolete grant markers automatically if the Magic or Resonance priority or path changes.
+
+## 2.0.4 — Informative priority offers and contextual validation
+
+- Replaced the large rank letters inside priority cells with the actual Metatype, Attribute, Magic or Resonance, Skill, and Resource benefits granted by each choice.
+- Made priority cells true toggles: select once to assign, select again to clear, or select an occupied priority to move it while leaving the displaced category unselected.
+- Kept new drafts completely unselected and added regression coverage for partial, unique priority assignments.
+- Moved each step's validation summary directly beneath its heading so problems are visible before the related controls.
+- Increased small builder typography and redesigned validation findings for readable wrapping without overflowing their panel.
+- Preserved the five-by-five matrix on narrow screens with contained horizontal scrolling and a sticky category column.
+
+## 2.0.3 — Priority matrix and enforceable Attribute controls
+
+### Improved
+
+- Replaced five repetitive Priority dropdowns with a responsive 5×5 button matrix styled after the established Priority Array table.
+- Added clear **Open**, **Swap** and **Assigned** cell states while retaining the deterministic one-rank-per-category swap behavior.
+- Added semantic table headings, pressed states, descriptive labels, keyboard-native buttons and compact phone styling.
+
+### Enforced during entry
+
+- Attribute controls now prevent spending beyond the selected priority budget.
+- Per-metatype and Exceptional Attribute ceilings are enforced by the stepper and numeric input rather than reported only after entry.
+- A second Physical or Mental Attribute cannot be raised to its natural maximum; the affected control identifies which Attribute must be lowered first.
+- Edge, Magic and Resonance allocation inputs now enforce both the Special Attribute pool and their final rating maximums.
+- Added an in-page constraint dossier and per-control explanations while retaining the independent final validation audit.
+
+### Validation
+
+- Added rendered regression coverage for all 25 Priority buttons, removal of the five dropdowns, exhausted Attribute budgets and the one-natural-maximum restriction.
+- All 108 unit and regression tests pass with zero lint or TypeScript warnings; dataset, relationship-rule, character-rule and production-build validation remain unchanged.
+
+## 2.0.2 — Guided entry and sequential creation
+
+### Corrected
+
+- Replaced the bare home route's archive grid with two prominent access choices: **Enter the Shadows** for character creation and **Matrix Search** for the established reference archive.
+- Removed the invented Runner Concept screen and its name, concept and notes fields from the active draft and final review.
+- Replaced production prefilled choices with a genuinely blank draft: no level, priorities, metatype, path, Attribute values or completed screens are selected on first entry.
+- Changed the browser draft storage key so obsolete prefilled 2.0.1 state cannot silently populate a first 2.0.2 session. Schema 1 JSON exports still import safely as unconfirmed drafts.
+
+### Workflow
+
+- Added explicit per-step confirmation and a single central first-incomplete-step rule.
+- Future desktop rail items and mobile-picker options remain locked until the current screen is mechanically clear and confirmed.
+- Premature or obsolete direct URLs resolve to the first incomplete screen without rendering a later step first.
+- Editing an earlier screen invalidates that screen and all later confirmations, preventing stale completion state.
+
+### Compatibility and validation
+
+- Matrix Search retains all four reference sectors, every registered archive module, source selection, legacy sector query links and GitHub Pages-compatible hash routing.
+- Added regression coverage for blank initial state, storage migration, one-step-at-a-time unlocking, premature direct links and both gateway actions.
+- All 106 unit and regression tests pass with zero lint or TypeScript warnings; the complete data, rules and production-build pipeline remains the release gate.
+
+## 2.0.1 — Code-quality verification
+
+### Improved
+
+- Removed a dead rules import, redundant object fallbacks and a duplicated catalogue calculation without changing any returned value or rendered output.
+- Simplified equivalent search and legality predicates so their intent is explicit and easier to review.
+- Enabled compiler checks for unused code, unreachable code, unused labels, implicit returns, switch fallthrough and unchecked side-effect imports.
+- Added a repository lint gate covering TypeScript, React, module imports, promises, build scripts and configuration; it now runs before the existing validation and regression pipeline.
+
+### Compatibility
+
+- No datasets, routes, markup, styles, filters, mechanics or user interactions were changed.
+- Existing rendered-presentation and relationship snapshots remain the behavioral contract for the reference site.
+
+### Validation
+
+- Lint completes with zero warnings, and the 39-module source graph contains no circular dependencies or UI imports in the headless rules layers.
+- All 102 unit and regression tests, 19 dataset checks, 1,374 record checks, TypeScript compilation and production asset validation pass after a clean `npm ci` installation.
+- Source data, CSS and stored presentation snapshots are byte-identical to 2.0.0, and the dependency audit reports zero known vulnerabilities.
+
+## 2.0.0 — Mechanically validated character creation
+
+### Added
+
+- Added a complete ten-screen Core Rulebook priority-creation workflow beneath **Core Rules**, with stable direct routes, desktop step navigation and a mobile-native step picker.
+- Added one versioned `CharacterDraft` for all selections, deterministic priority swapping and targeted rebasing when metatype, Magic path or priority choices change.
+- Added catalogue adapters for metatypes, Qualities, skills, spells, rituals, complex forms, adept powers, equipment, weapons, cyberdecks, vehicles, drones and Lifestyles without duplicating values owned by their reference datasets.
+- Added structured editors for Quality parameters, priority and Knowledge skills, Magic/Resonance formulas, adept powers, resources, augmentations, foci, contacts and leftover Karma.
+- Added live validation, stable violation IDs, budgets, Essence, Power Points, Karma accounting, final derived statistics and a printable review dossier.
+- Added private browser draft persistence plus JSON export, import and deliberate two-step reset. No account, server or database is required.
+
+### Compatibility and performance
+
+- Character Creation and its scoped stylesheet are route-level lazy chunks; reference pages do not import the workflow integration and keep the established initial stylesheet unchanged.
+- Home navigation prefetches the workflow only on intent. Production validation enforces a 500,000-byte initial-script budget and verifies the workflow remains lazy.
+- Production builds clear and recreate `dist/`, and post-build validation rejects duplicate entry or workflow chunks so obsolete content-hashed filenames cannot survive a copied release.
+- Existing reference JSON, shared responsive CSS, generated original-page CSS, routes, filters, source selection, comparisons and page-specific presentation remain unchanged.
+- The application remains a static Vite build deployable at no cost through the existing GitHub Pages workflow.
+
+### Validation
+
+- Added adapter, draft, orchestration, contact-allocation, Karma-sequence, fixed-power and direct-route regression coverage.
+- All 19 existing datasets and 1,374 reference records remain unchanged and continue through their established validators and rendering contracts.
+- All 102 unit and regression tests pass, followed by TypeScript, production-build and built-asset integrity validation.
+
+## 1.13.0 — Core Rulebook character-creation rules
+
+### Added
+
+- Added `character_creation_rules.json`, a versioned headless contract for the complete nine-step Core Rulebook priority-creation workflow.
+- Added cross-file rules for priorities, Attributes, all six Magic/Resonance paths, all 59 Core Qualities, skills, resources, leftover Karma, contacts and final calculations without duplicating the values owned by existing datasets.
+- Added a presentation-independent TypeScript engine with stable validation outcomes, numeric expression evaluation, Karma accounting, Essence handling and derived-stat calculation.
+- Added a semantic CI validator for dataset pointers, priority coverage, Quality cost structures, path grants, skill classifications, formula trees and source provenance.
+- Added 24 scenario tests covering valid and invalid builds, all Core Quality costs and worked creation arithmetic.
+- Documented the mechanical scope and future 2.0 integration contract in `CHARACTER_CREATION_RULES.md`.
+
+### Source rulings
+
+- Selected 5 Karma per Mystic Adept Power Point because the detailed rule, Step Three rule and worked example agree; retained the conflicting checklist value as machine-readable provenance.
+- Applied dwarf and troll modifiers to Lifestyle costs only, following the governing table, prose and worked resource example; retained the stale contradictory references as machine-readable provenance.
+
+### Compatibility
+
+- The current React application does not import the new character-creation engine. Existing datasets, routes, rendered markup, CSS and page-specific presentation remain unchanged.
+- The rules foundation remains static-host compatible and adds no runtime service, account, database or paid dependency.
+
+### Validation
+
+- All 19 existing datasets and 1,374 reference records remain valid and unchanged.
+- The semantic rules validator confirms 59 Core Qualities, six creation paths, twelve derived mechanics and both documented source conflicts.
+- All 92 unit and regression tests pass, including 24 character-creation scenarios and the existing relationship and rendered-presentation contracts.
+- The production TypeScript and Vite build passes with GitHub Pages-compatible output.
+
+## 1.12.0 — Structured relationship rules
+
+### Changed
+
+- Moved every runtime weapon-support compatibility predicate and display label from a TypeScript switch into the versioned `relationship_rules.json` ruleset.
+- Moved Equipment enhancement target evaluation and the armor-on-shield exclusion into the same structured data contract.
+- Replaced feature-specific matching branches with a compiled generic evaluator supporting logical composition, reusable definitions, field matching and field-to-field containment.
+- Simplified the optional organization script so records must arrive with structured relationship metadata instead of having rules inferred from duplicated name lists.
+- Preserved the existing record data, descriptions, components, CSS and rendered rule presentation.
+
+### Added
+
+- Added a machine-readable JSON Schema and a dedicated CI validator for rule structure, operators, scoped fields, references, cycles, regular expressions and assigned compatibility profiles.
+- Added unit coverage for the generic rule engine.
+- Added exhaustive snapshots for every generated weapon-support and Equipment-enhancement relationship.
+- Added exact rendered-markup regression coverage for representative weapon, support and Equipment configuration records.
+
+### Validation
+
+- All 19 datasets and 1,374 reference records remain unchanged and valid.
+- All 67 unit and regression tests pass, including the rule engine, full relationship matrix and rendered presentation contracts.
+- The complete pre-refactor relationship matrix and representative rendered panels match exactly.
+- The production TypeScript and Vite build passes with GitHub Pages-compatible output.
+
 ## 1.11.0 — Related equipment, weapon support and Actions
 
 ### Added
