@@ -7,6 +7,7 @@ export const CREATION_STEPS = [
   { id: "resources", label: "Resources", shortLabel: "Gear" },
   { id: "contacts", label: "Contacts", shortLabel: "Contacts" },
   { id: "karma", label: "Karma", shortLabel: "Karma" },
+  { id: "biography", label: "Biography", shortLabel: "Biography" },
   { id: "review", label: "Review", shortLabel: "Review" }
 ] as const;
 

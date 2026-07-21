@@ -1,5 +1,14 @@
 # Release notes
 
+## 2.1.0 — Biography and virtual equipment store
+
+- Added a required final Biography step with identity, physical description, background, and starting-lifestyle selection before character review.
+- Rebuilt Resources as a virtual store with department and category browsing, search, product cards, visible prices and availability, and a separate persistent shopping cart.
+- Preserved configurable purchase controls for ratings, grades, quantities, augmentation bonuses, and focus bonding inside the cart.
+- Removed the manual Matrix Data Processing and carry-over nuyen fields from character creation.
+- Calculate carry-over nuyen automatically from the remaining creation budget, enforcing the Core Rulebook maximum without requiring duplicate user input.
+- Added migration support for existing saved character drafts and expanded automated coverage for the new workflow.
+
 ## 2.0.9 — Priority Array layout repair
 
 - Removed the one-pixel table-cell height rule that caused Priority rows and their contents to collapse and overlap.

@@ -28,6 +28,7 @@ import {
 import { CONFIRMABLE_CREATION_STEPS, creationStepIndex } from "../character-creation/workflow";
 import {
   AttributesStep,
+  BiographyStep,
   ContactsStep,
   KarmaStep,
   MagicStep,
@@ -158,6 +159,7 @@ export function CharacterCreationPage() {
       case "resources": return <ResourcesStep {...commonProps}/>;
       case "contacts": return <ContactsStep {...commonProps}/>;
       case "karma": return <KarmaStep {...commonProps}/>;
+      case "biography": return <BiographyStep {...commonProps}/>;
       case "review": return <ReviewStep {...commonProps} goToStep={goToStep} exportDraft={exportDraft} printDraft={() => window.print()}/>;
     }
   })();

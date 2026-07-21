@@ -22,8 +22,21 @@ import {
   type SpecialAttributeId
 } from "./catalogues";
 
-export const CHARACTER_DRAFT_SCHEMA_VERSION = 2;
-export const CHARACTER_DRAFT_STORAGE_KEY = "shadowrun5e-character-draft-v3";
+export const CHARACTER_DRAFT_SCHEMA_VERSION = 3;
+export const CHARACTER_DRAFT_STORAGE_KEY = "shadowrun5e-character-draft-v4";
+
+export interface CharacterBiography {
+  legalName: string;
+  streetName: string;
+  age: string;
+  gender: string;
+  ethnicity: string;
+  height: string;
+  weight: string;
+  description: string;
+  background: string;
+  lifestyleId: string;
+}
 
 export interface DraftAdeptPowerSelection {
   instanceId: string;
@@ -83,12 +96,11 @@ export interface CharacterDraft {
   magic: CharacterMagicDraft;
   resources: ResourceSelectionShape[];
   karmaConvertedToNuyen: number;
-  nuyenCarryover: number;
   contacts: DraftContact[];
   karmaPurchases: DraftKarmaPurchase[];
   karmaCarryover: number;
   approvals: string[];
-  matrixDataProcessing: number;
+  biography: CharacterBiography;
   confirmedSteps: ConfirmableCreationStepId[];
 }
 
@@ -129,12 +141,11 @@ export function createEmptyCharacterDraft(): CharacterDraft {
     },
     resources: [],
     karmaConvertedToNuyen: 0,
-    nuyenCarryover: 0,
     contacts: [],
     karmaPurchases: [],
     karmaCarryover: 0,
     approvals: [],
-    matrixDataProcessing: 0,
+    biography: { legalName: "", streetName: "", age: "", gender: "", ethnicity: "", height: "", weight: "", description: "", background: "", lifestyleId: "" },
     confirmedSteps: []
   };
 }
@@ -237,7 +248,7 @@ export function parseCharacterDraft(value: unknown): CharacterDraft {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("The selected file does not contain a character draft object.");
   const raw = value as Partial<CharacterDraft> & { schemaVersion?: number };
   if (raw.ruleset !== "shadowrun5e.character-creation") throw new Error("This file belongs to a different ruleset.");
-  if (raw.schemaVersion !== 1 && raw.schemaVersion !== CHARACTER_DRAFT_SCHEMA_VERSION) throw new Error(`Draft schema ${String(raw.schemaVersion)} is not supported by this version.`);
+  if (![1, 2, CHARACTER_DRAFT_SCHEMA_VERSION].includes(Number(raw.schemaVersion))) throw new Error(`Draft schema ${String(raw.schemaVersion)} is not supported by this version.`);
   if (!isPriorityAssignments(raw.priorityAssignments)) throw new Error("The draft does not contain a valid A–E priority assignment state.");
   const fallback = createEmptyCharacterDraft();
   const merged: CharacterDraft = {
@@ -259,10 +270,9 @@ export function parseCharacterDraft(value: unknown): CharacterDraft {
     karmaPurchases: Array.isArray(raw.karmaPurchases) ? raw.karmaPurchases : [],
     approvals: Array.isArray(raw.approvals) ? raw.approvals : [],
     karmaConvertedToNuyen: Number(raw.karmaConvertedToNuyen) || 0,
-    nuyenCarryover: Number(raw.nuyenCarryover) || 0,
     karmaCarryover: Number(raw.karmaCarryover) || 0,
-    matrixDataProcessing: Number(raw.matrixDataProcessing) || 0,
-    confirmedSteps: raw.schemaVersion === CHARACTER_DRAFT_SCHEMA_VERSION ? confirmedStepPrefix(raw.confirmedSteps) : []
+    biography: { ...fallback.biography, ...(raw.biography && typeof raw.biography === "object" ? raw.biography : {}) },
+    confirmedSteps: Number(raw.schemaVersion) >= 2 ? confirmedStepPrefix(raw.confirmedSteps) : []
   };
   if (merged.metatypeId && !metatypeOptions.some((option) => option.id === merged.metatypeId)) throw new Error(`Unknown metatype '${merged.metatypeId}'.`);
   if (merged.magicPathId && !magicPathOptions.some((option) => option.id === merged.magicPathId)) throw new Error(`Unknown Magic or Resonance path '${merged.magicPathId}'.`);

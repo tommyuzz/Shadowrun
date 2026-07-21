@@ -1,5 +1,6 @@
 import {
   deriveCreationStatistics,
+  characterCreationRules,
   essenceAfterResources,
   qualityCostSummary,
   skillRatingsFromPlan,
@@ -205,13 +206,17 @@ export function resourcePlanFromDraft(draft: CharacterDraft): { plan: ResourcePl
     if (selection.bonded && !resolved.entry?.isFocus) errors.push(violation("catalogue.focus-bond", `${resolved.entry?.name || selection.catalogueId} is not a focus and cannot be bonded.`, `resources.${selection.instanceId}.bonded`));
     if (selection.bonded && (!Number.isInteger(selection.bondKarmaCost) || (selection.bondKarmaCost || 0) < 1)) errors.push(violation("catalogue.focus-karma", `A bonded ${resolved.entry?.name || "focus"} needs its positive bonding Karma cost.`, `resources.${selection.instanceId}.bondKarmaCost`));
   }
+  const available = resourceBudget(draft.priorityAssignments.resources, draft.playLevelId) + draft.karmaConvertedToNuyen * 2000;
+  const spent = purchases.reduce((sum, purchase) => sum + purchase.cost, 0);
+  const maximumCarryover = Number(characterCreationRules.resource_rules.maximum_unspent_nuyen_carryover) || 5000;
+  const carryoverNuyen = Math.min(maximumCarryover, Math.max(0, available - spent));
   return {
     plan: {
       playLevelId: draft.playLevelId,
       resourcePriorityRank: draft.priorityAssignments.resources,
       metatypeId: draft.metatypeId,
       karmaConvertedToNuyen: draft.karmaConvertedToNuyen,
-      carryoverNuyen: draft.nuyenCarryover,
+      carryoverNuyen,
       purchases,
       qualityIds: draft.qualities.map((quality) => quality.id)
     },
@@ -351,6 +356,11 @@ export function evaluateCharacterDraft(draft: CharacterDraft): CharacterDraftEva
     ...karmaSequenceViolations(draft, baseNatural, essence, { ...skillRatings }),
     ...runValidator(() => validateKarmaPlan(karmaPlan), "karma.validator", "karmaPurchases")
   ];
+  const biographyViolations: RuleViolation[] = [];
+  if (!draft.biography.streetName.trim()) biographyViolations.push(violation("biography.street-name", "Enter the runner's street name or primary alias.", "biography.streetName"));
+  if (!draft.biography.age.trim()) biographyViolations.push(violation("biography.age", "Enter the runner's age.", "biography.age"));
+  if (!draft.biography.lifestyleId) biographyViolations.push(violation("biography.lifestyle", "Select the runner's starting lifestyle.", "biography.lifestyleId"));
+  else if (!resourceCatalogue.some((entry) => entry.kind === "lifestyle" && entry.id === draft.biography.lifestyleId)) biographyViolations.push(violation("biography.lifestyle-known", "Select a known lifestyle from the catalogue.", "biography.lifestyleId"));
 
   const preReview = {
     priorities: makeStep("priorities", priorityViolations, draft.confirmedSteps.includes("priorities")),
@@ -360,7 +370,8 @@ export function evaluateCharacterDraft(draft: CharacterDraft): CharacterDraftEva
     magic: makeStep("magic", magicViolations, draft.confirmedSteps.includes("magic")),
     resources: makeStep("resources", resourceViolations, draft.confirmedSteps.includes("resources")),
     contacts: makeStep("contacts", contactViolations, draft.confirmedSteps.includes("contacts")),
-    karma: makeStep("karma", karmaViolations, draft.confirmedSteps.includes("karma"))
+    karma: makeStep("karma", karmaViolations, draft.confirmedSteps.includes("karma")),
+    biography: makeStep("biography", biographyViolations, draft.confirmedSteps.includes("biography"))
   };
   const allViolations = Object.values(preReview).flatMap((step) => step.violations);
   const reviewViolations = allViolations.filter((item) => item.severity !== "warning");
@@ -379,7 +390,7 @@ export function evaluateCharacterDraft(draft: CharacterDraft): CharacterDraftEva
     attributesAugmented: augmented,
     essence,
     resonanceRating: natural.resonance,
-    matrixDataProcessing: draft.matrixDataProcessing,
+    matrixDataProcessing: 0,
     overflowBoxBonus: overflowBonus
   };
   let derivedStatistics: Record<string, unknown> = {};
@@ -399,7 +410,7 @@ export function evaluateCharacterDraft(draft: CharacterDraft): CharacterDraftEva
     augmentedAttributes: augmented,
     skillRatings,
     powerPoints: { available: draft.magicPathId === "adept" ? baseNatural.magic : draft.magicPathId === "mystic-adept" ? draft.magic.purchasedPowerPoints : 0, spent: magicPlan.powerPointsSpent || 0 },
-    resources: { budget: totalBudget, spent, carryover: draft.nuyenCarryover, essence },
+    resources: { budget: totalBudget, spent, carryover: resourcePlan.carryoverNuyen, essence },
     qualitySummary,
     karmaSummary,
     derivedStatistics,

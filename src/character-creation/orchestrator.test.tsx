@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { SourceSelectionProvider } from "../source-selection";
 import { CharacterCreationPage } from "../pages/CharacterCreationPage";
-import { AttributesStep, SkillsStep } from "./steps";
+import { AttributesStep, BiographyStep, ResourcesStep, SkillsStep } from "./steps";
 import {
   ATTRIBUTE_IDS,
   adeptPowerCost,
@@ -43,6 +43,7 @@ function createConfiguredDraft(): CharacterDraft {
   draft.magicPathId = "mundane";
   draft.attributeRatings = Object.fromEntries(ATTRIBUTE_IDS.map((id) => [id, 4])) as CharacterDraft["attributeRatings"];
   draft.specialPointSpend = { edge: 3, magic: 0, resonance: 0 };
+  draft.biography = { ...draft.biography, streetName: "Test Runner", age: "28", lifestyleId: "middle" };
   return draft;
 }
 
@@ -147,7 +148,7 @@ describe("2.0 unified CharacterDraft", () => {
   });
 
   it("isolates new drafts from the former prefilled storage key and safely migrates schema 1 exports", () => {
-    expect(CHARACTER_DRAFT_STORAGE_KEY).toBe("shadowrun5e-character-draft-v3");
+    expect(CHARACTER_DRAFT_STORAGE_KEY).toBe("shadowrun5e-character-draft-v4");
     const legacy = { ...createConfiguredDraft(), schemaVersion: 1, characterName: "Old test runner", concept: "Legacy", notes: "Legacy" };
     delete (legacy as Partial<CharacterDraft> & { characterName?: string }).confirmedSteps;
     const migrated = parseCharacterDraft(legacy);
@@ -217,6 +218,26 @@ describe("Character Creation page contract", () => {
     expect(html).toContain("Cannot be lower than the granted Rating 5");
     expect(html).not.toContain("Granted rating</span><input");
     expect(html).toContain("Native Language (no rating)");
+  });
+
+  it("renders Resources as a departmental store and keeps derived fields out of the form", () => {
+    const draft = createConfiguredDraft();
+    const html = renderToStaticMarkup(<ResourcesStep draft={draft} setDraft={() => undefined} evaluation={evaluateCharacterDraft(draft)}/>);
+    expect(html).toContain("Store departments");
+    expect(html).toContain("Add to cart");
+    expect(html).toContain("Shopping cart");
+    expect(html).toContain("Automatic carryover");
+    expect(html).not.toContain("Nuyen carried into play");
+    expect(html).not.toContain("Matrix Data Processing");
+  });
+
+  it("collects the final biography and lifestyle before review", () => {
+    const draft = createConfiguredDraft();
+    const html = renderToStaticMarkup(<BiographyStep draft={draft} setDraft={() => undefined} evaluation={evaluateCharacterDraft(draft)}/>);
+    expect(CREATION_STEPS.at(-2)?.id).toBe("biography");
+    expect(html).toContain("Street name / primary alias");
+    expect(html).toContain("Starting lifestyle");
+    expect(html).toContain("Middle // 5,000¥ per month");
   });
 
   it("enforces Attribute budget and natural-maximum restrictions in the controls", () => {

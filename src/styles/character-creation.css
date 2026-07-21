@@ -1711,8 +1711,95 @@
 }
 
 .creation-resource-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
   margin-top: 15px;
 }
+
+.creation-resource-controls > label,
+.creation-resource-controls > div {
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--line);
+}
+
+.creation-resource-controls > div > span,
+.creation-resource-controls > div > strong,
+.creation-resource-controls > div > small { display: block; }
+
+.creation-resource-controls > div > span {
+  font-size: .7rem;
+  font-weight: 900;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+}
+
+.creation-resource-controls > div > strong {
+  margin-top: 5px;
+  color: var(--red);
+  font-size: 1.2rem;
+}
+
+.creation-resource-controls > div > small { margin-top: 4px; color: var(--muted); font-size: .7rem; }
+
+.creation-store-departments {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 5px;
+  margin-top: 20px;
+}
+
+.creation-store-departments button {
+  min-width: 0;
+  min-height: 50px;
+  padding: 7px 6px;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--ink);
+  font-size: .68rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.creation-store-departments button small { display: block; margin-top: 2px; color: var(--red); }
+.creation-store-departments button[aria-pressed="true"] { color: #fff; background: var(--ink); box-shadow: inset 0 -4px var(--red); }
+
+.creation-storefront {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(290px, .75fr);
+  gap: 14px;
+  margin-top: 14px;
+  align-items: start;
+}
+
+.creation-store-products,
+.creation-store-cart { min-width: 0; border: 1px solid var(--ink); background: rgba(255,255,255,.65); }
+
+.creation-store-products > header { display: flex; justify-content: space-between; padding: 10px 12px; color: #fff; background: var(--ink); border-left: 4px solid var(--red); }
+.creation-store-products > header strong { font-size: .72rem; text-transform: uppercase; }
+.creation-store-products > header span { color: #aeb1b3; font-size: .7rem; }
+
+.creation-store-product-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; padding: 10px; }
+.creation-store-product-grid article { display: grid; min-width: 0; padding: 12px; gap: 10px; background: #fff; border: 1px solid var(--line); box-shadow: inset 4px 0 var(--creation-red-soft); }
+.creation-store-product-grid article > div > span { color: var(--red); font-size: .66rem; font-weight: 900; text-transform: uppercase; }
+.creation-store-product-grid h3 { margin: 4px 0; font-size: .84rem; line-height: 1.2; text-transform: uppercase; }
+.creation-store-product-grid p { margin: 0; color: var(--muted); font-size: .72rem; line-height: 1.4; }
+.creation-store-product-grid dl { display: grid; grid-template-columns: 1fr 1fr; margin: 0; background: var(--faint); }
+.creation-store-product-grid dl > div { padding: 7px; }
+.creation-store-product-grid dt { color: var(--muted); font-size: .64rem; font-weight: 900; text-transform: uppercase; }
+.creation-store-product-grid dd { margin: 2px 0 0; color: var(--red); font-size: .75rem; font-weight: 900; }
+.creation-store-product-grid article > button { min-height: 38px; color: #fff; background: var(--ink); border: 0; font-weight: 900; text-transform: uppercase; cursor: pointer; }
+.creation-store-product-grid article > button:hover,
+.creation-store-product-grid article > button:focus-visible { background: var(--red); outline: none; }
+
+.creation-store-cart { position: sticky; top: 14px; max-height: 78vh; overflow-y: auto; }
+
+.creation-biography-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 22px; }
+.creation-biography-grid > label { padding: 13px; background: #fff; border: 1px solid var(--line); }
+.creation-biography-wide { grid-column: 1 / -1; }
+.creation-biography-lifestyle { box-shadow: inset 4px 0 var(--red); }
 
 .creation-resource-card details {
   margin-top: 11px;
@@ -2366,6 +2453,22 @@
   .creation-augmentation-grid {
     grid-template-columns: 1fr;
   }
+
+  .creation-resource-controls,
+  .creation-storefront,
+  .creation-store-product-grid,
+  .creation-biography-grid { grid-template-columns: 1fr; }
+
+  .creation-biography-wide { grid-column: 1; }
+
+  .creation-store-departments {
+    display: flex;
+    padding-bottom: 5px;
+    overflow-x: auto;
+  }
+
+  .creation-store-departments button { flex: 0 0 125px; }
+  .creation-store-cart { position: static; max-height: none; }
 
   .creation-review-grid .creation-review-wide,
   .creation-review-findings > header {
