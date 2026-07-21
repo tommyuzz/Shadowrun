@@ -5,7 +5,8 @@ const collections = {
   attributes: ["attributes"],
   cyberdecks: ["cyberdecks", "software"],
   drones: ["drones"],
-  equipment: ["equipment"],
+  equipment: ["equipment", "enhancements"],
+  generic_actions: ["free_actions", "simple_actions", "complex_actions", "reload_methods"],
   lifestyles: ["lifestyles"],
   lifestyle_extras: ["lifestyle_extras", "lifestyle_options"],
   matrixinteraction: ["matrix_actions", "complex_forms"],
@@ -17,7 +18,7 @@ const collections = {
   spirits: ["spirits"],
   sprites: ["sprites"],
   vehicles: ["vehicles"],
-  weapons: ["weapons"]
+  weapons: ["weapons", "weapon_support"]
 };
 
 let count = 0;
@@ -37,6 +38,33 @@ const qualityPayload = JSON.parse(await readFile("qualities.json", "utf8"));
 if (!qualityPayload.quality_types || typeof qualityPayload.quality_types !== "object" || Array.isArray(qualityPayload.quality_types)) throw new Error("qualities.json: missing object 'quality_types'");
 for (const [name, description] of Object.entries(qualityPayload.quality_types)) {
   if (!name.trim() || typeof description !== "string" || !description.trim()) throw new Error(`qualities.json: invalid quality type definition '${name}'`);
+}
+
+const actionPayload = JSON.parse(await readFile("generic_actions.json", "utf8"));
+for (const category of ["Free Actions", "Simple Actions", "Complex Actions", "Unlisted Actions", "Scope"]) {
+  if (typeof actionPayload.action_rules?.[category] !== "string" || !actionPayload.action_rules[category].trim()) throw new Error(`generic_actions.json: missing action rule '${category}'`);
+}
+for (const [collection, expectedCategory] of [["free_actions", "Free Actions"], ["simple_actions", "Simple Actions"], ["complex_actions", "Complex Actions"]]) {
+  for (const [name, action] of Object.entries(actionPayload[collection])) {
+    if (action.category !== expectedCategory) throw new Error(`generic_actions.json: '${name}' has category '${action.category}', expected '${expectedCategory}'`);
+    if (!Array.isArray(action.requirements)) throw new Error(`generic_actions.json: '${name}' has no requirements array`);
+    for (const field of ["test", "attack_restriction", "description", "source"]) if (typeof action[field] !== "string" || !action[field].trim()) throw new Error(`generic_actions.json: '${name}' is missing '${field}'`);
+  }
+}
+
+const equipmentPayload = JSON.parse(await readFile("equipment.json", "utf8"));
+if (Object.values(equipmentPayload.equipment).some((record) => record.category === "Weapon Support")) throw new Error("equipment.json: Weapon Support must live in weapons.json");
+for (const [name, enhancement] of Object.entries(equipmentPayload.enhancements)) {
+  const hasItems = Array.isArray(enhancement.compatible_items) && enhancement.compatible_items.length;
+  const hasSubcategories = Array.isArray(enhancement.compatible_subcategories) && enhancement.compatible_subcategories.length;
+  if (!hasItems && !hasSubcategories) throw new Error(`equipment.json: enhancement '${name}' has no compatibility target`);
+  if (typeof enhancement.enhancement_group !== "string" || !enhancement.enhancement_group.trim()) throw new Error(`equipment.json: enhancement '${name}' has no group`);
+}
+
+const weaponPayload = JSON.parse(await readFile("weapons.json", "utf8"));
+for (const [name, support] of Object.entries(weaponPayload.weapon_support)) {
+  if (support.category !== "Weapon Support") throw new Error(`weapons.json: support '${name}' has invalid category`);
+  if (typeof support.compatibility_profile !== "string" || !support.compatibility_profile.trim()) throw new Error(`weapons.json: support '${name}' has no compatibility profile`);
 }
 
 const attributePayload = JSON.parse(await readFile("attributes.json", "utf8"));

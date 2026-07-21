@@ -1,7 +1,7 @@
 import type { RawRecord, ReferenceCategory, ReferenceData, ReferenceRecord } from "./types";
 
 const jsonLoaders = import.meta.glob<Record<string, unknown>>([
-  "../adeptpowers.json", "../attributes.json", "../cyberdecks.json", "../drones.json", "../equipment.json",
+  "../adeptpowers.json", "../attributes.json", "../cyberdecks.json", "../drones.json", "../equipment.json", "../generic_actions.json",
   "../matrixinteraction.json", "../metatypes.json", "../rituals.json", "../skills.json",
   "../qualities.json", "../lifestyles.json", "../lifestyle_extras.json", "../priority_array.json", "../spells.json", "../spirits.json", "../sprites.json", "../vehicles.json", "../weapons.json"
 ], { import: "default" });
@@ -217,6 +217,41 @@ function priorityData(payload: Record<string, unknown>): ReferenceData {
   };
 }
 
+function actionData(payload: Record<string, unknown>): ReferenceData {
+  const collections: [string, string][] = [
+    ["free_actions", "Free Actions"],
+    ["simple_actions", "Simple Actions"],
+    ["complex_actions", "Complex Actions"]
+  ];
+  const reloadMethods = objectEntries(payload.reload_methods);
+  const records = collections.flatMap(([collection, category]) => objectEntries(payload[collection]).map(([name, raw]) => {
+    const actionType = category.replace(/\s+Actions$/, "");
+    const relatedReloadMethods = name === "Reload Weapon"
+      ? Object.fromEntries(reloadMethods.filter(([, method]) => text(method.action_type) === actionType))
+      : undefined;
+    return record(name, relatedReloadMethods ? { ...raw, reload_methods: relatedReloadMethods } : raw, category);
+  }));
+  const rules = lookupDefinitions(payload.action_rules);
+  return {
+    records,
+    categories: collections.map(([, label]) => ({ id: slug(label), label, description: text(rules[label]) })),
+    definitions: rules,
+    payload
+  };
+}
+
+function weaponData(payload: Record<string, unknown>): ReferenceData {
+  const weapons = objectEntries(payload.weapons).map(([name, raw]) => record(weaponNames[name] || name, raw, text(raw.category) || "Weapons", raw.subcategory ? [text(raw.subcategory)] : []));
+  const support = objectEntries(payload.weapon_support).map(([name, raw]) => record(name, raw, "Weapon Support", raw.subcategory ? [text(raw.subcategory)] : []));
+  const records = [...weapons, ...support];
+  return {
+    records,
+    categories: categoriesFrom(records, lookupDefinitions(payload.category) as Record<string, string>, true),
+    definitions: lookupDefinitions(payload.subcategories),
+    payload
+  };
+}
+
 export async function loadData(moduleId: string): Promise<ReferenceData> {
   const existing = dataCache.get(moduleId);
   if (existing) return existing;
@@ -234,7 +269,7 @@ async function loadUncached(moduleId: string): Promise<ReferenceData> {
     const [payload, extrasPayload] = await Promise.all([lifestyleLoader(), extrasLoader()]);
     return lifestyleData(payload, extrasPayload);
   }
-  const path = moduleId === "priorityarray" ? "../priority_array.json" : `../${moduleId}.json`;
+  const path = moduleId === "priorityarray" ? "../priority_array.json" : moduleId === "actions" ? "../generic_actions.json" : `../${moduleId}.json`;
   const loader = jsonLoaders[path];
   if (!loader) throw new Error(`No dataset is registered for '${moduleId}'.`);
   const payload = await loader();
@@ -247,7 +282,8 @@ async function loadUncached(moduleId: string): Promise<ReferenceData> {
     case "matrixinteraction": return matrixData(payload);
     case "qualities": return qualityData(payload);
     case "priorityarray": return priorityData(payload);
-    case "weapons": return simpleData(payload, "weapons", "category", true);
+    case "actions": return actionData(payload);
+    case "weapons": return weaponData(payload);
     case "vehicles": return simpleData(payload, "vehicles", "category", true);
     case "drones": return simpleData(payload, "drones", "subcategory", true);
     case "equipment": return simpleData(payload, "equipment", "category", true);

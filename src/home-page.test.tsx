@@ -19,10 +19,11 @@ describe("home page module navigation", () => {
     const html = renderHome("/");
     expect(html).toContain("<h2 class=\"content-title\">Core Rules</h2>");
     expect(html).toMatch(/href="\/attributes"[^>]*>[\s\S]*?<span class="module-name">Attributes<\/span>/);
+    expect(html).toMatch(/href="\/actions"[^>]*>[\s\S]*?<span class="module-name">Actions<\/span>/);
     expect(html).toMatch(/href="\/qualities"[^>]*>[\s\S]*?<span class="module-name">Qualities<\/span>/);
     expect(html).toMatch(/href="\/lifestyles"[^>]*>[\s\S]*?<span class="module-name">Lifestyles<\/span>/);
     expect(html).toMatch(/href="\/priorityarray"[^>]*>[\s\S]*?<span class="module-name">Priority Array<\/span>/);
-    expect(html.match(/class="module-button archive-module-button"/g)).toHaveLength(6);
+    expect(html.match(/class="module-button archive-module-button"/g)).toHaveLength(7);
   });
 
   it("still honours an explicitly selected home sector", () => {

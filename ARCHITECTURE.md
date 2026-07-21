@@ -29,13 +29,19 @@ The Attributes adapter exposes the supplied Physical, Mental and Special collect
 
 The Priority Array adapter exposes A through E as source-aware reference records while preserving the full `play_levels` object in the shared payload. `PriorityArrayPage` consumes that one payload directly: the selected Street-Level, Regular or Prime Runner key controls both the Resources column and the corresponding creation-limit dossier. No values or play-level rules are duplicated in components.
 
+The Actions adapter combines `free_actions`, `simple_actions` and `complex_actions` into three ordered routes. The two Reload Weapon records are enriched in memory with only the matching entries from `reload_methods`, making those methods searchable without duplicating them in the source JSON. The complete payload remains available to the action detail view and sidebar rule definitions.
+
+Weapon support records live in `weapons.json` under `weapon_support`, while base weapons remain under `weapons`. The adapter combines both collections into one routeable archive and reserves **Weapon Support** as its final tab. `src/relations.ts` evaluates each support record's compact compatibility profile against weapon category, subcategory, ammunition feed and searchable weapon data, providing the same bidirectional relationship to both sides of the UI.
+
+Equipment enhancements live in the top-level `enhancements` collection rather than the browseable `equipment` collection. Each enhancement carries a group plus compatible item names or subcategories. `src/relations.ts` resolves those declarations for the active base record; the detail component then applies the global source selection and renders one configuration planner. This keeps enhancement ownership, compatibility, effect and cost in one data location.
+
 Home-page links prefetch their dataset on hover or focus. Vite emits every dataset with a content hash, allowing normal long-lived browser caching without query-string versions.
 
 ## Faithful page-specific presentation
 
 `HomePage`, `ModulePage` and the matrix-oriented `PriorityArrayPage` own page composition. Shared controls and framing live in `src/components`. Common list, record, filter, tag, source and responsive rules are loaded once.
 
-`RecordDetail` contains the specialised archive views used by the original site: skill sections, attribute capability dossiers and benchmark ladders, metatype profiles, character-quality ledgers, lifestyle dossiers, cyberdeck consoles, Matrix protocols, sprite and spirit profiles, spell and adept grids, ritual procedures, weapon specifications, vehicle dashboards, drone control stacks and equipment market listings. `ModuleChrome` supplies the matching sidebars, legends and footer treatments.
+`RecordDetail` contains the specialised archive views used by the original site: skill sections, attribute capability dossiers and benchmark ladders, action-economy dossiers, metatype profiles, character-quality ledgers, lifestyle dossiers, cyberdeck consoles, Matrix protocols, sprite and spirit profiles, spell and adept grids, ritual procedures, weapon specifications and support relationships, vehicle dashboards, drone control stacks and equipment market configuration listings. `ModuleChrome` supplies the matching sidebars, legends and footer treatments.
 
 The original page stylesheets are retained in `assets/css/pages/`. `scripts/scope-page-styles.mjs` uses PostCSS to generate one scoped stylesheet at build time, so every unique visual rule remains intact without leaking into another module. Shared React state and routing can therefore evolve independently of the original visual language.
 

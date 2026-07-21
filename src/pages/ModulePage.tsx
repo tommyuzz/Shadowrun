@@ -17,7 +17,7 @@ import type { ComparisonModule } from "../comparison";
 import type { PagePresentation } from "../presentation";
 import type { ReferenceCategory, ReferenceData, ReferenceRecord } from "../types";
 
-const localListNumbers = new Set(["spells", "cyberdecks", "matrixinteraction", "qualities", "lifestyles", "drones", "equipment"]);
+const localListNumbers = new Set(["spells", "cyberdecks", "matrixinteraction", "qualities", "lifestyles", "actions", "drones", "equipment"]);
 const localDetailNumbers = new Set(["cyberdecks", "matrixinteraction"]);
 const comparisonModules = new Set<ComparisonModule>(["weapons", "cyberdecks", "vehicles", "drones"]);
 const comparisonLabels: Record<ComparisonModule, string> = {
@@ -27,7 +27,7 @@ const comparisonLabels: Record<ComparisonModule, string> = {
   drones: "drones"
 };
 const titleIds: Record<string, [string | undefined, string | undefined]> = {
-  skills: ["skill-list-title", "skill-title"], attributes: ["attribute-list-title", "attribute-title"], metatypes: [undefined, "metatype-title"], cyberdecks: ["list-title", "record-title"], matrixinteraction: ["list-title", "record-title"],
+  skills: ["skill-list-title", "skill-title"], attributes: ["attribute-list-title", "attribute-title"], actions: ["action-list-title", "action-title"], metatypes: [undefined, "metatype-title"], cyberdecks: ["list-title", "record-title"], matrixinteraction: ["list-title", "record-title"],
   qualities: ["quality-list-title", "quality-title"], lifestyles: ["lifestyle-list-title", "lifestyle-title"],
   sprites: [undefined, "sprite-title"], spells: ["spell-list-title", "spell-title"], adeptpowers: ["power-list-title", "power-title"], rituals: [undefined, "ritual-title"], spirits: [undefined, "spirit-title"],
   weapons: ["list-title", "weapon-title"], vehicles: ["list-title", "vehicle-title"], drones: ["list-title", "drone-title"], equipment: ["list-title", "item-title"]
@@ -42,10 +42,16 @@ function compactPowerCost(record: ReferenceRecord) {
 function listMeta(moduleId: string, record: ReferenceRecord, presentation: PagePresentation) {
   const raw = record.raw;
   if (moduleId === "adeptpowers") return <span className={`${presentation.metaClass} archive-list-meta`.trim()}><span className="power-list-cost">{compactPowerCost(record)}</span><span className="power-list-activation">{valueText(raw.activation, "")}</span></span>;
+  if (moduleId === "weapons") return <span className={`${presentation.metaClass} archive-list-meta`.trim()}><span className="weapon-list-type">{record.subcategory || "Uncategorised"}</span><strong className="weapon-list-price">{valueText(raw.cost)}</strong></span>;
   let value = "";
   switch (moduleId) {
     case "skills": value = raw.skillgroup ? titleCase(raw.skillgroup) : "Standalone"; break;
     case "attributes": value = valueText(raw.abbreviation); break;
+    case "actions": {
+      const restriction = valueText(raw.attack_restriction).toLocaleLowerCase("en-GB");
+      value = restriction.includes("modifies an attack") ? "Attack modifier" : restriction.includes("counts as") && restriction.includes("attack") ? "Attack action" : restriction.startsWith("not an attack") ? "Non-attack" : "Conditional";
+      break;
+    }
     case "metatypes": { const body = raw.attributes && typeof raw.attributes === "object" ? (raw.attributes as Record<string, Record<string, unknown>>).body : undefined; value = body ? `BOD ${body.minimum}–${body.maximum}` : "—"; break; }
     case "cyberdecks": value = valueText(raw.cost); break;
     case "matrixinteraction": value = record.category === "Matrix Actions" ? valueText(raw.action_type).replace(/\s+Action$/, "") : valueText(raw.fading_value); break;
@@ -60,7 +66,7 @@ function listMeta(moduleId: string, record: ReferenceRecord, presentation: PageP
     case "spells": value = `Drain ${valueText(raw.drain ?? raw.Drain, "")}`.trim(); break;
     case "rituals": value = valueText(raw.ritual_time); break;
     case "spirits": value = `BOD ${valueText(raw.body)}`; break;
-    case "weapons": case "vehicles": case "drones": value = record.subcategory || "Uncategorised"; break;
+    case "vehicles": case "drones": value = record.subcategory || "Uncategorised"; break;
     case "equipment": value = valueText(raw.cost); break;
   }
   return <span className={`${presentation.metaClass} archive-list-meta`.trim()}>{value}</span>;
@@ -80,6 +86,14 @@ function ArchiveTitle({ id, title }: { id?: string; title: string }) {
   const mobileScale = Math.max(6, Math.min(11, 108 / longestWord));
   const style = { "--archive-title-mobile-scale": `${mobileScale}vw` } as CSSProperties;
   return <h1 className="archive-title" id={id} style={style}>{title}</h1>;
+}
+
+function relatedPayloadSources(data: ReferenceData): string[] {
+  return ["enhancements", "reload_methods"].flatMap((key) => {
+    const collection = data.payload[key];
+    if (!collection || typeof collection !== "object" || Array.isArray(collection)) return [];
+    return Object.values(collection as Record<string, unknown>).flatMap((value) => value && typeof value === "object" && !Array.isArray(value) ? [valueText((value as Record<string, unknown>).source, "CRB")] : []);
+  });
 }
 
 function ArchiveTabs({ moduleId, data, records, category, chooseCategory, moveCategory }: { moduleId: string; data: ReferenceData; records: ReferenceRecord[]; category: ReferenceCategory; chooseCategory: (id: string) => void; moveCategory: (event: KeyboardEvent<HTMLButtonElement>, index: number) => void }) {
@@ -146,7 +160,7 @@ export function ModulePage() {
   }, [module, loadAttempt]);
 
   useEffect(() => {
-    if (data) registerSources(data.records.flatMap((record) => recordSourceCodes(record.source)));
+    if (data) registerSources([...data.records.map((record) => record.source), ...relatedPayloadSources(data)].flatMap(recordSourceCodes));
   }, [data, registerSources]);
 
   useEffect(() => {
@@ -193,13 +207,18 @@ export function ModulePage() {
     ? data.records.filter((record) => record.category === selected.category).indexOf(selected)
     : localDetailNumbers.has(module.id) ? allCategoryRecords.indexOf(selected) : data.records.indexOf(selected)) + 1 : 0;
   const comparisonModule: ComparisonModule | null = comparisonModules.has(module.id as ComparisonModule) ? module.id as ComparisonModule : null;
-  const comparisonRecords = module.id === "cyberdecks" ? sourceRecords.filter((record) => record.category === "Cyberdecks") : comparisonModule ? sourceRecords : [];
-  const canCompare = Boolean(comparisonModule && comparisonRecords.length > 1 && (module.id !== "cyberdecks" || category.label === "Cyberdecks"));
+  const comparisonRecords = module.id === "cyberdecks" ? sourceRecords.filter((record) => record.category === "Cyberdecks") : module.id === "weapons" ? sourceRecords.filter((record) => record.category !== "Weapon Support") : comparisonModule ? sourceRecords : [];
+  const canCompare = Boolean(comparisonModule && comparisonRecords.length > 1 && (module.id !== "cyberdecks" || category.label === "Cyberdecks") && (module.id !== "weapons" || category.label !== "Weapon Support"));
   const filterMotionKey = `${deferredQuery}|${Object.entries(deferredFilterValues).sort(([a], [b]) => a.localeCompare(b)).map(([key, value]) => `${key}:${value}`).join("|")}`;
   const viewMotionKey = `${module.id}-${category.id}-${selected?.id || excludedSelected?.id || "list"}`;
 
   function openComparedRecord(record: ReferenceRecord) {
     setComparisonOpen(false);
+    runArchiveTransition(() => navigate(`/${module!.id}/${slug(record.category)}/${record.id}`));
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  function openRelatedRecord(record: ReferenceRecord) {
     runArchiveTransition(() => navigate(`/${module!.id}/${slug(record.category)}/${record.id}`));
     window.scrollTo({ top: 0, behavior: "auto" });
   }
@@ -232,7 +251,7 @@ export function ModulePage() {
         </section>) : <section className={presentation.recordViewClass} data-category={module.id === "vehicles" || module.id === "qualities" || module.id === "lifestyles" || module.id === "attributes" ? slug(selected.category) : undefined} data-subcategory={module.id === "lifestyles" ? slug(selected.subcategory || "") : undefined}>
           <header className={`${presentation.headerClass} ${presentation.recordHeaderClass} archive-record-header`.trim()}><button className="back-button" type="button" onClick={showList}>{presentation.backLabel || "Back to list"}</button>{canCompare ? <button className="compare-launch-button compare-record-button" type="button" onClick={() => setComparisonOpen(true)}>Compare</button> : null}<p className="eyebrow">{presentation.recordEyebrow(selected)}</p><ArchiveTitle id={titleIds[module.id]?.[1]} title={selected.name}/><RecordHeaderExtra moduleId={module.id} record={selected}/>{tags.length ? <div className="tag-row" aria-label={`${module.singular} classifications`}>{tags.map((tag) => <button type="button" className={presentation.tagButtonClass} aria-pressed={selectedTag === tag.key} key={tag.key} onClick={() => setSelectedTag(selectedTag === tag.key ? "" : tag.key)}>{tag.label}</button>)}</div> : null}</header>
           {activeTag ? <section className={presentation.tagDetailClass} aria-live="polite"><strong className={presentation.tagDetailTitleClass}>{activeTag.label}</strong><div className={presentation.tagDetailCopyClass} dangerouslySetInnerHTML={{ __html: activeTag.html }}/></section> : null}
-          <RecordDetail moduleId={module.id} record={selected} data={data} recordNumber={detailNumber}/>
+          <RecordDetail moduleId={module.id} record={selected} data={data} recordNumber={detailNumber} openRecord={openRelatedRecord} isSourceEnabled={isSourceEnabled}/>
         </section>}
       </div></article>
     </main>

@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { sourceBooks } from "../data";
 import { titleCase, valueText } from "../presentation";
+import { equipmentEnhancementsFor, parseFixedNuyen, supportCompatibilityLabel, supportForWeapon, weaponsForSupport, type EquipmentEnhancement } from "../relations";
 import { recordSourceCodes } from "../source-selection";
 import type { RawRecord, ReferenceData, ReferenceRecord } from "../types";
 
@@ -8,11 +10,14 @@ interface DetailProps {
   record: ReferenceRecord;
   data: ReferenceData;
   recordNumber: number;
+  openRecord?: (record: ReferenceRecord) => void;
+  isSourceEnabled?: (source: string) => boolean;
 }
 
 const asObject = (value: unknown): RawRecord => value && typeof value === "object" && !Array.isArray(value) ? value as RawRecord : {};
 const asStrings = (value: unknown): string[] => Array.isArray(value) ? value.map(String).filter(Boolean) : [];
 const code = (prefix: string, index: number) => `${prefix}-${String(index).padStart(3, "0")}`;
+const sourceVisible = (source: string, isSourceEnabled?: (source: string) => boolean): boolean => !isSourceEnabled || recordSourceCodes(source).some(isSourceEnabled);
 
 function Source({ value = "CRB" }: { value?: unknown }) {
   const source = valueText(value);
@@ -376,14 +381,69 @@ function LifestyleExtraDetail({ record, recordNumber }: { record: ReferenceRecor
   </>;
 }
 
-function WeaponDetail({ record }: { record: ReferenceRecord }) {
+function ActionDetail({ record, data, recordNumber }: { record: ReferenceRecord; data: ReferenceData; recordNumber: number }) {
+  const raw = record.raw;
+  const requirements = asStrings(raw.requirements);
+  const actionType = record.category.replace(/\s+Actions$/, "");
+  const reloadMethods = record.name === "Reload Weapon"
+    ? Object.entries(asObject(data.payload.reload_methods)).filter(([, value]) => valueText(asObject(value).action_type, "") === actionType)
+    : [];
+  const attackRestriction = valueText(raw.attack_restriction);
+  const role = /modifies an attack/i.test(attackRestriction) ? "modifier" : /counts as.*attack/i.test(attackRestriction) ? "attack" : /^not an attack/i.test(attackRestriction) ? "utility" : "conditional";
+  return <>
+    <article className="action-dossier" data-role={role} aria-labelledby="action-dossier-title">
+      <header><div><span>Action economy record</span><h2 id="action-dossier-title">{record.category}</h2></div><strong>{code(actionType === "Free" ? "FA" : actionType === "Simple" ? "SA" : "CA", recordNumber)}</strong></header>
+      <div className="action-dossier-grid"><section><span>Resolution test</span><p>{valueText(raw.test, "No test is required.")}</p></section><section><span>Attack relationship</span><p>{attackRestriction}</p></section></div>
+      <div className="action-tempo-strip"><strong>{actionType}</strong><span>{actionType === "Free" ? "Normally one per Initiative Pass" : actionType === "Simple" ? "Normally two Simple Actions per Action Phase" : "Normally one Complex Action per Action Phase"}</span></div>
+    </article>
+    <section className="section action-description"><h2 className="section-title">Action procedure</h2><Html className="action-description-copy" value={raw.description} fallback="No action procedure is available."/></section>
+    <section className="section action-requirements"><h2 className="section-title">Requirements</h2>{requirements.length ? <TextList values={requirements} className="action-requirement-list"/> : <p className="action-empty-note">No additional requirements are listed.</p>}</section>
+    {reloadMethods.length ? <section className="section action-reload"><div className="action-reload-heading"><div><span>Weapon handling matrix</span><h2 className="section-title">{actionType} reload methods</h2></div><strong>{reloadMethods.length} methods</strong></div><div className="action-reload-grid">{reloadMethods.map(([name, value]) => { const method = asObject(value); return <article key={name}><span>{actionType} Action</span><h3>{name}</h3><p>{valueText(method.result)}</p></article>; })}</div></section> : null}
+    <Source value={raw.source}/>
+  </>;
+}
+
+function RelatedRecordControl({ record, openRecord }: { record: ReferenceRecord; openRecord?: (record: ReferenceRecord) => void }) {
+  return <button className="related-record-button" type="button" onClick={() => openRecord?.(record)} disabled={!openRecord}><span>{record.name}</span><small>{record.subcategory || record.category}</small></button>;
+}
+
+function WeaponSupportCards({ records, openRecord }: { records: ReferenceRecord[]; openRecord?: (record: ReferenceRecord) => void }) {
+  const groups = Array.from(new Set(records.map((record) => record.subcategory || "Weapon Support")));
+  return <div className="weapon-support-groups">{groups.map((group) => <section className="weapon-support-group" key={group}><header><span>Support class</span><h3>{group}</h3></header><div className="weapon-support-card-grid">{records.filter((record) => (record.subcategory || "Weapon Support") === group).map((record) => <article className="weapon-support-card" key={record.id}><div className="weapon-support-card-heading"><strong>{record.name}</strong><span>{valueText(record.raw.cost)}</span></div><p>{valueText(record.raw.description, "No effect description is available.")}</p><dl>{record.raw.mount ? <div><dt>Mount</dt><dd>{valueText(record.raw.mount)}</dd></div> : null}{record.raw.damage_modifier ? <div><dt>Damage</dt><dd>{valueText(record.raw.damage_modifier)}</dd></div> : null}{record.raw.ap_modifier ? <div><dt>AP</dt><dd>{valueText(record.raw.ap_modifier)}</dd></div> : null}</dl><RelatedRecordControl record={record} openRecord={openRecord}/></article>)}</div></section>)}</div>;
+}
+
+function WeaponSupportDetail({ record, data, openRecord, isSourceEnabled }: { record: ReferenceRecord; data: ReferenceData; openRecord?: (record: ReferenceRecord) => void; isSourceEnabled?: (source: string) => boolean }) {
+  const raw = record.raw;
+  const applicable = weaponsForSupport(record, data).filter((weapon) => sourceVisible(weapon.source, isSourceEnabled));
+  const groups = Array.from(new Set(applicable.map((weapon) => weapon.subcategory || weapon.category)));
+  const fields: [string, unknown][] = [["Support type", record.subcategory], ["Mount", raw.mount], ["Rating", raw.rating], ["Damage modifier", raw.damage_modifier], ["AP modifier", raw.ap_modifier], ["Availability", raw.availability]];
+  return <>
+    <article className="weapon-support-dossier" aria-labelledby="weapon-support-effect-title">
+      <div className="weapon-support-price"><span>Listed cost</span><strong>{valueText(raw.cost)}</strong><small>{valueText(raw.availability)} availability</small></div>
+      <section><span>Effect</span><h2 id="weapon-support-effect-title">{record.name}</h2><p>{valueText(raw.description, "No support-item effect is available.")}</p></section>
+    </article>
+    <div className="weapon-data-grid">{fields.filter(([, value]) => value != null && value !== "").map(([label, value]) => <div className="weapon-data-field" key={label}><span className="field-label">{label}</span><strong>{valueText(value)}</strong></div>)}</div>
+    <details className="weapon-related-disclosure">
+      <summary><span>Applicable weapons</span><strong>{applicable.length}</strong></summary>
+      <div className="weapon-related-content"><p className="compatibility-note"><strong>{supportCompatibilityLabel(record)} //</strong> This list is generated from weapon type and feed data. Confirm available mounts, factory-installed features and individual exceptions before purchase.</p>{applicable.length ? <div className="applicable-weapon-groups">{groups.map((group) => <section key={group}><h3>{group}</h3><div className="related-record-grid">{applicable.filter((weapon) => (weapon.subcategory || weapon.category) === group).map((weapon) => <RelatedRecordControl record={weapon} openRecord={openRecord} key={weapon.id}/>)}</div></section>)}</div> : <p>No compatible weapon records are available under the selected source books.</p>}</div>
+    </details>
+    <Source value={raw.source}/>
+  </>;
+}
+
+function WeaponDetail({ record, data, openRecord, isSourceEnabled }: { record: ReferenceRecord; data: ReferenceData; openRecord?: (record: ReferenceRecord) => void; isSourceEnabled?: (source: string) => boolean }) {
+  if (record.category === "Weapon Support") return <WeaponSupportDetail record={record} data={data} openRecord={openRecord} isSourceEnabled={isSourceEnabled}/>;
   const raw = record.raw;
   const fields: [string, unknown][] = [["Accuracy", raw.accuracy], ["Damage", raw.damage], ["Armor penetration", raw.ap], [raw.blast ? "Blast" : "Reach", raw.blast || raw.reach], ["Firing mode", raw.mode], ["Recoil compensation", raw.rc], ["Ammunition", raw.ammo], ["Rating", raw.rating], ["Availability", raw.availability], ["Cost", raw.cost]];
   const features = asStrings(raw.features);
+  const support = supportForWeapon(record, data).filter((item) => sourceVisible(item.source, isSourceEnabled));
+  const attachments = support.filter((item) => item.subcategory === "Firearm Accessories");
+  const ammunition = support.filter((item) => item.subcategory !== "Firearm Accessories");
   return <>
     <div className="weapon-data-grid">{fields.filter(([, value]) => value != null && value !== "").map(([label, value]) => <div className="weapon-data-field" key={label}><span className="field-label">{label}</span><strong>{valueText(value)}</strong></div>)}</div>
     <section className="weapon-description"><h2 className="section-title">Description</h2><p className="weapon-skill-note"><span>Associated skill</span><strong>{valueText(raw.skill, "Special")}</strong></p><p>{valueText(raw.description, "No description is available for this weapon.")}</p></section>
     {features.length ? <section className="section"><h2 className="section-title">Special features</h2><TextList className="feature-list" values={features}/></section> : null}
+    {support.length ? <section className="section weapon-related-section"><h2 className="section-title">Compatible weapon support</h2><p className="compatibility-note">Compatibility is based on weapon type, ammunition feed and accessory profile. Existing mounts and factory-installed features may reduce the final options.</p>{attachments.length ? <details className="weapon-related-disclosure"><summary><span>Available attachments</span><strong>{attachments.length}</strong></summary><div className="weapon-related-content"><WeaponSupportCards records={attachments} openRecord={openRecord}/></div></details> : null}{ammunition.length ? <details className="weapon-related-disclosure"><summary><span>Compatible ammunition</span><strong>{ammunition.length}</strong></summary><div className="weapon-related-content"><WeaponSupportCards records={ammunition} openRecord={openRecord}/></div></details> : null}</section> : null}
     <Source value={raw.source}/>
   </>;
 }
@@ -433,21 +493,53 @@ function DroneDetail({ record, recordNumber }: { record: ReferenceRecord; record
 const equipmentLabels: [string, string][] = [["vector", "Vector"], ["speed", "Speed"], ["penetration", "Penetration"], ["power", "Power"], ["effect", "Effect"], ["duration", "Duration"], ["addiction_type", "Addiction type"], ["addiction_rating", "Addiction rating"], ["addiction_threshold", "Addiction threshold"], ["mount", "Mount"], ["rating", "Rating"], ["damage_modifier", "Damage modifier"], ["ap_modifier", "AP modifier"], ["armor", "Armor"], ["capacity", "Capacity"], ["device_rating", "Device rating"], ["attribute_array", "Attribute array"], ["programs", "Programs"], ["structure", "Structure"], ["essence", "Essence"], ["maximum_value", "Maximum value"], ["force", "Force"]];
 const marketStatus = (value: unknown) => /F$/.test(String(value || "")) ? "Forbidden" : /R$/.test(String(value || "")) ? "Restricted" : "Open market";
 
-function EquipmentDetail({ record, recordNumber }: { record: ReferenceRecord; recordNumber: number }) {
+function noAdditionalCost(enhancement: EquipmentEnhancement): boolean {
+  return /included|no additional|^—$/i.test(valueText(enhancement.raw.cost, ""));
+}
+
+function EquipmentEnhancementBuilder({ record, data, isSourceEnabled }: { record: ReferenceRecord; data: ReferenceData; isSourceEnabled?: (source: string) => boolean }) {
+  const enhancements = equipmentEnhancementsFor(record, data).filter((enhancement) => sourceVisible(enhancement.source, isSourceEnabled));
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  if (!enhancements.length) return null;
+  const selected = enhancements.filter((enhancement) => selectedIds.includes(enhancement.id));
+  const groups = Array.from(new Set(enhancements.map((enhancement) => enhancement.group)));
+  const baseCost = parseFixedNuyen(record.raw.cost);
+  const fixedEnhancementCost = selected.reduce((total, enhancement) => total + (parseFixedNuyen(enhancement.raw.cost) || 0), 0);
+  const hasVariableCost = baseCost == null || selected.some((enhancement) => parseFixedNuyen(enhancement.raw.cost) == null && !noAdditionalCost(enhancement));
+  const subtotal = (baseCost || 0) + fixedEnhancementCost;
+  const totalLabel = hasVariableCost ? subtotal ? `${subtotal.toLocaleString("en-US")}¥ + variable items` : "Use listed line-item costs" : `${subtotal.toLocaleString("en-US")}¥`;
+
+  function toggle(id: string) {
+    setSelectedIds((current) => current.includes(id) ? current.filter((item) => item !== id) : [...current, id]);
+  }
+
+  return <details className="equipment-enhancement-builder">
+    <summary><span><small>Single-record configuration</small>Available enhancements</span><strong>{enhancements.length}</strong></summary>
+    <div className="equipment-builder-content">
+      <header className="equipment-builder-heading"><div><span>Configure purchase</span><h2>Build {record.name}</h2></div><p>Select compatible additions to assemble a readable purchase plan. Rating-dependent prices remain as authored line items.</p></header>
+      <div className="equipment-enhancement-groups">{groups.map((group) => <section key={group}><div className="equipment-enhancement-group-heading"><h3>{group}</h3><span>{enhancements.filter((enhancement) => enhancement.group === group).length} options</span></div><div className="equipment-enhancement-grid">{enhancements.filter((enhancement) => enhancement.group === group).map((enhancement) => { const selected = selectedIds.includes(enhancement.id); return <label className="equipment-enhancement-card" data-selected={selected || undefined} key={enhancement.id}><input type="checkbox" checked={selected} onChange={() => toggle(enhancement.id)}/><span className="equipment-enhancement-check" aria-hidden="true">{selected ? "✓" : "+"}</span><span className="equipment-enhancement-copy"><strong>{enhancement.name}</strong><small>{enhancement.source}</small><p>{valueText(enhancement.raw.description, "No enhancement effect is available.")}</p><span className="equipment-enhancement-note">{valueText(enhancement.raw.compatibility_note)}</span></span><span className="equipment-enhancement-specs"><b>{valueText(enhancement.raw.cost)}</b>{enhancement.raw.capacity ? <small>Capacity {valueText(enhancement.raw.capacity)}</small> : null}{enhancement.raw.rating ? <small>Rating {valueText(enhancement.raw.rating)}</small> : null}</span></label>; })}</div></section>)}</div>
+      <aside className="equipment-build-summary" aria-live="polite"><div><span>Configured purchase</span><strong>{record.name}</strong><small>{selected.length ? `${selected.length} selected ${selected.length === 1 ? "enhancement" : "enhancements"}` : "Base item only"}</small></div><ul>{selected.map((enhancement) => <li key={enhancement.id}><span>{enhancement.name}</span><strong>{valueText(enhancement.raw.cost)}</strong></li>)}</ul><div className="equipment-build-total"><span>{hasVariableCost ? "Fixed subtotal" : "Configured total"}</span><strong>{totalLabel}</strong></div></aside>
+    </div>
+  </details>;
+}
+
+function EquipmentDetail({ record, data, recordNumber, isSourceEnabled }: { record: ReferenceRecord; data: ReferenceData; recordNumber: number; isSourceEnabled?: (source: string) => boolean }) {
   const raw = record.raw;
   const specs = equipmentLabels.filter(([key]) => raw[key] != null && raw[key] !== "");
   const status = marketStatus(raw.availability);
   return <>
-    <article className="market-listing" aria-labelledby="listing-title"><header className="listing-banner"><div><span>Verified catalogue entry</span><h2 id="listing-title">Product specification</h2></div><strong>{code("EQ", recordNumber)}</strong></header><div className="listing-grid"><div className="product-summary"><p className="stock-label" data-status={status.toLowerCase().replace(/ /g, "-")}>{status}</p><div className="price-block"><span>Advertised price</span><strong>{valueText(raw.cost)}</strong></div><dl><div><dt>Availability</dt><dd>{valueText(raw.availability)}</dd></div><div><dt>Product class</dt><dd>{valueText(raw.subcategory)}</dd></div></dl></div><section className="product-specifications"><h3>Technical specifications</h3><dl>{specs.length ? specs.map(([key, label]) => <div key={key}><dt>{label}</dt><dd>{valueText(raw[key])}</dd></div>) : <div className="spec-empty">No additional specifications supplied.</div>}</dl></section></div><div className="seller-strip"><span>Seller note</span><strong>Reference listing only // Transaction disabled</strong></div></article>
+    <article className="market-listing" aria-labelledby="listing-title"><header className="listing-banner"><div><span>Verified catalogue entry</span><h2 id="listing-title">Product specification</h2></div><strong>{code("EQ", recordNumber)}</strong></header><div className="listing-grid"><div className="product-summary"><p className="stock-label" data-status={status.toLowerCase().replace(/ /g, "-")}>{status}</p><div className="price-block"><span>Advertised price</span><strong>{valueText(raw.cost)}</strong></div><dl><div><dt>Availability</dt><dd>{valueText(raw.availability)}</dd></div><div><dt>Product class</dt><dd>{valueText(raw.subcategory)}</dd></div></dl></div><section className="product-specifications"><h3>Technical specifications</h3><dl>{specs.length ? specs.map(([key, label]) => <div key={key}><dt>{label}</dt><dd>{valueText(raw[key])}</dd></div>) : <div className="spec-empty">No additional specifications supplied.</div>}</dl></section></div><div className="seller-strip"><span>Seller note</span><strong>Configuration planning available below // Reference transaction only</strong></div></article>
     <section className="section product-description"><h2 className="section-title">Product description</h2><p>{valueText(raw.description, "No product description is available.")}</p></section>
+    <EquipmentEnhancementBuilder record={record} data={data} isSourceEnabled={isSourceEnabled}/>
     <Source value={raw.source}/>
   </>;
 }
 
-export function RecordDetail({ moduleId, record, data, recordNumber }: DetailProps) {
+export function RecordDetail({ moduleId, record, data, recordNumber, openRecord, isSourceEnabled }: DetailProps) {
   switch (moduleId) {
     case "skills": return <SkillDetail record={record}/>;
     case "attributes": return <AttributeDetail record={record} data={data} recordNumber={recordNumber}/>;
+    case "actions": return <ActionDetail record={record} data={data} recordNumber={recordNumber}/>;
     case "metatypes": return <MetatypeDetail record={record} recordNumber={recordNumber}/>;
     case "qualities": return <QualityDetail record={record} recordNumber={recordNumber}/>;
     case "lifestyles": return record.category === "Lifestyles"
@@ -460,10 +552,10 @@ export function RecordDetail({ moduleId, record, data, recordNumber }: DetailPro
     case "adeptpowers": return <AdeptDetail record={record} data={data}/>;
     case "rituals": return <RitualDetail record={record} recordNumber={recordNumber}/>;
     case "spirits": return <SpiritDetail record={record} recordNumber={recordNumber}/>;
-    case "weapons": return <WeaponDetail record={record}/>;
+    case "weapons": return <WeaponDetail record={record} data={data} openRecord={openRecord} isSourceEnabled={isSourceEnabled}/>;
     case "vehicles": return <VehicleDetail record={record}/>;
     case "drones": return <DroneDetail record={record} recordNumber={recordNumber}/>;
-    case "equipment": return <EquipmentDetail record={record} recordNumber={recordNumber}/>;
+    case "equipment": return <EquipmentDetail record={record} data={data} recordNumber={recordNumber} isSourceEnabled={isSourceEnabled}/>;
     default: return null;
   }
 }

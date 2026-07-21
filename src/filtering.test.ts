@@ -2,10 +2,12 @@ import { describe, expect, it } from "vitest";
 import { loadData, matchesSearch } from "./data";
 import { modules, modulesById } from "./registry";
 import { recordTags } from "./record-tags";
+import { equipmentEnhancementsFor, supportForWeapon, weaponsForSupport } from "./relations";
 
 const expectedFilters: Record<string, string[]> = {
   skills: ["skill-group"],
   attributes: ["linked-skill"],
+  actions: ["attack-role"],
   metatypes: ["racial-trait"],
   qualities: ["quality-type", "structure"],
   lifestyles: ["lifestyle-type", "subcategory", "minimum-lifestyle"],
@@ -127,6 +129,53 @@ describe("attributes dataset", () => {
     expect(data.definitions.Physical).toContain("Body, Agility, Reaction, and Strength");
     expect(benchmarkScale.scope).toContain("not an official Core Rulebook rating table");
     expect(benchmarkScale.special_attribute_note).toContain("dedicated benchmarks");
+  });
+});
+
+describe("generic actions dataset", () => {
+  it("preserves the three action-economy tabs and every supplied action", async () => {
+    const data = await loadData("actions");
+    expect(data.categories.map((category) => category.id)).toEqual(["free-actions", "simple-actions", "complex-actions"]);
+    expect(data.records.filter((record) => record.category === "Free Actions")).toHaveLength(9);
+    expect(data.records.filter((record) => record.category === "Simple Actions")).toHaveLength(22);
+    expect(data.records.filter((record) => record.category === "Complex Actions")).toHaveLength(13);
+  });
+
+  it("indexes reload methods with the matching Reload Weapon action", async () => {
+    const data = await loadData("actions");
+    const complexReload = data.records.find((record) => record.category === "Complex Actions" && record.name === "Reload Weapon")!;
+    const simpleReload = data.records.find((record) => record.category === "Simple Actions" && record.name === "Reload Weapon")!;
+    expect(matchesSearch(complexReload, "muzzle-loader load one tube")).toBe(true);
+    expect(matchesSearch(simpleReload, "removable clip insert")).toBe(true);
+  });
+});
+
+describe("related equipment and weapon support", () => {
+  it("moves every support item into a dedicated Weapons tab with bidirectional compatibility", async () => {
+    const data = await loadData("weapons");
+    const predator = data.records.find((record) => record.id === "ares-predator-v")!;
+    const laserSight = data.records.find((record) => record.id === "laser-sight")!;
+    expect(data.records).toHaveLength(214);
+    expect(data.records.filter((record) => record.category === "Weapon Support")).toHaveLength(45);
+    expect(data.categories.at(-1)?.id).toBe("weapon-support");
+    expect(supportForWeapon(predator, data).map((record) => record.name)).toEqual(expect.arrayContaining(["Laser Sight", "Regular Ammunition", "Spare Clip"]));
+    expect(weaponsForSupport(laserSight, data).map((record) => record.name)).toContain("Ares Predator V");
+    for (const support of data.records.filter((record) => record.category === "Weapon Support")) {
+      expect(weaponsForSupport(support, data).length, `${support.name} should have an applicable weapon`).toBeGreaterThan(0);
+    }
+  });
+
+  it("removes standalone enhancements and exposes them from compatible base records", async () => {
+    const data = await loadData("equipment");
+    const camera = data.records.find((record) => record.name === "Camera")!;
+    const sensor = data.records.find((record) => record.name === "Sensor Array")!;
+    const cybereyes = data.records.find((record) => record.name === "Cybereyes Basic System")!;
+    expect(data.records.some((record) => record.name === "Thermographic Vision (Vision Enhancement)")).toBe(false);
+    expect(equipmentEnhancementsFor(camera, data).map((item) => item.name)).toContain("Thermographic Vision (Vision Enhancement)");
+    expect(equipmentEnhancementsFor(sensor, data).map((item) => item.name)).toEqual(expect.arrayContaining(["Camera Sensor Function", "Thermographic Vision (Vision Enhancement)"]));
+    expect(equipmentEnhancementsFor(cybereyes, data).map((item) => item.name)).toContain("Thermographic Vision (Cybereye Enhancement)");
+    const linkedEnhancements = new Set(data.records.flatMap((record) => equipmentEnhancementsFor(record, data).map((item) => item.name)));
+    expect(linkedEnhancements.size).toBe(Object.keys(data.payload.enhancements as Record<string, unknown>).length);
   });
 });
 

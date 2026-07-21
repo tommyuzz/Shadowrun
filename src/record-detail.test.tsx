@@ -50,3 +50,45 @@ describe("Lifestyle record rendering", () => {
     expect(safehouseMarkup).toContain("cannot purchase Entertainment assets");
   });
 });
+
+describe("Actions, weapon support and equipment configuration rendering", () => {
+  it("renders action timing, requirements and matching reload methods", async () => {
+    const data = await loadData("actions");
+    const reload = data.records.find((record) => record.category === "Simple Actions" && record.name === "Reload Weapon")!;
+    const markup = renderToStaticMarkup(<RecordDetail moduleId="actions" record={reload} data={data} recordNumber={1}/>);
+    expect(markup).toContain("Action economy record");
+    expect(markup).toContain("Resolution test");
+    expect(markup).toContain("Simple reload methods");
+    expect(markup).toContain("Removable Clip");
+    expect(markup).not.toContain("Muzzle-Loader");
+  });
+
+  it("lists attachment effects and costs from a weapon record", async () => {
+    const data = await loadData("weapons");
+    const predator = data.records.find((record) => record.id === "ares-predator-v")!;
+    const markup = renderToStaticMarkup(<RecordDetail moduleId="weapons" record={predator} data={data} recordNumber={1} openRecord={() => undefined}/>);
+    expect(markup).toContain("Available attachments");
+    expect(markup).toContain("Laser Sight");
+    expect(markup).toContain("125¥");
+    expect(markup).toContain("Projects an aiming point");
+  });
+
+  it("lists applicable weapons from a support record", async () => {
+    const data = await loadData("weapons");
+    const laserSight = data.records.find((record) => record.id === "laser-sight")!;
+    const markup = renderToStaticMarkup(<RecordDetail moduleId="weapons" record={laserSight} data={data} recordNumber={1} openRecord={() => undefined}/>);
+    expect(markup).toContain("Applicable weapons");
+    expect(markup).toContain("Ares Predator V");
+    expect(markup).toContain("Listed cost");
+  });
+
+  it("embeds compatible enhancements in the base equipment record", async () => {
+    const data = await loadData("equipment");
+    const camera = data.records.find((record) => record.name === "Camera")!;
+    const markup = renderToStaticMarkup(<RecordDetail moduleId="equipment" record={camera} data={data} recordNumber={1}/>);
+    expect(markup).toContain("Available enhancements");
+    expect(markup).toContain("Thermographic Vision (Vision Enhancement)");
+    expect(markup).toContain("+500¥");
+    expect(markup).toContain("Build Camera");
+  });
+});

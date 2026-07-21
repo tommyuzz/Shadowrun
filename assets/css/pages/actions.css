@@ -1,0 +1,124 @@
+.action-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 210px));
+  justify-content: center;
+}
+
+.action-tabs .tab { width: auto; }
+.workspace { grid-template-columns: minmax(220px, 270px) minmax(0, 1fr); }
+.action-panel { min-width: 0; }
+.action-panel > .panel-inner { padding: clamp(24px, 4vw, 44px); }
+
+.action-header h1 {
+  max-width: 900px;
+  margin: 0;
+  font-family: "Arial Narrow", "Roboto Condensed", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: .88;
+  text-transform: uppercase;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+
+.action-filters {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(220px, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.action-list-summary strong { color: var(--red); }
+.action-list-item { position: relative; overflow: hidden; box-shadow: inset 4px 0 var(--red); }
+.action-list-item::after { content: ""; position: absolute; top: 0; right: 0; width: 40px; height: 4px; background: var(--red); transform: skewX(-35deg) translateX(8px); }
+.action-list-name { overflow-wrap: normal; word-break: normal; hyphens: none; }
+.action-list-role { max-width: 18ch; line-height: 1.25; white-space: normal; }
+.action-list-item:hover,
+.action-list-item:focus-visible { color: #fff; background: var(--red); border-color: var(--red); outline: none; }
+.action-list-item:hover .action-list-index,
+.action-list-item:focus-visible .action-list-index,
+.action-list-item:hover .action-list-role,
+.action-list-item:focus-visible .action-list-role { color: #fff; background-color: rgba(0,0,0,.14); border-color: #fff; }
+
+.action-dossier {
+  margin-top: 22px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--ink);
+  box-shadow: 7px 7px 0 rgba(16,17,19,.08);
+}
+
+.action-dossier > header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: center;
+  padding: 14px 18px;
+  color: #fff;
+  background: var(--ink);
+  border-top: 4px solid var(--red);
+}
+
+.action-dossier > header span,
+.action-dossier-grid section > span,
+.action-reload-heading span {
+  color: inherit;
+  opacity: .68;
+  font-size: .56rem;
+  font-weight: 900;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+
+.action-dossier > header h2 { margin: 3px 0 0; font-size: 1rem; letter-spacing: .08em; text-transform: uppercase; }
+.action-dossier > header > strong { color: var(--red); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .1em; white-space: nowrap; }
+.action-dossier[data-role="attack"] > header { background: linear-gradient(110deg, var(--ink) 0 75%, var(--red-dark) 75%); }
+.action-dossier[data-role="modifier"] > header { box-shadow: inset 0 -4px var(--red); }
+
+.action-dossier-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--ink); }
+.action-dossier-grid section { min-width: 0; padding: 22px; background: #fff; }
+.action-dossier-grid section > span { color: var(--red); opacity: 1; }
+.action-dossier-grid p { margin: 8px 0 0; font-family: Arial, Helvetica, sans-serif; font-size: .9rem; line-height: 1.55; }
+
+.action-tempo-strip { display: grid; grid-template-columns: minmax(90px, auto) minmax(0, 1fr); gap: 16px; align-items: center; padding: 13px 18px; color: #fff; background: var(--ink); }
+.action-tempo-strip strong { color: var(--red); font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif; font-size: 1.35rem; font-weight: 400; letter-spacing: .08em; text-transform: uppercase; }
+.action-tempo-strip span { font-size: .66rem; font-weight: 900; letter-spacing: .07em; text-transform: uppercase; }
+
+.action-description-copy { max-width: 86ch; font-family: Arial, Helvetica, sans-serif; font-size: .96rem; line-height: 1.65; }
+.action-description-copy p { margin: 0 0 1em; }
+.action-description-copy p:last-child { margin-bottom: 0; }
+.action-description-copy ul { margin: .75em 0 0; padding-left: 1.25rem; }
+.action-description-copy li + li { margin-top: .4em; }
+.action-requirement-list { margin: 0; padding: 0; list-style: none; }
+.action-requirement-list li { position: relative; margin-top: 8px; padding: 12px 14px 12px 40px; background: #fff; border: 1px solid var(--line); font-family: Arial, Helvetica, sans-serif; line-height: 1.5; }
+.action-requirement-list li::before { content: "REQ"; position: absolute; top: 13px; left: 10px; color: var(--red); font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .56rem; font-weight: 900; }
+.action-empty-note { margin: 0; color: var(--muted); }
+
+.action-reload-heading { display: flex; justify-content: space-between; gap: 20px; align-items: end; margin-bottom: 14px; }
+.action-reload-heading span { color: var(--red); opacity: 1; }
+.action-reload-heading h2 { margin-top: 4px; }
+.action-reload-heading > strong { padding: 7px 9px; color: #fff; background: var(--ink); font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
+.action-reload-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.action-reload-grid article { min-width: 0; padding: 15px; background: #fff; border: 1px solid var(--ink); box-shadow: inset 4px 0 var(--red); }
+.action-reload-grid article > span { color: var(--red); font-size: .54rem; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.action-reload-grid h3 { margin: 5px 0 0; font-size: .82rem; letter-spacing: .05em; text-transform: uppercase; }
+.action-reload-grid p { margin: 9px 0 0; font-family: Arial, Helvetica, sans-serif; font-size: .82rem; line-height: 1.5; }
+
+@media (max-width: 900px) { .workspace { grid-template-columns: 1fr; } }
+@media (max-width: 700px) {
+  .action-filters,
+  .action-dossier-grid,
+  .action-reload-grid { grid-template-columns: 1fr; }
+  .action-list-header { display: block; }
+  .action-list-header .filter-toggle-button { margin-top: 16px; }
+  .action-record-header { padding-right: 0; }
+  .action-record-header .back-button { position: static; margin-top: 16px; }
+}
+@media (max-width: 520px) {
+  .action-dossier > header,
+  .action-reload-heading { align-items: flex-start; flex-direction: column; }
+  .action-tempo-strip { grid-template-columns: 1fr; gap: 4px; }
+}
+@media print { .action-filters, .filter-toggle-button, .back-button { display: none !important; } .action-dossier, .action-reload-grid article { break-inside: avoid; } }

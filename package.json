@@ -1,7 +1,7 @@
 {
   "name": "shadowrun-reference-archive",
   "private": true,
-  "version": "1.10.1",
+  "version": "1.11.0",
   "type": "module",
   "scripts": {
     "styles:generate": "node scripts/scope-page-styles.mjs",
@@ -9,6 +9,7 @@
     "dev": "vite",
     "prebuild": "npm run styles:generate && node scripts/generate-redirects.mjs",
     "build": "tsc -b && vite build",
+    "postbuild": "node scripts/validate-dist.mjs",
     "preview": "vite preview",
     "validate:data": "node scripts/validate-data.mjs",
     "test:unit": "vitest run",

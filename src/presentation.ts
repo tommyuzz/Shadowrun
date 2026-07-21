@@ -51,6 +51,13 @@ export const presentations: Record<string, PagePresentation> = {
     searchLabel: "Search all attribute fields", searchPlaceholder: "Enter attribute, test, skill, formula or benchmark…", listTitle: (c) => c.id === "all" ? "All attributes" : `${c.label} attributes`, listEyebrow: (c) => archiveEyebrow(c, "Attribute"), recordEyebrow: (r) => `${r.category} protocol // Attribute record`,
     indexPrefix: () => "AT", tagButtonClass: "tag-toggle", tagDetailClass: "tag-detail", tagDetailTitleClass: "tag-detail-title", tagDetailCopyClass: "tag-detail-copy", backLabel: "Back to attribute index", tabLabel: (c) => c.id === "all" ? "All Attributes" : c.label
   },
+  actions: {
+    pageClass: "page-actions", workspaceClass: "workspace", panelClass: "action-panel", listViewClass: "action-list-view", recordViewClass: "action-record-view",
+    headerClass: "reference-header action-header", listHeaderClass: "reference-list-header action-list-header", recordHeaderClass: "reference-record-header action-record-header", filtersClass: "action-filters", filterFieldClass: "action-filter-field",
+    summaryClass: "reference-list-summary action-list-summary", listClass: "reference-list action-list", itemClass: "reference-list-item action-list-item", indexClass: "reference-list-index action-list-index", nameClass: "reference-list-name action-list-name", metaClass: "reference-list-meta action-list-role", tabsClass: "action-tabs",
+    searchLabel: "Search all action fields", searchPlaceholder: "Enter action, test, requirement, attack rule or reload method…", listTitle: (c) => c.label, listEyebrow: (c) => `${c.label} protocol // Action list`, recordEyebrow: (r) => `${r.category} // Timing record`,
+    indexPrefix: (c) => c.id === "free-actions" ? "FA" : c.id === "simple-actions" ? "SA" : "CA", tagButtonClass: "tag-toggle", tagDetailClass: "tag-detail", tagDetailTitleClass: "tag-detail-title", tagDetailCopyClass: "tag-detail-copy", backLabel: "Back to action index", tabLabel: (c) => c.label
+  },
   metatypes: {
     pageClass: "page-metatypes", workspaceClass: "workspace metatype-workspace", panelClass: "metatype-panel", headerClass: "metatype-header", listHeaderClass: "metatype-list-header", recordHeaderClass: "metatype-record-header",
     filtersClass: "metatype-filters", summaryClass: "metatype-list-summary", listClass: "metatype-list", itemClass: "metatype-list-item", indexClass: "metatype-list-index", nameClass: "metatype-list-name", metaClass: "metatype-list-value",

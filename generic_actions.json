@@ -1,0 +1,518 @@
+{
+  "free_actions": {
+    "Call a Shot": {
+      "category": "Free Actions",
+      "test": "None; the associated attack is resolved normally.",
+      "requirements": [
+        "Must be combined with a Fire Weapon, Throw Weapon, or Melee Attack action."
+      ],
+      "attack_restriction": "Modifies an attack rather than being a separate attack.",
+      "description": "<p>The character aims for a vulnerable or specific part of the target. The selected called-shot effect and its modifier are applied to the attack made during the same Action Phase.</p>",
+      "source": "CRB"
+    },
+    "Change Linked Device Mode": {
+      "category": "Free Actions",
+      "test": "None.",
+      "requirements": [
+        "The character must be connected to the device through a wired or wireless direct neural interface."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Activate, deactivate, or change the operating mode of a directly linked device. Examples include activating cyberware, changing a smartgun's firing mode, changing a smartlinked shotgun's choke, switching vision modes, hiding a commlink, or disabling wireless functionality.</p><p>Some devices require more time where their individual rules say so.</p>",
+      "source": "CRB"
+    },
+    "Drop Object": {
+      "category": "Free Actions",
+      "test": "None.",
+      "requirements": [
+        "The object must be held by the character."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Drop one held object, or one object from each hand, as a single Free Action. Fragile items or objects dropped into a hostile environment may be damaged at the gamemaster's discretion.</p>",
+      "source": "CRB"
+    },
+    "Drop Prone": {
+      "category": "Free Actions",
+      "test": "None.",
+      "requirements": [
+        "The character cannot be surprised."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Kneel or immediately drop into the prone position. A surprised character cannot use this action.</p>",
+      "source": "CRB"
+    },
+    "Eject Smartgun Clip": {
+      "category": "Free Actions",
+      "test": "None.",
+      "requirements": [
+        "The character must be linked to a ready smartgun fitted with the necessary system."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Use a mental command to eject the smartgun's current clip. Inserting a replacement clip still requires a separate Simple Action.</p>",
+      "source": "CRB"
+    },
+    "Gesture": {
+      "category": "Free Actions",
+      "test": "Intuition (2) for an observer unfamiliar with the gestures.",
+      "requirements": [
+        "The message must be brief enough to communicate through a few quick gestures."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Communicate a short instruction or message using quick gestures. Someone unfamiliar with the gesture system may need to interpret it with an Intuition Test.</p>",
+      "source": "CRB"
+    },
+    "Multiple Attacks": {
+      "category": "Free Actions",
+      "test": "The associated attack dice pool is split between the chosen attacks or targets.",
+      "requirements": [
+        "Must be combined with an eligible Fire Weapon, Throw Weapon, Melee Attack, Reckless Spellcasting, or Cast Spell action."
+      ],
+      "attack_restriction": "Modifies an attack rather than being a separate attack.",
+      "description": "<p>Attack more than one target, or make eligible attacks with more than one weapon, during a single attack action. The original dice pool is divided among the separate attacks, and all relevant off-hand and situational modifiers still apply.</p>",
+      "source": "CRB"
+    },
+    "Run": {
+      "category": "Free Actions",
+      "test": "None for ordinary running; Sprinting requires a separate Complex Action and Running Test.",
+      "requirements": [
+        "The character's total movement during the Combat Turn must exceed their Walking rate."
+      ],
+      "attack_restriction": "Not an attack, but running applies movement modifiers.",
+      "description": "<p>Declare movement beyond the character's Walking rate for the Combat Turn. The character is considered running and receives the normal running modifiers until the movement state changes under the movement rules.</p>",
+      "source": "CRB"
+    },
+    "Speak/Text/Transmit Phrase": {
+      "category": "Free Actions",
+      "test": "None.",
+      "requirements": [
+        "Limited to one short phrase, sentence, or DNI text message per Free Action."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Speak, transmit, or send one short phrase. Longer conversations require additional Free Actions and must remain plausible within a three-second Combat Turn.</p>",
+      "source": "CRB"
+    }
+  },
+  "simple_actions": {
+    "Activate Focus": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The character must be carrying the focus and able to use it."
+      ],
+      "attack_restriction": "Not normally an attack.",
+      "description": "<p>Activate a carried magical focus so that its powers become available under the focus rules.</p>",
+      "source": "CRB"
+    },
+    "Call Spirit": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The spirit must already have been summoned and placed on standby."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Call a spirit that the summoner previously placed on standby, bringing it back into active service.</p>",
+      "source": "CRB"
+    },
+    "Change Device Mode": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The character must be able to operate the device through its controls, a commlink, or another suitable wired or wireless connection."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Activate, deactivate, or change a device's mode using a switch, virtual control, or remote command. This can include weapon modes, shotgun chokes, vision systems, commlink status, or wireless functionality.</p><p>Equipment with more involved controls may require a different action specified by its own rules.</p>",
+      "source": "CRB"
+    },
+    "Change Gun Mode": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The character must be holding a ready firearm."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Change the firing mode of a ready firearm or alter a shotgun's choke. A properly linked smartgun reduces this to the Change Linked Device Mode Free Action.</p>",
+      "source": "CRB"
+    },
+    "Command Spirit": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The spirit or group of spirits must be under the summoner's control."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Issue one command to a controlled spirit or to a group of controlled spirits.</p>",
+      "source": "CRB"
+    },
+    "Dismiss Spirit": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The spirit must be under the summoner's control."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Release a spirit from the summoner's control. The spirit is not automatically returned to its home metaplane and may act as it chooses.</p>",
+      "source": "CRB"
+    },
+    "Fire Bow": {
+      "category": "Simple Actions",
+      "test": "Archery + Agility [Accuracy], opposed by the target's Defense Test.",
+      "requirements": [
+        "The bow must be ready and already loaded with an arrow."
+      ],
+      "attack_restriction": "Counts as the character's attack action for the Action Phase.",
+      "description": "<p>Fire one arrow from a loaded bow. Nocking the arrow beforehand uses the Reload Weapon Simple Action.</p>",
+      "source": "CRB"
+    },
+    "Fire Weapon (SA, SS, BF or FA)": {
+      "category": "Simple Actions",
+      "test": "Appropriate firearm skill + Agility [Accuracy], opposed by the target's Defense Test.",
+      "requirements": [
+        "The firearm must be ready and capable of the selected firing mode."
+      ],
+      "attack_restriction": "Counts as the character's attack action for the Action Phase; no other attack action may be taken that phase.",
+      "description": "<p>Fire a ready firearm using Semi-Automatic, Single-Shot, Burst-Fire, or the Simple-Action form of Full-Auto.</p><ul><li><strong>Burst Fire:</strong> expends 3 rounds.</li><li><strong>Full-Auto:</strong> expends 6 rounds when used as a Simple Action.</li><li>Two eligible weapons may be fired by combining this with Multiple Attacks, splitting the dice pool and applying off-hand modifiers.</li></ul>",
+      "source": "CRB"
+    },
+    "Insert Clip": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The firearm must be ready.",
+        "The previous removable clip must already have been removed.",
+        "A fresh clip must be available."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Insert a fresh removable clip into a ready firearm. Removing the old clip and inserting the new one are separate Simple Actions unless another rule changes the process.</p>",
+      "source": "CRB"
+    },
+    "Observe in Detail": {
+      "category": "Simple Actions",
+      "test": "Perception + Intuition [Mental], with modifiers appropriate to the sense and situation.",
+      "requirements": [],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Closely examine a person, object, or part of the environment. Obvious information is normally noticed without this action; Observe in Detail is used when the character needs a Perception Test to identify finer details.</p>",
+      "source": "CRB"
+    },
+    "Pick Up/Put Down Object": {
+      "category": "Simple Actions",
+      "test": "None unless unusual circumstances require one.",
+      "requirements": [
+        "The object must be within reach."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Carefully pick up an object or place down an object being held. Unlike the Drop Object Free Action, this action assumes enough care to reduce the risk of damaging the item.</p>",
+      "source": "CRB"
+    },
+    "Quick Draw": {
+      "category": "Simple Actions",
+      "test": "Appropriate Weapon Skill + Reaction [Physical] (3), or threshold 2 with a quick-draw holster.",
+      "requirements": [
+        "The pistol, pistol-sized weapon, blade, or small throwing weapon must be properly holstered, sheathed, or carried on a suitable sling."
+      ],
+      "attack_restriction": "Drawing and immediately attacking counts as the character's attack action for the phase.",
+      "description": "<p>Attempt to draw a suitable weapon and attack with it as one Simple Action.</p><ul><li><strong>Success:</strong> draw and attack immediately.</li><li><strong>Failure:</strong> the weapon is drawn but cannot be used with that action.</li><li><strong>Glitch:</strong> the weapon becomes stuck or is dropped and the character loses their remaining actions.</li><li><strong>Critical glitch:</strong> the weapon may be thrown out of reach, discharged in the holster, or suffer another serious mishap.</li></ul><p>Two weapons may be quick-drawn together by splitting the test pool and applying off-hand penalties.</p>",
+      "source": "CRB"
+    },
+    "Ready Weapon": {
+      "category": "Simple Actions",
+      "test": "None under ordinary circumstances.",
+      "requirements": [
+        "The weapon must be accessible."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Draw, pick up, unsling, or otherwise prepare a firearm, melee weapon, throwing weapon, bow, mounted weapon, or vehicle weapon for use.</p><p>Improperly stored or awkward weapons may require a Complex Action at the gamemaster's discretion. One action can ready a number of small throwing weapons equal to half the character's Agility, rounded up.</p>",
+      "source": "CRB"
+    },
+    "Reckless Spellcasting": {
+      "category": "Simple Actions",
+      "test": "Resolved using the normal Spellcasting Test for the selected spell.",
+      "requirements": [
+        "The character must be capable of casting the selected spell."
+      ],
+      "attack_restriction": "Counts as an attack action when the spell is an attack; otherwise it still uses one of the phase's Simple Actions.",
+      "description": "<p>Cast a spell more quickly as a Simple Action. Reckless casting increases the spell's Drain Value under the spellcasting rules.</p>",
+      "source": "CRB"
+    },
+    "Reload Weapon": {
+      "category": "Simple Actions",
+      "test": "Normally none.",
+      "requirements": [
+        "The weapon and ammunition must be accessible.",
+        "Only reload methods listed as Simple may use this action."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Perform a reload method that takes a Simple Action. Under the Core Rulebook table, this includes removing or inserting a removable clip and nocking one arrow.</p>",
+      "source": "CRB"
+    },
+    "Remove Clip": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The firearm must be ready and currently contain a removable clip."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Remove the current clip from a ready firearm. Retrieving and inserting a replacement clip requires another Simple Action.</p>",
+      "source": "CRB"
+    },
+    "Shift Perception": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The character must be capable of astral perception."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Shift perception from the physical plane to astral perception, or return from astral perception to ordinary physical perception.</p>",
+      "source": "CRB"
+    },
+    "Stand Up": {
+      "category": "Simple Actions",
+      "test": "Body + Willpower (2) if wounded; otherwise no test.",
+      "requirements": [
+        "The character must currently be prone or lying down."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Rise from the prone position. A wounded character must pass the listed test, including wound modifiers, to stand successfully.</p>",
+      "source": "CRB"
+    },
+    "Take Aim": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "The firearm, bow, or throwing weapon must be ready."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Prepare a more accurate attack with a ready ranged weapon. Each consecutive Take Aim action provides either <strong>+1 die</strong> or <strong>+1 Accuracy</strong> to the eventual attack.</p><ul><li>The maximum accumulated bonus is half the character's Willpower, rounded up.</li><li>The benefit is lost if the character takes any other action, including a Free Action, before attacking.</li><li>The first Take Aim used with a targeting scope or image magnification enables the device but grants no additional aiming bonus.</li></ul>",
+      "source": "CRB"
+    },
+    "Take Cover": {
+      "category": "Simple Actions",
+      "test": "None.",
+      "requirements": [
+        "Suitable cover must be available.",
+        "The character cannot be surprised."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Deliberately position the character behind available cover to gain the applicable cover bonus on Defense Tests.</p>",
+      "source": "CRB"
+    },
+    "Throw Weapon": {
+      "category": "Simple Actions",
+      "test": "Throwing Weapons + Agility [Physical], opposed by the target's Defense Test.",
+      "requirements": [
+        "The throwing weapon must already be ready."
+      ],
+      "attack_restriction": "Counts as the character's attack action for the Action Phase; no other attack action may be taken that phase.",
+      "description": "<p>Throw one ready weapon. Multiple ready throwing weapons may be used against eligible targets within Short or Medium range by combining this action with Multiple Attacks and splitting the dice pool.</p>",
+      "source": "CRB"
+    },
+    "Use Simple Device": {
+      "category": "Simple Actions",
+      "test": "Normally none; the device may require a test under its own rules.",
+      "requirements": [
+        "The device must be usable through a simple control such as a trigger, single key, switch, or icon."
+      ],
+      "attack_restriction": "Not normally an attack.",
+      "description": "<p>Operate a straightforward device whose function is activated through one uncomplicated movement or control input.</p>",
+      "source": "CRB"
+    }
+  },
+  "complex_actions": {
+    "Astral Projection": {
+      "category": "Complex Actions",
+      "test": "None.",
+      "requirements": [
+        "The character must be capable of astral projection."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Leave the physical body and project the character's consciousness onto the astral plane.</p>",
+      "source": "CRB"
+    },
+    "Banish Spirit": {
+      "category": "Complex Actions",
+      "test": "Banishing + Magic [Astral], opposed according to the Banishing rules.",
+      "requirements": [
+        "A valid spirit target must be available."
+      ],
+      "attack_restriction": "Not treated as an ordinary physical attack.",
+      "description": "<p>Enter a Banishing contest to weaken or force a spirit away from the physical plane.</p>",
+      "source": "CRB"
+    },
+    "Cast Spell": {
+      "category": "Complex Actions",
+      "test": "Spellcasting + Magic [Force], opposed or resisted according to the selected spell.",
+      "requirements": [
+        "The character must know and be capable of casting the selected spell."
+      ],
+      "attack_restriction": "Counts as an attack action when the selected spell is an attack.",
+      "description": "<p>Cast one spell using the standard spellcasting process, including selecting Force, resolving the spell, and resisting Drain.</p>",
+      "source": "CRB"
+    },
+    "Fire Full-Auto Weapon": {
+      "category": "Complex Actions",
+      "test": "Appropriate firearm skill + Agility [Accuracy], opposed by the target's Defense Test.",
+      "requirements": [
+        "The firearm must be ready and capable of Full-Auto fire.",
+        "At least 10 rounds must be available."
+      ],
+      "attack_restriction": "Counts as the character's attack action.",
+      "description": "<p>Fire a ready weapon using the Complex-Action Full-Auto attack, expending <strong>10 rounds</strong>. Multiple eligible weapons may be used with Multiple Attacks, with the dice pool split and off-hand modifiers applied.</p>",
+      "source": "CRB"
+    },
+    "Fire Long Burst or Semi-Auto Burst": {
+      "category": "Complex Actions",
+      "test": "Appropriate firearm skill + Agility [Accuracy], opposed by the target's Defense Test.",
+      "requirements": [
+        "The firearm must be ready and capable of the selected firing mode."
+      ],
+      "attack_restriction": "Counts as the character's attack action.",
+      "description": "<p>Fire a ready firearm as a Long Burst or Semi-Auto Burst. Eligible attacks can be divided between multiple targets at Short or Medium range by combining the action with Multiple Attacks.</p>",
+      "source": "CRB"
+    },
+    "Fire Mounted or Vehicle Weapon": {
+      "category": "Complex Actions",
+      "test": "Resolved with the appropriate Gunnery or weapon test under the vehicle-combat rules.",
+      "requirements": [
+        "The mounted or vehicle weapon must already be ready and controllable by the character."
+      ],
+      "attack_restriction": "Counts as the character's attack action.",
+      "description": "<p>Fire a previously readied weapon mounted on a vehicle, drone, emplacement, or similar platform.</p>",
+      "source": "CRB"
+    },
+    "Load and Fire Bow": {
+      "category": "Complex Actions",
+      "test": "Archery + Agility [Accuracy], opposed by the target's Defense Test.",
+      "requirements": [
+        "The bow must already be ready.",
+        "A suitable arrow must be accessible."
+      ],
+      "attack_restriction": "Counts as the character's attack action.",
+      "description": "<p>Nock an arrow and fire the bow as a single Complex Action. The order may be reversed when appropriate: fire a loaded bow and then nock the next arrow.</p>",
+      "source": "CRB"
+    },
+    "Melee Attack": {
+      "category": "Complex Actions",
+      "test": "Appropriate melee skill + Agility [Accuracy or Physical], opposed by the target's melee Defense Test.",
+      "requirements": [
+        "The target must be within the attacker's melee reach."
+      ],
+      "attack_restriction": "Counts as the character's attack action.",
+      "description": "<p>Make one armed or unarmed close-combat attack. Multiple targets within melee range may be attacked by adding Multiple Attacks and splitting the dice pool.</p>",
+      "source": "CRB"
+    },
+    "Reload Weapon": {
+      "category": "Complex Actions",
+      "test": "Normally none.",
+      "requirements": [
+        "The weapon and ammunition must be accessible.",
+        "The selected reload method must require a Complex Action."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Reload a weapon using a method that requires a Complex Action, including speed loaders, break-action weapons, belts, drums, internal magazines, cylinders, muzzle-loaders, or manually filling clips and ammunition feeds.</p>",
+      "source": "CRB"
+    },
+    "Rigger Jump In": {
+      "category": "Complex Actions",
+      "test": "None.",
+      "requirements": [
+        "The character must have a vehicle control rig.",
+        "The vehicle or drone must be rigger-adapted and accessible through a valid connection."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Transfer the rigger's control perspective into a compatible vehicle or drone and begin controlling it through jumped-in virtual reality.</p>",
+      "source": "CRB"
+    },
+    "Sprint": {
+      "category": "Complex Actions",
+      "test": "Running + Strength [Physical].",
+      "requirements": [
+        "The character must be running and able to move."
+      ],
+      "attack_restriction": "Not an attack.",
+      "description": "<p>Attempt to increase the character's running distance for the Combat Turn. Each hit adds distance according to the character's metatype sprint-increase value.</p>",
+      "source": "CRB"
+    },
+    "Summoning": {
+      "category": "Complex Actions",
+      "test": "Summoning + Magic [Force], opposed by the spirit's Force.",
+      "requirements": [
+        "The character must be able to summon the selected spirit type."
+      ],
+      "attack_restriction": "Not an ordinary attack.",
+      "description": "<p>Attempt to summon a spirit and gain services from it under the Summoning rules.</p>",
+      "source": "CRB"
+    },
+    "Use Skill": {
+      "category": "Complex Actions",
+      "test": "The test associated with the selected skill and task.",
+      "requirements": [
+        "The task must be suitable for completion or meaningful progress through a Complex Action."
+      ],
+      "attack_restriction": "Depends on the selected skill and task.",
+      "description": "<p>Perform a skilled task that demands substantial concentration, coordination, or effort and is not covered by a more specific listed action.</p>",
+      "source": "CRB"
+    }
+  },
+  "reload_methods": {
+    "Removable Clip": {
+      "result": "Remove or insert one removable clip.",
+      "action_type": "Simple",
+      "source": "CRB"
+    },
+    "Bow": {
+      "result": "Nock one arrow.",
+      "action_type": "Simple",
+      "source": "CRB"
+    },
+    "Speed Loader": {
+      "result": "Use a speed loader to completely load the firearm.",
+      "action_type": "Complex",
+      "source": "CRB"
+    },
+    "Fill Clip": {
+      "result": "Insert a number of rounds equal to Agility into a clip.",
+      "action_type": "Complex",
+      "source": "CRB"
+    },
+    "Break Action": {
+      "result": "Insert 2 rounds.",
+      "action_type": "Complex",
+      "source": "CRB"
+    },
+    "Belt Fed": {
+      "result": "Remove or insert an ammunition belt.",
+      "action_type": "Complex",
+      "source": "CRB"
+    },
+    "Fill Belt/Drum": {
+      "result": "Insert a number of rounds equal to Agility into a belt or drum.",
+      "action_type": "Complex",
+      "source": "CRB"
+    },
+    "Internal Magazine": {
+      "result": "Insert a number of rounds equal to Agility into the internal magazine.",
+      "action_type": "Complex",
+      "source": "CRB"
+    },
+    "Muzzle-Loader": {
+      "result": "Load one muzzle tube.",
+      "action_type": "Complex",
+      "source": "CRB"
+    },
+    "Cylinder": {
+      "result": "Insert a number of rounds equal to Agility into the cylinder.",
+      "action_type": "Complex",
+      "source": "CRB"
+    },
+    "Drum": {
+      "result": "Remove or insert the drum.",
+      "action_type": "Complex",
+      "source": "CRB"
+    }
+  },
+  "action_rules": {
+    "Free Actions": "<strong>Free Actions</strong><br>Normally one Free Action is available during each Initiative Pass. It may be used during the character's Action Phase or later in the pass. Before the character's first Action Phase, a Free Action may only be taken if the character is not surprised. Free Actions normally require no test.",
+    "Simple Actions": "<strong>Simple Actions</strong><br>A character may normally take two Simple Actions during an Action Phase, plus one Free Action. Only one of the two Simple Actions may be an attack action.",
+    "Complex Actions": "<strong>Complex Actions</strong><br>A character may normally take one Complex Action during an Action Phase, plus one Free Action.",
+    "Unlisted Actions": "<strong>Unlisted Actions</strong><br>The gamemaster assigns an unlisted activity as Free, Simple, or Complex by comparing its effort, concentration, and finesse to the listed actions.",
+    "Scope": "<strong>Scope</strong><br>This file contains the generic combat Free, Simple, and Complex Actions from the Core Rulebook. Matrix-specific actions and Interrupt Actions are separate systems and are not included."
+  }
+}

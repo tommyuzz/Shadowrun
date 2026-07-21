@@ -1,4 +1,5 @@
 import { titleCase, valueText } from "./presentation";
+import { supportCompatibilityLabel } from "./relations";
 import type { RawRecord, ReferenceData, ReferenceRecord } from "./types";
 
 export interface RecordTag {
@@ -35,6 +36,17 @@ export function recordTags(moduleId: string, record: ReferenceRecord, data: Refe
         { key: "attribute", label: `${attribute} linked`, html: `<strong>Linked attribute</strong><br>This skill is linked to <strong>${attribute}</strong>. A normal skill test uses the linked attribute plus the skill rating, unless a specific rule calls for a different dice pool.` },
         { key: "default", label: raw.default ? "Defaultable" : "No default", html: raw.default ? "<strong>Defaulting</strong><br>This skill may be attempted without a skill rating. Roll the linked attribute with a <strong>–1 dice pool modifier</strong>, before applying any other relevant modifiers." : "<strong>Defaulting</strong><br>This skill <strong>cannot be defaulted</strong>. A character needs an appropriate skill rating before attempting tests that require it." },
         { key: "group", label: group ? `${group} group` : "Standalone skill", html: group ? `<strong>Skill group</strong><br>This skill belongs to the <strong>${group}</strong> skill group. Skill groups allow related skills to be improved together while the group remains intact.${groupList}` : "<strong>Standalone skill</strong><br>This skill is not part of a skill group and is improved individually." }
+      ];
+    }
+    case "actions": {
+      const rules = recordMap(data, "action_rules");
+      const restriction = valueText(raw.attack_restriction);
+      const role = /modifies an attack/i.test(restriction) ? "Attack modifier" : /counts as.*attack/i.test(restriction) ? "Attack action" : /^not an attack/i.test(restriction) ? "Non-attack" : "Conditional";
+      const requirementCount = strings(raw.requirements).length;
+      return [
+        { key: "action-type", label: record.category, html: String(rules[record.category] || `<strong>${record.category}</strong><br>No action-economy definition is available.`) },
+        { key: "attack-role", label: role, html: `<strong>${role}</strong><br>${restriction}` },
+        { key: "requirements", label: requirementCount ? `${requirementCount} ${requirementCount === 1 ? "requirement" : "requirements"}` : "No requirements", html: requirementCount ? `<strong>Requirements</strong><ul>${strings(raw.requirements).map((requirement) => `<li>${requirement}</li>`).join("")}</ul>` : "<strong>No additional requirements</strong><br>This action has no separate prerequisite in the supplied record." }
       ];
     }
     case "metatypes": {
@@ -111,6 +123,12 @@ export function recordTags(moduleId: string, record: ReferenceRecord, data: Refe
     case "weapons": {
       const definitions = recordMap(data, "subcategories");
       const legal = legality(raw.availability);
+      if (record.category === "Weapon Support") return [
+        { key: "category", label: "Weapon Support", html: "<strong>Weapon Support</strong><br>This record is ammunition or an accessory stored with the weapons it supports rather than in the general equipment market." },
+        { key: "type", label: valueText(raw.subcategory), html: `<strong>${valueText(raw.subcategory)}</strong><br>${supportCompatibilityLabel(record)} are listed from the centralized compatibility profile.` },
+        { key: "compatibility", label: supportCompatibilityLabel(record), html: `<strong>Compatibility profile</strong><br>${supportCompatibilityLabel(record)} are included when their category, type and ammunition-feed data match. Mounts and specific exceptions still apply.` },
+        { key: "legality", label: legal, html: `<strong>Legality</strong><br><strong>${legal}</strong> availability is indicated by <strong>${valueText(raw.availability)}</strong> in this record.` }
+      ];
       return [
         { key: "category", label: record.category, html: `<strong>Weapon category</strong><br>This weapon is indexed under <strong>${titleCase(record.category)}</strong>. Use the matching archive tab to browse comparable weapons.` },
         { key: "type", label: valueText(raw.subcategory), html: String(definitions[String(raw.subcategory)] || "<strong>Weapon type</strong><br>No additional rules are available for this subcategory.") },

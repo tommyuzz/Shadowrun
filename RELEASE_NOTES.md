@@ -1,5 +1,29 @@
 # Release notes
 
+## 1.11.0 — Related equipment, weapon support and Actions
+
+### Added
+
+- Added the **Actions** archive beneath **Core Rules**, using all 44 supplied Free, Simple and Complex Actions from `generic_actions.json`.
+- Added action-role filtering, full-field search, action-economy dossiers, requirements, attack restrictions and action-type-specific reload method cards.
+- Added a dedicated **Weapon Support** tab containing all 45 ammunition and accessory records formerly shown under Equipment.
+- Added expandable weapon-side attachment and ammunition lists with effect, cost, mount and modifier details.
+- Added expandable support-side applicable-weapon lists with direct navigation to each weapon record.
+- Added in-record Equipment configuration planners for all 67 supplied vision, audio, sensor, cybereye, cyberear, cyberlimb, armor, clothing and fitted enhancements.
+
+### Changed
+
+- Weapon list cards now show both weapon type and price.
+- Enhancements no longer appear as unrelated standalone Equipment results; they are resolved from one compatibility declaration and displayed with every compatible base item.
+- Equipment configuration summaries calculate exact totals for fixed-price selections and identify variable authored costs without inventing values.
+- Weapon comparison continues to include weapons only; support records are intentionally excluded from comparison candidates.
+
+### Validation
+
+- 19 datasets and 1,374 reference records validated, including support ownership, enhancement targets and complete Generic Action fields.
+- 60 unit tests passed, including bidirectional weapon compatibility, embedded Thermographic Vision, action reload search and dedicated record rendering.
+- Production TypeScript and Vite build passed and generated the new Actions compatibility redirect.
+
 ## 1.10.1 — Three-tab Lifestyle archive
 
 ### Corrected
