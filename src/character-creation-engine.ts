@@ -491,7 +491,6 @@ function validateQualityParameterRule(rule: UnknownRecord, selection: QualitySel
     const source = parameters.source;
     const addiction = selections.find((quality) => quality.id === "addiction" && /btl/i.test(String(quality.parameters?.subject || "")));
     if (source === "btl" && (!addiction || !context.capabilityIds?.includes("btl-interface"))) errors.push(violation("quality.scorched-btl", "BTL Scorched requires at least a Mild BTL Addiction and BTL-capable gear.", `qualities.${selection.id}`));
-    if (["black-ic", "psychotropic-ic"].includes(String(source)) && context.magicPathId !== "technomancer" && !context.capabilityIds?.includes("decker")) errors.push(violation("quality.scorched-ic", "IC-based Scorched requires a decker or technomancer.", `qualities.${selection.id}`));
   }
   return errors;
 }

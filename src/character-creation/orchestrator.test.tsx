@@ -3,10 +3,11 @@ import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { describe, expect, it } from "vitest";
 import { SourceSelectionProvider } from "../source-selection";
 import { CharacterCreationPage } from "../pages/CharacterCreationPage";
-import { AttributesStep, BiographyStep, ResourcesStep, SkillsStep } from "./steps";
+import { AttributesStep, BiographyStep, QualitiesStep, ResourcesStep, SkillsStep, resourceRecordHref } from "./steps";
 import {
   ATTRIBUTE_IDS,
   adeptPowerCost,
+  associatedResourceAddons,
   resourceCatalogue,
   resolveCatalogueAvailability,
   resolveCatalogueCost,
@@ -43,7 +44,8 @@ function createConfiguredDraft(): CharacterDraft {
   draft.magicPathId = "mundane";
   draft.attributeRatings = Object.fromEntries(ATTRIBUTE_IDS.map((id) => [id, 4])) as CharacterDraft["attributeRatings"];
   draft.specialPointSpend = { edge: 3, magic: 0, resonance: 0 };
-  draft.biography = { ...draft.biography, streetName: "Test Runner", age: "28", lifestyleId: "middle" };
+  draft.biography = { ...draft.biography, streetName: "Test Runner", age: "28" };
+  draft.resources = [{ instanceId: "lifestyle-1", catalogueId: "lifestyles:middle", quantity: 1 }];
   return draft;
 }
 
@@ -69,6 +71,59 @@ describe("2.0 catalogue adapters", () => {
     expect(alphaEyes.issues).toEqual([]);
     expect(alphaEyes.purchase).toMatchObject({ cost: 12000, essenceCost: 0.32, availability: 9, augmentationGrade: "alphaware" });
     expect(trollLifestyle.purchase).toMatchObject({ baseCost: 5000, cost: 10000, kind: "lifestyle" });
+  });
+
+  it("includes programs and resolves associated equipment enhancements", () => {
+    expect(resourceCatalogue.find((entry) => entry.catalogueId === "software:browse")).toMatchObject({ collectionLabel: "Programs", kind: "gear" });
+    const fullBodyArmor = resourceCatalogue.find((entry) => entry.catalogueId === "equipment:full-body-armor")!;
+    const browse = resourceCatalogue.find((entry) => entry.catalogueId === "software:browse")!;
+    const agent = resourceCatalogue.find((entry) => entry.catalogueId === "software:agent")!;
+    expect(resourceRecordHref(fullBodyArmor)).toContain("#/equipment/clothing-and-armor/full-body-armor");
+    expect(resourceRecordHref(browse)).toContain("#/cyberdecks/software/browse");
+    expect(agent).toMatchObject({ ratingMinimum: 1, ratingMaximum: 6 });
+    expect(resolveCatalogueCost(agent, 4)).toBe(8000);
+    expect(associatedResourceAddons(fullBodyArmor).map((entry) => entry.name)).toEqual(expect.arrayContaining(["Full Helmet (Full Body Armor Add-On)", "Chemical Seal (Full Body Armor Add-On)"]));
+    const configured = resolveResourceSelection({
+      instanceId: "armor",
+      catalogueId: fullBodyArmor.catalogueId,
+      quantity: 1,
+      addons: [{ id: "enhancement:full-helmet-full-body-armor-add-on", quantity: 1 }],
+      additionalCost: 250
+    }, "human");
+    expect(configured.issues).toEqual([]);
+    expect(configured.purchase.cost).toBe(resolveCatalogueCost(fullBodyArmor)! + 750);
+  });
+
+  it("offers rule-compatible weapon attachments with their own ratings", () => {
+    const ak97 = resourceCatalogue.find((entry) => entry.catalogueId === "weapons:ak-97")!;
+    const addons = associatedResourceAddons(ak97);
+    const gasVent = addons.find((entry) => entry.name === "Gas-Vent System")!;
+    expect(gasVent).toMatchObject({ kind: "attachment", ratingMinimum: 1, ratingMaximum: 3 });
+    expect(addons.map((entry) => entry.name)).not.toEqual(expect.arrayContaining(["Spare Clip", "Regular Ammunition", "APDS"]));
+    const configured = resolveResourceSelection({
+      instanceId: "rifle",
+      catalogueId: ak97.catalogueId,
+      quantity: 1,
+      addons: [{ id: gasVent.addonId, quantity: 1, rating: 3 }]
+    }, "human");
+    expect(configured.issues).toEqual([]);
+    expect(configured.purchase.cost).toBe(resolveCatalogueCost(ak97)! + 600);
+  });
+
+  it("presents ammunition and standalone weapon accessories as separate catalogue products", () => {
+    const spareClip = resourceCatalogue.find((entry) => entry.catalogueId === "weapons:spare-clip")!;
+    const regularAmmunition = resourceCatalogue.find((entry) => entry.catalogueId === "weapons:regular-ammunition")!;
+    const injectionArrow = resourceCatalogue.find((entry) => entry.catalogueId === "weapons:injection-arrow")!;
+    const holster = resourceCatalogue.find((entry) => entry.catalogueId === "weapons:concealable-holster")!;
+    expect(spareClip).toMatchObject({ collection: "weapons", kind: "gear", subcategory: "Firearm Accessories" });
+    expect(regularAmmunition).toMatchObject({ collection: "weapons", kind: "gear", subcategory: "Firearm Ammunition" });
+    expect(holster).toMatchObject({ collection: "weapons", kind: "gear" });
+    expect(resourceRecordHref(spareClip)).toContain("#/weapons/weapon-support/spare-clip");
+    expect(associatedResourceAddons(spareClip)).toEqual([]);
+    expect(resolveCatalogueCost(spareClip)).toBe(5);
+    expect(resolveCatalogueCost(regularAmmunition)).toBe(20);
+    expect(resolveCatalogueAvailability(injectionArrow, 3)).toBe(5);
+    expect(resolveResourceSelection({ instanceId: "clips", catalogueId: spareClip.catalogueId, quantity: 3 }, "human").purchase.cost).toBe(15);
   });
 
   it("resolves every adept power cost in quarter-point increments", () => {
@@ -137,6 +192,17 @@ describe("2.0 unified CharacterDraft", () => {
     expect(evaluation.steps.review.violations).toEqual([]);
   });
 
+  it("requires exactly one lifestyle purchase in Gear and never in Biography", () => {
+    const missing = createConfiguredDraft();
+    missing.resources = [];
+    expect(evaluateCharacterDraft(missing).steps.resources.violations.map((item) => item.id)).toContain("resources.lifestyle");
+    expect(evaluateCharacterDraft(missing).steps.biography.violations.map((item) => item.id)).not.toContain("biography.lifestyle");
+
+    const duplicate = createConfiguredDraft();
+    duplicate.resources.push({ instanceId: "lifestyle-2", catalogueId: "lifestyles:low", quantity: 1 });
+    expect(evaluateCharacterDraft(duplicate).steps.resources.violations.map((item) => item.id)).toContain("resources.lifestyle-single");
+  });
+
   it("rejects out-of-sequence Karma ratings and levels on fixed adept powers", () => {
     const draft = createConfiguredDraft();
     const currentBody = naturalAttributeRatings(draft).body;
@@ -149,13 +215,36 @@ describe("2.0 unified CharacterDraft", () => {
 
   it("isolates new drafts from the former prefilled storage key and safely migrates schema 1 exports", () => {
     expect(CHARACTER_DRAFT_STORAGE_KEY).toBe("shadowrun5e-character-draft-v4");
-    const legacy = { ...createConfiguredDraft(), schemaVersion: 1, characterName: "Old test runner", concept: "Legacy", notes: "Legacy" };
+    const legacy = { ...createConfiguredDraft(), schemaVersion: 1, biography: { ...createConfiguredDraft().biography, lifestyleId: "middle" }, characterName: "Old test runner", concept: "Legacy", notes: "Legacy" };
     delete (legacy as Partial<CharacterDraft> & { characterName?: string }).confirmedSteps;
     const migrated = parseCharacterDraft(legacy);
     expect(migrated.schemaVersion).toBe(CHARACTER_DRAFT_SCHEMA_VERSION);
     expect(migrated.confirmedSteps).toEqual([]);
     expect(migrated).not.toHaveProperty("characterName");
     expect(migrated).not.toHaveProperty("concept");
+    expect(migrated.biography).not.toHaveProperty("lifestyleId");
+  });
+
+  it("migrates formerly nested ammunition and reload supplies into independent cart lines", () => {
+    const legacy = createConfiguredDraft();
+    legacy.resources.unshift({
+      instanceId: "rifle",
+      catalogueId: "weapons:ak-97",
+      quantity: 2,
+      addons: [
+        { id: "attachment:gas-vent-system", quantity: 1, rating: 2 },
+        { id: "attachment:spare-clip", quantity: 2 },
+        { id: "attachment:regular-ammunition", quantity: 3 }
+      ]
+    });
+    const migrated = parseCharacterDraft(legacy);
+    expect(migrated.resources.find((entry) => entry.instanceId === "rifle")?.addons).toEqual([
+      { id: "attachment:gas-vent-system", quantity: 1, rating: 2 }
+    ]);
+    expect(migrated.resources).toEqual(expect.arrayContaining([
+      expect.objectContaining({ catalogueId: "weapons:spare-clip", quantity: 4 }),
+      expect.objectContaining({ catalogueId: "weapons:regular-ammunition", quantity: 6 })
+    ]));
   });
 
   it("unlocks exactly one step at a time after explicit confirmation", () => {
@@ -195,6 +284,8 @@ describe("Character Creation page contract", () => {
     expect(html).toContain("CORE PRIORITY BUILDER // RULESET 1");
     expect(html).toContain('aria-label="Return to Shadowrun front page"');
     expect(html).toContain('href="/"');
+    expect(html).toContain('class="source-selector-trigger"');
+    expect(html).toContain('aria-haspopup="dialog"');
   });
 
   it("renders priority assignment as a 5 by 5 button matrix", () => {
@@ -220,24 +311,55 @@ describe("Character Creation page contract", () => {
     expect(html).toContain("Native Language (no rating)");
   });
 
-  it("renders Resources as a departmental store and keeps derived fields out of the form", () => {
+  it("renders Gear as a subcategory-first store with a separate cart", () => {
     const draft = createConfiguredDraft();
     const html = renderToStaticMarkup(<ResourcesStep draft={draft} setDraft={() => undefined} evaluation={evaluateCharacterDraft(draft)}/>);
+    expect(html).toContain('class="creation-lifestyle-selection" data-selected="true"');
+    expect(html).toContain("Starting lifestyle");
+    expect(html).toContain("Middle // 5,000¥ per month");
+    expect(html.indexOf("Starting lifestyle")).toBeLessThan(html.indexOf("Available catalogue"));
     expect(html).toContain("Store departments");
-    expect(html).toContain("Add to cart");
-    expect(html).toContain("Shopping cart");
+    expect(html).toContain("Browse subcategory");
+    expect(html).toContain("Programs");
+    expect(html).toContain("View cart (0)");
+    expect(html).not.toContain("Add to cart");
     expect(html).toContain("Automatic carryover");
     expect(html).not.toContain("Nuyen carried into play");
     expect(html).not.toContain("Matrix Data Processing");
+    expect(html).not.toContain("Configured numeric values");
   });
 
-  it("collects the final biography and lifestyle before review", () => {
+  it("presents Lifestyle as a required control before the Gear catalogue", () => {
+    const draft = createConfiguredDraft();
+    draft.resources = [];
+    const html = renderToStaticMarkup(<ResourcesStep draft={draft} setDraft={() => undefined} evaluation={evaluateCharacterDraft(draft)}/>);
+    expect(html).toContain('required="" aria-required="true" aria-invalid="true"');
+    expect(html).toContain("A lifestyle must be selected before Gear can be confirmed.");
+    expect(evaluateCharacterDraft(draft).steps.resources.violations).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: "resources.lifestyle", message: "Select the runner's required starting lifestyle above the Gear catalogue." })
+    ]));
+  });
+
+  it("collects the final biography and reflects the lifestyle purchased in Gear", () => {
     const draft = createConfiguredDraft();
     const html = renderToStaticMarkup(<BiographyStep draft={draft} setDraft={() => undefined} evaluation={evaluateCharacterDraft(draft)}/>);
     expect(CREATION_STEPS.at(-2)?.id).toBe("biography");
     expect(html).toContain("Street name / primary alias");
     expect(html).toContain("Starting lifestyle");
-    expect(html).toContain("Middle // 5,000¥ per month");
+    expect(html).toContain("Middle");
+    expect(html).toContain("purchased in Gear");
+    expect(html).not.toContain("Select lifestyle");
+  });
+
+  it("uses Positive and Negative Quality tabs and exposes selected descriptions", () => {
+    const draft = createConfiguredDraft();
+    draft.qualities = [{ id: "scorched", parameters: { source: "black-ic", side_effect: "Blackout" } }];
+    const html = renderToStaticMarkup(<QualitiesStep draft={draft} setDraft={() => undefined} evaluation={evaluateCharacterDraft(draft)}/>);
+    expect(html).toContain("Positive qualities");
+    expect(html).toContain("Negative qualities");
+    expect(html).toContain("Read full description");
+    expect(html).toContain("Gamemaster approval required");
+    expect(html).toContain('role="tablist"');
   });
 
   it("enforces Attribute budget and natural-maximum restrictions in the controls", () => {

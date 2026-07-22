@@ -15,6 +15,7 @@ import {
   magicPriorityGrant,
   metatypeAttributeRange,
   metatypeOptions,
+  standaloneWeaponSupportCatalogueIdForAddon,
   type AttributeId,
   type PriorityCategoryId,
   type PriorityRank,
@@ -22,7 +23,7 @@ import {
   type SpecialAttributeId
 } from "./catalogues";
 
-export const CHARACTER_DRAFT_SCHEMA_VERSION = 3;
+export const CHARACTER_DRAFT_SCHEMA_VERSION = 4;
 export const CHARACTER_DRAFT_STORAGE_KEY = "shadowrun5e-character-draft-v4";
 
 export interface CharacterBiography {
@@ -35,7 +36,6 @@ export interface CharacterBiography {
   weight: string;
   description: string;
   background: string;
-  lifestyleId: string;
 }
 
 export interface DraftAdeptPowerSelection {
@@ -145,7 +145,7 @@ export function createEmptyCharacterDraft(): CharacterDraft {
     karmaPurchases: [],
     karmaCarryover: 0,
     approvals: [],
-    biography: { legalName: "", streetName: "", age: "", gender: "", ethnicity: "", height: "", weight: "", description: "", background: "", lifestyleId: "" },
+    biography: { legalName: "", streetName: "", age: "", gender: "", ethnicity: "", height: "", weight: "", description: "", background: "" },
     confirmedSteps: []
   };
 }
@@ -244,13 +244,46 @@ function confirmedStepPrefix(value: unknown): ConfirmableCreationStepId[] {
   return prefix;
 }
 
+function migrateStandaloneWeaponSupport(resources: ResourceSelectionShape[]): ResourceSelectionShape[] {
+  const migrated: ResourceSelectionShape[] = [];
+  const instanceIds = resources.map((resource) => resource.instanceId);
+  for (const resource of resources) {
+    const retainedAddons: NonNullable<ResourceSelectionShape["addons"]> = [];
+    const standaloneSelections: ResourceSelectionShape[] = [];
+    for (const addon of resource.addons || []) {
+      const catalogueId = standaloneWeaponSupportCatalogueIdForAddon(addon.id);
+      if (!catalogueId) {
+        retainedAddons.push(addon);
+        continue;
+      }
+      const instanceId = draftInstanceId("item", instanceIds);
+      instanceIds.push(instanceId);
+      standaloneSelections.push({
+        instanceId,
+        catalogueId,
+        quantity: Math.max(1, resource.quantity || 1) * Math.max(1, addon.quantity || 1),
+        ...(addon.rating != null ? { rating: addon.rating } : {})
+      });
+    }
+    migrated.push({
+      ...resource,
+      ...(resource.addons ? { addons: retainedAddons } : {})
+    });
+    migrated.push(...standaloneSelections);
+  }
+  return migrated;
+}
+
 export function parseCharacterDraft(value: unknown): CharacterDraft {
   if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error("The selected file does not contain a character draft object.");
   const raw = value as Partial<CharacterDraft> & { schemaVersion?: number };
   if (raw.ruleset !== "shadowrun5e.character-creation") throw new Error("This file belongs to a different ruleset.");
-  if (![1, 2, CHARACTER_DRAFT_SCHEMA_VERSION].includes(Number(raw.schemaVersion))) throw new Error(`Draft schema ${String(raw.schemaVersion)} is not supported by this version.`);
+  if (![1, 2, 3, CHARACTER_DRAFT_SCHEMA_VERSION].includes(Number(raw.schemaVersion))) throw new Error(`Draft schema ${String(raw.schemaVersion)} is not supported by this version.`);
   if (!isPriorityAssignments(raw.priorityAssignments)) throw new Error("The draft does not contain a valid A–E priority assignment state.");
   const fallback = createEmptyCharacterDraft();
+  const biography = raw.biography && typeof raw.biography === "object"
+    ? Object.fromEntries(Object.entries(raw.biography).filter(([key]) => key in fallback.biography))
+    : {};
   const merged: CharacterDraft = {
     ...fallback,
     schemaVersion: CHARACTER_DRAFT_SCHEMA_VERSION,
@@ -265,13 +298,13 @@ export function parseCharacterDraft(value: unknown): CharacterDraft {
     qualities: Array.isArray(raw.qualities) ? raw.qualities : [],
     individualSkills: Array.isArray(raw.individualSkills) ? raw.individualSkills : [],
     skillGroups: Array.isArray(raw.skillGroups) ? raw.skillGroups : [],
-    resources: Array.isArray(raw.resources) ? raw.resources : [],
+    resources: migrateStandaloneWeaponSupport(Array.isArray(raw.resources) ? raw.resources : []),
     contacts: Array.isArray(raw.contacts) ? raw.contacts : [],
     karmaPurchases: Array.isArray(raw.karmaPurchases) ? raw.karmaPurchases : [],
     approvals: Array.isArray(raw.approvals) ? raw.approvals : [],
     karmaConvertedToNuyen: Number(raw.karmaConvertedToNuyen) || 0,
     karmaCarryover: Number(raw.karmaCarryover) || 0,
-    biography: { ...fallback.biography, ...(raw.biography && typeof raw.biography === "object" ? raw.biography : {}) },
+    biography: { ...fallback.biography, ...biography },
     confirmedSteps: Number(raw.schemaVersion) >= 2 ? confirmedStepPrefix(raw.confirmedSteps) : []
   };
   if (merged.metatypeId && !metatypeOptions.some((option) => option.id === merged.metatypeId)) throw new Error(`Unknown metatype '${merged.metatypeId}'.`);

@@ -1,7 +1,7 @@
 {
   "name": "shadowrun-reference-archive",
   "private": true,
-  "version": "2.1.0",
+  "version": "2.2.2",
   "type": "module",
   "scripts": {
     "styles:generate": "node scripts/scope-page-styles.mjs",

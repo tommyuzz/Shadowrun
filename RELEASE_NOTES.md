@@ -1,5 +1,29 @@
 # Release notes
 
+## 2.2.2 — Required Lifestyle placement and Sources repair
+
+- Moved the mandatory starting Lifestyle into a dedicated selector above the Gear catalogue, including prepaid months and adjusted cost totals.
+- Removed Lifestyles from the store departments and shopping cart while retaining the selected Lifestyle in the Resources budget, Biography, and final review.
+- Raised the Character Creation masthead above the builder's content stacking contexts so the global Sources panel opens visibly and remains interactive.
+- Added regression coverage for mandatory Lifestyle placement and the Character Creation Sources control contract.
+
+## 2.2.1 — Standalone weapon support purchasing
+
+- Removed ammunition, spare clips, speed loaders, holsters and other standalone support gear from weapon attachment choices.
+- Added those records to the Weapons department as independently rated and quantified catalogue purchases with their existing dedicated record links.
+- Limited weapon cart-line configuration to genuine installed attachments and changed items without add-ons to show only their optional cost adjustment.
+- Added an in-place draft migration that converts formerly nested standalone support into separate cart lines while retaining installed attachments on their weapon.
+
+## 2.2.0 — Quality browser and configurable Gear store
+
+- Replaced the Quality kind dropdown with direct Positive and Negative tabs and added complete expandable descriptions to every selected Quality.
+- Changed Scorched's IC-based decker or technomancer prerequisite from an automatic role check to an explicit gamemaster-approval finding, while retaining the authored prerequisite in the full description.
+- Made the Gear purchase the single source of truth for starting Lifestyle; Biography and final review now display that purchase without presenting a second selector.
+- Added all Core software and programs to the Gear catalogue.
+- Added subcategory-first department browsing, a catalogue/cart view toggle, pre-cart Rating selection, and new-tab links to each product's dedicated archive record.
+- Replaced manual configured-number controls with compatible weapon attachments or Equipment enhancements, rated add-on choices, and one explicit additional-cost adjustment.
+- Added draft migration that removes the obsolete Biography Lifestyle field while preserving existing Gear purchases.
+
 ## 2.1.0 — Biography and virtual equipment store
 
 - Added a required final Biography step with identity, physical description, background, and starting-lifestyle selection before character review.

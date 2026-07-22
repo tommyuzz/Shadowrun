@@ -14,6 +14,7 @@ import spiritPayload from "../../spirits.json";
 import vehiclePayload from "../../vehicles.json";
 import weaponPayload from "../../weapons.json";
 import { characterCreationRules, stableCreationId, type ResourcePurchase } from "../character-creation-engine";
+import { compileRule, relationshipRules, ruleValueAtPath } from "../rule-engine";
 
 export type UnknownRecord = Record<string, unknown>;
 
@@ -256,6 +257,7 @@ export type ResourceKind = "gear" | "weapon" | "augmentation" | "lifestyle" | "v
 export interface ResourceCatalogueEntry extends CatalogueOption {
   catalogueId: string;
   collection: string;
+  collectionLabel: string;
   category: string;
   subcategory: string;
   kind: ResourceKind;
@@ -264,6 +266,20 @@ export interface ResourceCatalogueEntry extends CatalogueOption {
   isFocus: boolean;
   augmentationType?: "cyberware" | "bioware";
   capabilityIds: string[];
+}
+
+export interface ResourceAddonSelection {
+  id: string;
+  rating?: number;
+  quantity?: number;
+}
+
+export interface ResourceAddonEntry extends CatalogueOption {
+  addonId: string;
+  kind: "attachment" | "enhancement";
+  group: string;
+  ratingMinimum?: number;
+  ratingMaximum?: number;
 }
 
 export interface ResourceSelectionShape {
@@ -275,6 +291,8 @@ export interface ResourceSelectionShape {
   manualCost?: number;
   manualAvailability?: number;
   manualEssence?: number;
+  additionalCost?: number;
+  addons?: ResourceAddonSelection[];
   attributeBonuses?: Record<string, number>;
   bonded?: boolean;
   bondKarmaCost?: number;
@@ -283,18 +301,18 @@ export interface ResourceSelectionShape {
 export interface ResolvedResourceSelection {
   entry?: ResourceCatalogueEntry;
   purchase: ResourcePurchase;
-  issues: Array<{ id: string; message: string; field: "cost" | "availability" | "essence" | "rating" }>;
+  issues: Array<{ id: string; message: string; field: "cost" | "availability" | "essence" | "rating" | "addons"; severity?: "error" | "warning" }>;
 }
 
-function ratingRange(raw: UnknownRecord): { minimum?: number; maximum?: number } {
+function ratingRange(raw: UnknownRecord): { ratingMinimum?: number; ratingMaximum?: number } {
   const authored = text(raw.rating || raw.force);
   const range = authored.match(/(\d+)\s*[-–]\s*(\d+)/);
-  if (range) return { minimum: Number(range[1]), maximum: Number(range[2]) };
-  if (/variable/i.test(authored)) return { minimum: 1, maximum: 6 };
+  if (range) return { ratingMinimum: Number(range[1]), ratingMaximum: Number(range[2]) };
+  if (/variable/i.test(authored)) return { ratingMinimum: 1, ratingMaximum: 6 };
   return {};
 }
 
-function resourceEntries(collection: string, value: unknown, fallbackCategory: string, kindFor: (raw: UnknownRecord) => ResourceKind): ResourceCatalogueEntry[] {
+function resourceEntries(collection: string, value: unknown, fallbackCategory: string, kindFor: (raw: UnknownRecord) => ResourceKind, collectionLabel = titleCase(collection)): ResourceCatalogueEntry[] {
   return entries(value).filter(([, raw]) => isCore(raw)).map(([name, raw]) => {
     const category = text(raw.category) || fallbackCategory;
     const subcategory = text(raw.subcategory);
@@ -314,6 +332,7 @@ function resourceEntries(collection: string, value: unknown, fallbackCategory: s
       source: text(raw.source) || "CRB",
       raw,
       collection,
+      collectionLabel,
       category,
       subcategory,
       kind,
@@ -325,14 +344,114 @@ function resourceEntries(collection: string, value: unknown, fallbackCategory: s
   });
 }
 
+const WEAPON_ATTACHMENT_NAMES = new Set([
+  "Airburst Link",
+  "Bipod",
+  "Gas-Vent System",
+  "Imaging Scope (Firearm Accessory)",
+  "Laser Sight",
+  "Periscope (Firearm Accessory)",
+  "Shock Pad",
+  "Silencer/Suppressor",
+  "Smartgun System (Internal)",
+  "Smartgun System (External)",
+  "Tripod"
+]);
+
+const coreWeaponSupport = entries(weaponPayload.weapon_support).filter(([, raw]) => isCore(raw));
+const isWeaponAttachment = ([name, raw]: [string, UnknownRecord]): boolean =>
+  text(raw.subcategory) === "Firearm Accessories" && WEAPON_ATTACHMENT_NAMES.has(name);
+
+const standaloneWeaponSupportCatalogue: ResourceCatalogueEntry[] = coreWeaponSupport.filter((entry) => !isWeaponAttachment(entry)).map(([name, raw]) => {
+  const category = text(raw.category) || "Weapon Support";
+  const subcategory = text(raw.subcategory) || category;
+  const id = stableCreationId(name);
+  return {
+    id,
+    catalogueId: `weapons:${id}`,
+    name: titleCase(name),
+    source: text(raw.source) || "CRB",
+    raw,
+    collection: "weapons",
+    collectionLabel: "Weapons",
+    category,
+    subcategory,
+    kind: "gear",
+    ...ratingRange(raw),
+    isFocus: false,
+    capabilityIds: []
+  };
+});
+
 export const resourceCatalogue: ResourceCatalogueEntry[] = [
   ...resourceEntries("equipment", equipmentPayload.equipment, "Equipment", (raw) => text(raw.category) === "Augmentations" ? "augmentation" : "gear"),
   ...resourceEntries("weapons", weaponPayload.weapons, "Weapons", () => "weapon"),
+  ...standaloneWeaponSupportCatalogue,
   ...resourceEntries("cyberdecks", cyberdeckPayload.cyberdecks, "Cyberdecks", () => "gear"),
+  ...resourceEntries("software", cyberdeckPayload.software, "Software", () => "gear", "Programs"),
   ...resourceEntries("vehicles", vehiclePayload.vehicles, "Vehicles", () => "vehicle"),
   ...resourceEntries("drones", dronePayload.drones, "Drones", () => "drone"),
   ...resourceEntries("lifestyles", lifestylePayload.lifestyles, "Lifestyles", () => "lifestyle")
 ].sort((a, b) => a.category.localeCompare(b.category) || a.name.localeCompare(b.name));
+
+const equipmentEnhancementMatch = compileRule(relationshipRules.equipment_enhancements.match);
+const equipmentEnhancementExclusions = relationshipRules.equipment_enhancements.exclusions.map((exclusion) => compileRule(exclusion.when));
+const weaponSupportPredicates = new Map(Object.entries(relationshipRules.weapon_support.profiles).map(([profile, configuration]) => [
+  profile,
+  compileRule(configuration.rule, relationshipRules.weapon_support.definitions)
+]));
+
+const equipmentEnhancements: ResourceAddonEntry[] = entries(equipmentPayload.enhancements).filter(([, raw]) => isCore(raw)).map(([name, raw]) => {
+  const range = ratingRange(raw);
+  return {
+    id: stableCreationId(name),
+    addonId: `enhancement:${stableCreationId(name)}`,
+    name: titleCase(name),
+    source: text(raw.source) || "CRB",
+    raw,
+    kind: "enhancement",
+    group: text(raw.enhancement_group) || "Enhancements",
+    ...range
+  };
+});
+
+const weaponAttachments: ResourceAddonEntry[] = coreWeaponSupport.filter(isWeaponAttachment).map(([name, raw]) => {
+  const range = ratingRange(raw);
+  return {
+    id: stableCreationId(name),
+    addonId: `attachment:${stableCreationId(name)}`,
+    name: titleCase(name),
+    source: text(raw.source) || "CRB",
+    raw,
+    kind: "attachment",
+    group: text(raw.subcategory) || "Weapon attachments",
+    ...range
+  };
+});
+
+export function associatedResourceAddons(entry: ResourceCatalogueEntry): ResourceAddonEntry[] {
+  if (entry.collection === "equipment") {
+    const equipment = { name: entry.name, category: entry.category, subcategory: entry.subcategory, raw: entry.raw };
+    return equipmentEnhancements.filter((enhancement) => {
+      const context = { equipment, enhancement: enhancement.raw };
+      return equipmentEnhancementMatch(context) && !equipmentEnhancementExclusions.some((exclusion) => exclusion(context));
+    });
+  }
+  if (entry.collection === "weapons" && entry.kind === "weapon") {
+    const weapon = { name: entry.name, category: entry.category, subcategory: entry.subcategory, raw: entry.raw };
+    return weaponAttachments.filter((support) => {
+      const profile = text(ruleValueAtPath({ raw: support.raw }, relationshipRules.weapon_support.profile_field));
+      return weaponSupportPredicates.get(profile)?.({ support: support.raw, weapon }) || false;
+    });
+  }
+  return [];
+}
+
+const standaloneWeaponSupportByLegacyAddonId = new Map(standaloneWeaponSupportCatalogue.map((entry) => [`attachment:${entry.id}`, entry.catalogueId]));
+
+export function standaloneWeaponSupportCatalogueIdForAddon(addonId: string): string | undefined {
+  return standaloneWeaponSupportByLegacyAddonId.get(addonId);
+}
 
 export function parseNuyenValue(value: unknown): number | null {
   const authored = text(value).trim();
@@ -344,6 +463,15 @@ export function parseNuyenValue(value: unknown): number | null {
 function labelledRatingValue(authored: string, rating: number): number | null {
   const matcher = /Rating\s+(\d+)\s*:\s*([\d,]+(?:\.\d+)?)/gi;
   for (const match of authored.matchAll(matcher)) if (Number(match[1]) === rating) return Number(match[2].replace(/,/g, ""));
+  return null;
+}
+
+function rangedRatingValue(authored: string, rating: number, variable: "Rating" | "Force"): number | null {
+  const matcher = /Rating\s+(\d+)\s*[-–]\s*(\d+)\s*:\s*([^;]+)/gi;
+  for (const match of authored.matchAll(matcher)) {
+    if (rating < Number(match[1]) || rating > Number(match[2])) continue;
+    return multipliedRatingValue(match[3], rating, variable) ?? parseNuyenValue(match[3]);
+  }
   return null;
 }
 
@@ -362,14 +490,26 @@ function multipliedRatingValue(authored: string, rating: number, variable: "Rati
   return null;
 }
 
+function offsetRatingValue(authored: string, rating: number, variable: "Rating" | "Force"): number | null {
+  const normalized = authored.replace(/,/g, "").replace(/×/g, "x");
+  const offset = normalized.match(new RegExp(`${variable}\\s*([+-])\\s*([0-9]+(?:\\.[0-9]+)?)`, "i"));
+  if (!offset) return null;
+  return rating + (offset[1] === "-" ? -1 : 1) * Number(offset[2]);
+}
+
 function resolveRatedValue(value: unknown, rating: number | undefined, variable: "Rating" | "Force"): number | null {
   const authored = text(value).trim();
   if (!authored || authored === "—" || authored === "-") return 0;
+  if (/^included\b/i.test(authored)) return 0;
   if (rating != null) {
     const labelled = labelledRatingValue(authored, rating);
     if (labelled != null) return labelled;
+    const ranged = rangedRatingValue(authored, rating, variable);
+    if (ranged != null) return ranged;
     const multiplied = multipliedRatingValue(authored, rating, variable);
     if (multiplied != null) return multiplied;
+    const offset = offsetRatingValue(authored, rating, variable);
+    if (offset != null) return offset;
     if (authored.includes("/")) {
       const slashed = slashRatingValue(authored, rating);
       if (slashed != null) return slashed;
@@ -388,7 +528,7 @@ export function resolveCatalogueCost(entry: ResourceCatalogueEntry, rating?: num
 export function resolveCatalogueAvailability(entry: ResourceCatalogueEntry, rating?: number): number | null {
   const authored = text(entry.raw.availability);
   if (!authored || authored === "—") return 0;
-  return resolveRatedValue(authored.replace(/[RF]\s*$/i, ""), rating, entry.isFocus ? "Force" : "Rating");
+  return resolveRatedValue(authored.replace(/^\+/, "").replace(/[RF]\s*$/i, ""), rating, entry.isFocus ? "Force" : "Rating");
 }
 
 export function resolveCatalogueEssence(entry: ResourceCatalogueEntry, rating?: number): number | null {
@@ -401,6 +541,21 @@ export function resolveCatalogueDeviceRating(entry: ResourceCatalogueEntry, rati
   if (authored == null || authored === "") return undefined;
   const value = resolveRatedValue(authored, rating, "Rating");
   return value == null ? undefined : value;
+}
+
+export function resolveResourceAddonCost(addon: ResourceAddonEntry, rating?: number, baseItemCost?: number | null): number | null {
+  const authored = text(addon.raw.cost).trim();
+  const baseMultiplier = authored.match(/(?:weapon|armor)\s+cost\s*[x×]\s*(\d+(?:\.\d+)?)/i);
+  if (baseMultiplier) return baseItemCost == null ? null : baseItemCost * Number(baseMultiplier[1]);
+  const resolved = resolveRatedValue(authored.replace(/^\+/, ""), rating, "Rating");
+  if (resolved == null) return null;
+  return rating != null && /per point\b/i.test(authored) ? resolved * rating : resolved;
+}
+
+export function resolveResourceAddonAvailability(addon: ResourceAddonEntry, rating?: number): number | null {
+  const authored = text(addon.raw.availability).trim();
+  if (!authored || authored === "—") return 0;
+  return resolveRatedValue(authored.replace(/^\+/, "").replace(/[RF]\s*$/i, ""), rating, "Rating");
 }
 
 export function lifestyleCostMultiplier(metatypeId: string): number {
@@ -418,27 +573,54 @@ export function resolveResourceSelection(selection: ResourceSelectionShape, meta
   if (entry.ratingMinimum != null && (selection.rating == null || selection.rating < entry.ratingMinimum || (entry.ratingMaximum != null && selection.rating > entry.ratingMaximum))) {
     issues.push({ id: "catalogue.resource-rating", message: `${entry.name} requires a rating from ${entry.ratingMinimum} to ${entry.ratingMaximum}.`, field: "rating" });
   }
-  const rawCost = selection.manualCost ?? resolveCatalogueCost(entry, selection.rating);
-  if (rawCost == null || !Number.isFinite(rawCost)) issues.push({ id: "catalogue.resource-cost", message: `${entry.name} has authored variable pricing. Enter the configured per-item cost.`, field: "cost" });
+  const automaticCost = resolveCatalogueCost(entry, selection.rating);
+  const rawCost = selection.manualCost ?? automaticCost;
   const rawAvailability = selection.manualAvailability ?? resolveCatalogueAvailability(entry, selection.rating);
-  if (rawAvailability == null || !Number.isFinite(rawAvailability)) issues.push({ id: "catalogue.resource-availability", message: `${entry.name} has variable Availability. Enter the configured numeric value.`, field: "availability" });
+  if (rawAvailability == null || !Number.isFinite(rawAvailability)) issues.push({ id: "catalogue.resource-availability", message: `${entry.name} has authored variable Availability; verify it against the creation limit with the gamemaster.`, field: "availability", severity: "warning" });
   const rawEssence = selection.manualEssence ?? resolveCatalogueEssence(entry, selection.rating);
   if (entry.kind === "augmentation" && (rawEssence == null || !Number.isFinite(rawEssence))) issues.push({ id: "catalogue.resource-essence", message: `${entry.name} has variable Essence. Enter the configured per-item Essence cost.`, field: "essence" });
+
+  const associatedAddons = associatedResourceAddons(entry);
+  const addonCosts: number[] = [];
+  const addonAvailabilities: number[] = [];
+  const addonAvailabilityModifiers: number[] = [];
+  let unresolvedCost = rawCost == null || !Number.isFinite(rawCost);
+  for (const addonSelection of selection.addons || []) {
+    const addon = associatedAddons.find((candidate) => candidate.addonId === addonSelection.id);
+    if (!addon) {
+      issues.push({ id: "catalogue.resource-addon", message: `${entry.name} includes an attachment or enhancement that is not compatible with this item.`, field: "addons" });
+      continue;
+    }
+    if (addon.ratingMinimum != null && (addonSelection.rating == null || addonSelection.rating < addon.ratingMinimum || (addon.ratingMaximum != null && addonSelection.rating > addon.ratingMaximum))) {
+      issues.push({ id: "catalogue.resource-addon-rating", message: `${addon.name} requires a rating from ${addon.ratingMinimum} to ${addon.ratingMaximum}.`, field: "addons" });
+      continue;
+    }
+    const addonQuantity = Number.isInteger(addonSelection.quantity) && (addonSelection.quantity || 0) > 0 ? Number(addonSelection.quantity) : 1;
+    const addonCost = resolveResourceAddonCost(addon, addonSelection.rating, rawCost);
+    if (addonCost == null || !Number.isFinite(addonCost)) unresolvedCost = true;
+    else addonCosts.push(addonCost * addonQuantity);
+    const addonAvailability = resolveResourceAddonAvailability(addon, addonSelection.rating);
+    if (addonAvailability == null || !Number.isFinite(addonAvailability)) issues.push({ id: "catalogue.resource-addon-availability", message: `${addon.name} has authored variable Availability; verify it against the creation limit with the gamemaster.`, field: "addons", severity: "warning" });
+    else if (/^\(?\s*\+/.test(text(addon.raw.availability).trim())) addonAvailabilityModifiers.push(addonAvailability);
+    else addonAvailabilities.push(addonAvailability);
+  }
+  if (unresolvedCost && selection.additionalCost == null) issues.push({ id: "catalogue.resource-cost", message: `${entry.name} has an unresolved authored price. Enter that amount in Additional cost.`, field: "cost" });
 
   const grade = entry.kind === "augmentation" ? selection.grade || "standard" : undefined;
   const gradeCostMultiplier = grade === "alphaware" ? 1.2 : 1;
   const gradeEssenceMultiplier = grade === "alphaware" ? 0.8 : 1;
-  const baseLineCost = (rawCost || 0) * quantity;
+  const baseLineCost = ((rawCost || 0) + addonCosts.reduce((total, cost) => total + cost, 0)) * quantity;
   const metatypeMultiplier = entry.kind === "lifestyle" ? lifestyleCostMultiplier(metatypeId) : 1;
-  const cost = Math.round(baseLineCost * gradeCostMultiplier * metatypeMultiplier);
+  const cost = Math.round(baseLineCost * gradeCostMultiplier * metatypeMultiplier + Math.max(0, selection.additionalCost || 0));
   const essenceCost = entry.kind === "augmentation" ? Math.round((rawEssence || 0) * quantity * gradeEssenceMultiplier * 1_000_000) / 1_000_000 : undefined;
   const deviceRating = resolveCatalogueDeviceRating(entry, selection.rating);
+  const availability = rawAvailability == null ? undefined : Math.max(rawAvailability + addonAvailabilityModifiers.reduce((total, value) => total + value, 0), ...addonAvailabilities);
   const purchase: ResourcePurchase = {
     id: selection.instanceId,
     kind: entry.kind === "augmentation" ? "augmentation" : entry.kind === "lifestyle" ? "lifestyle" : entry.kind === "weapon" ? "weapon" : "gear",
     cost,
     ...(entry.kind === "lifestyle" ? { baseCost: baseLineCost } : {}),
-    ...(rawAvailability != null ? { availability: rawAvailability } : {}),
+    ...(availability != null ? { availability } : {}),
     ...(deviceRating != null ? { deviceRating } : {}),
     ...(grade ? { augmentationGrade: grade } : {}),
     ...(entry.augmentationType ? { augmentationType: entry.augmentationType } : {}),

@@ -51,7 +51,7 @@ The runtime integration is split into five narrow layers:
 
 - `src/character-creation/workflow.ts` defines the ordered step identifiers shared by state, orchestration and routing;
 - `src/character-creation/draft.ts` defines the one versioned, exportable `CharacterDraft` and the deterministic rebasing rules used when a priority, metatype or path changes;
-- `src/character-creation/catalogues.ts` adapts the established Core datasets into stable choices and normalizes authored cost, Availability, Rating, Essence, grade and Lifestyle modifiers;
+- `src/character-creation/catalogues.ts` adapts the established Core datasets into stable choices and normalizes authored cost, Availability, Rating, Essence, grade, Lifestyle modifiers and programs. It exposes installed attachments and enhancements as cart-line options while adapting ammunition and other standalone weapon support into independently purchasable catalogue records;
 - `src/character-creation/orchestrator.ts` derives the engine plans, Karma ledger, catalogue validation, completion state and final statistics from that draft;
 - `src/character-creation/steps.tsx` renders accessible editors and consumes evaluation results without owning mechanical constants.
 

@@ -16,6 +16,7 @@ import {
   PRIORITY_CATEGORY_LABELS,
   PRIORITY_RANKS,
   adeptPowerCatalogue,
+  associatedResourceAddons,
   availableMagicPaths,
   availableMetatypes,
   complexFormCatalogue,
@@ -28,9 +29,9 @@ import {
   priorityRow,
   qualityCatalogue,
   qualityOptions,
-  resolveCatalogueAvailability,
   resolveCatalogueCost,
-  resolveCatalogueEssence,
+  resolveResourceAddonCost,
+  resolveResourceSelection,
   resourceCatalogue,
   ritualCatalogue,
   skillCatalogue,
@@ -42,6 +43,8 @@ import {
   titleCase,
   type AttributeId,
   type QualityCatalogueEntry,
+  type ResourceAddonEntry,
+  type ResourceAddonSelection,
   type ResourceCatalogueEntry,
   type ResourceSelectionShape,
   type SpecialAttributeId
@@ -290,15 +293,20 @@ function QualityParameterEditor({ quality, selection, update }: { quality: Quali
 
 export function QualitiesStep({ draft, setDraft, evaluation }: StepProps) {
   const [query, setQuery] = useState("");
-  const [kind, setKind] = useState<"all" | "positive" | "negative">("all");
-  const filtered = useMemo(() => qualityCatalogue.filter((quality) => (kind === "all" || quality.kind === kind) && `${quality.name} ${quality.qualityType} ${stripHtml(quality.raw.description)}`.toLowerCase().includes(query.toLowerCase().trim())), [query, kind]);
+  const [kind, setKind] = useState<"positive" | "negative">("positive");
+  const filtered = useMemo(() => qualityCatalogue.filter((quality) => quality.kind === kind && `${quality.name} ${quality.qualityType} ${stripHtml(quality.raw.description)}`.toLowerCase().includes(query.toLowerCase().trim())), [query, kind]);
   const selectedCount = (id: string) => draft.qualities.filter((selection) => selection.id === id).length;
   const updateSelection = (index: number, selection: QualitySelection) => setDraft((current) => ({ ...current, qualities: current.qualities.map((item, itemIndex) => itemIndex === index ? selection : item) }));
   return <>
     <StepHeader code="STEP 03 // PROFILE" title="Qualities" copy="Choose Core Rulebook Positive and Negative Qualities. Rated, option-based, repeatable, eligibility, incompatibility, and approval rules are generated from the structured contract."/>
     <ValidationPanel violations={evaluation.steps.qualities.violations}/>
     <div className="creation-ledger-strip"><div><span>Positive</span><strong>{evaluation.qualitySummary?.positive ?? "—"}</strong><small>Karma spent</small></div><div><span>Negative</span><strong>{evaluation.qualitySummary?.negative ?? "—"}</strong><small>Karma gained</small></div><div><span>Available</span><strong>{evaluation.qualitySummary?.netKarmaAfterQualities ?? "—"}</strong><small>After qualities</small></div></div>
-    <div className="creation-catalogue-tools"><label><span>Search qualities</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Name, type, rule or effect…"/></label><label><span>Quality kind</span><select value={kind} onChange={(event) => setKind(event.target.value as typeof kind)}><option value="all">All qualities</option><option value="positive">Positive</option><option value="negative">Negative</option></select></label></div>
+    <nav className="creation-quality-tabs" aria-label="Quality kind" role="tablist">{(["positive", "negative"] as const).map((qualityKind) => {
+      const available = qualityCatalogue.filter((quality) => quality.kind === qualityKind).length;
+      const selected = draft.qualities.filter((quality) => qualityCatalogue.find((entry) => entry.id === quality.id)?.kind === qualityKind).length;
+      return <button type="button" role="tab" aria-selected={kind === qualityKind} key={qualityKind} onClick={() => setKind(qualityKind)}><span>{titleCase(qualityKind)} qualities</span><small>{available} available // {selected} selected</small></button>;
+    })}</nav>
+    <div className="creation-catalogue-tools creation-catalogue-tools--qualities"><label><span>Search {kind} qualities</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Name, type, rule or effect…"/></label></div>
     <div className="creation-split-catalogue">
       <section className="creation-catalogue-list" aria-label="Available qualities"><header><strong>{filtered.length} available</strong><span>Core Rulebook ruleset</span></header>{filtered.map((quality) => {
         const repeatable = quality.constraint.repeatable === true;
@@ -311,7 +319,7 @@ export function QualitiesStep({ draft, setDraft, evaluation }: StepProps) {
         let cost = "Configure";
         try { const resolved = qualityKarmaValue(selection); cost = `${resolved.amount} Karma`; } catch { /* Configuration editor exposes missing values. */ }
         const approvalId = `quality:${quality.id}`;
-        return <article className="creation-selected-card" key={`${selection.id}:${index}`}><header><div><span>{quality.kind}</span><h3>{quality.name}</h3><small>{cost}</small></div><button type="button" onClick={() => setDraft((current) => ({ ...current, qualities: current.qualities.filter((_, itemIndex) => itemIndex !== index) }))} aria-label={`Remove ${quality.name}`}>Remove</button></header><p>{stripHtml(quality.raw.description).slice(0, 230)}{stripHtml(quality.raw.description).length > 230 ? "…" : ""}</p><QualityParameterEditor quality={quality} selection={selection} update={(next) => updateSelection(index, next)}/>{quality.constraint.requires_gamemaster_approval ? <label className="creation-approval"><input type="checkbox" checked={draft.approvals.includes(approvalId)} onChange={(event) => setDraft((current) => ({ ...current, approvals: event.target.checked ? [...current.approvals, approvalId] : current.approvals.filter((id) => id !== approvalId) }))}/><span>Gamemaster approval recorded</span></label> : null}</article>;
+        return <article className="creation-selected-card" key={`${selection.id}:${index}`}><header><div><span>{quality.kind}</span><h3>{quality.name}</h3><small>{cost}</small></div><button type="button" onClick={() => setDraft((current) => ({ ...current, qualities: current.qualities.filter((_, itemIndex) => itemIndex !== index) }))} aria-label={`Remove ${quality.name}`}>Remove</button></header><details className="creation-quality-description"><summary>Read full description</summary><div dangerouslySetInnerHTML={{ __html: String(quality.raw.description || "No description is available.") }}/></details><QualityParameterEditor quality={quality} selection={selection} update={(next) => updateSelection(index, next)}/>{quality.constraint.requires_gamemaster_approval ? <label className="creation-approval"><input type="checkbox" checked={draft.approvals.includes(approvalId)} onChange={(event) => setDraft((current) => ({ ...current, approvals: event.target.checked ? [...current.approvals, approvalId] : current.approvals.filter((id) => id !== approvalId) }))}/><span>Gamemaster approval required — check once approved</span></label> : null}</article>;
       }) : <EmptySelection>Select qualities from the catalogue. A character may also begin with none.</EmptySelection>}</section>
     </div>
   </>;
@@ -411,33 +419,155 @@ function resourceAuthoredValue(entry: ResourceCatalogueEntry, field: "cost" | "a
   return String(value ?? "—");
 }
 
+export function resourceRecordHref(entry: ResourceCatalogueEntry): string {
+  const moduleId = entry.collection === "software" || entry.collection === "cyberdecks" ? "cyberdecks" : entry.collection;
+  const categoryId = entry.collection === "software" ? "software" : stableCreationId(entry.category);
+  return `${import.meta.env.BASE_URL}#/${moduleId}/${categoryId}/${entry.id}`;
+}
+
+function ResourceRecordLink({ entry }: { entry: ResourceCatalogueEntry }) {
+  return <a className="creation-resource-record-link" href={resourceRecordHref(entry)} target="_blank" rel="noreferrer" aria-label={`Open ${entry.name} record in a new tab`}>{entry.name}<span aria-hidden="true">↗</span></a>;
+}
+
+function ratingOptions(minimum: number, maximum = minimum): number[] {
+  return Array.from({ length: Math.max(0, maximum - minimum + 1) }, (_, index) => minimum + index);
+}
+
+function ResourceAddonEditor({ entry, selection, update }: { entry: ResourceCatalogueEntry; selection: ResourceSelectionShape; update: (patch: Partial<ResourceSelectionShape>) => void }) {
+  const addons = associatedResourceAddons(entry);
+  const selected = selection.addons || [];
+  const selectedById = new Map(selected.map((addon) => [addon.id, addon]));
+  const setAddon = (addon: ResourceAddonEntry, enabled: boolean) => {
+    const next = enabled
+      ? [...selected, { id: addon.addonId, quantity: 1, ...(addon.ratingMinimum != null ? { rating: addon.ratingMinimum } : {}) }]
+      : selected.filter((candidate) => candidate.id !== addon.addonId);
+    update({ addons: next });
+  };
+  const patchAddon = (addonId: string, patch: Partial<ResourceAddonSelection>) => update({
+    addons: selected.map((addon) => addon.id === addonId ? { ...addon, ...patch } : addon)
+  });
+  const baseCost = resolveCatalogueCost(entry, selection.rating);
+
+  return <details className="creation-resource-addon-config"><summary>{addons.length ? <>Attachments &amp; enhancements <span>{selected.length} selected</span></> : "Cost adjustment"}</summary><div>
+    <label className="creation-additional-cost"><span>Additional cost</span><input type="number" min={0} value={selection.additionalCost ?? ""} placeholder="0" onChange={(event) => update({ additionalCost: optionalNumberInput(event.target.value) })}/><small>Add a custom or unresolved amount to this cart line.</small></label>
+    {addons.length ? <div className="creation-addon-list">{addons.map((addon) => {
+      const addonSelection = selectedById.get(addon.addonId);
+      const selectedRating = addonSelection?.rating ?? addon.ratingMinimum;
+      const resolvedCost = resolveResourceAddonCost(addon, selectedRating, baseCost);
+      return <article key={addon.addonId} data-selected={Boolean(addonSelection) || undefined}><label><input type="checkbox" checked={Boolean(addonSelection)} onChange={(event) => setAddon(addon, event.target.checked)}/><span><strong>{addon.name}</strong><small>{addon.group} // {resolvedCost == null ? String(addon.raw.cost || "Variable cost") : formatNuyen(resolvedCost)}</small></span></label>{addonSelection && addon.ratingMinimum != null ? <label className="creation-addon-rating"><span>Rating</span><select value={selectedRating} onChange={(event) => patchAddon(addon.addonId, { rating: Number(event.target.value) })}>{ratingOptions(addon.ratingMinimum, addon.ratingMaximum).map((rating) => <option value={rating} key={rating}>{rating}</option>)}</select></label> : null}</article>;
+    })}</div> : null}
+  </div></details>;
+}
+
+interface StoreSubcategory {
+  id: string;
+  label: string;
+  category: string;
+  entries: ResourceCatalogueEntry[];
+}
+
+const STORE_DEPARTMENT_ORDER = ["equipment", "weapons", "cyberdecks", "software", "vehicles", "drones"];
+
 export function ResourcesStep({ draft, setDraft, evaluation }: StepProps) {
   const [query, setQuery] = useState("");
   const [department, setDepartment] = useState("equipment");
-  const [category, setCategory] = useState("all");
-  const departments = useMemo(() => [...new Map(resourceCatalogue.map((entry) => [entry.collection, { id: entry.collection.toLowerCase(), name: entry.collection }])).values()], []);
-  const categories = useMemo(() => [...new Set(resourceCatalogue.filter((entry) => entry.collection.toLowerCase() === department).map((entry) => entry.category))], [department]);
-  const filtered = useMemo(() => resourceCatalogue.filter((entry) => entry.collection.toLowerCase() === department && (category === "all" || entry.category === category) && `${entry.name} ${entry.category} ${entry.subcategory} ${entry.raw.description || ""}`.toLowerCase().includes(query.toLowerCase().trim())), [query, category, department]);
-  const visible = filtered.slice(0, 36);
+  const [subcategoryId, setSubcategoryId] = useState("");
+  const [storeView, setStoreView] = useState<"catalogue" | "cart">("catalogue");
+  const [ratingChoices, setRatingChoices] = useState<Record<string, number>>({});
+  const lifestyleEntries = useMemo(() => resourceCatalogue.filter((entry) => entry.kind === "lifestyle").sort((left, right) => left.name.localeCompare(right.name)), []);
+  const lifestyleSelection = draft.resources.find((selection) => resourceCatalogue.find((entry) => entry.catalogueId === selection.catalogueId)?.kind === "lifestyle");
+  const lifestyleEntry = lifestyleEntries.find((entry) => entry.catalogueId === lifestyleSelection?.catalogueId);
+  const lifestyleResolved = lifestyleSelection ? resolveResourceSelection(lifestyleSelection, draft.metatypeId) : null;
+  const lifestyleMonthlyCost = lifestyleSelection ? resolveResourceSelection({ ...lifestyleSelection, quantity: 1 }, draft.metatypeId).purchase.cost : 0;
+  const cartSelections = draft.resources.map((selection, index) => ({
+    selection,
+    index,
+    entry: resourceCatalogue.find((entry) => entry.catalogueId === selection.catalogueId)
+  })).filter((item) => item.entry?.kind !== "lifestyle");
+  const cartSpent = cartSelections.reduce((total, item) => total + resolveResourceSelection(item.selection, draft.metatypeId).purchase.cost, 0);
+  const departments = useMemo(() => [...new Map(resourceCatalogue.filter((entry) => entry.kind !== "lifestyle").map((entry) => [entry.collection, { id: entry.collection, name: entry.collectionLabel }])).values()].sort((left, right) => STORE_DEPARTMENT_ORDER.indexOf(left.id) - STORE_DEPARTMENT_ORDER.indexOf(right.id)), []);
+  const departmentEntries = useMemo(() => resourceCatalogue.filter((entry) => entry.collection === department), [department]);
+  const subcategories = useMemo<StoreSubcategory[]>(() => {
+    const groups = new Map<string, StoreSubcategory>();
+    for (const entry of departmentEntries) {
+      const label = entry.subcategory || entry.category;
+      const id = stableCreationId(`${entry.category}-${label}`);
+      const existing = groups.get(id);
+      if (existing) existing.entries.push(entry);
+      else groups.set(id, { id, label, category: entry.category, entries: [entry] });
+    }
+    return [...groups.values()].sort((left, right) => left.category.localeCompare(right.category) || left.label.localeCompare(right.label));
+  }, [departmentEntries]);
+  const searchTerm = query.toLowerCase().trim();
+  const matchesSearch = (entry: ResourceCatalogueEntry) => `${entry.name} ${entry.category} ${entry.subcategory} ${entry.raw.description || ""}`.toLowerCase().includes(searchTerm);
+  const visibleSubcategories = subcategories.filter((group) => !searchTerm || group.entries.some(matchesSearch));
+  const selectedSubcategory = subcategories.find((group) => group.id === subcategoryId);
+  const filteredProducts = (selectedSubcategory?.entries || []).filter(matchesSearch);
+  const visibleProducts = filteredProducts.slice(0, 36);
   const update = (index: number, patch: Partial<ResourceSelectionShape>) => setDraft((current) => ({ ...current, resources: current.resources.map((selection, itemIndex) => itemIndex === index ? { ...selection, ...patch } : selection) }));
+  const chooseLifestyle = (catalogueId: string) => setDraft((current) => {
+    const currentLifestyle = current.resources.find((selection) => resourceCatalogue.find((entry) => entry.catalogueId === selection.catalogueId)?.kind === "lifestyle");
+    const gear = current.resources.filter((selection) => resourceCatalogue.find((entry) => entry.catalogueId === selection.catalogueId)?.kind !== "lifestyle");
+    if (!catalogueId) return { ...current, resources: gear };
+    const selection: ResourceSelectionShape = {
+      instanceId: currentLifestyle?.instanceId || draftInstanceId("lifestyle", current.resources.map((item) => item.instanceId)),
+      catalogueId,
+      quantity: Math.max(1, currentLifestyle?.quantity || 1)
+    };
+    return { ...current, resources: [selection, ...gear] };
+  });
+  const updateLifestyleMonths = (months: number) => {
+    if (!lifestyleSelection) return;
+    setDraft((current) => ({
+      ...current,
+      resources: current.resources.map((selection) => selection.instanceId === lifestyleSelection.instanceId ? { ...selection, quantity: Math.max(1, months) } : selection)
+    }));
+  };
+  const addToCart = (entry: ResourceCatalogueEntry) => {
+    const rating = entry.ratingMinimum == null ? undefined : ratingChoices[entry.catalogueId] ?? entry.ratingMinimum;
+    setDraft((current) => {
+      const selection: ResourceSelectionShape = {
+        instanceId: draftInstanceId("item", current.resources.map((item) => item.instanceId)),
+        catalogueId: entry.catalogueId,
+        quantity: 1,
+        ...(rating != null ? { rating } : {}),
+        ...(entry.kind === "augmentation" ? { grade: "standard" as const } : {})
+      };
+      return { ...current, resources: [...current.resources, selection] };
+    });
+  };
+  const removeFromCart = (index: number) => setDraft((current) => {
+    const resources = current.resources.filter((_, itemIndex) => itemIndex !== index);
+    return { ...current, resources };
+  });
   return <>
-    <StepHeader code="STEP 06 // PROCUREMENT" title="Resources" copy="Purchase from the existing equipment, weapon, cyberdeck, vehicle, drone, focus, and lifestyle catalogues. Fixed and rated values resolve automatically; authored variable prices are entered transparently."/>
+    <StepHeader code="STEP 06 // PROCUREMENT" title="Gear" copy="Choose the runner's required starting lifestyle, then purchase equipment, weapons, programs, cyberdecks, vehicles, drones, foci, and augmentations from the connected catalogues."/>
     <ValidationPanel violations={evaluation.steps.resources.violations}/>
     <div className="creation-budget-grid"><BudgetMeter label="Budget allocated" spent={evaluation.resources.spent + evaluation.resources.carryover} total={evaluation.resources.budget} invert/><BudgetMeter label="Essence used" spent={Math.max(0, 6 - evaluation.resources.essence)} total={6}/></div>
     <div className="creation-resource-controls"><label><span>Karma converted to nuyen</span><input type="number" min={0} value={draft.karmaConvertedToNuyen} onChange={(event) => setDraft((current) => ({ ...current, karmaConvertedToNuyen: numberInput(event.target.value) }))}/><small>{formatNuyen(draft.karmaConvertedToNuyen * 2000)}</small></label><div><span>Automatic carryover</span><strong>{formatNuyen(evaluation.resources.carryover)}</strong><small>Calculated from the unspent balance, up to the Core limit.</small></div></div>
-    <nav className="creation-store-departments" aria-label="Store departments">{departments.map((option) => <button type="button" key={option.id} aria-pressed={department === option.id} onClick={() => { setDepartment(option.id); setCategory("all"); }}>{option.name}<small>{resourceCatalogue.filter((entry) => entry.collection.toLowerCase() === option.id).length}</small></button>)}</nav>
-    <div className="creation-catalogue-tools"><label><span>Search this department</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Item, effect, cost…"/></label><label><span>Product category</span><select value={category} onChange={(event) => setCategory(event.target.value)}><option value="all">All {departments.find((item) => item.id === department)?.name || "products"}</option>{categories.map((name) => <option value={name} key={name}>{name}</option>)}</select></label></div>
-    <div className="creation-storefront">
-      <section className="creation-store-products"><header><strong>{filtered.length} products</strong><span>{filtered.length > visible.length ? `Showing first ${visible.length}` : "Available catalogue"}</span></header><div className="creation-store-product-grid">{visible.map((entry) => <article key={entry.catalogueId}><div><span>{entry.subcategory || entry.category}</span><h3>{entry.name}</h3><p>{stripHtml(entry.raw.description).slice(0, 120) || "Catalogue specification available when added to the cart."}</p></div><dl><div><dt>Price</dt><dd>{resourceAuthoredValue(entry, "cost")}</dd></div><div><dt>Availability</dt><dd>{resourceAuthoredValue(entry, "availability")}</dd></div></dl><button type="button" onClick={() => setDraft((current) => ({ ...current, resources: [...current.resources, { instanceId: draftInstanceId("item", current.resources.map((item) => item.instanceId)), catalogueId: entry.catalogueId, quantity: 1, ...(entry.ratingMinimum != null ? { rating: entry.ratingMinimum } : {}), ...(entry.kind === "augmentation" ? { grade: "standard" as const } : {}) }] }))}>Add to cart</button></article>)}</div></section>
-      <section className="creation-selected-list creation-resource-selected creation-store-cart"><header><strong>Shopping cart</strong><span>{draft.resources.length} line items // {formatNuyen(evaluation.resources.spent)}</span></header>{draft.resources.length ? draft.resources.map((selection, index) => {
-        const entry = resourceCatalogue.find((item) => item.catalogueId === selection.catalogueId);
+    <section className="creation-lifestyle-selection" data-selected={Boolean(lifestyleEntry) || undefined} aria-labelledby="creation-lifestyle-title">
+      <header><div><span>Required selection</span><strong id="creation-lifestyle-title">Starting lifestyle</strong><p>This cost is deducted from the Resources budget before the remaining gear purchases.</p></div><b>{lifestyleEntry ? "Selected" : "Required"}</b></header>
+      <div className="creation-lifestyle-fields">
+        <label><span>Lifestyle</span><select required aria-required="true" aria-invalid={!lifestyleEntry} value={lifestyleEntry?.catalogueId || ""} onChange={(event) => chooseLifestyle(event.target.value)}><option value="">Select a lifestyle…</option>{lifestyleEntries.map((entry) => <option value={entry.catalogueId} key={entry.catalogueId}>{entry.name} // {resourceAuthoredValue(entry, "cost")}</option>)}</select></label>
+        <label><span>Months</span><input type="number" required min={1} disabled={!lifestyleEntry} value={lifestyleSelection?.quantity || 1} onChange={(event) => updateLifestyleMonths(numberInput(event.target.value))}/></label>
+        <dl><div><dt>Monthly cost</dt><dd>{lifestyleEntry ? formatNuyen(lifestyleMonthlyCost) : "—"}</dd></div><div><dt>Selected total</dt><dd>{lifestyleResolved ? formatNuyen(lifestyleResolved.purchase.cost) : "—"}</dd></div></dl>
+      </div>
+      {lifestyleEntry ? <footer><span>{stripHtml(lifestyleEntry.raw.description).slice(0, 180)}</span><ResourceRecordLink entry={lifestyleEntry}/></footer> : <p className="creation-lifestyle-required">A lifestyle must be selected before Gear can be confirmed.</p>}
+    </section>
+    <div className="creation-store-view-toggle"><div><span>{storeView === "catalogue" ? "Available catalogue" : "Shopping cart"}</span><strong>{storeView === "catalogue" ? departments.find((item) => item.id === department)?.name : `${cartSelections.length} line items // ${formatNuyen(cartSpent)}`}</strong></div><button type="button" onClick={() => setStoreView((current) => current === "catalogue" ? "cart" : "catalogue")}>{storeView === "catalogue" ? `View cart (${cartSelections.length})` : "Return to catalogue"}</button></div>
+    {storeView === "catalogue" ? <>
+      <nav className="creation-store-departments" aria-label="Store departments">{departments.map((option) => <button type="button" key={option.id} aria-pressed={department === option.id} onClick={() => { setDepartment(option.id); setSubcategoryId(""); setQuery(""); }}>{option.name}<small>{resourceCatalogue.filter((entry) => entry.collection === option.id).length}</small></button>)}</nav>
+      <div className="creation-catalogue-tools creation-catalogue-tools--store"><label><span>Search this department</span><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Subcategory, item, effect or cost…"/></label></div>
+      <div className="creation-storefront"><section className="creation-store-products"><header><div><strong>{selectedSubcategory ? `${filteredProducts.length} products` : `${visibleSubcategories.length} subcategories`}</strong><span>{selectedSubcategory ? selectedSubcategory.label : "Available catalogue"}</span></div>{selectedSubcategory ? <button type="button" onClick={() => setSubcategoryId("")}>← Back to subcategories</button> : null}</header><div className="creation-store-product-grid">{selectedSubcategory ? visibleProducts.map((entry) => {
+        const rating = entry.ratingMinimum == null ? undefined : ratingChoices[entry.catalogueId] ?? entry.ratingMinimum;
+        const resolvedCost = resolveCatalogueCost(entry, rating);
+        return <article key={entry.catalogueId}><div><span>{entry.subcategory || entry.category}</span><h3><ResourceRecordLink entry={entry}/></h3><p>{stripHtml(entry.raw.description).slice(0, 120) || "Open the catalogue record for the complete specification."}</p></div><dl><div><dt>Price</dt><dd>{resolvedCost == null ? resourceAuthoredValue(entry, "cost") : formatNuyen(resolvedCost)}</dd></div><div><dt>Availability</dt><dd>{resourceAuthoredValue(entry, "availability")}</dd></div></dl>{entry.ratingMinimum != null ? <label className="creation-product-rating"><span>{entry.isFocus ? "Force" : "Rating"}</span><select value={rating} onChange={(event) => setRatingChoices((current) => ({ ...current, [entry.catalogueId]: Number(event.target.value) }))}>{ratingOptions(entry.ratingMinimum, entry.ratingMaximum).map((option) => <option value={option} key={option}>{option}</option>)}</select></label> : null}<button type="button" onClick={() => addToCart(entry)}>Add to cart</button></article>;
+      }) : visibleSubcategories.map((subcategory) => <article className="creation-store-subcategory-card" key={subcategory.id}><div><span>{subcategory.category}</span><h3>{subcategory.label}</h3><p>{subcategory.entries.length} catalogue item{subcategory.entries.length === 1 ? "" : "s"} available in this subcategory.</p></div><dl><div><dt>Records</dt><dd>{subcategory.entries.length}</dd></div><div><dt>Department</dt><dd>{departments.find((item) => item.id === department)?.name}</dd></div></dl><button type="button" onClick={() => setSubcategoryId(subcategory.id)}>Browse subcategory</button></article>)}</div></section></div>
+    </> : <div className="creation-storefront"><section className="creation-selected-list creation-resource-selected creation-store-cart"><header><strong>Shopping cart</strong><span>{cartSelections.length} line items // {formatNuyen(cartSpent)}</span></header>{cartSelections.length ? cartSelections.map(({ selection, index, entry }) => {
         if (!entry) return null;
-        const automaticCost = resolveCatalogueCost(entry, selection.rating);
-        const automaticAvailability = resolveCatalogueAvailability(entry, selection.rating);
-        const automaticEssence = resolveCatalogueEssence(entry, selection.rating);
-        return <article className="creation-selected-card creation-resource-card" key={selection.instanceId}><header><div><span>{entry.collection}</span><h3>{entry.name}</h3><small>{resourceAuthoredValue(entry, "cost")} // Availability {resourceAuthoredValue(entry, "availability")}</small></div><button type="button" onClick={() => setDraft((current) => ({ ...current, resources: current.resources.filter((_, itemIndex) => itemIndex !== index) }))}>Remove</button></header><div className="creation-inline-fields"><label><span>Quantity</span><input type="number" min={1} value={selection.quantity} onChange={(event) => update(index, { quantity: numberInput(event.target.value) })}/></label>{entry.ratingMinimum != null ? <label><span>{entry.isFocus ? "Force" : "Rating"}</span><input type="number" min={entry.ratingMinimum} max={entry.ratingMaximum} value={selection.rating || entry.ratingMinimum} onChange={(event) => update(index, { rating: numberInput(event.target.value) })}/></label> : null}{entry.kind === "augmentation" ? <label><span>Grade</span><select value={selection.grade || "standard"} onChange={(event) => update(index, { grade: event.target.value as "standard" | "alphaware" })}><option value="standard">Standard</option><option value="alphaware">Alphaware</option></select></label> : null}</div><details><summary>Configured numeric values</summary><div className="creation-inline-fields"><label><span>Per-item cost</span><input type="number" min={0} value={selection.manualCost ?? ""} placeholder={automaticCost == null ? "Required" : String(automaticCost)} onChange={(event) => update(index, { manualCost: optionalNumberInput(event.target.value) })}/><small>{automaticCost == null ? "Variable authored price" : `Automatic: ${formatNuyen(automaticCost)}`}</small></label><label><span>Availability</span><input type="number" min={0} value={selection.manualAvailability ?? ""} placeholder={automaticAvailability == null ? "Required" : String(automaticAvailability)} onChange={(event) => update(index, { manualAvailability: optionalNumberInput(event.target.value) })}/></label>{entry.kind === "augmentation" ? <label><span>Per-item Essence</span><input type="number" min={0} step={0.01} value={selection.manualEssence ?? ""} placeholder={automaticEssence == null ? "Required" : String(automaticEssence)} onChange={(event) => update(index, { manualEssence: optionalNumberInput(event.target.value) })}/></label> : null}</div></details>{entry.kind === "augmentation" ? <details><summary>Declared Attribute bonuses</summary><div className="creation-augmentation-grid">{ATTRIBUTE_IDS.map((id) => <label key={id}><span>{id.slice(0, 3).toUpperCase()}</span><input type="number" min={0} max={4} value={selection.attributeBonuses?.[id] || 0} onChange={(event) => update(index, { attributeBonuses: { ...selection.attributeBonuses, [id]: numberInput(event.target.value) } })}/></label>)}</div></details> : null}{entry.isFocus ? <div className="creation-focus-controls"><label className="creation-check-field"><input type="checkbox" checked={Boolean(selection.bonded)} onChange={(event) => update(index, { bonded: event.target.checked })}/><span>Bond this focus at creation</span></label>{selection.bonded ? <label><span>Bonding Karma cost</span><input type="number" min={1} value={selection.bondKarmaCost || ""} onChange={(event) => update(index, { bondKarmaCost: numberInput(event.target.value) })}/><small>Enter the cost for the selected focus type and Force.</small></label> : null}</div> : null}</article>;
-      }) : <EmptySelection>Add purchases from the catalogue. Empty plans are valid but unspent nuyen will be lost.</EmptySelection>}</section>
-    </div>
+        const resolved = resolveResourceSelection(selection, draft.metatypeId);
+        return <article className="creation-selected-card creation-resource-card" key={selection.instanceId}><header><div><span>{entry.collectionLabel}</span><h3><ResourceRecordLink entry={entry}/></h3><small>{formatNuyen(resolved.purchase.cost)} configured // Availability {resolved.purchase.availability ?? "—"}</small></div><button type="button" onClick={() => removeFromCart(index)}>Remove</button></header><div className="creation-inline-fields"><label><span>Quantity</span><input type="number" min={1} value={selection.quantity} onChange={(event) => update(index, { quantity: numberInput(event.target.value) })}/></label>{entry.ratingMinimum != null ? <label><span>{entry.isFocus ? "Force" : "Rating"}</span><select value={selection.rating || entry.ratingMinimum} onChange={(event) => update(index, { rating: Number(event.target.value) })}>{ratingOptions(entry.ratingMinimum, entry.ratingMaximum).map((rating) => <option value={rating} key={rating}>{rating}</option>)}</select></label> : null}{entry.kind === "augmentation" ? <label><span>Grade</span><select value={selection.grade || "standard"} onChange={(event) => update(index, { grade: event.target.value as "standard" | "alphaware" })}><option value="standard">Standard</option><option value="alphaware">Alphaware</option></select></label> : null}</div><ResourceAddonEditor entry={entry} selection={selection} update={(patch) => update(index, patch)}/>{entry.kind === "augmentation" ? <details><summary>Declared Attribute bonuses</summary><div className="creation-augmentation-grid">{ATTRIBUTE_IDS.map((id) => <label key={id}><span>{id.slice(0, 3).toUpperCase()}</span><input type="number" min={0} max={4} value={selection.attributeBonuses?.[id] || 0} onChange={(event) => update(index, { attributeBonuses: { ...selection.attributeBonuses, [id]: numberInput(event.target.value) } })}/></label>)}</div></details> : null}{entry.isFocus ? <div className="creation-focus-controls"><label className="creation-check-field"><input type="checkbox" checked={Boolean(selection.bonded)} onChange={(event) => update(index, { bonded: event.target.checked })}/><span>Bond this focus at creation</span></label>{selection.bonded ? <label><span>Bonding Karma cost</span><input type="number" min={1} value={selection.bondKarmaCost || ""} onChange={(event) => update(index, { bondKarmaCost: numberInput(event.target.value) })}/><small>Enter the cost for the selected focus type and Force.</small></label> : null}</div> : null}</article>;
+      }) : <EmptySelection>Add purchases from the catalogue.</EmptySelection>}</section></div>}
   </>;
 }
 
@@ -500,12 +630,14 @@ export function KarmaStep({ draft, setDraft, evaluation }: StepProps) {
 }
 
 export function BiographyStep({ draft, setDraft, evaluation }: StepProps) {
-  const lifestyles = resourceCatalogue.filter((entry) => entry.kind === "lifestyle");
+  const lifestyleSelection = draft.resources.find((selection) => resourceCatalogue.find((entry) => entry.catalogueId === selection.catalogueId)?.kind === "lifestyle");
+  const lifestyle = resourceCatalogue.find((entry) => entry.catalogueId === lifestyleSelection?.catalogueId);
+  const lifestyleMonths = lifestyleSelection?.quantity || 1;
   const update = (field: keyof CharacterDraft["biography"], value: string) => setDraft((current) => ({ ...current, biography: { ...current.biography, [field]: value } }));
   return <>
-    <StepHeader code="STEP 09 // IDENTITY" title="Biography" copy="Record the identity and personal details that complete the runner, then select the lifestyle they begin play with."/>
+    <StepHeader code="STEP 09 // IDENTITY" title="Biography" copy="Record the identity, physical description, and background that complete the runner. Their purchased Gear lifestyle is carried into this biography automatically."/>
     <ValidationPanel violations={evaluation.steps.biography.violations}/>
-    <div className="creation-biography-grid"><label><span>Street name / primary alias</span><input value={draft.biography.streetName} onChange={(event) => update("streetName", event.target.value)} placeholder="Required"/></label><label><span>Legal name</span><input value={draft.biography.legalName} onChange={(event) => update("legalName", event.target.value)} placeholder="Optional or unknown"/></label><label><span>Age</span><input value={draft.biography.age} onChange={(event) => update("age", event.target.value)} placeholder="Required"/></label><label><span>Gender / pronouns</span><input value={draft.biography.gender} onChange={(event) => update("gender", event.target.value)}/></label><label><span>Ethnicity / heritage</span><input value={draft.biography.ethnicity} onChange={(event) => update("ethnicity", event.target.value)}/></label><label><span>Height</span><input value={draft.biography.height} onChange={(event) => update("height", event.target.value)} placeholder="e.g. 1.82 m"/></label><label><span>Weight</span><input value={draft.biography.weight} onChange={(event) => update("weight", event.target.value)} placeholder="e.g. 78 kg"/></label><label className="creation-biography-lifestyle"><span>Starting lifestyle</span><select value={draft.biography.lifestyleId} onChange={(event) => update("lifestyleId", event.target.value)}><option value="">Select lifestyle…</option>{lifestyles.map((entry) => <option value={entry.id} key={entry.id}>{entry.name} // {resourceAuthoredValue(entry, "cost")}</option>)}</select><small>This records the runner's living standard. Purchase any prepaid months from the Lifestyles department in Resources.</small></label><label className="creation-biography-wide"><span>Physical description</span><textarea rows={4} value={draft.biography.description} onChange={(event) => update("description", event.target.value)} placeholder="Appearance, distinguishing features, style…"/></label><label className="creation-biography-wide"><span>Background notes</span><textarea rows={5} value={draft.biography.background} onChange={(event) => update("background", event.target.value)} placeholder="Origin, motivations, affiliations, important history…"/></label></div>
+    <div className="creation-biography-grid"><label><span>Street name / primary alias</span><input value={draft.biography.streetName} onChange={(event) => update("streetName", event.target.value)} placeholder="Required"/></label><label><span>Legal name</span><input value={draft.biography.legalName} onChange={(event) => update("legalName", event.target.value)} placeholder="Optional or unknown"/></label><label><span>Age</span><input value={draft.biography.age} onChange={(event) => update("age", event.target.value)} placeholder="Required"/></label><label><span>Gender / pronouns</span><input value={draft.biography.gender} onChange={(event) => update("gender", event.target.value)}/></label><label><span>Ethnicity / heritage</span><input value={draft.biography.ethnicity} onChange={(event) => update("ethnicity", event.target.value)}/></label><label><span>Height</span><input value={draft.biography.height} onChange={(event) => update("height", event.target.value)} placeholder="e.g. 1.82 m"/></label><label><span>Weight</span><input value={draft.biography.weight} onChange={(event) => update("weight", event.target.value)} placeholder="e.g. 78 kg"/></label><div className="creation-biography-lifestyle"><span>Starting lifestyle</span><strong>{lifestyle?.name || "No lifestyle purchased"}</strong><small>{lifestyle ? `${lifestyleMonths} month${lifestyleMonths === 1 ? "" : "s"} purchased in Gear // ${resourceAuthoredValue(lifestyle, "cost")}` : "Choose a lifestyle in the Gear store before confirming that step."}</small></div><label className="creation-biography-wide"><span>Physical description</span><textarea rows={4} value={draft.biography.description} onChange={(event) => update("description", event.target.value)} placeholder="Appearance, distinguishing features, style…"/></label><label className="creation-biography-wide"><span>Background notes</span><textarea rows={5} value={draft.biography.background} onChange={(event) => update("background", event.target.value)} placeholder="Origin, motivations, affiliations, important history…"/></label></div>
   </>;
 }
 
@@ -519,12 +651,14 @@ function statisticValue(value: unknown): string {
 }
 
 export function ReviewStep({ draft, evaluation, goToStep, exportDraft, printDraft }: ReviewStepProps) {
+  const lifestyleSelection = draft.resources.find((selection) => resourceCatalogue.find((entry) => entry.catalogueId === selection.catalogueId)?.kind === "lifestyle");
+  const lifestyle = resourceCatalogue.find((entry) => entry.catalogueId === lifestyleSelection?.catalogueId);
   return <>
     <StepHeader code="STEP 10 // AUDIT" title="Final review" copy="This dossier is generated from the same draft evaluated by the rules engine. Final status remains blocked while any mechanical error, approval, or unfinished step is unresolved."/>
     <ValidationPanel violations={evaluation.steps.review.violations} empty="The complete mechanical audit is clear."/>
     <section className="creation-final-status" data-ready={evaluation.ready || undefined}><span aria-hidden="true">{evaluation.ready ? "✓" : "!"}</span><div><strong>{evaluation.ready ? "Runner mechanically ready" : "Runner requires attention"}</strong><p>{evaluation.ready ? "Every creation step is confirmed and no blocking errors or approvals remain. Warnings identify optional unspent resources." : `${evaluation.steps.review.errors} errors and ${evaluation.steps.review.approvals} approvals remain across the workflow.`}</p></div><div><button type="button" onClick={exportDraft}>Export JSON</button><button type="button" onClick={printDraft}>Print dossier</button></div></section>
     <div className="creation-review-grid">
-      <section><header><span>CREATION PROFILE</span><button type="button" onClick={() => goToStep("biography")}>Edit</button></header><h3>{draft.biography.streetName || "Alias not entered"}</h3><p>{metatypeOptions.find((option) => option.id === draft.metatypeId)?.name || "Metatype not selected"} // {titleCase(draft.magicPathId || "Path not selected")}</p><dl><div><dt>Legal name</dt><dd>{draft.biography.legalName || "—"}</dd></div><div><dt>Age</dt><dd>{draft.biography.age || "—"}</dd></div><div><dt>Lifestyle</dt><dd>{resourceCatalogue.find((entry) => entry.kind === "lifestyle" && entry.id === draft.biography.lifestyleId)?.name || "—"}</dd></div></dl></section>
+      <section><header><span>CREATION PROFILE</span><button type="button" onClick={() => goToStep("biography")}>Edit</button></header><h3>{draft.biography.streetName || "Alias not entered"}</h3><p>{metatypeOptions.find((option) => option.id === draft.metatypeId)?.name || "Metatype not selected"} // {titleCase(draft.magicPathId || "Path not selected")}</p><dl><div><dt>Legal name</dt><dd>{draft.biography.legalName || "—"}</dd></div><div><dt>Age</dt><dd>{draft.biography.age || "—"}</dd></div><div><dt>Lifestyle</dt><dd>{lifestyle?.name || "—"}</dd></div></dl></section>
       <section><header><span>PRIORITIES</span><button type="button" onClick={() => goToStep("priorities")}>Edit</button></header><dl>{PRIORITY_CATEGORIES.map((category) => <div key={category}><dt>{PRIORITY_CATEGORY_LABELS[category]}</dt><dd>{draft.priorityAssignments[category]}</dd></div>)}</dl></section>
       <section className="creation-review-wide"><header><span>ATTRIBUTES</span><button type="button" onClick={() => goToStep("attributes")}>Edit</button></header><div className="creation-review-stat-grid">{[...ATTRIBUTE_IDS, "edge", "magic", "resonance"].map((id) => <div key={id}><span>{id.slice(0, 3).toUpperCase()}</span><strong>{evaluation.naturalAttributes[id]}</strong>{evaluation.augmentedAttributes[id] !== evaluation.naturalAttributes[id] ? <small>Aug {evaluation.augmentedAttributes[id]}</small> : null}</div>)}</div></section>
       <section className="creation-review-wide"><header><span>DERIVED STATISTICS</span><span>Essence {evaluation.resources.essence.toFixed(2)}</span></header><dl className="creation-derived-grid">{Object.entries(evaluation.derivedStatistics).map(([id, value]) => <div key={id}><dt>{titleCase(id)}</dt><dd>{statisticValue(value)}</dd></div>)}</dl></section>

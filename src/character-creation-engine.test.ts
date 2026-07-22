@@ -218,7 +218,7 @@ describe("qualities and quality Karma", () => {
     expect(errors.map((error) => error.id)).toEqual(expect.arrayContaining(["quality.eligibility", "quality.incompatible", "quality.tested-matrix-action", "quality.maximum-selections"]));
   });
 
-  it("keeps repeatable qualities distinct and enforces Scorched and Incompetent prerequisites", () => {
+  it("keeps repeatable qualities distinct and treats IC-based Scorched as a GM-approved choice", () => {
     const allergies: QualitySelection[] = [
       { id: "allergy", parameters: { rarity: "Uncommon", severity: "Mild", subject: "Pollen" } },
       { id: "allergy", parameters: { rarity: "Common", severity: "Moderate", subject: "Pollen" } }
@@ -226,6 +226,9 @@ describe("qualities and quality Karma", () => {
     expect(validateQualitySelections(allergies, baseQualityContext).map((error) => error.id)).toContain("quality.repeatable-duplicate");
     expect(validateQualitySelections([{ id: "incompetent", parameters: { skill_group_id: "sorcery" } }], baseQualityContext).map((error) => error.id)).toContain("quality.incompetent-group");
     expect(validateQualitySelections([{ id: "scorched", parameters: { source: "btl", side_effect: "Blackout" } }], baseQualityContext).map((error) => error.id)).toContain("quality.scorched-btl");
+    const icScorched = { id: "scorched", parameters: { source: "black-ic", side_effect: "Blackout" } };
+    expect(validateQualitySelections([icScorched], baseQualityContext).map((error) => error.id)).toEqual(["quality.gamemaster-approval"]);
+    expect(validateQualitySelections([icScorched], { ...baseQualityContext, approvals: ["quality:scorched"] })).toEqual([]);
   });
 });
 

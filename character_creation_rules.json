@@ -832,6 +832,7 @@
         ]
       },
       "scorched": {
+        "requires_gamemaster_approval": true,
         "required_parameters": [
           "source",
           "side_effect"

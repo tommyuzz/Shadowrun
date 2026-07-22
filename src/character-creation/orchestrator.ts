@@ -202,7 +202,7 @@ export function resourcePlanFromDraft(draft: CharacterDraft): { plan: ResourcePl
   for (const selection of draft.resources) {
     const resolved = resolveResourceSelection(selection, draft.metatypeId);
     purchases.push(resolved.purchase);
-    errors.push(...resolved.issues.map((issue) => violation(issue.id, issue.message, `resources.${selection.instanceId}.${issue.field}`)));
+    errors.push(...resolved.issues.map((issue) => violation(issue.id, issue.message, `resources.${selection.instanceId}.${issue.field}`, issue.severity || "error")));
     if (selection.bonded && !resolved.entry?.isFocus) errors.push(violation("catalogue.focus-bond", `${resolved.entry?.name || selection.catalogueId} is not a focus and cannot be bonded.`, `resources.${selection.instanceId}.bonded`));
     if (selection.bonded && (!Number.isInteger(selection.bondKarmaCost) || (selection.bondKarmaCost || 0) < 1)) errors.push(violation("catalogue.focus-karma", `A bonded ${resolved.entry?.name || "focus"} needs its positive bonding Karma cost.`, `resources.${selection.instanceId}.bondKarmaCost`));
   }
@@ -351,6 +351,9 @@ export function evaluateCharacterDraft(draft: CharacterDraft): CharacterDraftEva
     ...resolvedResources.violations,
     ...runValidator(() => validateResourcePlan(resourcePlan), "resources.validator", "resources")
   ];
+  const lifestyleSelections = draft.resources.filter((selection) => resourceCatalogue.find((entry) => entry.catalogueId === selection.catalogueId)?.kind === "lifestyle");
+  if (!lifestyleSelections.length) resourceViolations.push(violation("resources.lifestyle", "Select the runner's required starting lifestyle above the Gear catalogue.", "resources"));
+  if (lifestyleSelections.length > 1) resourceViolations.push(violation("resources.lifestyle-single", "Choose one starting lifestyle; change its quantity to purchase additional months.", "resources"));
   const contactViolations = runValidator(() => validateContacts(contactPlan), "contacts.validator", "contacts");
   const karmaViolations = [
     ...karmaSequenceViolations(draft, baseNatural, essence, { ...skillRatings }),
@@ -359,8 +362,6 @@ export function evaluateCharacterDraft(draft: CharacterDraft): CharacterDraftEva
   const biographyViolations: RuleViolation[] = [];
   if (!draft.biography.streetName.trim()) biographyViolations.push(violation("biography.street-name", "Enter the runner's street name or primary alias.", "biography.streetName"));
   if (!draft.biography.age.trim()) biographyViolations.push(violation("biography.age", "Enter the runner's age.", "biography.age"));
-  if (!draft.biography.lifestyleId) biographyViolations.push(violation("biography.lifestyle", "Select the runner's starting lifestyle.", "biography.lifestyleId"));
-  else if (!resourceCatalogue.some((entry) => entry.kind === "lifestyle" && entry.id === draft.biography.lifestyleId)) biographyViolations.push(violation("biography.lifestyle-known", "Select a known lifestyle from the catalogue.", "biography.lifestyleId"));
 
   const preReview = {
     priorities: makeStep("priorities", priorityViolations, draft.confirmedSteps.includes("priorities")),
